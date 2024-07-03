@@ -15,7 +15,7 @@
                     <th>NO</th>
                     <th>NIK</th>
                     <th>NAMA</th>
-                    <th>GENDER</th>
+                    <th>JENIS KELAMIN</th>
                     <th>PERUSAHAAN</th>
                     <th>JABATAN</th>
                     <th>ALAMAT</th>
@@ -25,7 +25,9 @@
                 @forelse ($employees as $employee)
                     <tr>
                         <th>{{ $loop->iteration }}</th>
-                        <td>{{ $employee->nik }}</td>
+                        <td><a href="{{route('employees.show',['employee'=>$employee->id])}}">
+                                {{ $employee->nik }}</td>
+                        </a>
                         <td>{{ $employee->name }}</td>
                         <td>{{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
                         <td>{{ $employee->subsidiary }}</td>

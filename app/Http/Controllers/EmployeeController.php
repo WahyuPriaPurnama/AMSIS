@@ -12,8 +12,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees=Employee::all();
-        return view('employee.index',['employees'=>$employees]);
+        $employees = Employee::all();
+        return view('employee.index', ['employees' => $employees]);
     }
 
     /**
@@ -44,9 +44,10 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Employee $employee)
+    public function show($employee)
     {
-        //
+        $result = Employee::find($employee);
+        return view('employee.show', ['employee' => $result]);
     }
 
     /**
