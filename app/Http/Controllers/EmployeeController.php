@@ -12,7 +12,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('employee.index');
+        $employees=Employee::all();
+        return view('employee.index',['employees'=>$employees]);
     }
 
     /**
@@ -20,7 +21,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return "form pendaftaran";
+        return view('employee.create');
     }
 
     /**
@@ -31,13 +32,13 @@ class EmployeeController extends Controller
         $validateData = $request->validate([
             'nik' => 'required|size:16',
             'name' => 'required|min:3|max:50',
-            'gender' => 'required|in:M,F',
-            'company' => 'required',
+            'gender' => 'required|in:L,P',
+            'subsidiary' => 'required',
             'position' => 'required',
             'address' => '',
         ]);
         Employee::create($validateData);
-        return view('employee.index')->with('alert', 'data berhasil diinput');
+        redirect()->route('employees.index')->with('alert', "Input data {$validateData['name']} berhasil");
     }
 
     /**

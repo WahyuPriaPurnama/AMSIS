@@ -2,9 +2,14 @@
 @section('title', 'Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
-    <div class="container text-center p-3">
-<h2>DATA KARYAWAN</h2>
-        <table class="table">
+    <div class="container text-center mt-3">
+        <h2>DATA KARYAWAN</h2>
+        @if (session()->has('alert'))
+            <div class="alert alert-success">
+                {{ session()->get('alert') }}
+            </div>
+        @endif
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>NO</th>
@@ -17,13 +22,19 @@
                 </tr>
             </thead>
             <tbody>
-                <td>1.</td>
-                <td>3153170504960001</td>
-                <td>Wahyu Pria Purnama</td>
-                <td>L</td>
-                <td>AMS Holding</td>
-                <td>IT STAFF</td>
-                <td>Probolinggo</td>
+                @forelse ($employees as $employee)
+                    <tr>
+                        <th>{{ $loop->iteration }}</th>
+                        <td>{{ $employee->nik }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
+                        <td>{{ $employee->subsidiary }}</td>
+                        <td>{{ $employee->position }}</td>
+                        <td>{{ $employee->address == '' ? 'N/A' : $employee->address }}</td>
+                    </tr>
+                @empty
+                    <td colspan="7">Tidak ada data...</td>
+                @endforelse
             </tbody>
         </table>
     </div>

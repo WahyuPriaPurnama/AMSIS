@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('nik', 16)->unique();
             $table->string('name');
             $table->char('gender', 1);
-            $table->string('company');
+            $table->string('subsidiary');
             $table->string('position');
             $table->text('address')->nullable();
             $table->timestamps();
