@@ -17,10 +17,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+route::get('/tes',function(){
+    return view('tes');
+});
 
 route::redirect('/', '/login');
-route::get('/login',[LoginController::class,'login']);
-route::post('/login',[LoginController::class,'processLogin']);
-route::resource('employees', EmployeeController::class);
-route::resource('subsidiaries', SubsidiaryController::class);
+route::controller(LoginController::class)->group(function () {
+    route::get('/login', 'login');
+    route::post('/login', '/processLogin');
+    route::get('/logout', 'logout');
+});
+route::get('/login', [LoginController::class, 'login']);
+route::post('/login', [LoginController::class, 'processLogin']);
+route::resource('employees', EmployeeController::class)->middleware('login');
+route::resource('subsidiaries', SubsidiaryController::class)->middleware('login');
 route::resource('purchase_orders', PurchaseOrderController::class);

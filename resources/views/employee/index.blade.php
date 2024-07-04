@@ -5,7 +5,26 @@
     <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA KARYAWAN</h2>
-            <a href="{{route('employees.create')}}" class="btn btn-primary">Tambah Data</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Tambah Data
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Data Karyawan</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            @include('employee.create')
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         @if (session()->has('alert'))
@@ -29,7 +48,7 @@
                 @forelse ($employees as $employee)
                     <tr>
                         <th>{{ $loop->iteration }}</th>
-                        <td><a href="{{route('employees.show',['employee'=>$employee->id])}}">
+                        <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}">
                                 {{ $employee->nik }}</td>
                         </a>
                         <td>{{ $employee->name }}</td>
