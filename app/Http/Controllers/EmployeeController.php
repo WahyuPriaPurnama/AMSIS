@@ -30,7 +30,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nik' => 'required|size:16',
+            'nik' => 'required|size:16|unique:employees',
             'name' => 'required|min:3|max:50',
             'gender' => 'required|in:L,P',
             'subsidiary' => 'required',
@@ -55,7 +55,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employee.edit', ['employee' => $employee]);
     }
 
     /**
@@ -63,7 +63,16 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $validateData = $request->validate([
+            'nik' => 'required|size:16|unique:employees,nik,' . $employee->id,
+            'name' => 'required|min:3|max:50',
+            'gender' => 'required|in:L,P',
+            'subsidiary' => 'required',
+            'position' => 'required',
+            'address' => '',
+        ]);
+        Employee::where('id', $employee->id)->update($validateData);
+        return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['name']} berhasil");
     }
 
     /**

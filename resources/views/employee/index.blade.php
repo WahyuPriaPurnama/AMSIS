@@ -3,7 +3,11 @@
 @section('menuEmployees', 'active')
 @section('content')
     <div class="container text-center mt-3">
-        <h2>DATA KARYAWAN</h2>
+        <div class="py-4 d-flex justify-content-between align-items-center">
+            <h2>DATA KARYAWAN</h2>
+            <a href="{{route('employees.create')}}" class="btn btn-primary">Tambah Karyawan</a>
+        </div>
+
         @if (session()->has('alert'))
             <div class="alert alert-success">
                 {{ session()->get('alert') }}
