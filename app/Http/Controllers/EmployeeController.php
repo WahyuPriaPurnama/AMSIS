@@ -38,7 +38,7 @@ class EmployeeController extends Controller
             'address' => '',
         ]);
         Employee::create($validateData);
-        redirect()->route('employees.index')->with('alert', "Input data {$validateData['name']} berhasil");
+       return redirect()->route('employees.index')->with('alert', "Input data {$validateData['name']} berhasil");
     }
 
     /**
@@ -80,10 +80,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
-    }
-    public function subsidiary()
-    {
-        return view('subsidiary.index');
+        $employee->delete();
+        return redirect()->route('employees.index')->with('alert', "hapus data $employee->name berhasil");
     }
 }

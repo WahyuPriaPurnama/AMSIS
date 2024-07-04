@@ -86,7 +86,8 @@
                         {{ old('subsidiary') ?? $employee->position == 'Supervisor' ? 'selected' : '' }}>
                         Supervisor
                     </option>
-                    <option value="Operator" {{ old('subsidiary') ?? $employee->position == 'Operator' ? 'selected' : '' }}>
+                    <option value="Operator"
+                        {{ old('subsidiary') ?? $employee->position == 'Operator' ? 'selected' : '' }}>
                         Operator
                     </option>
                     <option value="Admin" {{ old('subsidiary') ?? $employee->position == 'Admin' ? 'selected' : '' }}>
@@ -99,10 +100,10 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="address">Address</label>
-                <textarea class="form-control" id="address" rows="3" name="address">{{ old('address') }}</textarea>
+                <textarea class="form-control" id="address" rows="3" name="address">{{ old('address') ?? $employee->address }}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary mb-2">Daftar</button>
+            <button type="submit" class="btn btn-primary mb-2">Update</button>
         </form>
     </div>
 

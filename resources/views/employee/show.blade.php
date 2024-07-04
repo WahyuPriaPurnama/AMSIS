@@ -4,7 +4,14 @@
     <div class="container mt-3">
         <div class="pt-3 d-flex justify-content-between align-items-center">
             <h2>Biodata {{ $employee->name }}</h2>
-            <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}" class="btn btn-primary">Edit</a>
+            <div class="d-flex">
+                <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}" class="btn btn-primary">Edit</a>
+                <form action="{{ route('employees.destroy', ['employee' => $employee->id]) }}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-danger ms-3">Hapus</button>
+                </form>
+            </div>
         </div>
         <hr>
         @if (session()->has('alert'))
@@ -19,7 +26,7 @@
                 {{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-aki' }}
             </li>
             <li>PERUSAHAAN: {{ $employee->subsidiary }}</li>
-            <li>JABATAN:{{$employee->position}}</li>
+            <li>JABATAN: {{ $employee->position }}</li>
             <li>
                 ALAMAT:
                 {{ $employee->address == '' ? 'N/A' : $employee->address }}

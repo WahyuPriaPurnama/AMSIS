@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SubsidiaryController;
+use App\Models\Subsidiary;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-route::redirect('/', '/employees');
-route::controller(EmployeeController::class)->group(function () {
-    route::get('/employees', 'index')->name('employees.index');
-    route::get('/employees/create', 'create')->name('employees.create');
-    route::post('/employees', 'store')->name('employees.store');
-    route::get('/employees/{employee}', 'show')->name('employees.show');
-    route::get('/employees/{employee}/edit', 'edit')->name('employees.edit');
-    route::put('/employees/{employee}', 'update')->name('employees.update');
-    route::delete('/employees/{employee}', 'destroy')->name('employees.destroy');
-    route::get('/subsidiary','subsidiary');
-});
+route::resource('employees', EmployeeController::class);
+route::resource('subsidiaries', SubsidiaryController::class);

@@ -17,7 +17,7 @@
                     <a class="nav-link @yield('menuEmployees')" href="/employees">Data Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @yield('menuSubsidiary')" href="/subsidiary">Data Perusahaan</a>
+                    <a class="nav-link @yield('menuSubsidiary')" href="/subsidiaries">Data Perusahaan</a>
                 </li>
             </ul>
         </div>

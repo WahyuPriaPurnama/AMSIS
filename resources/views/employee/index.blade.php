@@ -2,10 +2,10 @@
 @section('title', 'Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
-    <div class="container text-center mt-3">
+    <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA KARYAWAN</h2>
-            <a href="{{route('employees.create')}}" class="btn btn-primary">Tambah Karyawan</a>
+            <a href="{{route('employees.create')}}" class="btn btn-primary">Tambah Data</a>
         </div>
 
         @if (session()->has('alert'))
@@ -39,7 +39,7 @@
                         <td>{{ $employee->address == '' ? 'N/A' : $employee->address }}</td>
                     </tr>
                 @empty
-                    <td colspan="7">Tidak ada data...</td>
+                    <td colspan="7" class="text-center">Tidak ada data...</td>
                 @endforelse
             </tbody>
         </table>
