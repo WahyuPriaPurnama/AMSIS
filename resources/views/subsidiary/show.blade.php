@@ -22,7 +22,7 @@
         <ul>
             <li>NAMA: {{ $subsidiary->name }}</li>
             <li>PERUSAHAAN: {{ $subsidiary->tagline }}</li>
-            <li>JABATAN: {{ $subsidiary->npwp }}</li>
+            <li>NPWP {{ $subsidiary->npwp }}</li>
             <li>EMAIL: {{ $subsidiary->email }}</li>
             <li>NO. TELP: {{ $subsidiary->phone }}</li>
             <li>ALAMAT: {{ $subsidiary->address }}</li>

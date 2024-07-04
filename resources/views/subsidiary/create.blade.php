@@ -24,7 +24,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="npwp">NPWP</label>
-                <input type="number" id="npwp" name="npwp" value="{{ old('npwp') }}"
+                <input type="text" id="npwp" name="npwp" value="{{ old('npwp') }}"
                     class="form-control @error('tagline') is-invalid @enderror">
                 @error('npwp')
                     <div class="text-danger">{{ $message }}</div>

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('tagline');
-            $table->float('npwp',16);
+            $table->string('npwp');
             $table->string('email');
-            $table->char('phone');
+            $table->string('phone');
             $table->text('address');
             $table->timestamps();
         });

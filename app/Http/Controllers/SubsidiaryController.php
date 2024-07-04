@@ -32,7 +32,7 @@ class SubsidiaryController extends Controller
         $validateData = $request->validate([
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
-            'npwp' => 'required|max:16',
+            'npwp' => 'required',
             'email' => 'required',
             'phone' => 'required',
             'address' => 'required'
@@ -66,13 +66,13 @@ class SubsidiaryController extends Controller
         $validateData = $request->validate([
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
-            'npwp' => 'required|max:16',
+            'npwp' => 'required',
             'email' => 'required',
             'phone' => 'required',
             'address' => 'required'
         ]);
         Subsidiary::where('id', $subsidiary->id)->update($validateData);
-        return redirect()->route('subsidiaries.show',['subsidiary'=>$subsidiary->id])->with('alert', "update data {$validateData['name']} berhasil");
+        return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data {$validateData['name']} berhasil");
     }
 
     /**
@@ -80,6 +80,7 @@ class SubsidiaryController extends Controller
      */
     public function destroy(Subsidiary $subsidiary)
     {
-        //
+        $subsidiary->delete();
+        return redirect()->route('subsidiaries.index')->with('alert', "hapus data $subsidiary->name berhasil");
     }
 }
