@@ -1,10 +1,10 @@
 @extends('layout.master')
 @section('title', 'Daftar Perusahaan')
-@section('menuSubsidiary', 'active')
+@section('menuPurchase_Orders', 'active')
 @section('content')
     <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
-            <h2>DATA PERUSAHAAN</h2>
+            <h2>DATA PO</h2>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Tambah Data
             </button>
@@ -19,7 +19,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            @include('subsidiary.create')
+                            @include('purchase_orders.create')
                         </div>
                     </div>
                 </div>
@@ -34,27 +34,27 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>NO</th>
-                    <th>NAMA</th>
-                    <th>TAGLINE</th>
-                    <th>NPWP</th>
-                    <th>EMAIL</th>
-                    <th>NO. TELP</th>
+                    <th>#</th>
+                    <th>NOMOR</th>
+                    <th>SUPPLIER</th>
+                    <th>BARANG</th>
+                    <th>JUMLAH</th>
+                    <th>TGL PENGIRIMAN</th>
                     <th>ALAMAT</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($subsidiaries as $subsidiary)
+                @forelse ($purchase_orders as $purchase_order)
                     <tr>
                         <th>{{ $loop->iteration }}</th>
-                        <td><a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}">
-                                {{ $subsidiary->name }}</td>
+                        <td><a href="{{ route('purchase_orders.show', ['purchase_order' => $purchase_order->id]) }}">
+                                {{ $purchase_order->number }}</td>
                         </a>
-                        <td>{{ $subsidiary->tagline }}</td>
-                        <td>{{ $subsidiary->npwp }}</td>
-                        <td>{{ $subsidiary->email }}</td>
-                        <td>{{ $subsidiary->phone }}</td>
-                        <td>{{ $subsidiary->address == '' ? 'N/A' : $subsidiary->address }}</td>
+                        <td>{{ $purchase_order->supplier }}</td>
+                        <td>{{ $purchase_order->items }}</td>
+                        <td>{{ $purchase_order->qty }}</td>
+                        <td>{{ $purchase_order->delivery_date}}</td>
+                        <td>{{ $purchase_order->shipping_address}}</td>
                     </tr>
                 @empty
                     <td colspan="7" class="text-center">Tidak ada data...</td>

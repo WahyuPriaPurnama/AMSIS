@@ -13,7 +13,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('employee.index', ['employees' => $employees]);
+        return view('employees.index', ['employees' => $employees]);
     }
 
     /**
@@ -21,7 +21,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employee.create');
+        return view('employees.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class EmployeeController extends Controller
     public function show($employee)
     {
         $result = Employee::find($employee);
-        return view('employee.show', ['employee' => $result]);
+        return view('employees.show', ['employee' => $result]);
     }
 
     /**
@@ -55,7 +55,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return view('employee.edit', ['employee' => $employee]);
+        return view('employees.edit', ['employee' => $employee]);
     }
 
     /**

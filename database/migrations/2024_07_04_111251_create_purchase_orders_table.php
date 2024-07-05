@@ -13,6 +13,27 @@ return new class extends Migration
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('supplier');
+            $table->text('address');
+            $table->char('phone');
+            $table->string('number');
+            $table->date('date');
+            $table->string('npwp');
+            $table->string('items');
+            $table->char('unit');
+            $table->integer('qty');
+            $table->float('price');
+            $table->float('total_price');
+            $table->text('top');
+            $table->float('grand_price');
+            $table->integer('discount');
+            $table->integer('ppn');
+            $table->float('grand_total');
+            $table->date('delivery_date');
+            $table->text('shipping_address');
+            $table->char('purchasing_sign');
+            $table->char('supplier_sign');
             $table->timestamps();
         });
     }

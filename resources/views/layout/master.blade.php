@@ -14,14 +14,17 @@
         <div class="container">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link @yield('menuEmployees')" href="/employees">Data Karyawan</a>
+                    <a class="nav-link @yield('menuEmployees')" href="{{route('employees.index')}}">Data Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @yield('menuSubsidiary')" href="/subsidiaries">Data Perusahaan</a>
+                    <a class="nav-link @yield('menuSubsidiaries')" href="{{route('subsidiaries.index')}}">Data Perusahaan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @yield('menuPurchase_Orders')" href="{{route('purchase_orders.index')}}">Purchase Order</a>
                 </li>
             </ul>
-            @if(session()->has('username'))
 
+            @if(session()->has('username'))
             <div class="dropdown">
                 <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Halo, {{ Str::upper(session()->get('username'))}}
@@ -36,7 +39,7 @@
 
         @yield('content')
 
-    <footer class="bg-dark py-4 text-white mt-4 fixed-bottom">
+    <footer class="bg-dark py-4 text-white mt-4">
         @vite('resources/js/app.js')
         <div class="container text-center">
             AMS Information System | Copyright © {{ date('Y') }} AMS Group

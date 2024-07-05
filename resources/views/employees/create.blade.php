@@ -39,7 +39,6 @@
             @enderror
         </div>
         <div class="col">
-
             <label class="form-label" for="subsidiary">Perusahaan</label>
             <select class="form-select" name="subsidiary" id="subsidiary" value="{{ old('subsidiary') }}">
                 <option value="AMS Holding" {{ old('subsidiary') == 'AMS Holding' ? 'selected' : '' }}>

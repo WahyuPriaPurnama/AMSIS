@@ -13,7 +13,7 @@ class SubsidiaryController extends Controller
     public function index()
     {
         $subsidiaries = Subsidiary::all();
-        return view('subsidiary.index', ['subsidiaries' => $subsidiaries]);
+        return view('subsidiaries.index', ['subsidiaries' => $subsidiaries]);
     }
 
     /**
@@ -21,7 +21,7 @@ class SubsidiaryController extends Controller
      */
     public function create()
     {
-        return view('subsidiary.create');
+        return view('subsidiaries.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class SubsidiaryController extends Controller
     public function show($subsidiary)
     {
         $result = Subsidiary::find($subsidiary);
-        return view('subsidiary.show', ['subsidiary' => $result]);
+        return view('subsidiaries.show', ['subsidiary' => $result]);
     }
 
     /**
@@ -55,7 +55,7 @@ class SubsidiaryController extends Controller
      */
     public function edit(Subsidiary $subsidiary)
     {
-        return view('subsidiary.edit', ['subsidiary' => $subsidiary]);
+        return view('subsidiaries.edit', ['subsidiary' => $subsidiary]);
     }
 
     /**
