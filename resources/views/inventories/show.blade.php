@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-3">
         <div class="pt-3 d-flex justify-content-between align-items-center">
-            <h2>Biodata {{ $inventory->name }}</h2>
+            <h2>Detail {{ $inventory->name }}</h2>
             <div class="d-flex">
                 <a href="{{ route('inventories.edit', ['inventory' => $inventory->id]) }}" class="btn btn-primary">Edit</a>
                 <form action="{{ route('inventories.destroy', ['inventory' => $inventory->id]) }}" method="post">
