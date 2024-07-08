@@ -32,8 +32,6 @@ return new class extends Migration
             $table->float('grand_total');
             $table->date('delivery_date');
             $table->text('shipping_address');
-            $table->char('purchasing_sign');
-            $table->char('supplier_sign');
             $table->timestamps();
         });
     }

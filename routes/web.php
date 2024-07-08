@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\SubsidiaryController;
-use App\Models\Subsidiary;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-route::get('/tes',function(){
+
+route::get('/tes', function () {
     return view('tes');
 });
 
@@ -32,3 +33,4 @@ route::post('/login', [LoginController::class, 'processLogin']);
 route::resource('employees', EmployeeController::class)->middleware('login');
 route::resource('subsidiaries', SubsidiaryController::class)->middleware('login');
 route::resource('purchase_orders', PurchaseOrderController::class);
+route::resource('inventories', InventoryController::class);

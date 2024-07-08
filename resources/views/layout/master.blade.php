@@ -22,6 +22,9 @@
                 <li class="nav-item">
                     <a class="nav-link @yield('menuPurchase_Orders')" href="{{route('purchase_orders.index')}}">Purchase Order</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link @yield('menuInventories')" href="{{route('inventories.index')}}">Inventories</a>
+                </li>
             </ul>
 
             @if(session()->has('username'))
