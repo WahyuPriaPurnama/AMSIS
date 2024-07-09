@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->string('category')->nullable();
+            $table->string('category');
             $table->char('code')->unique();
             $table->string('name');
-            $table->text('spec')->nullable();
+            $table->text('spec');
             $table->integer('qty');
             $table->char('unit');
-            $table->char('user')->nullable();
             $table->timestamps();
         });
     }

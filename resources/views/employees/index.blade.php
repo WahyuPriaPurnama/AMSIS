@@ -41,7 +41,6 @@
                     <th>JENIS KELAMIN</th>
                     <th>PERUSAHAAN</th>
                     <th>JABATAN</th>
-                    <th>ALAMAT</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +54,6 @@
                         <td>{{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
                         <td>{{ $employee->subsidiary }}</td>
                         <td>{{ $employee->position }}</td>
-                        <td>{{ $employee->address == '' ? 'N/A' : $employee->address }}</td>
                     </tr>
                 @empty
                     <td colspan="7" class="text-center">Tidak ada data...</td>

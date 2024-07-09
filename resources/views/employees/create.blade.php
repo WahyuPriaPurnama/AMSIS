@@ -87,9 +87,22 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label" for="dob">Tanggal Lahir:</label>
+            <input type="date" name="dob" id="dob" class="form-control" value="{{ old('dob') }}">
+            @error('dob')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col">
             <label class="form-label" for="address">Address</label>
-            <textarea class="form-control w-50" id="address" rows="3" name="address">{{ old('address') }}</textarea>
+            <textarea class="form-control" id="address" rows="3" name="address">{{ old('address') }}</textarea>
+        </div>
+        <div class="col">
+            <label class="form-label" for="foto">Foto:</label>
+            <input type="file" name="foto" id="foto" class="form-control" disabled>
         </div>
     </div>
     <button type="submit" class="btn btn-primary mb-2">Simpan</button>

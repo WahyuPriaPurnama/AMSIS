@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link @yield('menuInventories')" href="{{route('inventories.index')}}">Inventories</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link @yield('menuHistory')" href="{{route('history.index')}}">History</a>
+                </li>
             </ul>
 
             @if(session()->has('username'))
@@ -42,7 +45,7 @@
 
         @yield('content')
 
-    <footer class="bg-dark py-4 text-white mt-4">
+    <footer class="bg-dark py-4 text-white mt-4 fixed-bottom">
         @vite('resources/js/app.js')
         <div class="container text-center">
             AMS Information System | Copyright © {{ date('Y') }} AMS Group

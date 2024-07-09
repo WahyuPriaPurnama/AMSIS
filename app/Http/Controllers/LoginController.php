@@ -10,6 +10,7 @@ class LoginController extends Controller
     {
         return view('login');
     }
+
     public function processLogin(Request $request)
     {
         $username = $request->validate([
@@ -28,5 +29,20 @@ class LoginController extends Controller
     {
         session()->forget('username');
         return redirect('login')->with('alert', 'logout berhasil');
+    }
+
+    public function register()
+    {
+        return view('register');
+    }
+
+    public function authenticate(Request $request)
+    {
+
+    }
+
+    public function store(Request $request)
+    {
+
     }
 }

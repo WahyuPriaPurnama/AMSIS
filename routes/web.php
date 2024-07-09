@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-route::get('/tes', function () {
-    return view('tes');
-});
-
 route::redirect('/', '/login');
 route::controller(LoginController::class)->group(function () {
     route::get('/login', 'login');
@@ -34,3 +30,4 @@ route::resource('employees', EmployeeController::class)->middleware('login');
 route::resource('subsidiaries', SubsidiaryController::class)->middleware('login');
 route::resource('purchase_orders', PurchaseOrderController::class);
 route::resource('inventories', InventoryController::class);
+route::get('/history', [InventoryController::class, 'history'])->name('history.index');

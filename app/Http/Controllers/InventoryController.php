@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\History;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 
@@ -14,8 +14,8 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = Inventory::all();
-        return view('inventories.index', ['inventories' => $inventories]);
+        $result = Inventory::all();
+        return view('inventories.index', ['inventories' => $result]);
     }
 
     /**
@@ -37,7 +37,13 @@ class InventoryController extends Controller
             'spec' => 'required',
             'qty' => 'required',
             'unit' => 'required',
-            'username'=>session()->get('username')
+        ]);
+        History::create([
+            'category' => $request->category,
+            'code' => $request->code,
+            'name' => $request->name,
+            'qty' => $request->qty,
+
         ]);
         Inventory::create($validateData);
         return redirect()->route('inventories.index')->with('alert', "Input data {$validateData['name']} berhasil");
@@ -57,7 +63,6 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        return view('inventories.edit', ['inventory' => $inventory]);
     }
 
     /**
@@ -73,7 +78,15 @@ class InventoryController extends Controller
             'qty' => 'required',
             'unit' => 'required',
         ]);
+        History::create([
+            'category' => $request->category,
+            'code' => $request->code,
+            'name' => $request->name,
+            'qty' => $request->qty,
+
+        ]);
         Inventory::where('id', $inventory->id)->update($validateData);
+
         return redirect()->route('inventories.show', ['inventory' => $inventory->id])->with('alert', "update data {$validateData['name']} berhasil");
     }
 
@@ -84,5 +97,11 @@ class InventoryController extends Controller
     {
         $inventory->delete();
         return redirect()->route('inventories.index')->with('alert', "hapus data $inventory->name berhasil");
+    }
+
+    public function history()
+    {
+        $history = History::all();
+        return view('inventories.history', ['history' => $history]);
     }
 }

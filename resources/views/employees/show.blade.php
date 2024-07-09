@@ -22,8 +22,9 @@
         <ul>
             <li>NIK: {{ $employee->nik }}</li>
             <li>NAMA: {{ $employee->name }}</li>
+            <li>TGL LAHIR: {{$employee->dob}}</li>
             <li>JENIS KELAMIN:
-                {{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-aki' }}
+                {{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-laki' }}
             </li>
             <li>PERUSAHAAN: {{ $employee->subsidiary }}</li>
             <li>JABATAN: {{ $employee->position }}</li>

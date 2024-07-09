@@ -21,7 +21,6 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-     
     }
 
     /**
@@ -32,13 +31,14 @@ class EmployeeController extends Controller
         $validateData = $request->validate([
             'nik' => 'required|size:16|unique:employees',
             'name' => 'required|min:3|max:50',
+            'dob' => 'required',
             'gender' => 'required|in:L,P',
             'subsidiary' => 'required',
             'position' => 'required',
             'address' => '',
         ]);
         Employee::create($validateData);
-       return redirect()->route('employees.index')->with('alert', "Input data {$validateData['name']} berhasil");
+        return redirect()->route('employees.index')->with('alert', "Input data {$validateData['name']} berhasil");
     }
 
     /**
@@ -83,4 +83,5 @@ class EmployeeController extends Controller
         $employee->delete();
         return redirect()->route('employees.index')->with('alert', "hapus data $employee->name berhasil");
     }
+
 }

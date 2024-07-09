@@ -41,7 +41,7 @@
                     <th>JUMLAH</th>
                     <th>SATUAN</th>
                     <th>DIUPDATE</th>
-                    <th>USER</th>
+                    <th>MENU</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,18 +50,39 @@
                         <th>{{ $loop->iteration }}</th>
                         <td>{{ $inventory->category }}</td>
                         <td><a href="{{ route('inventories.show', ['inventory' => $inventory->id]) }}">
-                            {{ $inventory->code }}</td>
+                                {{ $inventory->code }}</td>
                         </a>
                         <td>{{ $inventory->name }}</td>
                         <td>{{ $inventory->qty }}</td>
                         <td>{{ $inventory->unit }}</td>
                         <td>{{ $inventory->updated_at }}</td>
-                        <td>{{ $inventory->user }}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#update">
+                                update
+                            </button>
+                            <div class="modal fade" id="update" data-bs-backdrop="static" data-bs-keyboard="false"
+                                tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="updateLabel">Tambah Stok
+                                                {{ $inventory->category }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @include('inventories.update')
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 @empty
                     <td colspan="8" class="text-center">Tidak ada data...</td>
                 @endforelse
             </tbody>
         </table>
+
     </div>
 @endsection
