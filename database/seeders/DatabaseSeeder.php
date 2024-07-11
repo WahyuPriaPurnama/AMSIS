@@ -27,33 +27,22 @@ class DatabaseSeeder extends Seeder
             'name' => 'Wahyu Pria Purnama',
             'dob' => '1996-04-05',
             'gender' => 'L',
+            'whatsapp' => '085745334330',
+            'email' => 'wahyupriapurnama@gmail.com',
             'subsidiary' => 'AMS Holding',
             'position' => 'Manager',
             'address' => 'Probolinggo',
         ]);
 
-        Employee::create([
-            'nik' => '3513170504960002',
-            'name' => 'Lingga Pratama Mulia',
-            'dob' => '1996-01-05',
-            'gender' => 'L',
-            'subsidiary' => 'PT. ELN Plant 1',
-            'position' => 'Staff',
-            'address' => 'Malang',
-        ]);
 
-        Employee::create([
-            'nik' => '3513170504960003',
-            'name' => 'Firsandi',
-            'dob' => '1996-01-20',
-            'gender' => 'L',
-            'subsidiary' => 'PT. ELN Plant 2',
-            'position' => 'Staff',
-            'address' => 'Malang',
-        ]);
 
         Subsidiary::create([
-            
+            'name' => 'CV. Anugerah Mulia Sejahtera',
+            'tagline' => 'General Trading and Supplier',
+            'npwp' => '70.651.906.3-657.000',
+            'email' => 'headoffice@amsgroup.co.id',
+            'phone' => '03415054969',
+            'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
         ]);
     }
 }

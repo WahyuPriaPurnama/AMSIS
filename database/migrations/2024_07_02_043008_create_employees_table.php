@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('dob');
             $table->char('gender', 1);
+            $table->string('whatsapp');
+            $table->string('email');
             $table->string('subsidiary');
             $table->string('position');
             $table->text('address')->nullable();

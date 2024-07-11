@@ -17,10 +17,7 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
-    </div>
-    <div class="row mb-3">
         <div class="col">
-
             <label class="form-label">Jenis Kelamin</label>
             <div class="d-flex">
                 <div class="form-check me-3">
@@ -38,6 +35,33 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label" for="whatsapp">WhatsApp</label>
+            <input type="number" id="whatsapp" name="whatsapp" value="{{ old('whatsapp') }}"
+                class="form-control @error('whatsapp') is-invalid @enderror">
+            @error('whatsapp')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col">
+            <label class="form-label" for="email">Email</label>
+            <input type="text" id="email" name="email" value="{{ old('email') }}"
+                class="form-control @error('email') is-invalid @enderror">
+            @error('email')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col">
+            <label class="form-label" for="dob">Tanggal Lahir</label>
+            <input type="date" name="dob" id="dob" class="form-control" value="{{ old('dob') }}">
+            @error('dob')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+    <div class="row mb-3">
         <div class="col">
             <label class="form-label" for="subsidiary">Perusahaan</label>
             <select class="form-select" name="subsidiary" id="subsidiary" value="{{ old('subsidiary') }}">
@@ -89,13 +113,7 @@
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col">
-            <label class="form-label" for="dob">Tanggal Lahir:</label>
-            <input type="date" name="dob" id="dob" class="form-control" value="{{ old('dob') }}">
-            @error('dob')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
+
         <div class="col">
             <label class="form-label" for="address">Address</label>
             <textarea class="form-control" id="address" rows="3" name="address">{{ old('address') }}</textarea>

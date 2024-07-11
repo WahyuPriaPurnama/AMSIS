@@ -71,6 +71,7 @@ class EmployeeController extends Controller
             'gender' => 'required|in:L,P',
             'subsidiary' => 'required',
             'position' => 'required',
+            'dob' => 'required',
             'address' => '',
         ]);
         Employee::where('id', $employee->id)->update($validateData);
