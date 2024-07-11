@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PurchaseOrder;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class PurchaseOrderController extends Controller
@@ -21,7 +22,7 @@ class PurchaseOrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('purchase_orders.create');
     }
 
     /**
@@ -29,7 +30,32 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->address);
+        $validateData = $request->validate([
+            'name' => 'required',
+            'supplier' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'number' => 'required|unique:purchase_orders',
+            'date' => 'required',
+            'npwp' => 'required',
+            'items' => 'required',
+            'unit' => 'required',
+            'qty' => 'required',
+            'price' => 'required',
+            'total_price' => 'required',
+            'top' => 'required',
+            'grand_price' => 'required',
+            'discount' => '',
+            'ppn' => '',
+            'grand_total' => 'required',
+            'delivery_date' => 'required',
+            'shipping_address' => 'required',
+        ]);
+
+
+        PurchaseOrder::create($validateData);
+        return redirect()->route('purchase_orders.index')->with('alert', "Input data {$validateData['name']} berhasil");
     }
 
     /**

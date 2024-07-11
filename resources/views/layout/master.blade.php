@@ -45,7 +45,7 @@
 
         @yield('content')
 
-    <footer class="bg-dark py-4 text-white mt-4 fixed-bottom">
+    <footer class="bg-dark py-4 text-white mt-4 sticky-bottom">
         @vite('resources/js/app.js')
         <div class="container text-center">
             AMS Information System | Copyright © {{ date('Y') }} AMS Group

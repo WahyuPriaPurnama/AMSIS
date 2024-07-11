@@ -5,25 +5,7 @@
     <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA PO</h2>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Tambah Data
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Data Perusahaan</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            @include('purchase_orders.create')
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a href="{{ route('purchase_orders.create') }}" class="btn btn-primary">Buat PO</a>
         </div>
         @if (session()->has('alert'))
             <div class="alert alert-success">
@@ -53,8 +35,8 @@
                         <td>{{ $purchase_order->supplier }}</td>
                         <td>{{ $purchase_order->items }}</td>
                         <td>{{ $purchase_order->qty }}</td>
-                        <td>{{ $purchase_order->delivery_date}}</td>
-                        <td>{{ $purchase_order->shipping_address}}</td>
+                        <td>{{ $purchase_order->delivery_date }}</td>
+                        <td>{{ $purchase_order->shipping_address }}</td>
                     </tr>
                 @empty
                     <td colspan="7" class="text-center">Tidak ada data...</td>

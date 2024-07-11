@@ -19,20 +19,22 @@
                 {{ session()->get('alert') }}
             </div>
         @endif
-        <ul>
-            <li>NIK: {{ $employee->nik }}</li>
-            <li>NAMA: {{ $employee->name }}</li>
-            <li>TGL LAHIR: {{$employee->dob}}</li>
-            <li>JENIS KELAMIN:
-                {{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-laki' }}
-            </li>
-            <li>PERUSAHAAN: {{ $employee->subsidiary }}</li>
-            <li>JABATAN: {{ $employee->position }}</li>
-            <li>
-                ALAMAT:
-                {{ $employee->address == '' ? 'N/A' : $employee->address }}
-            </li>
-
-        </ul>
+        <div class="w-50">
+            <ul class="list-group">
+                <li class="list-group-item">NIK: {{ $employee->nik }}</li>
+                <li class="list-group-item">NAMA: {{ $employee->name }}</li>
+                <li class="list-group-item">TGL LAHIR: {{ $employee->dob }}</li>
+                <li class="list-group-item">USIA: {{ Carbon\Carbon::parse($employee->dob)->age }} Tahun</li>
+                <li class="list-group-item">JENIS KELAMIN:
+                    {{ $employee->gender == 'P' ? 'Perempuan' : 'Laki-laki' }}
+                </li>
+                <li class="list-group-item">PERUSAHAAN: {{ $employee->subsidiary }}</li>
+                <li class="list-group-item">JABATAN: {{ $employee->position }}</li>
+                <li class="list-group-item">
+                    ALAMAT:
+                    {{ $employee->address == '' ? 'N/A' : $employee->address }}
+                </li>
+            </ul>
+        </div>
     </div>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -46,6 +47,7 @@ class EmployeeController extends Controller
      */
     public function show($employee)
     {
+
         $result = Employee::find($employee);
         return view('employees.show', ['employee' => $result]);
     }
@@ -83,5 +85,4 @@ class EmployeeController extends Controller
         $employee->delete();
         return redirect()->route('employees.index')->with('alert', "hapus data $employee->name berhasil");
     }
-
 }
