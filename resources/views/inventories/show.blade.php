@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.app')
 @section('title', "Data $inventory->name")
 @section('content')
     <div class="container mt-3">

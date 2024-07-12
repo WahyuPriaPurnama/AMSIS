@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.app')
 @section('title', "Data $subsidiary->name")
 @section('content')
     <div class="container mt-3">

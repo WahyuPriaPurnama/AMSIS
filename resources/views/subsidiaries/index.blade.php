@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.app')
 @section('title', 'Daftar Perusahaan')
 @section('menuSubsidiaries', 'active')
 @section('content')

@@ -1,30 +1,11 @@
-@extends('layout.master')
+@extends('layouts.app')
 @section('title', 'Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
     <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA KARYAWAN</h2>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Tambah Data
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Data Karyawan</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            @include('employees.create')
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a href="{{route('employees.create')}}" class="btn btn-primary">Tambah Data</a>
         </div>
 
         @if (session()->has('alert'))

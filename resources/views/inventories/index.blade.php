@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.app')
 @section('title', 'Daftar Inventory')
 @section('menuInventories', 'active')
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.app')
 @section('title', 'Edit Perusahaan')
 @section('content')
     <div class="container mt-3">

@@ -22,6 +22,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        return view('employees.create');
     }
 
     /**
@@ -30,13 +31,35 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
+            'nip' => 'required|min:10|max:16|unique:employees',
+            'nama' => 'required|min:3|max:50',
             'nik' => 'required|size:16|unique:employees',
-            'name' => 'required|min:3|max:50',
-            'dob' => 'required',
-            'gender' => 'required|in:L,P',
-            'subsidiary' => 'required',
-            'position' => 'required',
-            'address' => '',
+            'perusahaan' => 'required|size:30',
+            'divisi' => 'required|size:20',
+            'departemen' => 'required|size:20',
+            'seksi' => 'required|size:20',
+            'posisi' => 'required|size:20',
+            'status_peg' => 'required|size:8',
+            'tgl_masuk' => 'required',
+            'awal_kontrak' => 'required',
+            'akhir_kontrak' => 'required',
+            'tmpt_lahir' => 'required|size:20',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required|in:L,P',
+            'alamat' => 'required',
+            'no_telp' => 'required|size:12',
+            'email' => 'required',
+            'pend_trkhr' => 'required|size:10',
+            'jurusan' => 'required|size:25',
+            'thn_lulus' => 'required|size:4',
+            'nama_ibu' => 'required|size:25',
+            'npwp' => 'required|size:16',
+            'status' => 'required|size:2',
+            'jml_ank' => '',
+            'nama_kd' => 'required|size:25',
+            'no_kd' => 'required|size:12',
+            'hubungan' => 'required|size:15'
+
         ]);
         Employee::create($validateData);
         return redirect()->route('employees.index')->with('alert', "Input data {$validateData['name']} berhasil");
@@ -66,13 +89,34 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $validateData = $request->validate([
-            'nik' => 'required|size:16|unique:employees,nik,' . $employee->id,
-            'name' => 'required|min:3|max:50',
-            'gender' => 'required|in:L,P',
-            'subsidiary' => 'required',
-            'position' => 'required',
-            'dob' => 'required',
-            'address' => '',
+            'nip' => 'required|min:10|max:16|unique:employees' . $employee->id,
+            'nama' => 'required|min:3|max:50',
+            'nik' => 'required|size:16|unique:employees' . $employee->id,
+            'perusahaan' => 'required|size:30',
+            'divisi' => 'required|size:20',
+            'departemen' => 'required|size:20',
+            'seksi' => 'required|size:20',
+            'posisi' => 'required|size:20',
+            'status_peg' => 'required|size:8',
+            'tgl_masuk' => 'required',
+            'awal_kontrak' => 'required',
+            'akhir_kontrak' => 'required',
+            'tmpt_lahir' => 'required|size:20',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required|in:L,P',
+            'alamat' => 'required',
+            'no_telp' => 'required|size:12',
+            'email' => 'required',
+            'pend_trkhr' => 'required|size:10',
+            'jurusan' => 'required|size:25',
+            'thn_lulus' => 'required|size:4',
+            'nama_ibu' => 'required|size:25',
+            'npwp' => 'required|size:16',
+            'status' => 'required|size:2',
+            'jml_ank' => '',
+            'nama_kd' => 'required|size:25',
+            'no_kd' => 'required|size:12',
+            'hubungan' => 'required|size:15'
         ]);
         Employee::where('id', $employee->id)->update($validateData);
         return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['name']} berhasil");

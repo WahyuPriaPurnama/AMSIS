@@ -20,12 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-route::resource('employees', EmployeeController::class);
-route::resource('subsidiaries', SubsidiaryController::class);
-route::resource('purchase_orders', PurchaseOrderController::class);
-route::resource('inventories', InventoryController::class);
-route::get('/history', [InventoryController::class, 'history'])->name('history.index');
+route::resource('employees', EmployeeController::class)->middleware('auth');
+route::resource('subsidiaries', SubsidiaryController::class)->middleware('auth');
+route::resource('purchase_orders', PurchaseOrderController::class)->middleware('auth');
+route::resource('inventories', InventoryController::class)->middleware('auth');
+route::get('/history', [InventoryController::class, 'history'])->name('history.index')->middleware('auth');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+route::redirect('/home','/employees');
+route::redirect('/','/login');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

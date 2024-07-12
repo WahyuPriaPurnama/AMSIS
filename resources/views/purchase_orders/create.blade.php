@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.app')
 @section('content')
     <div class="container mt-4">
         <h2>PURCHASE ORDER</h2>

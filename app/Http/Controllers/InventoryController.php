@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\History;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
@@ -37,12 +37,14 @@ class InventoryController extends Controller
             'spec' => 'required',
             'qty' => 'required',
             'unit' => 'required',
+
         ]);
         History::create([
             'category' => $request->category,
             'code' => $request->code,
             'name' => $request->name,
             'qty' => $request->qty,
+            'user' => Auth::user()->name
 
         ]);
         Inventory::create($validateData);

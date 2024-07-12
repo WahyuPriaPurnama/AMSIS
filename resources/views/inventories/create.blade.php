@@ -33,7 +33,7 @@
             @enderror
         </div>
         <div class="col">
-            <label class="form-label" for="name">Nama</label>
+            <label class="form-label" for="name">Nama Barang</label>
             <input type="text" id="name" name="name" value="{{ old('name') }}"
                 class="form-control @error('name') is-invalid @enderror" required>
             @error('name')
