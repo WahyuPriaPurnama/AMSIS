@@ -32,28 +32,28 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <label class="form-label" for="posisi">Perusahaan</label>
-                    <select class="form-select" name="posisi" id="posisi" value="{{ old('posisi') }}">
-                        <option value="AMS Holding" {{ old('posisi') == 'AMS Holding' ? 'selected' : '' }}>
+                    <label class="form-label" for="perusahaan">Perusahaan</label>
+                    <select class="form-select" name="perusahaan" id="perusahaan" value="{{ old('perusahaan') }}">
+                        <option value="AMS Holding" @selected(old('perusahaan') == 'AMS Holding')>
                             AMS Holding
                         </option>
-                        <option value="PT. ELN Plant 1" {{ old('posisi') == 'PT. ELN Plant 1' ? 'selected' : '' }}>
+                        <option value="PT. ELN Plant 1" @selected(old('perusahaan') == 'PT. ELN Plant 1')>
                             PT. ELN Plant 1
                         </option>
-                        <option value="PT. ELN Plant 2" {{ old('posisi') == 'PT. ELN Plant 2' ? 'selected' : '' }}>
+                        <option value="PT. ELN Plant 2" @selected(old('perusahaan') == 'PT. ELN Plant 2')>
                             PT. ELN Plant 2
                         </option>
-                        <option value="PT. BOFI" {{ old('posisi') == 'PT. BOFI' ? 'selected' : '' }}>
+                        <option value="PT. BOFI" @selected(old('perusahaan') == 'PT. BOFI')>
                             PT. BOFI
                         </option>
-                        <option value="PT. Haka" {{ old('posisi') == 'PT. Haka' ? 'selected' : '' }}>
+                        <option value="PT. Haka" @selected(old('perusahaan') == 'PT. Haka')>
                             PT. Haka
                         </option>
-                        <option value="PT. RMM" {{ old('posisi') == 'PT. RMM' ? 'selected' : '' }}>
+                        <option value="PT. RMM" @selected(old('perusahaan') == 'PT. RMM')>
                             PT. RMM
                         </option>
                     </select>
-                    @error('posisi')
+                    @error('perusahaan')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -86,19 +86,19 @@
                 <div class="col">
                     <label class="form-label" for="posisi">Jabatan</label>
                     <select class="form-select" name="posisi" id="posisi" value="{{ old('posisi') }}">
-                        <option value="Manager" {{ old('posisi') == 'Manager' ? 'selected' : '' }}>
+                        <option value="Manager" @selected(old('posisi') == 'Manager')>
                             Manager
                         </option>
-                        <option value="Staff" {{ old('posisi') == 'Staff' ? 'selected' : '' }}>
+                        <option value="Staff" @selected(old('posisi') == 'Staff')>
                             Staff
                         </option>
-                        <option value="Supervisor" {{ old('posisi') == 'Supervisor' ? 'selected' : '' }}>
+                        <option value="Supervisor" @selected(old('posisi') == 'Supervisor')>
                             Supervisor
                         </option>
-                        <option value="Operator" {{ old('posisi') == 'Operator' ? 'selected' : '' }}>
+                        <option value="Operator" @selected(old('posisi') == 'Operator')>
                             Operator
                         </option>
-                        <option value="Admin" {{ old('posisi') == 'Admin' ? 'selected' : '' }}>
+                        <option value="Admin" @selected(old('posisi') == 'Admin')>
                             Admin
                         </option>
                     </select>
@@ -109,9 +109,9 @@
                 <div class="col">
                     <label class="form-label" for="status_peg">Status Pegawai</label>
                     <select class="form-select" name="status_peg" id="status_peg" value="{{ old('status_peg') }}">
-                        <option value="PKWT" {{ old('status_peg') == 'PKWT' ? 'selected' : '' }}>PKWT</option>
-                        <option value="PKWTT"{{ old('status_peg') == 'PKWTT' ? 'selected' : '' }}>PKWTT</option>
-                        <option value="Alihdaya"{{ old('status_peg') == 'Alihdaya' ? 'selected' : '' }}>Alihdaya</option>
+                        <option value="PKWT" @selected(old('status_peg') == 'PKWT')>PKWT</option>
+                        <option value="PKWTT" @selected(old('status_peg') == 'PKWTT')>PKWTT</option>
+                        <option value="Alihdaya"@selected(old('status_peg') == 'Alihdaya')>Alihdaya</option>
                     </select>
                     @error('status_peg')
                         <div class="text-danger">{{ $message }}</div>
@@ -145,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3 pt-3">
                 <h3>Biodata</h3>
                 <hr>
                 <div class="col">
@@ -167,16 +167,16 @@
                 <div class="col">
                     <label class="form-label">Jenis Kelamin</label>
                     <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" name="gender" id="laki_laki" value="L"
-                            {{ old('gender') == 'L' ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki_laki" value="L"
+                            @checked(old('jenis_kelamin') == 'L')>
                         <label class="form-check-label" for="laki_laki">Laki-laki</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="perempuan" value="P"
-                            {{ old('gender') == 'P' ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan" value="P"
+                            @checked(old('jenis_kelamin') == 'P')>
                         <label class="form-check-label" for="perempuan">Perempuan</label>
                     </div>
-                    @error('gender')
+                    @error('jenis_kelamin')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -205,13 +205,13 @@
                 <div class="col-2">
                     <label class="form-label" for="pend_trkhr">Pendidikan Terakhir</label>
                     <select name="pend_trkhr" id="pend_trkhr" class="form-select">
-                        <option value="SD"{{ old('pend_trkhr') == 'SD' ? 'selected' : '' }}>SD</option>
-                        <option value="SMP"{{ old('pend_trkhr') == 'SMP' ? 'selected' : '' }}>SMP</option>
-                        <option value="SMA"{{ old('pend_trkhr') == 'SMA' ? 'selected' : '' }}>SMA</option>
-                        <option value="Diploma"{{ old('pend_trkhr') == 'Diploma' ? 'selected' : '' }}>Diploma</option>
-                        <option value="Sarjana"{{ old('pend_trkhr') == 'Sarjana' ? 'selected' : '' }}>Sarjana</option>
-                        <option value="Magister"{{ old('pend_trkhr') == 'Magister' ? 'selected' : '' }}>Magister</option>
-                        <option value="Doktor"{{ old('pend_trkhr') == 'Doktor' ? 'selected' : '' }}>Doktor</option>
+                        <option value="SD" @selected(old('pend_trkhr') == 'SD')>SD</option>
+                        <option value="SMP" @selected(old('pend_trkhr') == 'SMP')>SMP</option>
+                        <option value="SMA" @selected(old('pend_trkhr') == 'SMA')>SMA</option>
+                        <option value="Diploma" @selected(old('pend_trkhr') == 'Diploma')>Diploma</option>
+                        <option value="Sarjana" @selected(old('pend_trkhr') == 'Sarjana')>Sarjana</option>
+                        <option value="Magister" @selected(old('pend_trkhr') == 'Magister')>Magister</option>
+                        <option value="Doktor" @selected(old('pend_trkhr') == 'Doktor')>Doktor</option>
                     </select>
                     @error('pend_trkhr')
                         <div class="text-danger">{{ $message }}</div>
@@ -235,12 +235,68 @@
                 </div>
             </div>
             <div class="row mb-3">
-
-            </div>
-            <div class="row mb-3">
                 <div class="col">
-                    <label class="form-label" for="foto">Foto:</label>
-                    <input type="file" name="foto" id="foto" class="form-control" disabled>
+                    <label class="form-label" for="nama_ibu">Nama Ibu</label>
+                    <input type="text" id="nama_ibu" name="nama_ibu" value="{{ old('nama_ibu') }}"
+                        class="form-control @error('nama_ibu') is-invalid @enderror">
+                    @error('nama_ibu')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label class="form-label" for="npwp">NPWP</label>
+                    <input type="text" id="npwp" name="npwp" value="{{ old('npwp') }}"
+                        class="form-control @error('npwp') is-invalid @enderror">
+                    @error('npwp')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-2">
+                    <label class="form-label" for="status">Status Pernikahan</label>
+                    <select name="status" id="status" class="form-select">
+                        <option value="Kawin" @selected(old('status') == 'Kawin')>Kawin</option>
+                        <option value="Belum Kawin" @selected(old('status') == 'Belum Kawin')>Belum Kawin
+                        </option>
+                    </select>
+                    @error('pend_trkhr')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-2">
+                    <label class="form-label" for="jml_anak">Jumlah Anak</label>
+                    <input type="number" id="jml_anak" name="jml_anak" value="{{ old('jml_anak') }}"
+                        class="form-control @error('jml_anak') is-invalid @enderror">
+                    @error('jml_anak')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3 pt-3">
+                <h3>Kontak Darurat</h3>
+                <hr>
+                <div class="col">
+                    <label class="form-label" for="nama_kd">Nama Kontak Darurat</label>
+                    <input type="text" id="nama_ibu" name="nama_kd" value="{{ old('nama_kd') }}"
+                        class="form-control @error('nama_kd') is-invalid @enderror">
+                    @error('nama_kd')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label class="form-label" for="no_kd">No. Kontak Darurat</label>
+                    <input type="number" id="no_kd" name="no_kd" value="{{ old('no_kd') }}"
+                        class="form-control @error('no_kd') is-invalid @enderror">
+                    @error('no_kd')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col">
+                    <label class="form-label" for="hubungan">Hubungan</label>
+                    <input type="text" id="hubungan" name="hubungan" value="{{ old('hubungan') }}"
+                        class="form-control @error('hubungan') is-invalid @enderror">
+                    @error('hubungan')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mb-2">Simpan</button>

@@ -30,35 +30,36 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+
         $validateData = $request->validate([
             'nip' => 'required|min:10|max:16|unique:employees',
             'nama' => 'required|min:3|max:50',
             'nik' => 'required|size:16|unique:employees',
-            'perusahaan' => 'required|size:30',
-            'divisi' => 'required|size:20',
-            'departemen' => 'required|size:20',
-            'seksi' => 'required|size:20',
-            'posisi' => 'required|size:20',
-            'status_peg' => 'required|size:8',
+            'perusahaan' => '',
+            'divisi' => 'required|max:20',
+            'departemen' => 'required|max:20',
+            'seksi' => 'required|max:20',
+            'posisi' => '',
+            'status_peg' => '',
             'tgl_masuk' => 'required',
             'awal_kontrak' => 'required',
             'akhir_kontrak' => 'required',
-            'tmpt_lahir' => 'required|size:20',
+            'tmpt_lahir' => 'required|max:20',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required|in:L,P',
             'alamat' => 'required',
-            'no_telp' => 'required|size:12',
+            'no_telp' => 'required|max:13',
             'email' => 'required',
-            'pend_trkhr' => 'required|size:10',
-            'jurusan' => 'required|size:25',
-            'thn_lulus' => 'required|size:4',
-            'nama_ibu' => 'required|size:25',
+            'pend_trkhr' => '',
+            'jurusan' => 'required|max:25',
+            'thn_lulus' => 'required|max:4',
+            'nama_ibu' => 'required|max:25',
             'npwp' => 'required|size:16',
-            'status' => 'required|size:2',
+            'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'required|size:25',
-            'no_kd' => 'required|size:12',
-            'hubungan' => 'required|size:15'
+            'nama_kd' => 'required|max:25',
+            'no_kd' => 'required|max:12',
+            'hubungan' => 'required|max:15'
 
         ]);
         Employee::create($validateData);
@@ -89,37 +90,37 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $validateData = $request->validate([
-            'nip' => 'required|min:10|max:16|unique:employees' . $employee->id,
+            'nip' => 'required|min:10|max:16|unique:employees'. $employee->id,
             'nama' => 'required|min:3|max:50',
-            'nik' => 'required|size:16|unique:employees' . $employee->id,
-            'perusahaan' => 'required|size:30',
-            'divisi' => 'required|size:20',
-            'departemen' => 'required|size:20',
-            'seksi' => 'required|size:20',
-            'posisi' => 'required|size:20',
-            'status_peg' => 'required|size:8',
+            'nik' => 'required|size:16|unique:employees'. $employee->id,
+            'perusahaan' => '',
+            'divisi' => 'required|max:20',
+            'departemen' => 'required|max:20',
+            'seksi' => 'required|max:20',
+            'posisi' => '',
+            'status_peg' => '',
             'tgl_masuk' => 'required',
             'awal_kontrak' => 'required',
             'akhir_kontrak' => 'required',
-            'tmpt_lahir' => 'required|size:20',
+            'tmpt_lahir' => 'required|max:20',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required|in:L,P',
             'alamat' => 'required',
-            'no_telp' => 'required|size:12',
+            'no_telp' => 'required|max:13',
             'email' => 'required',
-            'pend_trkhr' => 'required|size:10',
-            'jurusan' => 'required|size:25',
-            'thn_lulus' => 'required|size:4',
-            'nama_ibu' => 'required|size:25',
+            'pend_trkhr' => '',
+            'jurusan' => 'required|max:25',
+            'thn_lulus' => 'required|max:4',
+            'nama_ibu' => 'required|max:25',
             'npwp' => 'required|size:16',
-            'status' => 'required|size:2',
+            'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'required|size:25',
-            'no_kd' => 'required|size:12',
-            'hubungan' => 'required|size:15'
+            'nama_kd' => 'required|max:25',
+            'no_kd' => 'required|max:12',
+            'hubungan' => 'required|max:15'
         ]);
         Employee::where('id', $employee->id)->update($validateData);
-        return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['name']} berhasil");
+        return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} berhasil");
     }
 
     /**
@@ -128,6 +129,6 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return redirect()->route('employees.index')->with('alert', "hapus data $employee->name berhasil");
+        return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama berhasil");
     }
 }
