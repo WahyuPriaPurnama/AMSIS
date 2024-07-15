@@ -40,7 +40,7 @@ return new class extends Migration
             $table->char('jml_ank', 2)->nullable();
             $table->char('nama_kd', 25);
             $table->char('no_kd', 12);
-            $table->char('hubungan', 15);
+            $table->char('hubungan', 15);   
             $table->timestamps();
         });
     }

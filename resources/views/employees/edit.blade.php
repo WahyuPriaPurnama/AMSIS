@@ -264,10 +264,10 @@
                     @enderror
                 </div>
                 <div class="col-2">
-                    <label class="form-label" for="jml_anak">Jumlah Anak</label>
-                    <input type="number" id="jml_anak" name="jml_anak" value="{{ $employee->jml_anak}}"
-                        class="form-control @error('jml_anak') is-invalid @enderror">
-                    @error('jml_anak')
+                    <label class="form-label" for="jml_ank">Jumlah Anak</label>
+                    <input type="number" id="jml_ank" name="jml_ank" value="{{ $employee->jml_ank}}"
+                        class="form-control @error('jml_ank') is-invalid @enderror">
+                    @error('jml_ank')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
