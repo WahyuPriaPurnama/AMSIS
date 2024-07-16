@@ -3,13 +3,14 @@
 @section('content')
     <div class="container">
         <form action="{{ route('employees.update', ['employee' => $employee->id]) }}" method="post">
+            @method('PUT')
             @csrf
             <div class="row mb-3">
                 <h3>Organisasi</h3>
                 <hr>
                 <div class="col">
                     <label class="form-label" for="nip">NIP</label>
-                    <input type="text" id="nip" name="nip" value="{{ $employee->id }}"
+                    <input type="text" id="nip" name="nip" value="{{ $employee->nip }}"
                         class="form-control @error('nip') is-invalid @enderror">
                     @error('nip')
                         <div class="text-danger">{{ $message }}</div>
