@@ -2,7 +2,7 @@
 @section('title', 'Input Data Karyawan')
 @section('content')
     <div class="container">
-        <form action="{{ route('employees.store') }}" method="post">
+        <form action="{{ route('employees.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row mb-3">
                 <h3>Organisasi</h3>
@@ -109,6 +109,7 @@
                 <div class="col">
                     <label class="form-label" for="status_peg">Status Pegawai</label>
                     <select class="form-select" name="status_peg" id="status_peg" value="{{ old('status_peg') }}">
+                        <option value="Tetap"@selected(old('status_peg') == 'Tetap')>Tetap</option>
                         <option value="PKWT" @selected(old('status_peg') == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected(old('status_peg') == 'PKWTT')>PKWTT</option>
                         <option value="Alihdaya"@selected(old('status_peg') == 'Alihdaya')>Alihdaya</option>
@@ -167,13 +168,13 @@
                 <div class="col">
                     <label class="form-label">Jenis Kelamin</label>
                     <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki_laki" value="L"
-                            @checked(old('jenis_kelamin') == 'L')>
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki_laki"
+                            value="L" @checked(old('jenis_kelamin') == 'L')>
                         <label class="form-check-label" for="laki_laki">Laki-laki</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan" value="P"
-                            @checked(old('jenis_kelamin') == 'P')>
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan"
+                            value="P" @checked(old('jenis_kelamin') == 'P')>
                         <label class="form-check-label" for="perempuan">Perempuan</label>
                     </div>
                     @error('jenis_kelamin')
@@ -263,10 +264,10 @@
                     @enderror
                 </div>
                 <div class="col-2">
-                    <label class="form-label" for="jml_anak">Jumlah Anak</label>
-                    <input type="number" id="jml_anak" name="jml_anak" value="{{ old('jml_anak') }}"
-                        class="form-control @error('jml_anak') is-invalid @enderror">
-                    @error('jml_anak')
+                    <label class="form-label" for="jml_ank">Jumlah Anak</label>
+                    <input type="number" id="jml_ank" name="jml_ank" value="{{ old('jml_ank') }}"
+                        class="form-control @error('jml_ank') is-invalid @enderror">
+                    @error('jml_ank')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -299,7 +300,19 @@
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Simpan</button>
+            <div class="row mb-3 pt-3">
+                <h3>Lampiran</h3>
+                <hr>
+                <div class="col-3">
+                    <label class="form-label" for="pp">Foto Profil</label>
+                    <input type="file" id="pp" name="pp"
+                        class="form-control @error('pp') is-invalid @enderror" accept="image/png, image/jpeg, image/jpg">
+                    @error('pp')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+                <button type="submit" class="btn btn-primary mb-2">Simpan</button>
         </form>
     </div>
 @endsection

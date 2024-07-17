@@ -40,8 +40,10 @@
                     </tr>
                 @empty
                     <td colspan="7" class="text-center">Tidak ada data...</td>
+                </tbody>
                 @endforelse
-            </tbody>
         </table>
+        <br>
+      
     </div>
 @endsection

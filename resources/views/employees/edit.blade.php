@@ -110,6 +110,7 @@
                 <div class="col">
                     <label class="form-label" for="status_peg">Status Pegawai</label>
                     <select class="form-select" name="status_peg" id="status_peg" value="{{ $employee->status_peg }}">
+                        <option value="Tetap" @selected($employee->status_peg == 'Tetap')>Tetap</option>
                         <option value="PKWT" @selected($employee->status_peg == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected($employee->status_peg == 'PKWTT')>PKWTT</option>
                         <option value="Alihdaya" @selected($employee->status_peg == 'Alihdaya')>Alihdaya</option>
@@ -247,7 +248,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="npwp">NPWP</label>
-                    <input type="text" id="npwp" name="npwp" value="{{ $employee->npwp}}"
+                    <input type="text" id="npwp" name="npwp" value="{{ $employee->npwp }}"
                         class="form-control @error('npwp') is-invalid @enderror">
                     @error('npwp')
                         <div class="text-danger">{{ $message }}</div>
@@ -256,7 +257,7 @@
                 <div class="col-2">
                     <label class="form-label" for="status">Status Pernikahan</label>
                     <select name="status" id="status" class="form-select">
-                        <option value="Kawin"@selected($employee->status == 'Kawin' )>Kawin</option>
+                        <option value="Kawin"@selected($employee->status == 'Kawin')>Kawin</option>
                         <option value="Belum Kawin"@selected($employee->status == 'Belum Kawin')>Belum Kawin
                         </option>
                     </select>
@@ -266,7 +267,7 @@
                 </div>
                 <div class="col-2">
                     <label class="form-label" for="jml_ank">Jumlah Anak</label>
-                    <input type="number" id="jml_ank" name="jml_ank" value="{{ $employee->jml_ank}}"
+                    <input type="number" id="jml_ank" name="jml_ank" value="{{ $employee->jml_ank }}"
                         class="form-control @error('jml_ank') is-invalid @enderror">
                     @error('jml_ank')
                         <div class="text-danger">{{ $message }}</div>
@@ -297,6 +298,18 @@
                     <input type="text" id="hubungan" name="hubungan" value="{{ $employee->hubungan }}"
                         class="form-control @error('hubungan') is-invalid @enderror">
                     @error('hubungan')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3 pt-3">
+                <h3>Lampiran</h3>
+                <hr>
+                <div class="col-3">
+                    <label class="form-label" for="pp">Foto Profil</label>
+                    <input type="file" id="pp" name="pp"
+                        class="form-control @error('pp') is-invalid @enderror" accept="image/png, image/jpeg">
+                    @error('pp')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Employee;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -13,8 +11,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
-        return view('employees.index', ['employees' => $employees]);
+        $employees = Employee::latest()->paginate(10);
+        return view('employees.index', compact('employees'));
     }
 
     /**
@@ -42,8 +40,8 @@ class EmployeeController extends Controller
             'posisi' => '',
             'status_peg' => '',
             'tgl_masuk' => 'required',
-            'awal_kontrak' => 'required',
-            'akhir_kontrak' => 'required',
+            'awal_kontrak' => '',
+            'akhir_kontrak' => '',
             'tmpt_lahir' => 'required|max:20',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required|in:L,P',
@@ -59,11 +57,48 @@ class EmployeeController extends Controller
             'jml_ank' => '',
             'nama_kd' => 'required|max:25',
             'no_kd' => 'required|max:12',
-            'hubungan' => 'required|max:15'
-
+            'hubungan' => 'required|max:15',
+            'pp' => 'required|file|image|mimes:png,jpg,jpeg|max:2048'
         ]);
-        Employee::create($validateData);
-        return redirect()->route('employees.index')->with('alert', "Input data {$validateData['name']} berhasil");
+        $pp = $request->file('pp');
+        $pp->storeAs('public/foto_profil', $pp->hashName());
+
+        $data = Employee::create([
+            'nip' => $request->nip,
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'perusahaan' => $request->perusahaan,
+            'divisi' => $request->divisi,
+            'departemen' => $request->departemen,
+            'seksi' => $request->seksi,
+            'posisi' => $request->posisi,
+            'status_peg' => $request->status_peg,
+            'tgl_masuk' => $request->tgl_masuk,
+            'awal_kontrak' => $request->awal_kontrak,
+            'akhir_kontrak' => $request->akhir_kontrak,
+            'tmpt_lahir' => $request->tmpt_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+            'email' => $request->email,
+            'pend_trkhr' => $request->pend_trkhr,
+            'jurusan' => $request->jurusan,
+            'thn_lulus' => $request->thn_lulus,
+            'nama_ibu' => $request->nama_ibu,
+            'npwp' => $request->npwp,
+            'status' => $request->status,
+            'jml_ank' => $request->jml_ank,
+            'nama_kd' => $request->nama_kd,
+            'no_kd' => $request->no_kd,
+            'hubungan' => $request->hubungan,
+            'pp' => $pp->hashName()
+        ]);
+        if ($data) {
+            return redirect()->route('employees.index')->with('alert', "Input data {$validateData['nama']} berhasil");
+        } else {
+            return redirect()->route('employees.index')->with('alert', "Input data {$validateData['nama']} gagal");
+        }
     }
 
     /**
@@ -89,6 +124,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
+
         $validateData = $request->validate([
             'nip' => 'required|min:10|max:16|unique:employees,nip,' . $employee->id,
             'nama' => 'required|min:3|max:50',
@@ -100,8 +136,8 @@ class EmployeeController extends Controller
             'posisi' => '',
             'status_peg' => '',
             'tgl_masuk' => 'required',
-            'awal_kontrak' => 'required',
-            'akhir_kontrak' => 'required',
+            'awal_kontrak' => '',
+            'akhir_kontrak' => '',
             'tmpt_lahir' => 'required|max:20',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required|in:L,P',
@@ -117,8 +153,14 @@ class EmployeeController extends Controller
             'jml_ank' => '',
             'nama_kd' => 'required|max:25',
             'no_kd' => 'required|max:12',
-            'hubungan' => 'required|max:15'
+            'hubungan' => 'required|max:15',
+            'pp' => 'file|image|max:2048'
         ]);
+        $file = $request->file('pp');
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+        $destination = 'foto_profil';
+        $file->move($destination, $nama_file);
+
         Employee::where('id', $employee->id)->update($validateData);
         return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} berhasil");
     }

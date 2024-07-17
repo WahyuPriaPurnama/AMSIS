@@ -3,13 +3,13 @@
 @section('content')
     <div class="container mt-3">
         <div class="d-flex justify-content-end">
-                <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('employees.destroy', ['employee' => $employee->id]) }}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" class="btn btn-danger ms-3">Hapus</button>
-                </form>
-            </div>
+            <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}" class="btn btn-primary">Edit</a>
+            <form action="{{ route('employees.destroy', ['employee' => $employee->id]) }}" method="post">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-danger ms-3">Hapus</button>
+            </form>
+        </div>
         <hr>
         @if (session()->has('alert'))
             <div class="alert alert-success" role="alert">
@@ -29,7 +29,7 @@
                                     <div class="card-body text-center">
                                         <div class="mb-3">
                                             <img class="img-fluid rounded-circle"
-                                                src="https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                                src="{{ Storage::url('public/foto_profil/').$employee->pp }}"
                                                 alt="" srcset="">
                                         </div>
                                         <h5 class="mb-1">{{ $employee->nama }}</h5>
@@ -41,18 +41,20 @@
                                                 fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                                 <path
                                                     d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                                            </svg> {{ $employee->status_peg }}<br>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                            </svg> {{ $employee->akhir_kontrak }}<br>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z" />
-                                            </svg>
-                                            {{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak, false) }} hari
+                                            </svg> {{ $employee->status_peg == 'Tetap' ? 'Karyawan Tetap' : '' }}<br>
+                                            @if ($employee->status_peg != 'Tetap')
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                                </svg> {{ $employee->akhir_kontrak }}<br>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z" />
+                                                </svg>
+                                                {{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak, false) }} hari
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

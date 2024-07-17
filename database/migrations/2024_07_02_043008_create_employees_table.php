@@ -23,9 +23,9 @@ return new class extends Migration
             $table->char('posisi', 20);
             $table->char('status_peg', 8);
             $table->date('tgl_masuk');
-            $table->date('awal_kontrak');
-            $table->date('akhir_kontrak');
-            $table->char('tmpt_lahir',20);
+            $table->date('awal_kontrak')->nullable();
+            $table->date('akhir_kontrak')->nullable();
+            $table->char('tmpt_lahir', 20);
             $table->date('tgl_lahir');
             $table->char('jenis_kelamin', 1);
             $table->text('alamat');
@@ -40,7 +40,8 @@ return new class extends Migration
             $table->char('jml_ank', 2)->nullable();
             $table->char('nama_kd', 25);
             $table->char('no_kd', 12);
-            $table->char('hubungan', 15);   
+            $table->char('hubungan', 15);
+            $table->string('pp')->nullable();
             $table->timestamps();
         });
     }

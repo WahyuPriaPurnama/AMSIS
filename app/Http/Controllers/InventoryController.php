@@ -85,6 +85,7 @@ class InventoryController extends Controller
             'code' => $request->code,
             'name' => $request->name,
             'qty' => $request->qty,
+            'user'=>Auth::user()->name
 
         ]);
         Inventory::where('id', $inventory->id)->update($validateData);
