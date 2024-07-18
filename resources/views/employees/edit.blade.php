@@ -2,7 +2,7 @@
 @section('title', 'Edit Data Karyawan')
 @section('content')
     <div class="container">
-        <form action="{{ route('employees.update', ['employee' => $employee->id]) }}" method="post">
+        <form action="{{ route('employees.update', ['employee' => $employee->id]) }}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="row mb-3">

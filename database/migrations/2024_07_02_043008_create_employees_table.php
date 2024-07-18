@@ -35,7 +35,7 @@ return new class extends Migration
             $table->char('jurusan', 25);
             $table->char('thn_lulus', 4);
             $table->char('nama_ibu', 25);
-            $table->char('npwp', 16);
+            $table->char('npwp', 31);
             $table->char('status', 11);
             $table->char('jml_ank', 2)->nullable();
             $table->char('nama_kd', 25);

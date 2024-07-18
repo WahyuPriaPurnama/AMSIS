@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -52,13 +54,13 @@ class EmployeeController extends Controller
             'jurusan' => 'required|max:25',
             'thn_lulus' => 'required|max:4',
             'nama_ibu' => 'required|max:25',
-            'npwp' => 'required|size:16',
+            'npwp' => 'required|max:31',
             'status' => '',
             'jml_ank' => '',
             'nama_kd' => 'required|max:25',
             'no_kd' => 'required|max:12',
             'hubungan' => 'required|max:15',
-            'pp' => 'required|file|image|mimes:png,jpg,jpeg|max:2048'
+            'pp' => 'required|image|mimes:png,jpg,jpeg|max:2048'
         ]);
         $pp = $request->file('pp');
         $pp->storeAs('public/foto_profil', $pp->hashName());
@@ -116,7 +118,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return view('employees.edit', ['employee' => $employee]);
+        return view('employees.edit', compact('employee'));
     }
 
     /**
@@ -148,21 +150,89 @@ class EmployeeController extends Controller
             'jurusan' => 'required|max:25',
             'thn_lulus' => 'required|max:4',
             'nama_ibu' => 'required|max:25',
-            'npwp' => 'required|size:16',
+            'npwp' => 'required|max:31',
             'status' => '',
             'jml_ank' => '',
             'nama_kd' => 'required|max:25',
             'no_kd' => 'required|max:12',
             'hubungan' => 'required|max:15',
-            'pp' => 'file|image|max:2048'
         ]);
-        $file = $request->file('pp');
-        $nama_file = time() . "_" . $file->getClientOriginalName();
-        $destination = 'foto_profil';
-        $file->move($destination, $nama_file);
+        dd($request->file('pp'));
+        $employee = Employee::findOrFail($employee->id);
+        if ($request->file('pp') == "") {
+            $employee->update([
+                'nip' => $request->nip,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'perusahaan' => $request->perusahaan,
+                'divisi' => $request->divisi,
+                'departemen' => $request->departemen,
+                'seksi' => $request->seksi,
+                'posisi' => $request->posisi,
+                'status_peg' => $request->status_peg,
+                'tgl_masuk' => $request->tgl_masuk,
+                'awal_kontrak' => $request->awal_kontrak,
+                'akhir_kontrak' => $request->akhir_kontrak,
+                'tmpt_lahir' => $request->tmpt_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'alamat' => $request->alamat,
+                'no_telp' => $request->no_telp,
+                'email' => $request->email,
+                'pend_trkhr' => $request->pend_trkhr,
+                'jurusan' => $request->jurusan,
+                'thn_lulus' => $request->thn_lulus,
+                'nama_ibu' => $request->nama_ibu,
+                'npwp' => $request->npwp,
+                'status' => $request->status,
+                'jml_ank' => $request->jml_ank,
+                'nama_kd' => $request->nama_kd,
+                'no_kd' => $request->no_kd,
+                'hubungan' => $request->hubungan,
+            ]);
+        } else {
+            Storage::disk('local')->delete('public/foto_profil/' . $employee->pp);
 
-        Employee::where('id', $employee->id)->update($validateData);
-        return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} berhasil");
+            $pp = $request->file('pp');
+            $pp->storeAs('public/foto_profil', $pp->hashName());
+
+            $employee->update([
+                'nip' => $request->nip,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'perusahaan' => $request->perusahaan,
+                'divisi' => $request->divisi,
+                'departemen' => $request->departemen,
+                'seksi' => $request->seksi,
+                'posisi' => $request->posisi,
+                'status_peg' => $request->status_peg,
+                'tgl_masuk' => $request->tgl_masuk,
+                'awal_kontrak' => $request->awal_kontrak,
+                'akhir_kontrak' => $request->akhir_kontrak,
+                'tmpt_lahir' => $request->tmpt_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'alamat' => $request->alamat,
+                'no_telp' => $request->no_telp,
+                'email' => $request->email,
+                'pend_trkhr' => $request->pend_trkhr,
+                'jurusan' => $request->jurusan,
+                'thn_lulus' => $request->thn_lulus,
+                'nama_ibu' => $request->nama_ibu,
+                'npwp' => $request->npwp,
+                'status' => $request->status,
+                'jml_ank' => $request->jml_ank,
+                'nama_kd' => $request->nama_kd,
+                'no_kd' => $request->no_kd,
+                'hubungan' => $request->hubungan,
+                'pp' => $pp->hashName()
+            ]);
+        }
+        if ($employee) {
+            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} berhasil");
+        } else {
+            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} gagal");
+        }
     }
 
     /**
@@ -170,7 +240,14 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
+        Storage::disk('local')->delete('/public/foto_profil/' . $employee->pp);
         $employee->delete();
-        return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama berhasil");
+
+        if ($employee) {
+            return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama berhasil");
+        } else {
+
+            return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama gagal");
+        }
     }
 }
