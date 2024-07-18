@@ -157,7 +157,7 @@ class EmployeeController extends Controller
             'no_kd' => 'required|max:12',
             'hubungan' => 'required|max:15',
         ]);
-        dd($request->file('pp'));
+        
         $employee = Employee::findOrFail($employee->id);
         if ($request->file('pp') == "") {
             $employee->update([
