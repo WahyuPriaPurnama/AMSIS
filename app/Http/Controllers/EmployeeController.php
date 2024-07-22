@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
@@ -157,7 +158,7 @@ class EmployeeController extends Controller
             'no_kd' => 'required|max:12',
             'hubungan' => 'required|max:15',
         ]);
-        dd($request->file('pp'));
+
         $employee = Employee::findOrFail($employee->id);
         if ($request->file('pp') == "") {
             $employee->update([
@@ -246,8 +247,15 @@ class EmployeeController extends Controller
         if ($employee) {
             return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama berhasil");
         } else {
-
             return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama gagal");
         }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $employees = DB::table('employees')->where('nama', 'like', "%" . $search . "%")->get();
+    
+        return view('employees.index', ['employees' => $employees]);
     }
 }

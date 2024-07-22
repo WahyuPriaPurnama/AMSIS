@@ -59,6 +59,37 @@ class DatabaseSeeder extends Seeder
             'no_kd' => '085745334330',
             'hubungan' => 'Saudara Sepupu'
         ]);
+
+        Employee::create([
+            'nip' => '3513170504960002',
+            'nama' => 'Firsandi',
+            'nik' => '3513170504960002',
+            'perusahaan' => 'AMS Holding',
+            'divisi' => 'Desain',
+            'departemen' => 'Desain',
+            'seksi' => 'Desain Grafis',
+            'posisi' => 'Staff',
+            'status_peg' => 'Tetap',
+            'tgl_masuk' => '2021-04-05',
+
+            'tmpt_lahir' => 'Banyuwangi',
+            'tgl_lahir' => '1996-04-05',
+            'jenis_kelamin' => 'L',
+            'alamat' => 'RT 1 RW 5, Gang Pandawa, Desa Sebaung, Dusun Sumber (Belakang Lapangan PG Gending, Rumah No. 10)',
+            'no_telp' => '085745334330',
+            'email' => 'wahyupriapurnama@gmail.com',
+            'pend_trkhr' => 'Sarjana',
+            'jurusan' => 'Teknik Komputer',
+            'thn_lulus' => '2020',
+            'nama_ibu' => 'Tinik Mardiasih',
+            'npwp' => '61.314.708.1-625.000',
+            'status' => 'Kawin',
+            'jml_ank' => '1',
+            'nama_kd' => 'Wahyu Sri Ningsih',
+            'no_kd' => '085745334330',
+            'hubungan' => 'Saudara Sepupu'
+        ]);
+
         Subsidiary::create([
             'name' => 'CV. Anugerah Mulia Sejahtera',
             'tagline' => 'General Trading and Supplier',
@@ -84,6 +115,14 @@ class DatabaseSeeder extends Seeder
             'phone' => '0333 424150',
             'address' => 'Jalan Bawean No. 7, Klatak, Kalipuro, Banyuwangi
                             East Java 68421'
+        ]);
+        Subsidiary::create([
+            'name' => 'PT. Blue Ocean Foods Indonesia',
+            'tagline' => 'Canning',
+            'npwp' => '43.623.790.3-625.000',
+            'email' => 'headoffice@blueoceanfoods.co.id',
+            'phone' => '0333 2815013',
+            'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
         ]);
     }
 }
