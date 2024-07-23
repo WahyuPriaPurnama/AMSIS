@@ -13,44 +13,47 @@
                 </div>
             </form>
         </div>
-        <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
-
+        @can('create', App\Models\Employee::class)
+            <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
+        @endcan
         @if (session()->has('alert'))
             <div class="alert alert-success">
                 {{ session()->get('alert') }}
             </div>
         @endif
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>NO</th>
-                    <th>NIP</th>
-                    <th>NAMA</th>
-                    <th>JENIS KELAMIN</th>
-                    <th>PERUSAHAAN</th>
-                    <th>JABATAN</th>
-                    <th>STATUS</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($employees as $employee)
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <th>{{ $loop->iteration }}</th>
-                        <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}">
-                                {{ $employee->nip }}
-                            </a>
-                        </td>
-                        <td>{{ $employee->nama }}</td>
-                        <td>{{ $employee->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
-                        <td>{{ $employee->perusahaan }}</td>
-                        <td>{{ $employee->posisi }}</td>
-                        <td>{{ $employee->status_peg }}</td>
+                        <th>NO</th>
+                        <th>NIP</th>
+                        <th>NAMA</th>
+                        <th>JENIS KELAMIN</th>
+                        <th>PERUSAHAAN</th>
+                        <th>JABATAN</th>
+                        <th>STATUS</th>
                     </tr>
-                @empty
-                    <td colspan="7" class="text-center">Tidak ada data...</td>
-            </tbody>
-            @endforelse
-        </table>
+                </thead>
+                <tbody>
+                    @forelse ($employees as $employee)
+                        <tr>
+                            <th>{{ $loop->iteration }}</th>
+                            <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}">
+                                    {{ $employee->nip }}
+                                </a>
+                            </td>
+                            <td>{{ $employee->nama }}</td>
+                            <td>{{ $employee->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
+                            <td>{{ $employee->perusahaan }}</td>
+                            <td>{{ $employee->posisi }}</td>
+                            <td>{{ $employee->status_peg }}</td>
+                        </tr>
+                    @empty
+                        <td colspan="7" class="text-center">Tidak ada data...</td>
+                </tbody>
+                @endforelse
+            </table>
+        </div>
         <br>
 
     </div>

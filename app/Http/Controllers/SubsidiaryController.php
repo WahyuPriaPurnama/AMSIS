@@ -12,7 +12,7 @@ class SubsidiaryController extends Controller
      */
     public function index()
     {
-        $subsidiaries = Subsidiary::all();
+        $subsidiaries = Subsidiary::sortable()->paginate(5);
         return view('subsidiaries.index', ['subsidiaries' => $subsidiaries]);
     }
 

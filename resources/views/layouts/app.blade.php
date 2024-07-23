@@ -16,6 +16,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
@@ -43,7 +44,7 @@
                             <a class="nav-link @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">Data
                                 Perusahaan</a>
                         </li>
-                        <li class="nav-item">
+                     <!--   <li class="nav-item">
                             <a class="nav-link @yield('menuPurchase_Orders')" href="{{ route('purchase_orders.index') }}">Purchase
                                 Order</a>
                         </li>
@@ -55,6 +56,7 @@
                             <a class="nav-link @yield('menuHistory')" href="{{ route('history.index') }}">History</a>
                         </li>
 
+                    -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -31,40 +31,45 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-
+        $this->authorize('create', Employee::class);
         $validateData = $request->validate([
-            'nip' => 'required|min:10|max:16|unique:employees',
+            'nip' => 'required|size:9|unique:employees',
             'nama' => 'required|min:3|max:50',
             'nik' => 'required|size:16|unique:employees',
-            'perusahaan' => '',
+            'perusahaan' => 'required',
             'divisi' => 'required|max:20',
             'departemen' => 'required|max:20',
             'seksi' => 'required|max:20',
-            'posisi' => '',
-            'status_peg' => '',
+            'posisi' => 'required',
+            'status_peg' => 'required',
             'tgl_masuk' => 'required',
             'awal_kontrak' => '',
             'akhir_kontrak' => '',
-            'tmpt_lahir' => 'required|max:20',
-            'tgl_lahir' => 'required',
-            'jenis_kelamin' => 'required|in:L,P',
-            'alamat' => 'required',
-            'no_telp' => 'required|max:13',
-            'email' => 'required',
+
+            'tmpt_lahir' => 'max:20',
+            'tgl_lahir' => '',
+            'jenis_kelamin' => 'in:L,P',
+            'alamat' => '',
+            'no_telp' => '',
+            'email' => '',
             'pend_trkhr' => '',
-            'jurusan' => 'required|max:25',
-            'thn_lulus' => 'required|max:4',
-            'nama_ibu' => 'required|max:25',
-            'npwp' => 'required|max:31',
+            'jurusan' => 'max:25',
+            'thn_lulus' => 'max:4',
+            'nama_ibu' => 'max:25',
+            'npwp' => 'max:31',
             'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'required|max:25',
-            'no_kd' => 'required|max:12',
-            'hubungan' => 'required|max:15',
-            'pp' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            'nama_kd' => 'max:25',
+            'no_kd' => 'max:12',
+            'hubungan' => 'max:15',
+            'pp' => 'image|mimes:png,jpg,jpeg|max:2048'
         ]);
-        $pp = $request->file('pp');
-        $pp->storeAs('public/foto_profil', $pp->hashName());
+
+        if ($request->file('pp')) {
+            $pp = $request->file('pp');
+            $pp->storeAs('public/foto_profil', $pp->hashName());
+            Employee::create(['pp' => $pp->hashName()]);
+        }
 
         $data = Employee::create([
             'nip' => $request->nip,
@@ -95,7 +100,6 @@ class EmployeeController extends Controller
             'nama_kd' => $request->nama_kd,
             'no_kd' => $request->no_kd,
             'hubungan' => $request->hubungan,
-            'pp' => $pp->hashName()
         ]);
         if ($data) {
             return redirect()->route('employees.index')->with('alert', "Input data {$validateData['nama']} berhasil");
@@ -129,34 +133,35 @@ class EmployeeController extends Controller
     {
 
         $validateData = $request->validate([
-            'nip' => 'required|min:10|max:16|unique:employees,nip,' . $employee->id,
+            'nip' => 'required|size:9|unique:employees,nip,' . $employee->id,
             'nama' => 'required|min:3|max:50',
             'nik' => 'required|size:16|unique:employees,nik,' . $employee->id,
-            'perusahaan' => '',
+            'perusahaan' => 'required',
             'divisi' => 'required|max:20',
             'departemen' => 'required|max:20',
             'seksi' => 'required|max:20',
-            'posisi' => '',
-            'status_peg' => '',
+            'posisi' => 'required',
+            'status_peg' => 'required',
             'tgl_masuk' => 'required',
             'awal_kontrak' => '',
             'akhir_kontrak' => '',
-            'tmpt_lahir' => 'required|max:20',
-            'tgl_lahir' => 'required',
-            'jenis_kelamin' => 'required|in:L,P',
-            'alamat' => 'required',
-            'no_telp' => 'required|max:13',
-            'email' => 'required',
+
+            'tmpt_lahir' => 'max:20',
+            'tgl_lahir' => '',
+            'jenis_kelamin' => 'in:L,P',
+            'alamat' => '',
+            'no_telp' => '',
+            'email' => '',
             'pend_trkhr' => '',
-            'jurusan' => 'required|max:25',
-            'thn_lulus' => 'required|max:4',
-            'nama_ibu' => 'required|max:25',
-            'npwp' => 'required|max:31',
+            'jurusan' => 'max:25',
+            'thn_lulus' => 'max:4',
+            'nama_ibu' => 'max:25',
+            'npwp' => 'max:31',
             'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'required|max:25',
-            'no_kd' => 'required|max:12',
-            'hubungan' => 'required|max:15',
+            'nama_kd' => 'max:25',
+            'no_kd' => 'max:12',
+            'hubungan' => 'max:15',
         ]);
 
         $employee = Employee::findOrFail($employee->id);
@@ -174,6 +179,7 @@ class EmployeeController extends Controller
                 'tgl_masuk' => $request->tgl_masuk,
                 'awal_kontrak' => $request->awal_kontrak,
                 'akhir_kontrak' => $request->akhir_kontrak,
+
                 'tmpt_lahir' => $request->tmpt_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
@@ -210,6 +216,7 @@ class EmployeeController extends Controller
                 'tgl_masuk' => $request->tgl_masuk,
                 'awal_kontrak' => $request->awal_kontrak,
                 'akhir_kontrak' => $request->akhir_kontrak,
+
                 'tmpt_lahir' => $request->tmpt_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
@@ -241,6 +248,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
+        $this->authorize('delete', Employee::class);
         Storage::disk('local')->delete('/public/foto_profil/' . $employee->pp);
         $employee->delete();
 
@@ -255,7 +263,7 @@ class EmployeeController extends Controller
     {
         $search = $request->search;
         $employees = DB::table('employees')->where('nama', 'like', "%" . $search . "%")->get();
-    
+
         return view('employees.index', ['employees' => $employees]);
     }
 }

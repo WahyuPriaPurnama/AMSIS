@@ -25,13 +25,20 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'name' => 'Wahyu Pria Purnama',
-            'email' => 'wahyupriapurnama@gmail.com',
-            'password' => Hash::make('WahyuPria_96')
+            'name' => 'super-admin',
+            'email' => 'superadmin@amsgroup.co.id',
+            'password' => Hash::make('SuperAdmin_96'),
+            'roles' => 'admin'
+        ]);
+        User::create([
+            'name' => 'guest',
+            'email' => 'guest@amsgroup.co.id',
+            'password' => Hash::make('SuperAdmin_96'),
+            'roles' => 'guest'
         ]);
 
         Employee::create([
-            'nip' => '3513170504960001',
+            'nip' => '123456789',
             'nama' => 'Wahyu Pria Purnama',
             'nik' => '3513170504960001',
             'perusahaan' => 'AMS Holding',
@@ -61,7 +68,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Employee::create([
-            'nip' => '3513170504960002',
+            'nip' => '987654321',
             'nama' => 'Firsandi',
             'nik' => '3513170504960002',
             'perusahaan' => 'AMS Holding',
