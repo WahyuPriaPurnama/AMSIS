@@ -37,7 +37,7 @@ class EmployeePolicy
      */
     public function update(User $user, Employee $employee): bool
     {
-        return true;
+        return $user->roles === 'admin';
     }
 
     /**
