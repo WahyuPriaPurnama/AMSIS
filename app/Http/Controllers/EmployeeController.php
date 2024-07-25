@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::latest()->paginate(10);
+        $employees = Employee::latest()->paginate(25);
         return view('employees.index', compact('employees'));
     }
 
@@ -131,7 +131,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-
+        $this->authorize('update', Employee::class);
         $validateData = $request->validate([
             'nip' => 'required|size:9|unique:employees,nip,' . $employee->id,
             'nama' => 'required|min:3|max:50',
@@ -262,7 +262,7 @@ class EmployeeController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $employees = DB::table('employees')->where('nama', 'like', "%" . $search . "%")->get();
+        $employees = DB::table('employees')->where('nama', 'like', "%" . $search . "%")->paginate();
 
         return view('employees.index', ['employees' => $employees]);
     }

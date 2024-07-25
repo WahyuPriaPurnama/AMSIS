@@ -54,7 +54,9 @@
                 @endforelse
             </table>
         </div>
-        <br>
+        <div class="row">
+            {{$employees->links()}}
+        </div>
 
     </div>
 @endsection

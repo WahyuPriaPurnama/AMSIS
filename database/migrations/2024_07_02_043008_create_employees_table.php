@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->char('nip', 16)->unique();
-            $table->char('nama', 25);
+            $table->string('nama');
             $table->char('nik', 16)->unique();
             $table->char('perusahaan', 30);
             $table->char('divisi', 20);
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('tgl_masuk');
             $table->date('awal_kontrak')->nullable();
             $table->date('akhir_kontrak')->nullable();
-            $table->char('tmpt_lahir', 20)->nullable();
+            $table->string('tmpt_lahir')->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->char('jenis_kelamin', 1)->nullable();
             $table->text('alamat')->nullable();
@@ -34,11 +34,11 @@ return new class extends Migration
             $table->char('pend_trkhr', 10)->nullable();
             $table->char('jurusan', 25)->nullable();
             $table->char('thn_lulus', 4)->nullable();
-            $table->char('nama_ibu', 25)->nullable();
+            $table->string('nama_ibu')->nullable();
             $table->char('npwp', 31)->nullable();
             $table->char('status', 11)->nullable();
             $table->char('jml_ank', 2)->nullable();
-            $table->char('nama_kd', 25)->nullable();
+            $table->string('nama_kd')->nullable();
             $table->char('no_kd', 12)->nullable();
             $table->char('hubungan', 15)->nullable();
             $table->string('pp')->nullable();

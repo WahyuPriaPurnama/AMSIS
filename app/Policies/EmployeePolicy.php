@@ -29,15 +29,15 @@ class EmployeePolicy
      */
     public function create(User $user): bool
     {
-        return $user->roles === 'admin';
+        return $user->role === 'super admin';
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Employee $employee): bool
+    public function update(User $user): bool
     {
-        return $user->roles === 'admin';
+        return $user->role === 'super admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class EmployeePolicy
      */
     public function delete(User $user, Employee $employee): bool
     {
-        return $user->roles === 'admin';
+        return $user->role === 'super admin';
     }
 
     /**

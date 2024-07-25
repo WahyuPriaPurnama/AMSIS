@@ -27,7 +27,9 @@ route::middleware('auth')->group(function () {
     route::get('/history', [InventoryController::class, 'history'])->name('history.index');
 });
 
-Auth::routes();
+Auth::routes([
+    'register'=>false,
+]);
 route::redirect('/home', '/employees');
 route::redirect('/', '/login');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

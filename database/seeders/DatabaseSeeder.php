@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -24,17 +26,66 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+
+        $faker = \Faker\Factory::create('id_ID');
+        for ($i = 0; $i < 50; $i++) {
+            Employee::create([
+                'nip' => $faker->randomNumber(9),
+                'nama' => $faker->name(),
+                'nik' => $faker->nik(),
+                'perusahaan' => $faker->randomElement(['AMS Holding', 'PT. ELN Plant 1', 'PT. ELN Plant 2', 'PT. BOFI', 'PT. Haka']),
+                'divisi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
+                'departemen' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
+                'seksi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
+                'posisi' => $faker->randomElement(['Manager', 'Supervisor', 'Staff', 'Operator']),
+                'status_peg' => $faker->randomElement(['Tetap', 'PKWT', 'PKWTT', 'Alihdaya']),
+                'tgl_masuk' => $faker->date(),
+                'awal_kontrak' => $faker->dateTimeBetween('2019-01-01','2022-01-01'),
+                'akhir_kontrak' => $faker->dateTimeBetween('2024-11-11','2025-01-01'),
+
+                'tmpt_lahir' => $faker->city(),
+                'tgl_lahir' => $faker->date(),
+                'jenis_kelamin' => $faker->randomElement(['L', 'P']),
+                'alamat' => $faker->address(),
+                'no_telp' => $faker->numerify('085#########'),
+                'email' => $faker->email(),
+                'pend_trkhr' => $faker->randomElement(['Diploma', 'Sarjana', 'Magister', 'Doktor']),
+                'jurusan' => $faker->randomElement(['Teknik Komputer', 'Ekonomi', 'Akutansi', 'Teknik Sipil']),
+                'thn_lulus' => $faker->randomElement(['2020', '2014', '2015', '2016']),
+                'nama_ibu' => $faker->name(),
+                'npwp' => '61.314.708.1-625.000',
+                'status' => $faker->randomElement(['Kawin', 'Belum Kawin']),
+                'jml_ank' => $faker->randomDigit(),
+                'nama_kd' => $faker->name(),
+                'no_kd' => $faker->numerify('085#########'),
+                'hubungan' => $faker->randomElement(['Saudara Kandung', 'Saudara Sepupu', 'Ipar'])
+            ]);
+        }
+
         User::create([
             'name' => 'super-admin',
             'email' => 'superadmin@amsgroup.co.id',
             'password' => Hash::make('SuperAdmin_96'),
-            'roles' => 'admin'
+            'role' => 'super admin'
+        ]);
+
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@amsgroup.co.id',
+            'password' => Hash::make('SuperAdmin_96'),
+            'role' => 'admin'
+        ]);
+        User::create([
+            'name' => 'user',
+            'email' => 'usern@amsgroup.co.id',
+            'password' => Hash::make('SuperAdmin_96'),
+            'role' => 'user'
         ]);
         User::create([
             'name' => 'guest',
             'email' => 'guest@amsgroup.co.id',
             'password' => Hash::make('SuperAdmin_96'),
-            'roles' => 'guest'
+            'role' => 'guest'
         ]);
 
         Employee::create([
