@@ -112,10 +112,9 @@
                     <label class="form-label" for="status_peg">Status Pegawai</label>
                     <select class="form-select @error('status_peg') is-invalid @enderror" name="status_peg" id="status_peg" value="{{ old('status_peg') }}">
                        <option value="" selected>Pilih Status Pegawai</option>
-                        <option value="Tetap"@selected(old('status_peg') == 'Tetap')>Tetap</option>
                         <option value="PKWT" @selected(old('status_peg') == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected(old('status_peg') == 'PKWTT')>PKWTT</option>
-                        <option value="Alihdaya"@selected(old('status_peg') == 'Alihdaya')>Alihdaya</option>
+                       
                     </select>
                     @error('status_peg')
                         <div class="text-danger">{{ $message }}</div>

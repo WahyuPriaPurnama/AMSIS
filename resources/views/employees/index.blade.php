@@ -26,27 +26,37 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NIP</th>
-                        <th>NAMA</th>
+                        <th>@sortablelink('nip', 'NIP')</th>
+                        <th>@sortablelink('nama', 'NAMA')</th>
                         <th>JENIS KELAMIN</th>
-                        <th>PERUSAHAAN</th>
+                        <th>@sortablelink('perusahaan', 'PERUSAHAAN')</th>
                         <th>JABATAN</th>
                         <th>STATUS</th>
+                        <th>SISA KONTRAK</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($employees as $employee)
-                        <tr>
-                            <th>{{ $loop->iteration }}</th>
-                            <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}">
-                                    {{ $employee->nip }}
-                                </a>
-                            </td>
-                            <td>{{ $employee->nama }}</td>
-                            <td>{{ $employee->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
-                            <td>{{ $employee->perusahaan }}</td>
-                            <td>{{ $employee->posisi }}</td>
-                            <td>{{ $employee->status_peg }}</td>
+                        @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45)
+                            <tr class="table-danger">
+                            @else
+                            <tr>
+                        @endif
+                        <th>{{ $loop->iteration }}</th>
+                        <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}">
+                                {{ $employee->nip }}
+                            </a>
+                        </td>
+                        <td>{{ $employee->nama }}</td>
+                        <td>{{ $employee->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
+                        <td>{{ $employee->perusahaan }}</td>
+                        <td>{{ $employee->posisi }}</td>
+                        <td>{{ $employee->status_peg }}</td>
+                        @if($employee->status_peg == 'PKWT')
+                        <td>{{Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)}} hari</td>
+                        @else
+                        <td> - </td>
+                        @endif
                         </tr>
                     @empty
                         <td colspan="7" class="text-center">Tidak ada data...</td>
@@ -55,7 +65,7 @@
             </table>
         </div>
         <div class="row">
-            {{$employees->links()}}
+            {{ $employees->links() }}
         </div>
 
     </div>

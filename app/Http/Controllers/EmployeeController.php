@@ -14,7 +14,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::latest()->paginate(25);
+        $employees = Employee::sortable()->latest()->paginate(25);
+        
         return view('employees.index', compact('employees'));
     }
 
@@ -59,7 +60,7 @@ class EmployeeController extends Controller
             'npwp' => 'max:31',
             'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'max:25',
+            'nama_kd' => 'max:50',
             'no_kd' => 'max:12',
             'hubungan' => 'max:15',
             'pp' => 'image|mimes:png,jpg,jpeg|max:2048'
@@ -159,7 +160,7 @@ class EmployeeController extends Controller
             'npwp' => 'max:31',
             'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'max:25',
+            'nama_kd' => 'max:50',
             'no_kd' => 'max:12',
             'hubungan' => 'max:15',
         ]);

@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
                 'departemen' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
                 'seksi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
                 'posisi' => $faker->randomElement(['Manager', 'Supervisor', 'Staff', 'Operator']),
-                'status_peg' => $faker->randomElement(['Tetap', 'PKWT', 'PKWTT', 'Alihdaya']),
+                'status_peg' => $faker->randomElement(['PKWT', 'PKWTT']),
                 'tgl_masuk' => $faker->date(),
                 'awal_kontrak' => $faker->dateTimeBetween('2019-01-01','2022-01-01'),
                 'akhir_kontrak' => $faker->dateTimeBetween('2024-11-11','2025-01-01'),
@@ -86,66 +86,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'guest@amsgroup.co.id',
             'password' => Hash::make('SuperAdmin_96'),
             'role' => 'guest'
-        ]);
-
-        Employee::create([
-            'nip' => '123456789',
-            'nama' => 'Wahyu Pria Purnama',
-            'nik' => '3513170504960001',
-            'perusahaan' => 'AMS Holding',
-            'divisi' => 'IT',
-            'departemen' => 'IT',
-            'seksi' => 'IT',
-            'posisi' => 'Manager',
-            'status_peg' => 'Tetap',
-            'tgl_masuk' => '2021-04-05',
-
-            'tmpt_lahir' => 'Banyuwangi',
-            'tgl_lahir' => '1996-04-05',
-            'jenis_kelamin' => 'L',
-            'alamat' => 'RT 1 RW 5, Gang Pandawa, Desa Sebaung, Dusun Sumber (Belakang Lapangan PG Gending, Rumah No. 10)',
-            'no_telp' => '085745334330',
-            'email' => 'wahyupriapurnama@gmail.com',
-            'pend_trkhr' => 'Sarjana',
-            'jurusan' => 'Teknik Komputer',
-            'thn_lulus' => '2020',
-            'nama_ibu' => 'Tinik Mardiasih',
-            'npwp' => '61.314.708.1-625.000',
-            'status' => 'Kawin',
-            'jml_ank' => '1',
-            'nama_kd' => 'Wahyu Sri Ningsih',
-            'no_kd' => '085745334330',
-            'hubungan' => 'Saudara Sepupu'
-        ]);
-
-        Employee::create([
-            'nip' => '987654321',
-            'nama' => 'Firsandi',
-            'nik' => '3513170504960002',
-            'perusahaan' => 'AMS Holding',
-            'divisi' => 'Desain',
-            'departemen' => 'Desain',
-            'seksi' => 'Desain Grafis',
-            'posisi' => 'Staff',
-            'status_peg' => 'Tetap',
-            'tgl_masuk' => '2021-04-05',
-
-            'tmpt_lahir' => 'Banyuwangi',
-            'tgl_lahir' => '1996-04-05',
-            'jenis_kelamin' => 'L',
-            'alamat' => 'RT 1 RW 5, Gang Pandawa, Desa Sebaung, Dusun Sumber (Belakang Lapangan PG Gending, Rumah No. 10)',
-            'no_telp' => '085745334330',
-            'email' => 'wahyupriapurnama@gmail.com',
-            'pend_trkhr' => 'Sarjana',
-            'jurusan' => 'Teknik Komputer',
-            'thn_lulus' => '2020',
-            'nama_ibu' => 'Tinik Mardiasih',
-            'npwp' => '61.314.708.1-625.000',
-            'status' => 'Kawin',
-            'jml_ank' => '1',
-            'nama_kd' => 'Wahyu Sri Ningsih',
-            'no_kd' => '085745334330',
-            'hubungan' => 'Saudara Sepupu'
         ]);
 
         Subsidiary::create([
