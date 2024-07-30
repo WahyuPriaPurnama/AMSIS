@@ -15,7 +15,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::sortable()->latest()->paginate(25);
-        
+
         return view('employees.index', compact('employees'));
     }
 
@@ -24,6 +24,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Employee::class);
         return view('employees.create');
     }
 
@@ -124,6 +125,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
+        $this->authorize('update', Employee::class);
         return view('employees.edit', compact('employee'));
     }
 

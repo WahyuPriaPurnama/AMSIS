@@ -3,7 +3,9 @@
 @section('content')
     <div class="container mt-3">
         <div class="d-flex justify-content-end">
+            @can('update',$employee)
             <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}" class="btn btn-primary">Edit</a>
+           @endcan
             @can('delete', $employee)
                 <form action="{{ route('employees.destroy', ['employee' => $employee->id]) }}" method="post">
                     @method('DELETE')

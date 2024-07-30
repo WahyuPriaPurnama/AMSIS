@@ -28,8 +28,7 @@ route::middleware('auth')->group(function () {
 });
 
 Auth::routes([
-    'register'=>false,
+    'register' => false,
 ]);
 route::redirect('/home', '/employees');
-route::redirect('/', '/login');
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+route::redirect('/','/login');
