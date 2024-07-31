@@ -28,7 +28,7 @@
                             <div class="col-12">
                                 <div class="card widget-card border-light shadow-sm">
                                     <div class="card-header text-bg-secondary">
-                                        {{ $employee->perusahaan }}
+                                        {{ $employee->subsidiary->name }}
                                     </div>
                                     <div class="card-body text-center">
                                         <div class="mb-3">
@@ -125,7 +125,7 @@
                                             </div>
                                             <div
                                                 class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                <div class="p-2">{{ $employee->perusahaan }}</div>
+                                                <div class="p-2">{{ $employee->subsidiary->name }}</div>
                                             </div>
                                             <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
                                                 <div class="p-2">Divisi</div>

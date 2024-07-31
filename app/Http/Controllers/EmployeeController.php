@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::sortable()->latest()->paginate(25);
+        $employees = Employee::with('subsidiary')->sortable()->latest()->paginate(25);
 
         return view('employees.index', compact('employees'));
     }

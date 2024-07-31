@@ -21,6 +21,8 @@
                 {{ session()->get('alert') }}
             </div>
         @endif
+    </div>
+    <div class="container-fluid mt-3">
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -32,30 +34,29 @@
                         <th>@sortablelink('perusahaan', 'PERUSAHAAN')</th>
                         <th>JABATAN</th>
                         <th>STATUS</th>
-                        <th>SISA KONTRAK</th>
+                        <th>@sortablelink('akhir_kontrak')</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($employees as $employee)
-                        @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45)
+                        @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 110)
                             <tr class="table-danger">
                             @else
                             <tr>
                         @endif
-                        <th>{{ $loop->iteration }}</th>
-                        <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}">
-                                {{ $employee->nip }}
-                            </a>
-                        </td>
-                        <td>{{ $employee->nama }}</td>
+                        <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
+                        <td> {{ $employee->nip }}</td>
+                        <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}" class="text-decoration-none">
+                                {{ $employee->nama }}
+                            </a></td>
                         <td>{{ $employee->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
-                        <td>{{ $employee->perusahaan }}</td>
+                        <td>{{ $employee->subsidiary->name }}</td>
                         <td>{{ $employee->posisi }}</td>
                         <td>{{ $employee->status_peg }}</td>
-                        @if($employee->status_peg == 'PKWT')
-                        <td>{{Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)}} hari</td>
+                        @if ($employee->status_peg == 'PKWT')
+                            <td>{{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) }} hari</td>
                         @else
-                        <td> - </td>
+                            <td> - </td>
                         @endif
                         </tr>
                     @empty

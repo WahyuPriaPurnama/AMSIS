@@ -6,10 +6,11 @@
     <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA PERUSAHAAN</h2>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Tambah Data
-            </button>
-
+            @can('create', App\Models\Subsidiary::class)
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Tambah Data
+                </button>
+            @endcan
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -37,11 +38,8 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>@sortablelink('name', 'NAMA')</th>
-                        <th>TAGLINE</th>
-                        <th>NPWP</th>
-                        <th>EMAIL</th>
-                        <th>NO. TELP</th>
+                        <th>PERUSAHAAN</th>
+                        <th>KARYAWAN</th>
                         <th>ALAMAT</th>
                     </tr>
                 </thead>
@@ -49,13 +47,11 @@
                     @forelse ($subsidiaries as $subsidiary)
                         <tr>
                             <th>{{ $loop->iteration }}</th>
-                            <td><a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}">
+                            <td><a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}"
+                                    class="text-decoration-none">
                                     {{ $subsidiary->name }}</td>
                             </a>
-                            <td>{{ $subsidiary->tagline }}</td>
-                            <td>{{ $subsidiary->npwp }}</td>
-                            <td>{{ $subsidiary->email }}</td>
-                            <td>{{ $subsidiary->phone }}</td>
+                            <td>{{ $subsidiary->employees_count }}</td>
                             <td>{{ $subsidiary->address == '' ? 'N/A' : $subsidiary->address }}</td>
                         </tr>
                     @empty

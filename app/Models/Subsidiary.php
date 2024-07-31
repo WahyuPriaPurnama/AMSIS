@@ -10,5 +10,9 @@ class Subsidiary extends Model
 {
     use HasFactory, Sortable;
     protected $guarded = [];
-    public $sortable = ['name'];
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }

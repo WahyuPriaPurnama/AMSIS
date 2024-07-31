@@ -12,7 +12,7 @@ class SubsidiaryController extends Controller
      */
     public function index()
     {
-        $subsidiaries = Subsidiary::sortable()->paginate(5);
+        $subsidiaries = Subsidiary::withCount('employees')->get();
         return view('subsidiaries.index', ['subsidiaries' => $subsidiaries]);
     }
 
@@ -29,6 +29,7 @@ class SubsidiaryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Subsidiary::class);
         $validateData = $request->validate([
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
@@ -55,6 +56,7 @@ class SubsidiaryController extends Controller
      */
     public function edit(Subsidiary $subsidiary)
     {
+        $this->authorize('update', Subsidiary::class);
         return view('subsidiaries.edit', ['subsidiary' => $subsidiary]);
     }
 
@@ -63,6 +65,7 @@ class SubsidiaryController extends Controller
      */
     public function update(Request $request, Subsidiary $subsidiary)
     {
+        $this->authorize('update', Subsidiary::class);
         $validateData = $request->validate([
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
@@ -80,6 +83,7 @@ class SubsidiaryController extends Controller
      */
     public function destroy(Subsidiary $subsidiary)
     {
+        $this->authorize('delete', Subsidiary::class);
         $subsidiary->delete();
         return redirect()->route('subsidiaries.index')->with('alert', "hapus data $subsidiary->name berhasil");
     }

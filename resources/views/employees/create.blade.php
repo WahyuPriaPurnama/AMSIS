@@ -133,7 +133,7 @@
                 <div class="col">
                     <label class="form-label" for="awal_kontrak">Awal Kontrak</label>
                     <input type="date" id="awal_kontrak" name="awal_kontrak" value="{{ old('awal_kontrak') }}"
-                        class="form-control @error('awal_kontrak') is-invalid @enderror">
+                        class="form-control @error('awal_kontrak') is-invalid @enderror" >
                     @error('awal_kontrak')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

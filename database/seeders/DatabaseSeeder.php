@@ -26,6 +26,40 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        Subsidiary::create([
+            'name' => 'CV. Anugerah Mulia Sejahtera',
+            'tagline' => 'General Trading and Supplier',
+            'npwp' => '70.651.906.3-657.000',
+            'email' => 'headoffice@amsgroup.co.id',
+            'phone' => '03415054969',
+            'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
+        ]);
+        Subsidiary::create([
+            'name' => 'PT. Energy Lautan Nusantara Plant Malang',
+            'tagline' => 'Can Maker',
+            'npwp' => '94.024.473.4-657.000',
+            'email' => 'headoffice@eln.co.id',
+            'phone' => '0341 5058269',
+            'address' => 'Dusun Boro Nggondang, RT 52 / RW 13, Tawangargo Karangploso, Malang
+                            East Java 65152'
+        ]);
+        Subsidiary::create([
+            'name' => 'PT. Energy Lautan Nusantara Plant Banyuwangi',
+            'tagline' => 'ABF and Cold Storage',
+            'npwp' => '94.024.473.4-657.000',
+            'email' => 'headoffice@eln.co.id',
+            'phone' => '0333 424150',
+            'address' => 'Jalan Bawean No. 7, Klatak, Kalipuro, Banyuwangi
+                            East Java 68421'
+        ]);
+        Subsidiary::create([
+            'name' => 'PT. Blue Ocean Foods Indonesia',
+            'tagline' => 'Canning',
+            'npwp' => '43.623.790.3-625.000',
+            'email' => 'headoffice@blueoceanfoods.co.id',
+            'phone' => '0333 2815013',
+            'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
+        ]);
 
         $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i < 50; $i++) {
@@ -33,15 +67,15 @@ class DatabaseSeeder extends Seeder
                 'nip' => $faker->randomNumber(9),
                 'nama' => $faker->name(),
                 'nik' => $faker->nik(),
-                'perusahaan' => $faker->randomElement(['AMS Holding', 'PT. ELN Plant 1', 'PT. ELN Plant 2', 'PT. BOFI', 'PT. Haka']),
+                'subsidiary_id' => $faker->numberBetween(1, 4),
                 'divisi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
                 'departemen' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
                 'seksi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
                 'posisi' => $faker->randomElement(['Manager', 'Supervisor', 'Staff', 'Operator']),
                 'status_peg' => $faker->randomElement(['PKWT', 'PKWTT']),
                 'tgl_masuk' => $faker->date(),
-                'awal_kontrak' => $faker->dateTimeBetween('2019-01-01','2022-01-01'),
-                'akhir_kontrak' => $faker->dateTimeBetween('2024-11-11','2025-01-01'),
+                'awal_kontrak' => $faker->dateTimeBetween('2019-01-01', '2022-01-01'),
+                'akhir_kontrak' => $faker->dateTimeBetween('2024-11-11', '2025-01-01'),
 
                 'tmpt_lahir' => $faker->city(),
                 'tgl_lahir' => $faker->date(),
@@ -88,39 +122,5 @@ class DatabaseSeeder extends Seeder
             'role' => 'guest'
         ]);
 
-        Subsidiary::create([
-            'name' => 'CV. Anugerah Mulia Sejahtera',
-            'tagline' => 'General Trading and Supplier',
-            'npwp' => '70.651.906.3-657.000',
-            'email' => 'headoffice@amsgroup.co.id',
-            'phone' => '03415054969',
-            'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
-        ]);
-        Subsidiary::create([
-            'name' => 'PT. Energy Lautan Nusantara Plant Malang',
-            'tagline' => 'Can Maker',
-            'npwp' => '94.024.473.4-657.000',
-            'email' => 'headoffice@eln.co.id',
-            'phone' => '0341 5058269',
-            'address' => 'Dusun Boro Nggondang, RT 52 / RW 13, Tawangargo Karangploso, Malang
-                            East Java 65152'
-        ]);
-        Subsidiary::create([
-            'name' => 'PT. Energy Lautan Nusantara Plant Banyuwangi',
-            'tagline' => 'ABF and Cold Storage',
-            'npwp' => '94.024.473.4-657.000',
-            'email' => 'headoffice@eln.co.id',
-            'phone' => '0333 424150',
-            'address' => 'Jalan Bawean No. 7, Klatak, Kalipuro, Banyuwangi
-                            East Java 68421'
-        ]);
-        Subsidiary::create([
-            'name' => 'PT. Blue Ocean Foods Indonesia',
-            'tagline' => 'Canning',
-            'npwp' => '43.623.790.3-625.000',
-            'email' => 'headoffice@blueoceanfoods.co.id',
-            'phone' => '0333 2815013',
-            'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
-        ]);
     }
 }

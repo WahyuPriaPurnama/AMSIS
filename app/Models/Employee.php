@@ -10,5 +10,10 @@ class Employee extends Model
 {
     use HasFactory, Sortable;
     protected $guarded = [];
-    public $sortable = ['nip', 'nama', 'perusahaan'];
+    public $sortable = ['nip', 'nama', 'perusahaan','akhir_kontrak'];
+
+    public function subsidiary()
+    {
+        return $this->belongsTo(Subsidiary::class);
+    }
 }

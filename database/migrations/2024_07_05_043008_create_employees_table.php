@@ -16,7 +16,6 @@ return new class extends Migration
             $table->char('nip', 16)->unique();
             $table->string('nama');
             $table->char('nik', 16)->unique();
-            $table->char('perusahaan', 30);
             $table->char('divisi', 20);
             $table->char('departemen', 20);
             $table->char('seksi', 20);
@@ -42,6 +41,7 @@ return new class extends Migration
             $table->char('no_kd', 12)->nullable();
             $table->char('hubungan', 15)->nullable();
             $table->string('pp')->nullable();
+            $table->foreignId('subsidiary_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
