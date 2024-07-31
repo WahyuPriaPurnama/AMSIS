@@ -20,7 +20,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
@@ -104,7 +104,7 @@
             @yield('content')
         </main>
     </div>
-    <footer class="bg-dark py-4 text-white  sticky-bottom">
+    <footer class="bg-dark py-4 text-white  mt-auto">
         @vite('resources/js/app.js')
         <div class="container text-center">
             AMS Information System | Copyright © {{ date('Y') }} AMS Group
