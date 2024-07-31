@@ -51,7 +51,7 @@
                                     class="text-decoration-none">
                                     {{ $subsidiary->name }}</td>
                             </a>
-                            <td>{{ $subsidiary->employees_count }}</td>
+                            <td class="text-center">{{ $subsidiary->employees_count }} Orang</td>
                             <td>{{ $subsidiary->address == '' ? 'N/A' : $subsidiary->address }}</td>
                         </tr>
                     @empty

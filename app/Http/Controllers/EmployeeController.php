@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MyTestMail;
 use App\Models\Employee;
 use App\Models\Subsidiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
@@ -271,5 +273,16 @@ class EmployeeController extends Controller
         $employees = Employee::where('nama', 'like', "%" . $search . "%")->paginate(25);
 
         return view('employees.index', ['employees' => $employees]);
+    }
+
+    public function mail(){
+        $mailData=[
+            'title'=>'Mail dari AMSIS',
+            'body'=>'tes email SMTP'
+        ];
+
+        Mail::to('wahyupriapurnama@gmail.com')->send(new MyTestMail($mailData));
+        dd('email sukses terkirim!');
+
     }
 }

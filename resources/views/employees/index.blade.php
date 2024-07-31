@@ -36,7 +36,7 @@
                 </thead>
                 <tbody>
                     @forelse ($employees as $employee)
-                        @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 110)
+                        @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45)
                             <tr class="table-danger">
                             @else
                             <tr>

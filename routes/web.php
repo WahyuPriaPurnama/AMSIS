@@ -31,4 +31,6 @@ Auth::routes([
     'register' => false,
 ]);
 route::redirect('/home', '/employees');
-route::redirect('/','/login');
+route::redirect('/', '/login');
+
+route::get('/kirim-email', [EmployeeController::class, 'mail']);
