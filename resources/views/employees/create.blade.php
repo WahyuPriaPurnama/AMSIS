@@ -33,28 +33,14 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="perusahaan">Perusahaan</label>
-                    <select class="form-select @error('perusahaan') is-invalid @enderror" name="perusahaan" id="perusahaan" value="{{ old('perusahaan') }}">
+                    <select class="form-select @error('perusahaan_id') is-invalid @enderror" name="subsidiary_id" id="perusahaan" value="{{ old('perusahaan_id') }}">
                         <option value="" selected>Pilih Perusahaan</option>
-                        <option value="AMS Holding" @selected(old('perusahaan') == 'AMS Holding')>
-                            AMS Holding
-                        </option>
-                        <option value="PT. ELN Plant 1" @selected(old('perusahaan') == 'PT. ELN Plant 1')>
-                            PT. ELN Plant 1
-                        </option>
-                        <option value="PT. ELN Plant 2" @selected(old('perusahaan') == 'PT. ELN Plant 2')>
-                            PT. ELN Plant 2
-                        </option>
-                        <option value="PT. BOFI" @selected(old('perusahaan') == 'PT. BOFI')>
-                            PT. BOFI
-                        </option>
-                        <option value="PT. Haka" @selected(old('perusahaan') == 'PT. Haka')>
-                            PT. Haka
-                        </option>
-                        <option value="PT. RMM" @selected(old('perusahaan') == 'PT. RMM')>
-                            PT. RMM
-                        </option>
+                       @foreach ($subsidiaries as $subsidiary)
+                        <option value="{{$subsidiary->id}}">{{$subsidiary->name}}</option>                           
+                       @endforeach
+                      
                     </select>
-                    @error('perusahaan')
+                    @error('perusahaan_id')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

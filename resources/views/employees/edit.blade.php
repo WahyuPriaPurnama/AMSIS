@@ -7,24 +7,12 @@
             @method('PUT')
             @csrf
             <div class="row mb-3">
-                <div class="d-flex justify-content-between">
-                    <h3>Organisasi</h3>
-                    @cannot('update', $employee)
-                        <div class="alert alert-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
-                            </svg> <strong>Organisasi</strong> hanya dapat dirubah HRD
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endcannot
-                </div>
+                <h3>Organisasi</h3>
                 <hr>
                 <div class="col">
                     <label class="form-label" for="nip">NIP</label>
                     <input type="text" id="nip" name="nip" value="{{ $employee->nip }}"
-                        class="form-control @error('nip') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('nip') is-invalid @enderror">
                     @error('nip')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -32,8 +20,7 @@
                 <div class="col">
                     <label class="form-label" for="nama">Nama Lengkap</label>
                     <input type="text" id="nama" name="nama" value="{{ $employee->nama }}"
-                        class="form-control @error('nama') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('nama') is-invalid @enderror">
                     @error('nama')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -41,32 +28,31 @@
                 <div class="col">
                     <label class="form-label" for="nik">NIK</label>
                     <input type="text" id="nik" name="nik" value="{{ $employee->nik }}"
-                        class="form-control @error('nik') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('nik') is-invalid @enderror">
                     @error('nik')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col">
                     <label class="form-label" for="perusahaan">Perusahaan</label>
-                    <select class="form-select" name="perusahaan" id="perusahaan" value="{{ $employee->perusahaan }}"
-                        @cannot('update', $employee) readonly @endcannot>
-                        <option value="AMS Holding" @selected($employee->perusahaan == 'AMS Holding')>
+                    <select class="form-select" name="subsidiary_id" id="perusahaan" value="{{ $employee->subsidiary_id }}">
+                        <option value="" selected>Pilih Perusahaan</option>
+                        <option value="1" @selected($employee->subsidiary_id == '1')>
                             AMS Holding
                         </option>
-                        <option value="PT. ELN Plant 1" @selected($employee->perusahaan == 'PT. ELN Plant 1')>
+                        <option value="2" @selected($employee->subsidiary_id == '2')>
                             PT. ELN Plant 1
                         </option>
-                        <option value="PT. ELN Plant 2" @selected($employee->perusahaan == 'PT. ELN Plant 2')>
+                        <option value="3" @selected($employee->subsidiary_id == '3')>
                             PT. ELN Plant 2
                         </option>
-                        <option value="PT. BOFI" @selected($employee->perusahaan == 'PT. BOFI')>
+                        <option value="4" @selected($employee->subsidiary_id == '4')>
                             PT. BOFI
                         </option>
-                        <option value="PT. Haka" @selected($employee->perusahaan == 'PT. Haka')>
+                        <option value="4" @selected($employee->subsidiary_id == '5')>
                             PT. Haka
                         </option>
-                        <option value="PT. RMM" @selected($employee->perusahaan == 'PT. RMM')>
+                        <option value="6" @selected($employee->subsidiary_id == '6')>
                             PT. RMM
                         </option>
                     </select>
@@ -77,8 +63,7 @@
                 <div class="col">
                     <label class="form-label" for="divisi">Divisi</label>
                     <input type="text" id="divisi" name="divisi" value="{{ $employee->divisi }}"
-                        class="form-control @error('divisi') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('divisi') is-invalid @enderror">
                     @error('divisi')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -88,8 +73,7 @@
                 <div class="col">
                     <label class="form-label" for="departemen">Departemen</label>
                     <input type="text" id="departemen" name="departemen" value="{{ $employee->departemen }}"
-                        class="form-control @error('departemen') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('departemen') is-invalid @enderror">
                     @error('departemen')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -97,16 +81,14 @@
                 <div class="col">
                     <label class="form-label" for="seksi">Seksi</label>
                     <input type="text" id="seksi" name="seksi" value="{{ $employee->seksi }}"
-                        class="form-control @error('seksi') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('seksi') is-invalid @enderror">
                     @error('seksi')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col">
                     <label class="form-label" for="posisi">Jabatan</label>
-                    <select class="form-select" name="posisi" id="posisi" value="{{ $employee->posisi }}"
-                        @cannot('update', $employee) readonly @endcannot>
+                    <select class="form-select" name="posisi" id="posisi" value="{{ $employee->posisi }}">
                         <option value="Manager" @selected($employee->posisi == 'Manager')>
                             Manager
                         </option>
@@ -129,8 +111,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="status_peg">Status Pegawai</label>
-                    <select class="form-select" name="status_peg" id="status_peg" value="{{ $employee->status_peg }}"
-                        @cannot('update', $employee) readonly @endcannot>
+                    <select class="form-select" name="status_peg" id="status_peg" value="{{ $employee->status_peg }}">
                         <option value="PKWT" @selected($employee->status_peg == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected($employee->status_peg == 'PKWTT')>PKWTT</option>
                     </select>
@@ -143,8 +124,7 @@
                 <div class="col">
                     <label class="form-label" for="tgl_masuk">Tanggal Masuk Kerja</label>
                     <input type="date" id="tgl_masuk" name="tgl_masuk" value="{{ $employee->tgl_masuk }}"
-                        class="form-control @error('tgl_masuk') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('tgl_masuk') is-invalid @enderror">
                     @error('tgl_masuk')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -152,8 +132,7 @@
                 <div class="col">
                     <label class="form-label" for="awal_kontrak">Awal Kontrak</label>
                     <input type="date" id="awal_kontrak" name="awal_kontrak" value="{{ $employee->awal_kontrak }}"
-                        class="form-control @error('awal_kontrak') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('awal_kontrak') is-invalid @enderror">
                     @error('awal_kontrak')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -162,8 +141,7 @@
                     <label class="form-label" for="akhir_kontrak">Akhir Kontrak</label>
                     <input type="date" id="akhir_kontrak" name="akhir_kontrak"
                         value="{{ $employee->akhir_kontrak }}"
-                        class="form-control @error('akhir_kontrak') is-invalid @enderror"
-                        @cannot('update', $employee) readonly @endcannot>
+                        class="form-control @error('akhir_kontrak') is-invalid @enderror">
                     @error('akhir_kontrak')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

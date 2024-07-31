@@ -21,8 +21,7 @@
                 {{ session()->get('alert') }}
             </div>
         @endif
-    </div>
-    <div class="container-fluid mt-3">
+    
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -30,9 +29,7 @@
                         <th>NO</th>
                         <th>@sortablelink('nip', 'NIP')</th>
                         <th>@sortablelink('nama', 'NAMA')</th>
-                        <th>JENIS KELAMIN</th>
                         <th>@sortablelink('perusahaan', 'PERUSAHAAN')</th>
-                        <th>JABATAN</th>
                         <th>STATUS</th>
                         <th>@sortablelink('akhir_kontrak')</th>
                     </tr>
@@ -49,9 +46,8 @@
                         <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}" class="text-decoration-none">
                                 {{ $employee->nama }}
                             </a></td>
-                        <td>{{ $employee->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
+                   
                         <td>{{ $employee->subsidiary->name }}</td>
-                        <td>{{ $employee->posisi }}</td>
                         <td>{{ $employee->status_peg }}</td>
                         @if ($employee->status_peg == 'PKWT')
                             <td>{{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) }} hari</td>

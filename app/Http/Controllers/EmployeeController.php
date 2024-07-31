@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Subsidiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $this->authorize('create', Employee::class);
-        return view('employees.create');
+        $subsidiaries=Subsidiary::all();
+        return view('employees.create',compact('subsidiaries'));
     }
 
     /**
@@ -38,7 +40,7 @@ class EmployeeController extends Controller
             'nip' => 'required|size:9|unique:employees',
             'nama' => 'required|min:3|max:50',
             'nik' => 'required|size:16|unique:employees',
-            'perusahaan' => 'required',
+            'subsidiary_id' => 'required',
             'divisi' => 'required|max:20',
             'departemen' => 'required|max:20',
             'seksi' => 'required|max:20',
@@ -47,7 +49,6 @@ class EmployeeController extends Controller
             'tgl_masuk' => 'required',
             'awal_kontrak' => '',
             'akhir_kontrak' => '',
-
             'tmpt_lahir' => 'max:20',
             'tgl_lahir' => '',
             'jenis_kelamin' => 'in:L,P',
@@ -77,7 +78,7 @@ class EmployeeController extends Controller
             'nip' => $request->nip,
             'nama' => $request->nama,
             'nik' => $request->nik,
-            'perusahaan' => $request->perusahaan,
+            'subsidiary_id' => $request->subsidiary_id,
             'divisi' => $request->divisi,
             'departemen' => $request->departemen,
             'seksi' => $request->seksi,
@@ -103,6 +104,7 @@ class EmployeeController extends Controller
             'no_kd' => $request->no_kd,
             'hubungan' => $request->hubungan,
         ]);
+
         if ($data) {
             return redirect()->route('employees.index')->with('alert', "Input data {$validateData['nama']} berhasil");
         } else {
@@ -126,6 +128,7 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $this->authorize('update', Employee::class);
+
         return view('employees.edit', compact('employee'));
     }
 
@@ -139,7 +142,7 @@ class EmployeeController extends Controller
             'nip' => 'required|size:9|unique:employees,nip,' . $employee->id,
             'nama' => 'required|min:3|max:50',
             'nik' => 'required|size:16|unique:employees,nik,' . $employee->id,
-            'perusahaan' => 'required',
+            'subsidiary_id' => 'required',
             'divisi' => 'required|max:20',
             'departemen' => 'required|max:20',
             'seksi' => 'required|max:20',
@@ -173,7 +176,7 @@ class EmployeeController extends Controller
                 'nip' => $request->nip,
                 'nama' => $request->nama,
                 'nik' => $request->nik,
-                'perusahaan' => $request->perusahaan,
+                'subsidiary_id' => $request->subsidiary_id,
                 'divisi' => $request->divisi,
                 'departemen' => $request->departemen,
                 'seksi' => $request->seksi,
@@ -210,7 +213,7 @@ class EmployeeController extends Controller
                 'nip' => $request->nip,
                 'nama' => $request->nama,
                 'nik' => $request->nik,
-                'perusahaan' => $request->perusahaan,
+                'subsidiary_id' => $request->subsidiary_id,
                 'divisi' => $request->divisi,
                 'departemen' => $request->departemen,
                 'seksi' => $request->seksi,
@@ -265,7 +268,7 @@ class EmployeeController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $employees = DB::table('employees')->where('nama', 'like', "%" . $search . "%")->paginate();
+        $employees = Employee::where('nama', 'like', "%" . $search . "%")->paginate(25);
 
         return view('employees.index', ['employees' => $employees]);
     }

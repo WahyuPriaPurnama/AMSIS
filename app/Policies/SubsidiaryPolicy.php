@@ -35,7 +35,7 @@ class SubsidiaryPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Subsidiary $subsidiary): bool
+    public function update(User $user): bool
     {
         return $user->role==='super admin';
     }
@@ -43,7 +43,7 @@ class SubsidiaryPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Subsidiary $subsidiary): bool
+    public function delete(User $user): bool
     {
         return $user->role==='super admin';
     }

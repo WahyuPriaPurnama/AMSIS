@@ -41,7 +41,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="phone">Phone</label>
-                <input type="number" id="phone" name="phone" value="{{ old('tagline') ?? $subsidiary->phone }}"
+                <input type="text" id="phone" name="phone" value="{{ old('tagline') ?? $subsidiary->phone }}"
                     class="form-control @error('phone') is-invalid @enderror">
                 @error('phone')
                     <div class="text-danger">{{ $message }}</div>
