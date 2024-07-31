@@ -36,25 +36,12 @@
                 <div class="col">
                     <label class="form-label" for="perusahaan">Perusahaan</label>
                     <select class="form-select" name="subsidiary_id" id="perusahaan" value="{{ $employee->subsidiary_id }}">
-                        <option value="" selected>Pilih Perusahaan</option>
-                        <option value="1" @selected($employee->subsidiary_id == '1')>
-                            AMS Holding
-                        </option>
-                        <option value="2" @selected($employee->subsidiary_id == '2')>
-                            PT. ELN Plant 1
-                        </option>
-                        <option value="3" @selected($employee->subsidiary_id == '3')>
-                            PT. ELN Plant 2
-                        </option>
-                        <option value="4" @selected($employee->subsidiary_id == '4')>
-                            PT. BOFI
-                        </option>
-                        <option value="4" @selected($employee->subsidiary_id == '5')>
-                            PT. Haka
-                        </option>
-                        <option value="6" @selected($employee->subsidiary_id == '6')>
-                            PT. RMM
-                        </option>
+
+                        @foreach ($subsidiaries as $subsidiary)
+                            <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == $employee->subsidiary->id)>{{ $subsidiary->name }}
+                            </option>
+                        @endforeach
+                       
                     </select>
                     @error('perusahaan')
                         <div class="text-danger">{{ $message }}</div>

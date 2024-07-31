@@ -128,8 +128,8 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $this->authorize('update', Employee::class);
-
-        return view('employees.edit', compact('employee'));
+        $subsidiaries=Subsidiary::all();
+        return view('employees.edit', compact(['employee','subsidiaries']));
     }
 
     /**
