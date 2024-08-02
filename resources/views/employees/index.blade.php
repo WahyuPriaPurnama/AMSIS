@@ -5,7 +5,7 @@
     <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA KARYAWAN</h2>
-            <form action="{{ route('employees.search') }}" method="get">
+            <form action="{{ route('employee.search') }}" method="get">
                 <div class="input-group mb-3">
                     <input type="text" name="search" class="form-control" placeholder="Cari Nama"
                         value="{{ old('search') }}">

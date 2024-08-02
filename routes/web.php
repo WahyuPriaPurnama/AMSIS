@@ -19,8 +19,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 route::middleware('auth')->group(function () {
-    route::get('employees/search', [EmployeeController::class, 'search'])->name('employees.search');
+    route::get('employee/search', [EmployeeController::class, 'search'])->name('employee.search');
     route::resource('employees', EmployeeController::class);
+    route::get('employee/foto_profil/{pp}', [EmployeeController::class, 'pp'])->name('employee.pp');
+    route::get('employee/KTP/{ktp}', [EmployeeController::class, 'ktp'])->name('employee.ktp');
+    route::get('employee/NPWP/{npwp}', [EmployeeController::class, 'npwp'])->name('employee.npwp');
+    route::get('employee/KK/{kk}', [EmployeeController::class, 'kk'])->name('employee.kk');
+    route::get('employee/BPJS-ket/{bpjs_ket}', [EmployeeController::class, 'bpjs_ket'])->name('employee.bpjs_ket');
+    route::get('employee/BPJS-kes/{bpjs_kes}', [EmployeeController::class, 'bpjs_kes'])->name('employee.bpjs_kes');
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('purchase_orders', PurchaseOrderController::class);
     route::resource('inventories', InventoryController::class);
@@ -32,5 +38,4 @@ Auth::routes([
 ]);
 route::redirect('/home', '/employees');
 route::redirect('/', '/login');
-
 route::get('/kirim-email', [EmployeeController::class, 'mail']);

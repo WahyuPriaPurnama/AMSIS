@@ -42,6 +42,11 @@ return new class extends Migration
             $table->char('hubungan', 15)->nullable();
             $table->string('pp')->nullable();
             $table->foreignId('subsidiary_id')->constrained()->onDelete('cascade');
+            $table->string('ktp')->nullable();
+            $table->string('kk')->nullable();
+            $table->string('npwp2')->nullable();
+            $table->string('bpjs_ket')->nullable();
+            $table->string('bpjs_kes')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,9 @@ use App\Models\Subsidiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
 {
@@ -28,8 +30,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $this->authorize('create', Employee::class);
-        $subsidiaries=Subsidiary::all();
-        return view('employees.create',compact('subsidiaries'));
+        $subsidiaries = Subsidiary::all();
+        return view('employees.create', compact('subsidiaries'));
     }
 
     /**
@@ -67,13 +69,48 @@ class EmployeeController extends Controller
             'nama_kd' => 'max:50',
             'no_kd' => 'max:12',
             'hubungan' => 'max:15',
-            'pp' => 'image|mimes:png,jpg,jpeg|max:2048'
+            'pp' => 'mimes:png,jpg,jpeg|max:2048',
+            'ktp' => 'mimes:pdf|max:2048',
+            'kk' => 'mimes:pdf|max:2048',
+            'npwp2' => 'mimes:pdf|max:2048',
+            'bpjs_kes' => 'mimes:pdf|max:2048',
+            'bpjs_ket' => 'mimes:pdf|max:2048',
         ]);
 
         if ($request->file('pp')) {
             $pp = $request->file('pp');
             $pp->storeAs('public/foto_profil', $pp->hashName());
             Employee::create(['pp' => $pp->hashName()]);
+        }
+
+        if ($request->file('ktp')) {
+            $ktp = $request->file('ktp');
+            $ktp->storeAs('public/KTP', $ktp->hashName());
+            Employee::create(['ktp' => $ktp->hashName()]);
+        }
+
+        if ($request->file('npwp2')) {
+            $npwp = $request->file('npwp2');
+            $npwp->storeAs('public/NPWP', $npwp->hashName());
+            Employee::create(['npwp2' => $npwp->hashName()]);
+        }
+
+        if ($request->file('kk')) {
+            $kk = $request->file('kk');
+            $kk->storeAs('public/KK', $kk->hashName());
+            Employee::create(['kk' => $kk->hashName()]);
+        }
+
+        if ($request->file('bpjs_kes')) {
+            $bpjs_kes = $request->file('bpjs_kes');
+            $bpjs_kes->storeAs('public/BPJS Kesehatan', $bpjs_kes->hashName());
+            Employee::create(['bpjs_kes' => $bpjs_kes->hashName()]);
+        }
+
+        if ($request->file('bpjs_ket')) {
+            $bpjs_ket = $request->file('bpjs_ket');
+            $bpjs_ket->storeAs('public/BPJS Kesehatan', $bpjs_ket->hashName());
+            Employee::create(['bpjs_ket' => $bpjs_ket->hashName()]);
         }
 
         $data = Employee::create([
@@ -130,8 +167,8 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $this->authorize('update', Employee::class);
-        $subsidiaries=Subsidiary::all();
-        return view('employees.edit', compact(['employee','subsidiaries']));
+        $subsidiaries = Subsidiary::all();
+        return view('employees.edit', compact(['employee', 'subsidiaries']));
     }
 
     /**
@@ -170,80 +207,87 @@ class EmployeeController extends Controller
             'nama_kd' => 'max:50',
             'no_kd' => 'max:12',
             'hubungan' => 'max:15',
+            'pp' => 'mimes:png,jpg,jpeg|max:2048',
+            'ktp' => 'mimes:pdf|max:2048',
+            'kk' => 'mimes:pdf|max:2048',
+            'npwp2' => 'mimes:pdf|max:2048',
+            'bpjs_kes' => 'mimes:pdf|max:2048',
+            'bpjs_ket' => 'mimes:pdf|max:2048',
         ]);
 
         $employee = Employee::findOrFail($employee->id);
-        if ($request->file('pp') == "") {
-            $employee->update([
-                'nip' => $request->nip,
-                'nama' => $request->nama,
-                'nik' => $request->nik,
-                'subsidiary_id' => $request->subsidiary_id,
-                'divisi' => $request->divisi,
-                'departemen' => $request->departemen,
-                'seksi' => $request->seksi,
-                'posisi' => $request->posisi,
-                'status_peg' => $request->status_peg,
-                'tgl_masuk' => $request->tgl_masuk,
-                'awal_kontrak' => $request->awal_kontrak,
-                'akhir_kontrak' => $request->akhir_kontrak,
 
-                'tmpt_lahir' => $request->tmpt_lahir,
-                'tgl_lahir' => $request->tgl_lahir,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'alamat' => $request->alamat,
-                'no_telp' => $request->no_telp,
-                'email' => $request->email,
-                'pend_trkhr' => $request->pend_trkhr,
-                'jurusan' => $request->jurusan,
-                'thn_lulus' => $request->thn_lulus,
-                'nama_ibu' => $request->nama_ibu,
-                'npwp' => $request->npwp,
-                'status' => $request->status,
-                'jml_ank' => $request->jml_ank,
-                'nama_kd' => $request->nama_kd,
-                'no_kd' => $request->no_kd,
-                'hubungan' => $request->hubungan,
-            ]);
-        } else {
+        $employee->update([
+            'nip' => $request->nip,
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'subsidiary_id' => $request->subsidiary_id,
+            'divisi' => $request->divisi,
+            'departemen' => $request->departemen,
+            'seksi' => $request->seksi,
+            'posisi' => $request->posisi,
+            'status_peg' => $request->status_peg,
+            'tgl_masuk' => $request->tgl_masuk,
+            'awal_kontrak' => $request->awal_kontrak,
+            'akhir_kontrak' => $request->akhir_kontrak,
+
+            'tmpt_lahir' => $request->tmpt_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+            'email' => $request->email,
+            'pend_trkhr' => $request->pend_trkhr,
+            'jurusan' => $request->jurusan,
+            'thn_lulus' => $request->thn_lulus,
+            'nama_ibu' => $request->nama_ibu,
+            'npwp' => $request->npwp,
+            'status' => $request->status,
+            'jml_ank' => $request->jml_ank,
+            'nama_kd' => $request->nama_kd,
+            'no_kd' => $request->no_kd,
+            'hubungan' => $request->hubungan,
+        ]);
+        if ($request->file('pp')) {
             Storage::disk('local')->delete('public/foto_profil/' . $employee->pp);
-
             $pp = $request->file('pp');
-            $pp->storeAs('public/foto_profil', $pp->hashName());
-
-            $employee->update([
-                'nip' => $request->nip,
-                'nama' => $request->nama,
-                'nik' => $request->nik,
-                'subsidiary_id' => $request->subsidiary_id,
-                'divisi' => $request->divisi,
-                'departemen' => $request->departemen,
-                'seksi' => $request->seksi,
-                'posisi' => $request->posisi,
-                'status_peg' => $request->status_peg,
-                'tgl_masuk' => $request->tgl_masuk,
-                'awal_kontrak' => $request->awal_kontrak,
-                'akhir_kontrak' => $request->akhir_kontrak,
-
-                'tmpt_lahir' => $request->tmpt_lahir,
-                'tgl_lahir' => $request->tgl_lahir,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'alamat' => $request->alamat,
-                'no_telp' => $request->no_telp,
-                'email' => $request->email,
-                'pend_trkhr' => $request->pend_trkhr,
-                'jurusan' => $request->jurusan,
-                'thn_lulus' => $request->thn_lulus,
-                'nama_ibu' => $request->nama_ibu,
-                'npwp' => $request->npwp,
-                'status' => $request->status,
-                'jml_ank' => $request->jml_ank,
-                'nama_kd' => $request->nama_kd,
-                'no_kd' => $request->no_kd,
-                'hubungan' => $request->hubungan,
-                'pp' => $pp->hashName()
-            ]);
+            $pp->storeAs('public/foto_profil/', $pp->hashName());
+            $employee->update(['pp' => $pp->hashName()]);
         }
+        if ($request->file('ktp')) {
+            Storage::disk('local')->delete('public/KTP/' . $employee->ktp);
+            $ktp = $request->file('ktp');
+            $ktp->storeAs('public/KTP', $ktp->hashName());
+            $employee->update(['ktp' => $ktp->hashName()]);
+        }
+        if ($request->file('npwp2')) {
+            Storage::disk('local')->delete('public/NPWP/' . $employee->npwp2);
+            $npwp = $request->file('npwp2');
+            $npwp->storeAs('public/NPWP', $npwp->hashName());
+            $employee->update(['npwp2' => $npwp->hashName()]);
+        }
+
+        if ($request->file('kk')) {
+            Storage::disk('local')->delete('public/KK/' . $employee->kk);
+            $kk = $request->file('kk');
+            $kk->storeAs('public/Kartu Keluarga/', $kk->hashName());
+            $employee->update(['kk' => $kk->hashName()]);
+        }
+
+        if ($request->file('bpjs_kes')) {
+            Storage::disk('local')->delete('public/BPJS Kesehatan/' . $employee->bpjs_kes);
+            $bpjs_kes = $request->file('bpjs_kes');
+            $bpjs_kes->storeAs('public/BPJS Kesehatan/', $bpjs_kes->hashName());
+            $employee->update(['bpjs_kes' => $bpjs_kes->hashName()]);
+        }
+
+        if ($request->file('bpjs_ket')) {
+            Storage::disk('local')->delete('public/BPJS Ketenagakerjaan/' . $employee->kbpjs_ket);
+            $bpjs_ket = $request->file('bpjs_ket');
+            $bpjs_ket->storeAs('public/BPJS Ketenagakerjaan/', $bpjs_ket->hashName());
+            $employee->update(['bpjs_ket' => $bpjs_ket->hashName()]);
+        }
+
         if ($employee) {
             return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} berhasil");
         } else {
@@ -275,14 +319,45 @@ class EmployeeController extends Controller
         return view('employees.index', ['employees' => $employees]);
     }
 
-    public function mail(){
-        $mailData=[
-            'title'=>'Mail dari AMSIS',
-            'body'=>'tes email SMTP'
+    public function mail()
+    {
+        $mailData = [
+            'title' => 'Mail dari AMSIS',
+            'body' => 'tes email SMTP'
         ];
 
         Mail::to('wahyupriapurnama@gmail.com')->send(new MyTestMail($mailData));
         dd('email sukses terkirim!');
+    }
 
+    public function pp($pp)
+    {
+        $this->authorize('view', Employee::class);
+        return Response::download('storage/foto_profil/' . $pp);
+    }
+    public function ktp($ktp)
+    {
+        $this->authorize('view', Employee::class);
+        return Response::download('storage/KTP/' . $ktp);
+    }
+    public function npwp($npwp)
+    {
+        $this->authorize('view', Employee::class);
+        return Response::download('storage/NPWP/' . $npwp);
+    }
+    public function kk($kk)
+    {
+        $this->authorize('view', Employee::class);
+        return Response::download('storage/Kartu Keluarga/' . $kk);
+    }
+    public function bpjs_ket($bpjs_ket)
+    {
+        $this->authorize('view', Employee::class);
+        return Response::download('storage/BPJS Ketenagakerjaan/' . $bpjs_ket);
+    }
+    public function bpjs_kes($bpjs_kes)
+    {
+        $this->authorize('view', Employee::class);
+        return Response::download('storage/BPJS Kesehatan/' . $bpjs_kes);
     }
 }

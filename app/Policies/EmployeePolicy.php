@@ -21,7 +21,7 @@ class EmployeePolicy
      */
     public function view(User $user): bool
     {
-        return true;
+        return $user->role === 'super admin';
     }
 
     /**

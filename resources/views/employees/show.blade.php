@@ -3,9 +3,9 @@
 @section('content')
     <div class="container mt-3">
         <div class="d-flex justify-content-end">
-            @can('update',$employee)
-            <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}" class="btn btn-primary">Edit</a>
-           @endcan
+            @can('update', $employee)
+                <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}" class="btn btn-primary">Edit</a>
+            @endcan
             @can('delete', $employee)
                 <form action="{{ route('employees.destroy', ['employee' => $employee->id]) }}" method="post">
                     @method('DELETE')
@@ -40,7 +40,7 @@
                                                 alt="" srcset="">
                                         </div>
                                         <h5 class="mb-1">{{ $employee->nama }}</h5>
-                                        </b>{{ Carbon\Carbon::parse($employee->tgl_lahir)->age }} Tahun
+                                        </b>Usia: {{ Carbon\Carbon::parse($employee->tgl_lahir)->age }} Tahun
                                         <p class="text-secondary mb-4">{{ $employee->posisi }}</p>
                                         <hr>
                                         <div class="card-body text-center">
@@ -49,10 +49,10 @@
                                                 <path
                                                     d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                                             </svg>
-                                           
+
                                             {{ $employee->status_peg == 'PKWT' ? 'PKWT' : '' }}
                                             {{ $employee->status_peg == 'PKWTT' ? 'PKWTT' : '' }}<br>
-                                            
+
                                             @if ($employee->status_peg == 'PKWT')
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
@@ -91,6 +91,11 @@
                                         <button class="nav-link" id="emergency-tab" data-bs-toggle="tab"
                                             data-bs-target="#emergency-tab-pane" type="button" role="tab"
                                             aria-controls="emergency-tab-pane" aria-selected="false">Kontak Darurat</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="lampiran-tab" data-bs-toggle="tab"
+                                            data-bs-target="#lampiran-tab-pane" type="button" role="tab"
+                                            aria-controls="lampiran-tab-pane" aria-selected="false">Lampiran</button>
                                     </li>
 
                                 </ul>
@@ -282,6 +287,139 @@
                                             <div
                                                 class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
                                                 <div class="p-2">{{ $employee->hubungan }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade show" id="lampiran-tab-pane" role="tabpanel"
+                                        aria-labelledby="lampiran-tab" tabindex="0">
+
+                                        <div class="row g-0">
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">Foto Profil</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2">
+                                                    @if ($employee->pp == null)
+                                                        <p class="font-monospace">kosong</p>
+                                                    @else
+                                                        <a href="{{ route('employee.pp', $employee->pp) }}"
+                                                            target="_blank" class="btn btn-primary"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-file-earmark-arrow-down-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                                                            </svg></a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">KTP</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2">
+                                                    @if ($employee->ktp == null)
+                                                        <p class="font-monospace">kosong</p>
+                                                    @else
+                                                        <a href="{{ route('employee.ktp', $employee->ktp) }}"
+                                                            target="_blank" class="btn btn-primary"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-file-earmark-arrow-down-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                                                            </svg></a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">NPWP</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2">
+                                                    @if ($employee->npwp2 == null)
+                                                        <p class="font-monospace">kosong</p>
+                                                    @else
+                                                        <a href="{{ route('employee.npwp', $employee->npwp2) }}"
+                                                            target="_blank" class="btn btn-primary"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-file-earmark-arrow-down-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                                                            </svg></a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">Kartu Keluarga</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2">
+                                                    @if ($employee->kk == null)
+                                                        <p class="font-monospace">kosong</p>
+                                                    @else
+                                                        <a href="{{ route('employee.kk', $employee->kk) }}"
+                                                            target="_blank" class="btn btn-primary"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-file-earmark-arrow-down-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                                                            </svg></a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">BPJS Ketenagakerjaan</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2">
+                                                    @if ($employee->bpjs_ket == null)
+                                                        <p class="font-monospace">kosong</p>
+                                                    @else
+                                                        <a href="{{ route('employee.bpjs_ket', $employee->bpjs_ket) }}"
+                                                            target="_blank" class="btn btn-primary"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-file-earmark-arrow-down-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                                                            </svg></a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">BPJS Kesehatan</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2">
+                                                    @if ($employee->bpjs_kes == null)
+                                                        <p class="font-monospace">kosong</p>
+                                                    @else
+                                                        <a href="{{ route('employee.bpjs_kes', $employee->bpjs_kes) }}"
+                                                            target="_blank" class="btn btn-primary"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-file-earmark-arrow-down-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                                                            </svg></a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

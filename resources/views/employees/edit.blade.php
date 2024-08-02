@@ -41,7 +41,7 @@
                             <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == $employee->subsidiary->id)>{{ $subsidiary->name }}
                             </option>
                         @endforeach
-                       
+
                     </select>
                     @error('perusahaan')
                         <div class="text-danger">{{ $message }}</div>
@@ -295,8 +295,51 @@
                 <div class="col-3">
                     <label class="form-label" for="pp">Foto Profil</label>
                     <input type="file" id="pp" name="pp"
-                        class="form-control @error('pp') is-invalid @enderror" accept="image/png, image/jpeg">
+                        class="form-control @error('pp') is-invalid @enderror" accept="image/*" >
                     @error('pp')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-3">
+                    <label class="form-label" for="ktp">KTP</label>
+                    <input type="file" id="ktp" name="ktp"
+                        class="form-control @error('ktp') is-invalid @enderror" accept="application/pdf">
+                    @error('ktp')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-3">
+                    <label class="form-label" for="kk">Kartu Keluarga</label>
+                    <input type="file" id="kk" name="kk"
+                        class="form-control @error('kk') is-invalid @enderror" accept="application/pdf">
+                    @error('kk')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-3">
+                    <label class="form-label" for="npwp2">NPWP</label>
+                    <input type="file" id="npwp2" name="npwp2"
+                        class="form-control @error('npwp2') is-invalid @enderror" accept="application/pdf">
+                    @error('npwp2')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3 pt-3">
+
+                <div class="col-3">
+                    <label class="form-label" for="bpjs_kes">BPJS Kesehatan</label>
+                    <input type="file" id="bpjs_kes" name="bpjs_kes"
+                        class="form-control @error('bpjs_kes') is-invalid @enderror" accept="application/pdf">
+                    @error('bpjs_kes')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-3">
+                    <label class="form-label" for="bpjs_ket">BPJS Ketenagakerjaan</label>
+                    <input type="file" id="bpjs_ket" name="bpjs_ket"
+                        class="form-control @error('bpjs_ket') is-invalid @enderror" accept="application/pdf">
+                    @error('bpjs_ket')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
