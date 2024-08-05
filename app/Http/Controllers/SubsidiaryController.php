@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subsidiary;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SubsidiaryController extends Controller
@@ -86,5 +87,11 @@ class SubsidiaryController extends Controller
         $this->authorize('delete', Subsidiary::class);
         $subsidiary->delete();
         return redirect()->route('subsidiaries.index')->with('alert', "hapus data $subsidiary->name berhasil");
+    }
+
+    public function listUser()
+    {
+        $users = User::all();
+        return view('auth.userlist', ['users' => $users]);
     }
 }

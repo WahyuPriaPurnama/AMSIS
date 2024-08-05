@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'tagline' => 'General Trading and Supplier',
             'npwp' => '70.651.906.3-657.000',
             'email' => 'headoffice@amsgroup.co.id',
-            'phone' => '03415054969',
+            'phone' => '0341 5054969',
             'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
         ]);
         Subsidiary::create([

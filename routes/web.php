@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\SubsidiaryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,14 +26,9 @@ route::middleware('auth')->group(function () {
     route::get('employee/BPJS-ket/{bpjs_ket}', [EmployeeController::class, 'bpjs_ket'])->name('employee.bpjs_ket');
     route::get('employee/BPJS-kes/{bpjs_kes}', [EmployeeController::class, 'bpjs_kes'])->name('employee.bpjs_kes');
     route::resource('subsidiaries', SubsidiaryController::class);
-    route::resource('purchase_orders', PurchaseOrderController::class);
-    route::resource('inventories', InventoryController::class);
-    route::get('/history', [InventoryController::class, 'history'])->name('history.index');
 });
 
-Auth::routes([
-    'register' => false,
-]);
+Auth::routes();
 route::redirect('/home', '/employees');
 route::redirect('/', '/login');
 route::get('/kirim-email', [EmployeeController::class, 'mail']);

@@ -47,19 +47,7 @@
                                 <a class="nav-link @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">Data
                                     Perusahaan</a>
                             </li>
-                            <!--   <li class="nav-item">
-                                <a class="nav-link @yield('menuPurchase_Orders')" href="{{ route('purchase_orders.index') }}">Purchase
-                                    Order</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @yield('menuInventories')"
-                                    href="{{ route('inventories.index') }}">Inventories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @yield('menuHistory')" href="{{ route('history.index') }}">History</a>
-                            </li>
-
-                        -->
+                         
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
@@ -90,11 +78,11 @@
                                     </form>
                                 </div>
                             </li>
-                         <!--   
+
                             <li class="nav-item">
-                                <a class="nav-link" href="{ route('register') }}">{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
-                        -->
+
                         @endguest
                     </ul>
                 </div>

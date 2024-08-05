@@ -360,4 +360,5 @@ class EmployeeController extends Controller
         $this->authorize('view', Employee::class);
         return Response::download('storage/BPJS Kesehatan/' . $bpjs_kes);
     }
+
 }

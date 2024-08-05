@@ -102,7 +102,6 @@
                         <option value="" selected>Pilih Status Pegawai</option>
                         <option value="PKWT" @selected(old('status_peg') == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected(old('status_peg') == 'PKWTT')>PKWTT</option>
-
                     </select>
                     @error('status_peg')
                         <div class="text-danger">{{ $message }}</div>
