@@ -66,16 +66,16 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    <a class="dropdown-item" href="{{ route('users.index') }}">List User</a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">Register</a>
+                                    <a class="dropdown-item" href="{{ route('users.index') }}">User Management</a>
+                                    <a class="dropdown-item text-danger fw-bold" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
                                 </div>
                             </li>
 

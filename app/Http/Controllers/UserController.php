@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Stringable;
 
 class UserController extends Controller
 {
@@ -55,20 +57,18 @@ class UserController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|max:50|string',
+            'name' => 'required|max:50|string|alpha',
             'role' => 'required|string|max:25',
             'email' => 'required|email',
-           
+            'password' => 'min:8|nullable|confirmed'
         ]);
-       // dd($user->id);
 
         $user = User::findOrFail($user->id);
         $user->update([
-            'name' => $request->name,
+            'name' => strtolower($request->name),
             'role' => $request->role,
             'email' => $request->email,
-            
-
+            'password' => Hash::make($request->password),
         ]);
         return redirect()->route('users.index');
     }
@@ -78,7 +78,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-
         $user->delete();
         return redirect()->route('users.index');
     }

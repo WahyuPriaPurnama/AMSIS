@@ -78,6 +78,9 @@
                                                                     @error('name')
                                                                         <div class="text-danger">{{ $message }}</div>
                                                                     @enderror
+                                                                    <div class="form-text">
+                                                                        hanya berupa huruf dan tanpa spasi
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text"
@@ -110,16 +113,26 @@
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-floating mb-3">
-                                                                    <input type="password" class="form-control"
+                                                                    <input type="password"
+                                                                        class="form-control @error('password') is-invalid @enderror"
                                                                         id="floatingInput" name="password"
                                                                         placeholder="password">
                                                                     <label for="floatingInput">password</label>
+                                                                    @error('password')
+                                                                        <div class="text-danger">{{ $message }}</div>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="form-floating mb-3">
                                                                     <input type="password" class="form-control"
                                                                         name="password_confirmation" id="floatingInput"
                                                                         placeholder="konfirmasi password">
                                                                     <label for="floatingInput">konfirmasi password</label>
+                                                                    @error('password_confirmation')
+                                                                        <div class="text-danger">{{ $message }}</div>
+                                                                    @enderror
+                                                                    <div class="form-text">
+                                                                        kosongi password jika tidak ingin merubahnya
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-floating mb-3">
                                                                     <button class="btn btn-success mb-2"
