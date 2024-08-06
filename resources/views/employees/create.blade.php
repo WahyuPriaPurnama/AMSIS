@@ -328,7 +328,6 @@
                 </div>
             </div>
             <div class="row mb-3 pt-3">
-        
                 <div class="col-3">
                     <label class="form-label" for="bpjs_kes">BPJS Kesehatan</label>
                     <input type="file" id="bpjs_kes" name="bpjs_kes"

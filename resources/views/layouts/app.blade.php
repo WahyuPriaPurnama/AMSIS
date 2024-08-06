@@ -47,7 +47,7 @@
                                 <a class="nav-link @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">Data
                                     Perusahaan</a>
                             </li>
-                         
+
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
@@ -65,22 +65,18 @@
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="dropdown-item" href="{{ route('users.index') }}">List User</a>
                                 </div>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
 
                         @endguest
