@@ -47,6 +47,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', User::class);
         return view('auth.userlist', ['user' => $user]);
     }
 
@@ -55,7 +56,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
+        $this->authorize('update', User::class);
         $request->validate([
             'name' => 'required|max:50|string|alpha',
             'role' => 'required|string|max:25',
@@ -78,6 +79,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', User::class);
         $user->delete();
         return redirect()->route('users.index');
     }

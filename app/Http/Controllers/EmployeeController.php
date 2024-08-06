@@ -6,11 +6,10 @@ use App\Mail\MyTestMail;
 use App\Models\Employee;
 use App\Models\Subsidiary;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
+
 
 class EmployeeController extends Controller
 {

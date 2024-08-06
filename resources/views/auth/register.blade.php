@@ -46,7 +46,8 @@
                             <div class="row mb-3">
                                 <label for="roles" class="col-md-4 col-form-label text-md-end">Roles</label>
                                 <div class="col-md-6">
-                                    <select name="roles" id="roles"
+                                    <select name="role" id="roles"
+                                        class="form-select @error('role') is-invalid @enderror"
                                         class="form-select @error('roles') is-invalid @enderror">
                                         <option value="" selected>pilih level</option>
                                         <option value="super admin">Super Admin</option>
@@ -54,7 +55,7 @@
                                         <option value="user">User</option>
                                         <option value="guest">Guest</option>
                                     </select>
-                                    @error('roles')
+                                    @error('role')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -64,12 +65,10 @@
                             <div class="row mb-3">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
-
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -81,9 +80,9 @@
                             <div class="row mb-3">
                                 <label for="password-confirm"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
+                                    <input id="password-confirm" type="password"
+                                        class="form-control @error('password_confirmation') is-invalid @enderror"
                                         name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>

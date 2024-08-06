@@ -21,7 +21,9 @@ class EmployeePolicy
      */
     public function view(User $user): bool
     {
-        return $user->role === 'super admin';
+        return in_array($user->role,[
+            'super admin', 'admin'
+        ]);
     }
 
     /**
@@ -29,7 +31,9 @@ class EmployeePolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'super admin';
+        return in_array($user->role,[
+            'super admin', 'admin'
+        ]);
     }
 
     /**
@@ -37,7 +41,9 @@ class EmployeePolicy
      */
     public function update(User $user): bool
     {
-        return $user->role === 'super admin';
+        return in_array($user->role,[
+            'super admin', 'admin'
+        ]);
     }
 
     /**
@@ -45,7 +51,9 @@ class EmployeePolicy
      */
     public function delete(User $user): bool
     {
-        return $user->role === 'super admin';
+        return in_array($user->role,[
+            'super admin', 'admin'
+        ]);
     }
 
     /**

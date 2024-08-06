@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Subsidiary;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class SubsidiaryPolicy
+class UserPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +18,7 @@ class SubsidiaryPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Subsidiary $subsidiary): bool
+    public function view(User $user, User $model): bool
     {
         return true;
     }
@@ -29,9 +28,7 @@ class SubsidiaryPolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return $user->role === "super admin";
     }
 
     /**
@@ -39,9 +36,7 @@ class SubsidiaryPolicy
      */
     public function update(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return $user->role === "super admin";
     }
 
     /**
@@ -49,15 +44,13 @@ class SubsidiaryPolicy
      */
     public function delete(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return $user->role === "super admin";
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Subsidiary $subsidiary): bool
+    public function restore(User $user, User $model): bool
     {
         return true;
     }
@@ -65,7 +58,7 @@ class SubsidiaryPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Subsidiary $subsidiary): bool
+    public function forceDelete(User $user, User $model): bool
     {
         return true;
     }
