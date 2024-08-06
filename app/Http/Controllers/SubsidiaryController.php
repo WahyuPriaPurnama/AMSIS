@@ -30,7 +30,7 @@ class SubsidiaryController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', Subsidiary::class);
-        $validateData = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
             'npwp' => 'required',
@@ -38,8 +38,8 @@ class SubsidiaryController extends Controller
             'phone' => 'required',
             'address' => 'required'
         ]);
-        Subsidiary::create($validateData);
-        return redirect()->route('subsidiaries.index')->with('alert', "Input data {$validateData['name']} berhasil");
+        Subsidiary::create($validated);
+        return redirect()->route('subsidiaries.index')->with('alert', "Input data {$validated['name']} berhasil");
     }
 
     /**
@@ -66,7 +66,7 @@ class SubsidiaryController extends Controller
     public function update(Request $request, Subsidiary $subsidiary)
     {
         $this->authorize('update', Subsidiary::class);
-        $validateData = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
             'npwp' => 'required',
@@ -74,8 +74,8 @@ class SubsidiaryController extends Controller
             'phone' => 'required',
             'address' => 'required'
         ]);
-        Subsidiary::where('id', $subsidiary->id)->update($validateData);
-        return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data {$validateData['name']} berhasil");
+        Subsidiary::where('id', $subsidiary->id)->update($validated);
+        return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data {$validated['name']} berhasil");
     }
 
     /**

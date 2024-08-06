@@ -5,7 +5,104 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">List User</div>
+                    @if (session()->has('alert'))
+                        <div class="alert alert-success m-3">
+                            {{ session()->get('alert') }}
+                        </div>
+                    @endif
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6>List User</h6>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                <path fill-rule="evenodd"
+                                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                            </svg>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="addUserLabel">Tambah User</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('users.store') }}" method="post">
+                                            @csrf
+                                            <div class="form-floating mb-3">
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    id="floatingInput" placeholder="username" name="name">
+                                                <label for="floatingInput">username</label>
+                                                @error('name')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                                <div class="form-text">
+                                                    hanya berupa huruf dan tanpa spasi
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="text"
+                                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                                    id="floatingInput" placeholder="email">
+                                                <label for="floatingInput">email</label>
+                                                @error('email')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <select name="role" id="floatingSelect"
+                                                    class="form-select @error('role') is-invalid @enderror"
+                                                    aria-placeholder="level">
+                                                    <option value="" selected>pilih level</option>
+                                                    @if (Auth::user()->role === 'super admin')
+                                                        <option value="super admin">
+                                                            super admin</option>
+                                                    @endif
+                                                    <option value="admin">
+                                                        admin</option>
+                                                    <option value="user">
+                                                        user
+                                                    </option>
+                                                    <option value="guest">
+                                                        guest</option>
+                                                </select>
+                                                <label for="floatingSelect">level</label>
+                                                @error('role')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    id="floatingInput" name="password" placeholder="password">
+                                                <label for="floatingInput">password</label>
+                                                @error('password')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="password" class="form-control" name="password_confirmation"
+                                                    id="floatingInput" placeholder="konfirmasi password">
+                                                <label for="floatingInput">konfirmasi password</label>
+                                                @error('password_confirmation')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-floating text-end">
+                                                <button class="btn btn-success mb-2" type="submit">tambah</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
@@ -40,13 +137,15 @@
                                                 <button type="submit" class="btn btn-danger"
                                                     form="delete-form{{ $user->id }}"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-trash3-fill"
+                                                        viewBox="0 0 16 16">
                                                         <path
                                                             d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
                                                     </svg></button>
                                             </div>
                                             <form id="delete-form{{ $user->id }}"
-                                                action="{{ route('users.destroy', ['user' => $user->id]) }}" method="post">
+                                                action="{{ route('users.destroy', ['user' => $user->id]) }}"
+                                                method="post">
                                                 @method('DELETE')
                                                 @csrf
                                             </form>
@@ -60,8 +159,8 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="editDataLabel">Edit User</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <form
@@ -99,12 +198,15 @@
                                                                         <option value="super admin"
                                                                             @selected($user->role == 'super admin')>
                                                                             super admin</option>
-                                                                        <option value="admin" @selected($user->role == 'admin')>
+                                                                        <option value="admin"
+                                                                            @selected($user->role == 'admin')>
                                                                             admin</option>
-                                                                        <option value="user" @selected($user->role == 'user')>
+                                                                        <option value="user"
+                                                                            @selected($user->role == 'user')>
                                                                             user
                                                                         </option>
-                                                                        <option value="guest" @selected($user->role == 'guest')>
+                                                                        <option value="guest"
+                                                                            @selected($user->role == 'guest')>
                                                                             guest</option>
                                                                     </select>
                                                                     <label for="floatingSelect">level</label>

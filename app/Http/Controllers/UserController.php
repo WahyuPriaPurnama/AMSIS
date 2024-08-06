@@ -31,7 +31,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', User::class);
+        $validated = $request->validate([
+            'name' => 'required|max:50|string|alpha',
+            'role' => 'required|string|max:25',
+            'email' => 'required|email',
+            'password' => 'min:8|nullable|confirmed'
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'role' => $request->role,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('users.index')->with('alert', "input data {$validated['name']} berhasil");
     }
 
     /**
@@ -57,7 +72,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->authorize('update', User::class);
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|max:50|string|alpha',
             'role' => 'required|string|max:25',
             'email' => 'required|email',
@@ -71,7 +86,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('alert', "update data {$validated['name']} berhasil");
     }
 
     /**

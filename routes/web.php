@@ -30,7 +30,9 @@ route::middleware('auth')->group(function () {
     route::resource('users', UserController::class);
 });
 
-Auth::routes();
+Auth::routes([
+    'register'=>false
+]);
 route::redirect('/home', '/employees');
 route::redirect('/', '/login');
 route::get('/kirim-email', [EmployeeController::class, 'mail']);

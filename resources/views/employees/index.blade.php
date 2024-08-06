@@ -17,7 +17,7 @@
             <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
         @endcan
         @if (session()->has('alert'))
-            <div class="alert alert-success">
+            <div class="alert alert-success my-3">
                 {{ session()->get('alert') }}
             </div>
         @endif
