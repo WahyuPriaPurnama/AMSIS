@@ -37,7 +37,7 @@
                         id="subsidiary_id">
                         <option selected>Pilih Perusahaan</option>
                         @foreach ($subsidiaries as $subsidiary)
-                            <option value="{{ $subsidiary->id }}">{{ $subsidiary->name }}</option>
+                                <option value="{{ $subsidiary->id }}">{{ $subsidiary->name }}</option>
                         @endforeach
                     </select>
                     @error('subsidiary_id')
@@ -303,8 +303,7 @@
                 <div class="col-3">
                     <label class="form-label" for="ktp">KTP</label>
                     <input type="file" id="ktp" name="ktp"
-                        class="form-control @error('ktp') is-invalid @enderror"
-                        accept="application/pdf" >
+                        class="form-control @error('ktp') is-invalid @enderror" accept="application/pdf">
                     @error('ktp')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -320,8 +319,7 @@
                 <div class="col-3">
                     <label class="form-label" for="npwp2">NPWP</label>
                     <input type="file" id="npwp2" name="npwp2"
-                        class="form-control @error('npwp2') is-invalid @enderror"
-                        accept="application/pdf">
+                        class="form-control @error('npwp2') is-invalid @enderror" accept="application/pdf">
                     @error('npwp2')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -331,8 +329,7 @@
                 <div class="col-3">
                     <label class="form-label" for="bpjs_kes">BPJS Kesehatan</label>
                     <input type="file" id="bpjs_kes" name="bpjs_kes"
-                        class="form-control @error('bpjs_kes') is-invalid @enderror"
-                        accept="application/pdf">
+                        class="form-control @error('bpjs_kes') is-invalid @enderror" accept="application/pdf">
                     @error('bpjs_kes')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -340,8 +337,7 @@
                 <div class="col-3">
                     <label class="form-label" for="bpjs_ket">BPJS Ketenagakerjaan</label>
                     <input type="file" id="bpjs_ket" name="bpjs_ket"
-                        class="form-control @error('bpjs_ket') is-invalid @enderror"
-                        accept="application/pdf">
+                        class="form-control @error('bpjs_ket') is-invalid @enderror" accept="application/pdf">
                     @error('bpjs_ket')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

@@ -60,17 +60,18 @@
                                                     class="form-select @error('role') is-invalid @enderror"
                                                     aria-placeholder="level">
                                                     <option value="" selected>pilih level</option>
-                                                    @if (Auth::user()->role === 'super admin')
-                                                        <option value="super admin">
-                                                            super admin</option>
+                                                    @if (Auth::user()->role === 'super-admin')
+                                                        <option value="super-admin">
+                                                            Super Admin</option>
                                                     @endif
-                                                    <option value="admin">
-                                                        admin</option>
-                                                    <option value="user">
-                                                        user
+                                                    <option value="eln-admin">
+                                                        ELN Admin</option>
+                                                    <option value="eln2-admin">
+                                                        ELN 2 Admin
                                                     </option>
-                                                    <option value="guest">
-                                                        guest</option>
+                                                    <option value="haka-admin">
+                                                        Haka Admin</option>
+                                                        <option value="bofi-admin">BOFI Admin</option>
                                                 </select>
                                                 <label for="floatingSelect">level</label>
                                                 @error('role')

@@ -13,9 +13,12 @@
                 </div>
             </form>
         </div>
-        @can('create', App\Models\Employee::class)
+        <div class="text-end">
+            @can('create', App\Models\Employee::class)
             <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
-        @endcan
+            @endcan
+            <a href="{{route('employees.pdf')}}" class="btn btn-danger" target="_blank">Export PDF</a>
+        </div>
         @if (session()->has('alert'))
             <div class="alert alert-success my-3">
                 {{ session()->get('alert') }}
@@ -46,7 +49,6 @@
                         <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}" class="text-decoration-none">
                                 {{ $employee->nama }}
                             </a></td>
-                   
                         <td>{{ $employee->subsidiary->name }}</td>
                         <td>{{ $employee->status_peg }}</td>
                         @if ($employee->status_peg == 'PKWT')

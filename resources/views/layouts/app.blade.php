@@ -70,7 +70,7 @@
                                         @csrf
                                     </form>
                                     <!-- <a class="dropdown-item" href="{ route('register') }}">Register</a>-->
-                                    @if (Auth::user()->role === 'super admin' or Auth::user()->role === 'admin')
+                                    @if (Auth::user()->role === 'super-admin')
                                         <a class="dropdown-item" href="{{ route('users.index') }}">User Management</a>
                                     @endif
                                     <a class="dropdown-item text-danger fw-bold" href="{{ route('logout') }}"

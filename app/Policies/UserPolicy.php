@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === "super admin";
+        return $user->role === "super-admin";
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function update(User $user): bool
     {
-        return $user->role === "super admin";
+        return $user->role === "super-admin";
     }
 
     /**
@@ -44,7 +44,7 @@ class UserPolicy
      */
     public function delete(User $user): bool
     {
-        return $user->role === "super admin";
+        return $user->role === "super-admin";
     }
 
     /**

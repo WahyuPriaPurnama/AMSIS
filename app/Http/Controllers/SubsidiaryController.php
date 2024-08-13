@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubsidiaryRequest;
 use App\Models\Subsidiary;
 use Illuminate\Http\Request;
 
@@ -27,19 +28,12 @@ class SubsidiaryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubsidiaryRequest $request)
     {
         $this->authorize('create', Subsidiary::class);
-        $validated = $request->validate([
-            'name' => 'required|min:3|max:50',
-            'tagline' => 'required',
-            'npwp' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required'
-        ]);
-        Subsidiary::create($validated);
-        return redirect()->route('subsidiaries.index')->with('alert', "Input data {$validated['name']} berhasil");
+
+        Subsidiary::create($request->all());
+        return redirect()->route('subsidiaries.index')->with('alert', "Input data {$request['name']} berhasil");
     }
 
     /**
@@ -87,6 +81,4 @@ class SubsidiaryController extends Controller
         $subsidiary->delete();
         return redirect()->route('subsidiaries.index')->with('alert', "hapus data $subsidiary->name berhasil");
     }
-
-   
 }

@@ -97,29 +97,47 @@ class DatabaseSeeder extends Seeder
         }
 
         User::create([
-            'name' => 'super-admin',
-            'email' => 'superadmin@amsgroup.co.id',
+            'name' => 'Super Admin',
+            'email' => 'super.admin@amsgroup.co.id',
             'password' => Hash::make('SuperAdmin_96'),
-            'role' => 'super admin'
+            'role' => 'super-admin'
+        ]);
+        User::create([
+            'name' => 'Holding Admin',
+            'email' => 'holding.admin@amsgroup.co.id',
+            'password' => Hash::make('SuperAdmin_96'),
+            'role' => 'holding-admin'
         ]);
 
         User::create([
-            'name' => 'admin',
-            'email' => 'admin@amsgroup.co.id',
+            'name' => 'ELN Admin',
+            'email' => 'eln.admin@amsgroup.co.id',
             'password' => Hash::make('SuperAdmin_96'),
-            'role' => 'admin'
+            'role' => 'eln-admin'
         ]);
         User::create([
-            'name' => 'user',
-            'email' => 'user@amsgroup.co.id',
+            'name' => 'ELN 2 Admin',
+            'email' => 'eln2.admin@amsgroup.co.id',
             'password' => Hash::make('SuperAdmin_96'),
-            'role' => 'user'
+            'role' => 'eln2-admin'
         ]);
         User::create([
-            'name' => 'guest',
-            'email' => 'guest@amsgroup.co.id',
+            'name' => 'Haka Admin',
+            'email' => 'haka.admin@amsgroup.co.id',
             'password' => Hash::make('SuperAdmin_96'),
-            'role' => 'guest'
+            'role' => 'haka-admin'
+        ]);
+        User::create([
+            'name' => 'BOFI Admin',
+            'email' => 'bofi.admin@amsgroup.co.id',
+            'password' => Hash::make('SuperAdmin_96'),
+            'role' => 'bofi-admin'
+        ]);
+        User::create([
+            'name' => 'RMM Admin',
+            'email' => 'rmm.admin@amsgroup.co.id',
+            'password' => Hash::make('SuperAdmin_96'),
+            'role' => 'rmm-admin'
         ]);
 
     }

@@ -21,9 +21,7 @@ class EmployeePolicy
      */
     public function view(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return in_array($user->role, ['super-admin', 'holding-admin', 'haka-admin', 'eln-admin', 'eln2-admin', 'rmm-admin']);
     }
 
     /**
@@ -31,19 +29,14 @@ class EmployeePolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return in_array($user->role, ['super-admin', 'holding-admin', 'haka-admin', 'eln-admin', 'eln2-admin', 'rmm-admin']);
     }
-
     /**
      * Determine whether the user can update the model.
      */
     public function update(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return in_array($user->role, ['super-admin', 'holding-admin', 'haka-admin', 'eln-admin', 'eln2-admin', 'rmm-admin']);
     }
 
     /**
@@ -51,9 +44,7 @@ class EmployeePolicy
      */
     public function delete(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return in_array($user->role, ['super-admin', 'holding-admin', 'haka-admin', 'eln-admin', 'eln2-admin', 'rmm-admin']);
     }
 
     /**

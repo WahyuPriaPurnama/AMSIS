@@ -29,8 +29,9 @@ class SubsidiaryPolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
+        return in_array($user->role, [
+            'super-admin',
+            'holding-admin'
         ]);
     }
 
@@ -39,9 +40,7 @@ class SubsidiaryPolicy
      */
     public function update(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return in_array($user->role, ['super-admin', 'holding-admin']);
     }
 
     /**
@@ -49,9 +48,7 @@ class SubsidiaryPolicy
      */
     public function delete(User $user): bool
     {
-        return in_array($user->role,[
-            'super admin', 'admin'
-        ]);
+        return $user->role === 'super-admin';
     }
 
     /**
