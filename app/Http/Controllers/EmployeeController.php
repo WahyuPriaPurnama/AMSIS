@@ -36,7 +36,7 @@ class EmployeeController extends Controller
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
             $subsidiaries = Subsidiary::all();
         } elseif ($user == 'eln-admin') {
-            $subsidiaries = Subsidiary::where('id','2')->get();
+            $subsidiaries = Subsidiary::where('id', '2')->get();
         } elseif ($user == 'eln2-admin') {
             $subsidiaries = Subsidiary::where('id', '3')->get();
         } elseif ($user == 'bofi-admin') {
@@ -96,9 +96,9 @@ class EmployeeController extends Controller
         $data = Employee::create($request->all());
 
         if ($data) {
-            return redirect()->route('employees.index')->with('alert', "Input data {$validateData['nama']} berhasil");
+            return redirect()->route('employees.index')->with('alert', "Input data berhasil");
         } else {
-            return redirect()->route('employees.index')->with('alert', "Input data {$validateData['nama']} gagal");
+            return redirect()->route('employees.index')->with('alert', "Input data gagal");
         }
     }
 
@@ -152,8 +152,8 @@ class EmployeeController extends Controller
             'posisi' => 'required',
             'status_peg' => 'required',
             'tgl_masuk' => 'required|date',
-            'awal_kontrak' => 'date',
-            'akhir_kontrak' => 'date',
+            'awal_kontrak' => '',
+            'akhir_kontrak' => '',
 
             'tmpt_lahir' => 'max:20',
             'tgl_lahir' => 'date',
@@ -328,6 +328,7 @@ class EmployeeController extends Controller
 
     public function index_pdf()
     {
+        $this->authorize('view', Employee::class);
         $employees = Employee::all();
         $pdf = pdf::loadview('employees.pdf.index', ['employees' => $employees])->setPaper('letter', 'landscape');
         return $pdf->stream();
@@ -335,8 +336,8 @@ class EmployeeController extends Controller
 
     public function show_pdf($employee)
     {
+        $this->authorize('view', Employee::class);
         $result = Employee::find($employee);
-
         $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $result])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }

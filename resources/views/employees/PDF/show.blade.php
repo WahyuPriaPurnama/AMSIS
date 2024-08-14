@@ -14,8 +14,8 @@
         td {
             border: 1px solid black;
             border-collapse: collapse;
-            text-align: center;
             vertical-align: top;
+            padding: 1%;
         }
 
         table {
@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td>
-                {{ $employee->nip }}<br>
+                    NIP:{{ $employee->nip }}<br>
                 {{ $employee->nama }}<br>
                 {{ $employee->nik }}<br>
                 {{ $employee->divisi }}<br>
@@ -50,7 +50,7 @@
             </td>
             <td>
                 {{ $employee->tmpt_lahir }}<br>
-                {{ $employee->tgl_lahir }}<br>
+                {{ Carbon\Carbon::create($employee->tgl_lahir)->isoFormat('dddd, D MMMM YYYY') }}<br>
                 {{ $employee->jenis_kelamin }}<br>
                 {{ $employee->alamat }}<br>
                 {{ $employee->no_telp }}<br>
@@ -69,6 +69,47 @@
                 {{ $employee->hubungan }}<br>
             </td>
         </tr>
-
     </table>
+    <b>Kelengkapan Berkas:</b><br>
+    Foto Profil:
+    @if ($employee->pp != null)
+        ada
+    @else
+        -
+    @endif
+    <br>
+    KTP:
+    @if ($employee->ktp != null)
+        ada
+    @else
+        -
+    @endif
+    <br>
+    NPWP:
+    @if ($employee->npwp2 != null)
+        ada
+    @else
+        -
+    @endif
+    <br>
+    Kartu Keluarga:
+    @if ($employee->kk != null)
+        ada
+    @else
+        -
+    @endif
+    <br>
+    BPJS Ketenagakerjaan:
+    @if ($employee->bpjs_ket != null)
+        ada
+    @else
+        -
+    @endif
+    <br>
+    BPJS Kesehatan:
+    @if ($employee->bpjs_kes != null)
+        ada
+    @else
+        -
+    @endif
 </body>

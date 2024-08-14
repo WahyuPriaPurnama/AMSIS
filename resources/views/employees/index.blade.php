@@ -15,16 +15,16 @@
         </div>
         <div class="text-end">
             @can('create', App\Models\Employee::class)
-            <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
+                <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
             @endcan
-            <a href="{{route('employees.pdf')}}" class="btn btn-danger" target="_blank">Export PDF</a>
+            <a href="{{ route('employees.pdf') }}" class="btn btn-danger" target="_blank">Export PDF</a>
         </div>
         @if (session()->has('alert'))
             <div class="alert alert-success my-3">
                 {{ session()->get('alert') }}
             </div>
         @endif
-    
+
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -39,14 +39,15 @@
                 </thead>
                 <tbody>
                     @forelse ($employees as $employee)
-                        @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45)
+                        @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45 and $employee->status_peg == 'PKWT')
                             <tr class="table-danger">
                             @else
                             <tr>
                         @endif
                         <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
                         <td> {{ $employee->nip }}</td>
-                        <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}" class="text-decoration-none">
+                        <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}"
+                                class="text-decoration-none">
                                 {{ $employee->nama }}
                             </a></td>
                         <td>{{ $employee->subsidiary->name }}</td>

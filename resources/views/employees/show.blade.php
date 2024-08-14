@@ -186,7 +186,7 @@
                                             </div>
                                             <div
                                                 class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                <div class="p-2">{{ $employee->tgl_lahir }}</div>
+                                                <div class="p-2">{{Carbon\Carbon::create($employee->tgl_lahir)->isoFormat('dddd, D MMMM YYYY') }}</div>
                                             </div>
                                             <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
                                                 <div class="p-2">Jenis Kelamin</div>
