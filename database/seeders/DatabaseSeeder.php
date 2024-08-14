@@ -58,16 +58,33 @@ class DatabaseSeeder extends Seeder
             'npwp' => '43.623.790.3-625.000',
             'email' => 'headoffice@blueoceanfoods.co.id',
             'phone' => '0333 2815013',
+            'address' => 'Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
+        ]);
+        Subsidiary::create([
+            'name' => 'PT. Haka Arthacipta Unggul',
+            'tagline' => 'Open Trader With Us',
+            'npwp' => '43.623.790.3-625.000',
+            'email' => 'hkcipta@blueoceanfoods.co.id',
+            'phone' => '0333 2815013',
+            'address' => 'Kalipuro'
+        ]);
+
+        Subsidiary::create([
+            'name' => 'PT. Rania Mahanani Management',
+            'tagline' => 'Canning',
+            'npwp' => '43.623.790.3-625.000',
+            'email' => 'headoffice@blueoceanfoods.co.id',
+            'phone' => '0333 2815013',
             'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
         ]);
 
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i <= 500; $i++) {
             Employee::create([
                 'nip' => $faker->randomNumber(9),
                 'nama' => $faker->name(),
                 'nik' => $faker->nik(),
-                'subsidiary_id' => $faker->numberBetween(1, 4),
+                'subsidiary_id' => $faker->numberBetween(1, 6),
                 'divisi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
                 'departemen' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
                 'seksi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),

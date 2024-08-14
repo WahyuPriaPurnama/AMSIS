@@ -44,7 +44,7 @@
 
         {{ $i = 1 }}
         @forelse ($employees as $employee)
-            @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 120 && $employee->status_peg == 'PKWT')
+            @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45 && $employee->status_peg == 'PKWT')
                 <tr id="warning">
                 @else
                 <tr>

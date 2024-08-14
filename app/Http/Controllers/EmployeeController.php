@@ -21,7 +21,30 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with('subsidiary')->sortable()->latest()->paginate(25);
+        $user = Auth::user()->role;
+        if (($user == 'super-admin') or ($user == 'holding-admin')) {
+            $employees = Employee::with('subsidiary')->sortable()->latest()->paginate(25);
+        } elseif ($user == 'eln-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) {
+                return $query->where('id', '2');
+            })->sortable()->latest()->paginate(25);
+        } elseif ($user == 'eln2-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) {
+                return $query->where('id', '3');
+            })->sortable()->latest()->paginate(25);
+        } elseif ($user == 'bofi-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) {
+                return $query->where('id', '4');
+            })->sortable()->latest()->paginate(25);
+        } elseif ($user == 'rmm-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) {
+                return $query->where('id', '6');
+            })->sortable()->latest()->paginate(25);
+        } else {
+            $employees = Employee::whereHas('subsidiary', function ($query) {
+                return $query->where('id', '5');
+            })->sortable()->latest()->paginate(25);
+        }
 
         return view('employees.index', compact('employees'));
     }
@@ -42,9 +65,9 @@ class EmployeeController extends Controller
         } elseif ($user == 'bofi-admin') {
             $subsidiaries = Subsidiary::where('id', '4')->get();
         } elseif ($user == 'rmm-admin') {
-            $subsidiaries = Subsidiary::where('id', '5')->get();
-        } else {
             $subsidiaries = Subsidiary::where('id', '6')->get();
+        } else {
+            $subsidiaries = Subsidiary::where('id', '5')->get();
         }
         return view('employees.create', compact('subsidiaries'));
     }
@@ -128,9 +151,9 @@ class EmployeeController extends Controller
         } elseif ($user == 'bofi-admin') {
             $subsidiaries = Subsidiary::where('id', '4')->get();
         } elseif ($user == 'rmm-admin') {
-            $subsidiaries = Subsidiary::where('id', '5')->get();
-        } else {
             $subsidiaries = Subsidiary::where('id', '6')->get();
+        } else {
+            $subsidiaries = Subsidiary::where('id', '5')->get();
         }
         return view('employees.edit', compact(['employee', 'subsidiaries']));
     }
