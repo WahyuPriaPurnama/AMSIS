@@ -47,10 +47,16 @@
                     @forelse ($subsidiaries as $subsidiary)
                         <tr>
                             <th>{{ $loop->iteration }}</th>
-                            <td><a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}"
-                                    class="text-decoration-none">
-                                    {{ $subsidiary->name }}</td>
-                            </a>
+                            <td>
+                                @if (Auth::user()->role == 'super-admin' or Auth::user()->role == 'holding-admin')
+                                    <a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}"
+                                        class="text-decoration-none">
+                                        {{ $subsidiary->name }}
+                                    </a>
+                                @else
+                                    {{ $subsidiary->name }}
+                                @endif
+                            </td>
                             <td class="text-center">{{ $subsidiary->employees_count }} Orang</td>
                             <td>{{ $subsidiary->address == '' ? 'N/A' : $subsidiary->address }}</td>
                         </tr>
