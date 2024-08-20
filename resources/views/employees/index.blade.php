@@ -5,13 +5,13 @@
     <div class="container mt-3">
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA KARYAWAN</h2>
-            <form action="{{ route('employee.search') }}" method="get">
-                <div class="input-group mb-3">
-                    <input type="text" name="search" class="form-control" placeholder="Cari Nama"
-                        value="{{ old('search') }}">
-                    <button type="submit" class="btn btn-success">Search</button>
-                </div>
-            </form>
+            <!-- <form action="{ route('employee.search') }}" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" name="search" class="form-control" placeholder="Cari Nama"
+                            value="{ old('search') }}">
+                        <button type="submit" class="btn btn-success">Search</button>
+                    </div>
+                </form>-->
         </div>
         <div class="text-end">
             @can('create', App\Models\Employee::class)
