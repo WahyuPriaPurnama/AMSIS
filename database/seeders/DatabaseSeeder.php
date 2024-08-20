@@ -116,44 +116,44 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Super Admin',
             'email' => 'super.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_96'),
+            'password' => Hash::make('SuperAdmin_1996'),
             'role' => 'super-admin'
         ]);
         User::create([
             'name' => 'Holding Admin',
             'email' => 'holding.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_96'),
+            'password' => Hash::make('HoldingAdmin_9H!7'),
             'role' => 'holding-admin'
         ]);
 
         User::create([
             'name' => 'ELN Admin',
             'email' => 'eln.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_96'),
+            'password' => Hash::make('ELNAdmin_6c\9'),
             'role' => 'eln-admin'
         ]);
         User::create([
             'name' => 'ELN 2 Admin',
             'email' => 'eln2.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_96'),
+            'password' => Hash::make('ELN2Admin_tT45'),
             'role' => 'eln2-admin'
         ]);
         User::create([
             'name' => 'Haka Admin',
             'email' => 'haka.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_96'),
+            'password' => Hash::make('HakaAdmin_a6^0'),
             'role' => 'haka-admin'
         ]);
         User::create([
             'name' => 'BOFI Admin',
             'email' => 'bofi.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_96'),
+            'password' => Hash::make('BOFIAdmin_50U('),
             'role' => 'bofi-admin'
         ]);
         User::create([
             'name' => 'RMM Admin',
             'email' => 'rmm.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_96'),
+            'password' => Hash::make('RMMAdmin_177v'),
             'role' => 'rmm-admin'
         ]);
 
