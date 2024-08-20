@@ -34,7 +34,7 @@
                         <th>@sortablelink('nama', 'NAMA')</th>
                         <th>@sortablelink('perusahaan', 'PERUSAHAAN')</th>
                         <th>STATUS</th>
-                        <th>@sortablelink('akhir_kontrak')</th>
+                        <th>AKHIR KONTRAK</th>
                     </tr>
                 </thead>
                 <tbody>
