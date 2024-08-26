@@ -72,6 +72,7 @@
                                     <!-- <a class="dropdown-item" href="{ route('register') }}">Register</a>-->
                                     @if (Auth::user()->role === 'super-admin')
                                         <a class="dropdown-item" href="{{ route('users.index') }}">User Management</a>
+                                        <a class="dropdown-item" href="{{ route('log.activity') }}">Log Activity</a>
                                     @endif
                                     <a class="dropdown-item text-danger fw-bold" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

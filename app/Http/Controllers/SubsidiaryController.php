@@ -13,7 +13,9 @@ class SubsidiaryController extends Controller
      */
     public function index()
     {
-        $subsidiaries = Subsidiary::withCount('employees')->get();
+        $this->authorize('view', Subsidiary::class);
+        \App\Helpers\LogActivity::addToLog();
+        $subsidiaries = Subsidiary::Index()->get();
         return view('subsidiaries.index', ['subsidiaries' => $subsidiaries]);
     }
 
@@ -31,7 +33,6 @@ class SubsidiaryController extends Controller
     public function store(SubsidiaryRequest $request)
     {
         $this->authorize('create', Subsidiary::class);
-
         Subsidiary::create($request->all());
         return redirect()->route('subsidiaries.index')->with('alert', "Input data {$request['name']} berhasil");
     }

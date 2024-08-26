@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
             'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
         ]);
 
-        /*  $faker = \Faker\Factory::create('id_ID');
+        $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i <= 500; $i++) {
             Employee::create([
                 'nip' => $faker->randomNumber(9),
@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
                 'hubungan' => $faker->randomElement(['Saudara Kandung', 'Saudara Sepupu', 'Ipar'])
             ]);
         }
-            */
+        
 
         User::create([
             'name' => 'Super Admin',

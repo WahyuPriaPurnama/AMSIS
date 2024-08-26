@@ -19,9 +19,9 @@ class SubsidiaryPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Subsidiary $subsidiary): bool
+    public function view(User $user): bool
     {
-        return true;
+        return in_array($user->role, ['super-admin', 'holding-admin', 'haka-admin', 'eln-admin', 'eln2-admin', 'rmm-admin', 'bofi-admin']);
     }
 
     /**

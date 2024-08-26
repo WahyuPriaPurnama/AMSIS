@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubsidiaryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +28,10 @@ route::middleware('auth')->group(function () {
     route::get('employee/BPJS-ket/{bpjs_ket}', [EmployeeController::class, 'bpjs_ket'])->name('employee.bpjs_ket');
     route::get('employee/BPJS-kes/{bpjs_kes}', [EmployeeController::class, 'bpjs_kes'])->name('employee.bpjs_kes');
     route::get('/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
-    route::get('/show-pdf/{employee}',[EmployeeController::class,'show_pdf'])->name('employee.pdf');
+    route::get('/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('users', UserController::class);
+    route::get('logActivity',[HomeController::class,'logActivity'])->name('log.activity');
 });
 
 Auth::routes([

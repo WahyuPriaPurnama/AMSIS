@@ -15,4 +15,10 @@ class Subsidiary extends Model
     {
         return $this->hasMany(Employee::class);
     }
+
+    public function scopeIndex($query)
+    {
+        return $query->withCount('employees');
+    }
+
 }

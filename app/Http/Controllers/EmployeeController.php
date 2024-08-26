@@ -21,9 +21,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Employee::class);
+        \App\Helpers\LogActivity::addToLog();
         $user = Auth::user()->role;
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
-            $employees = Employee::with('subsidiary')->sortable()->latest()->paginate(25);
+            $employees = Employee::Index()->sortable()->latest()->paginate(25);
         } elseif ($user == 'eln-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '2');
@@ -77,9 +79,8 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
+        
         $this->authorize('create', Employee::class);
-        $validateData = $request->validate([]);
-
         if ($request->file('pp')) {
             $pp = $request->file('pp');
             $pp->storeAs('public/foto_profil', $pp->hashName());

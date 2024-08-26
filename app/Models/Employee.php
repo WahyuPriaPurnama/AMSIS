@@ -9,12 +9,17 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Employee extends Model
 {
-    use HasFactory, Sortable,HasUuids;
+    use HasFactory, Sortable, HasUuids;
     protected $guarded = [];
-    public $sortable = ['nip', 'nama', 'perusahaan','akhir_kontrak'];
+    public $sortable = ['nip', 'nama', 'perusahaan', 'akhir_kontrak'];
 
     public function subsidiary()
     {
         return $this->belongsTo(Subsidiary::class);
+    }
+
+    public function scopeIndex($query)
+    {
+        return $query->with('subsidiary');
     }
 }
