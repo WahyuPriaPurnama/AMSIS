@@ -36,7 +36,7 @@
                     <select class="form-select @error('subsidiary_id') is-invalid @enderror" name="subsidiary_id"
                         id="subsidiary_id">
                         @foreach ($subsidiaries as $subsidiary)
-                                <option value="{{ $subsidiary->id }}">{{ $subsidiary->name }}</option>
+                            <option value="{{ $subsidiary->id }}">{{ $subsidiary->name }}</option>
                         @endforeach
                     </select>
                     @error('subsidiary_id')
@@ -74,6 +74,9 @@
                     <select class="form-select @error('posisi') is-invalid @enderror" name="posisi" id="posisi"
                         value="{{ old('posisi') }}">
                         <option selected value="">Pilih Jabatan</option>
+                        <option value="Direktur" @selected(old('posisi') == 'Direktur')>
+                            Direktur
+                        </option>
                         <option value="Manager" @selected(old('posisi') == 'Manager')>
                             Manager
                         </option>
@@ -101,6 +104,7 @@
                         <option value="" selected>Pilih Status Pegawai</option>
                         <option value="PKWT" @selected(old('status_peg') == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected(old('status_peg') == 'PKWTT')>PKWTT</option>
+                        <option value="-" @selected(old('status_peg') == '-')> - </option>
                     </select>
                     @error('status_peg')
                         <div class="text-danger">{{ $message }}</div>

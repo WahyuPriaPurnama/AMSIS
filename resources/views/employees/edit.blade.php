@@ -76,6 +76,9 @@
                 <div class="col">
                     <label class="form-label" for="posisi">Jabatan</label>
                     <select class="form-select" name="posisi" id="posisi" value="{{ $employee->posisi }}">
+                        <option value="Direktur" @selected($employee->posisi == 'Direktur')>
+                            Direktur
+                        </option>
                         <option value="Manager" @selected($employee->posisi == 'Manager')>
                             Manager
                         </option>
@@ -101,6 +104,7 @@
                     <select class="form-select" name="status_peg" id="status_peg" value="{{ $employee->status_peg }}">
                         <option value="PKWT" @selected($employee->status_peg == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected($employee->status_peg == 'PKWTT')>PKWTT</option>
+                        <option value="-" @selected($employee->status_peg == '-')> - </option>
                     </select>
                     @error('status_peg')
                         <div class="text-danger">{{ $message }}</div>
@@ -178,7 +182,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label class="form-label" for="no_telp">No. Telp / WhatsApp</label>
-                    <input type="number" id="no_telp" name="no_telp" value="{{ $employee->no_telp }}"
+                    <input type="text" id="no_telp" name="no_telp" value="{{ $employee->no_telp }}"
                         class="form-control @error('no_telp') is-invalid @enderror">
                     @error('no_telp')
                         <div class="text-danger">{{ $message }}</div>
@@ -217,7 +221,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="thn_lulus">Tahun Lulus</label>
-                    <input type="number" id="thn_lulus" name="thn_lulus" value="{{ $employee->thn_lulus }}"
+                    <input type="text" id="thn_lulus" name="thn_lulus" value="{{ $employee->thn_lulus }}"
                         class="form-control @error('thn_lulus') is-invalid @enderror">
                     @error('thn_lulus')
                         <div class="text-danger">{{ $message }}</div>
@@ -254,7 +258,7 @@
                 </div>
                 <div class="col-2">
                     <label class="form-label" for="jml_ank">Jumlah Anak</label>
-                    <input type="number" id="jml_ank" name="jml_ank" value="{{ $employee->jml_ank }}"
+                    <input type="text" id="jml_ank" name="jml_ank" value="{{ $employee->jml_ank }}"
                         class="form-control @error('jml_ank') is-invalid @enderror">
                     @error('jml_ank')
                         <div class="text-danger">{{ $message }}</div>
@@ -274,7 +278,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label" for="no_kd">No. Kontak Darurat</label>
-                    <input type="number" id="no_kd" name="no_kd" value="{{ $employee->no_kd }}"
+                    <input type="text" id="no_kd" name="no_kd" value="{{ $employee->no_kd }}"
                         class="form-control @error('no_kd') is-invalid @enderror">
                     @error('no_kd')
                         <div class="text-danger">{{ $message }}</div>

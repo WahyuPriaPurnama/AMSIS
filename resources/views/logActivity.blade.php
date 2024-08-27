@@ -4,7 +4,7 @@
 @section('content')
     <div class="container-fluid text-center">
         <h1>Log Activity Lists</h1>
-        <div class="table-responsive">
+        <div class="card table-responsive">
             <table class="table table-bordered">
                 <tr>
                     <th>URL</th>

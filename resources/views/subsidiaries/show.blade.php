@@ -32,7 +32,7 @@
             <li>ALAMAT: {{ $subsidiary->address }}</li>
         </ul>
 
-        <div class="table table-responsive">
+        <div class="card table table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>

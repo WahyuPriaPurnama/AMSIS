@@ -33,7 +33,7 @@
             </div>
         @endif
 
-        <div class="table-responsive">
+        <div class=" card table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>

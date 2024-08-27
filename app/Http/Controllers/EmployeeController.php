@@ -6,6 +6,7 @@ use App\Http\Requests\EmployeeRequest;
 use App\Mail\MyTestMail;
 use App\Models\Employee;
 use App\Models\Subsidiary;
+use App\Traits\FileUpload;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
+    use FileUpload;
     /**
      * Display a listing of the resource.
      */
@@ -79,45 +81,41 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        
+
         $this->authorize('create', Employee::class);
+        $data = Employee::create($request->all());
+
         if ($request->file('pp')) {
-            $pp = $request->file('pp');
-            $pp->storeAs('public/foto_profil', $pp->hashName());
-            Employee::create(['pp' => $pp->hashName()]);
+            $pp = $this->fileUpload($request, 'public/foto_profil', 'pp');
+            $data->update(['pp' => $pp->hashName()]);
         }
 
         if ($request->file('ktp')) {
-            $ktp = $request->file('ktp');
-            $ktp->storeAs('public/KTP', $ktp->hashName());
-            Employee::create(['ktp' => $ktp->hashName()]);
+            $ktp = $this->fileUpload($request, 'public/KTP', 'ktp');
+            $data->update(['ktp' => $ktp->hashName()]);
         }
 
         if ($request->file('npwp2')) {
-            $npwp = $request->file('npwp2');
-            $npwp->storeAs('public/NPWP', $npwp->hashName());
-            Employee::create(['npwp2' => $npwp->hashName()]);
+            $npwp = $this->fileUpload($request, 'public/NPWP', 'npwp2');
+            $data->update(['npwp2' => $npwp->hashName()]);
         }
 
         if ($request->file('kk')) {
-            $kk = $request->file('kk');
-            $kk->storeAs('public/KK', $kk->hashName());
-            Employee::create(['kk' => $kk->hashName()]);
+            $kk = $this->fileUpload($request, 'public/Kartu Keluarga', 'kk');
+            $data->update(['kk' => $kk->hashName()]);
         }
 
         if ($request->file('bpjs_kes')) {
-            $bpjs_kes = $request->file('bpjs_kes');
-            $bpjs_kes->storeAs('public/BPJS Kesehatan', $bpjs_kes->hashName());
-            Employee::create(['bpjs_kes' => $bpjs_kes->hashName()]);
+            $bpjs_kes = $this->fileUpload($request, 'public/BPJS Kesehatan', 'bpjs_kes');
+            $data->update(['bpjs_kes' => $bpjs_kes->hashName()]);
         }
 
         if ($request->file('bpjs_ket')) {
-            $bpjs_ket = $request->file('bpjs_ket');
-            $bpjs_ket->storeAs('public/BPJS Kesehatan', $bpjs_ket->hashName());
-            Employee::create(['bpjs_ket' => $bpjs_ket->hashName()]);
+            $bpjs_ket = $this->fileUpload($request, 'public/BPJS Ketenagakerjaan', 'bpjs_ket');
+            $data->update(['bpjs_ket' => $bpjs_ket->hashName()]);
         }
 
-        $data = Employee::create($request->all());
+
 
         if ($data) {
             return redirect()->route('employees.index')->with('alert', "Input data berhasil");
@@ -165,34 +163,32 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $this->authorize('update', Employee::class);
-        $validateData = $request->validate([
-            'nip' => 'required|size:9|unique:employees,nip,' . $employee->id,
-            'nama' => 'required|min:3|max:50',
-            'nik' => 'required|size:16|unique:employees,nik,' . $employee->id,
-            'subsidiary_id' => 'required',
-            'divisi' => 'required|max:20',
-            'departemen' => 'required|max:20',
-            'seksi' => 'required|max:20',
-            'posisi' => 'required',
-            'status_peg' => 'required',
-            'tgl_masuk' => 'required|date',
+        $request->validate([
+            'nip' => 'size:9|unique:employees,nip,' . $employee->id,
+            'nama' => 'min:3|max:50',
+            'nik' => 'size:16|unique:employees,nik,' . $employee->id,
+            'subsidiary_id' => '',
+            'divisi' => 'max:20',
+            'departemen' => 'max:20',
+            'seksi' => 'max:20',
+            'posisi' => '',
+            'status_peg' => '',
+            'tgl_masuk' => '',
             'awal_kontrak' => '',
             'akhir_kontrak' => '',
-
             'tmpt_lahir' => 'max:20',
-            'tgl_lahir' => 'date',
+            'tgl_lahir' => '',
             'jenis_kelamin' => 'in:L,P',
             'alamat' => '',
-            'no_telp' => 'numeric',
-            'email' => 'email',
+            'no_telp' => '',
+            'email' => '',
             'pend_trkhr' => '',
             'jurusan' => 'max:25',
             'thn_lulus' => 'max:4',
             'nama_ibu' => 'max:25',
             'npwp' => 'max:31',
             'status' => '',
-            'jml_ank' => 'integer',
-
+            'jml_ank' => '',
             'nama_kd' => 'max:50',
             'no_kd' => 'max:12',
             'hubungan' => 'max:15',
@@ -237,50 +233,45 @@ class EmployeeController extends Controller
             'no_kd' => $request->no_kd,
             'hubungan' => $request->hubungan,
         ]);
+
         if ($request->file('pp')) {
             Storage::disk('local')->delete('public/foto_profil/' . $employee->pp);
-            $pp = $request->file('pp');
-            $pp->storeAs('public/foto_profil/', $pp->hashName());
+            $pp = $this->fileUpload($request, 'public/foto_profil/', 'pp');
             $employee->update(['pp' => $pp->hashName()]);
         }
         if ($request->file('ktp')) {
             Storage::disk('local')->delete('public/KTP/' . $employee->ktp);
-            $ktp = $request->file('ktp');
-            $ktp->storeAs('public/KTP', $ktp->hashName());
+            $ktp = $this->fileUpload($request, 'public/KTP/', 'ktp');
             $employee->update(['ktp' => $ktp->hashName()]);
         }
         if ($request->file('npwp2')) {
             Storage::disk('local')->delete('public/NPWP/' . $employee->npwp2);
-            $npwp = $request->file('npwp2');
-            $npwp->storeAs('public/NPWP', $npwp->hashName());
+            $npwp = $this->fileUpload($request, 'public/NPWP/', 'npwp2');
             $employee->update(['npwp2' => $npwp->hashName()]);
         }
 
         if ($request->file('kk')) {
-            Storage::disk('local')->delete('public/KK/' . $employee->kk);
-            $kk = $request->file('kk');
-            $kk->storeAs('public/Kartu Keluarga/', $kk->hashName());
+            Storage::disk('local')->delete('public/Kartu Keluarga/' . $employee->kk);
+            $kk = $this->fileUpload($request, 'public/Kartu Keluarga/', 'kk');
             $employee->update(['kk' => $kk->hashName()]);
         }
 
         if ($request->file('bpjs_kes')) {
             Storage::disk('local')->delete('public/BPJS Kesehatan/' . $employee->bpjs_kes);
-            $bpjs_kes = $request->file('bpjs_kes');
-            $bpjs_kes->storeAs('public/BPJS Kesehatan/', $bpjs_kes->hashName());
+            $bpjs_kes = $this->fileUpload($request, 'public/BPJS Kesehatan/', 'bpjs_kes');
             $employee->update(['bpjs_kes' => $bpjs_kes->hashName()]);
         }
 
         if ($request->file('bpjs_ket')) {
             Storage::disk('local')->delete('public/BPJS Ketenagakerjaan/' . $employee->kbpjs_ket);
-            $bpjs_ket = $request->file('bpjs_ket');
-            $bpjs_ket->storeAs('public/BPJS Ketenagakerjaan/', $bpjs_ket->hashName());
+            $bpjs_ket = $this->fileUpload($request, 'public/BPJS Ketenagakerjaan/', 'bpjs_ket');
             $employee->update(['bpjs_ket' => $bpjs_ket->hashName()]);
         }
 
         if ($employee) {
-            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} berhasil");
+            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data berhasil");
         } else {
-            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data {$validateData['nama']} gagal");
+            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data  gagal");
         }
     }
 
@@ -290,7 +281,14 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $this->authorize('delete', Employee::class);
-        Storage::disk('local')->delete('/public/foto_profil/' . $employee->pp);
+        $data=Storage::disk('local');
+        $data->delete('/public/foto_profil/' . $employee->pp);
+        $data->delete('/public/Kartu Keluarga/' . $employee->kk);
+        $data->delete('/public/BPJS Kesehatan/' . $employee->bpjs_kes);
+        $data->delete('/public/BPJS Ketenagakerjaan/' . $employee->bpjs_ket);
+        $data->delete('/public/KTP/' . $employee->ktp);
+        $data->delete('/public/NPWP/' . $employee->npwp2);
+
         $employee->delete();
 
         if ($employee) {

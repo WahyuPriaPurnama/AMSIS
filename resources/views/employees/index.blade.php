@@ -6,18 +6,18 @@
         <div class="py-4 d-flex justify-content-between align-items-center">
             <h2>DATA KARYAWAN</h2>
             <!-- <form action="{ route('employee.search') }}" method="get">
-                    <div class="input-group mb-3">
-                        <input type="text" name="search" class="form-control" placeholder="Cari Nama"
-                            value="{ old('search') }}">
-                        <button type="submit" class="btn btn-success">Search</button>
-                    </div>
-                </form>-->
-        </div>
-        <div class="text-end">
-            @can('create', App\Models\Employee::class)
-                <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
-            @endcan
-            <a href="{{ route('employees.pdf') }}" class="btn btn-danger" target="_blank">Export PDF</a>
+                        <div class="input-group mb-3">
+                            <input type="text" name="search" class="form-control" placeholder="Cari Nama"
+                                value="{ old('search') }}">
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </div>
+                    </form>-->
+            <div class="text-end">
+                @can('create', App\Models\Employee::class)
+                    <a href="{{ route('employees.create') }}" class="btn btn-primary">Tambah Data</a>
+                @endcan
+                <a href="{{ route('employees.pdf') }}" class="btn btn-danger" target="_blank">Export PDF</a>
+            </div>
         </div>
         @if (session()->has('alert'))
             <div class="alert alert-success my-3">
@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        <div class="table-responsive">
+        <div class="card table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
