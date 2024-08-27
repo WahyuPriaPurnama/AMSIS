@@ -3,14 +3,7 @@
 @section('menuSubsidiaries', 'active')
 @section('content')
 
-    <div class="container mt-3">
-        <div class="py-4 d-flex justify-content-between align-items-center">
-            <h2>DATA PERUSAHAAN</h2>
-            @can('create', App\Models\Subsidiary::class)
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Tambah Data
-                </button>
-            @endcan
+    <div class="container mt-3">    
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -26,45 +19,57 @@
                     </div>
                 </div>
             </div>
-        </div>
         @if (session()->has('alert'))
             <div class="alert alert-success my-3">
                 {{ session()->get('alert') }}
             </div>
         @endif
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <b>DATA PERUSAHAAN</b>
+                @can('create', App\Models\Subsidiary::class)
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Tambah Data
+                </button>
+            @endcan
+            </div>
+            <div class="card-body">
 
-        <div class=" card table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>NO</th>
-                        <th>PERUSAHAAN</th>
-                        <th>KARYAWAN</th>
-                        <th>ALAMAT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($subsidiaries as $subsidiary)
-                        <tr>
-                            <th>{{ $loop->iteration }}</th>
-                            <td>
-                                @if (Auth::user()->role == 'super-admin' or Auth::user()->role == 'holding-admin')
-                                    <a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}"
-                                        class="text-decoration-none">
-                                        {{ $subsidiary->name }}
-                                    </a>
-                                @else
-                                    {{ $subsidiary->name }}
-                                @endif
-                            </td>
-                            <td class="text-center">{{ $subsidiary->employees_count }} Orang</td>
-                            <td>{{ $subsidiary->address == '' ? 'N/A' : $subsidiary->address }}</td>
-                        </tr>
-                    @empty
-                        <td colspan="7" class="text-center">Tidak ada data...</td>
-                    @endforelse
-                </tbody>
-            </table>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>NAMA</th>
+                                <th>KARYAWAN</th>
+                                <th>ALAMAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($subsidiaries as $subsidiary)
+                                <tr>
+                                    <th>{{ $loop->iteration }}</th>
+                                    <td>
+                                        @if (Auth::user()->role == 'super-admin' or Auth::user()->role == 'holding-admin')
+                                            <a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}"
+                                                class="text-decoration-none">
+                                                {{ $subsidiary->name }}
+                                            </a>
+                                        @else
+                                            {{ $subsidiary->name }}
+                                        @endif
+                                    </td>
+                                    <td class="text-center">{{ $subsidiary->employees_count }} Orang</td>
+                                    <td>{{ $subsidiary->address == '' ? 'N/A' : $subsidiary->address }}</td>
+                                </tr>
+                            @empty
+                                <td colspan="7" class="text-center">Tidak ada data...</td>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
