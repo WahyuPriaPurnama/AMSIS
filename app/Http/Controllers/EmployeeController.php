@@ -24,30 +24,29 @@ class EmployeeController extends Controller
     public function index()
     {
         $this->authorize('view', Employee::class);
-        \App\Helpers\LogActivity::addToLog();
         $user = Auth::user()->role;
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
-            $employees = Employee::Index()->sortable()->latest()->paginate(25);
+            $employees = Employee::Index()->sortable()->latest()->paginate(100);
         } elseif ($user == 'eln-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '2');
-            })->sortable()->latest()->paginate(25);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'eln2-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '3');
-            })->sortable()->latest()->paginate(25);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'bofi-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '4');
-            })->sortable()->latest()->paginate(25);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'rmm-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '6');
-            })->sortable()->latest()->paginate(25);
+            })->sortable()->latest()->paginate(100);
         } else {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '5');
-            })->sortable()->latest()->paginate(25);
+            })->sortable()->latest()->paginate(100);
         }
 
         return view('employees.index', compact('employees'));
@@ -81,8 +80,8 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-
         $this->authorize('create', Employee::class);
+        \App\Helpers\LogActivity::addToLog();
         $data = Employee::create($request->all());
 
         if ($request->file('pp')) {
@@ -163,6 +162,7 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $this->authorize('update', Employee::class);
+        \App\Helpers\LogActivity::addToLog();
         $request->validate([
             'nip' => 'size:9|unique:employees,nip,' . $employee->id,
             'nama' => 'min:3|max:50',
@@ -281,6 +281,7 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $this->authorize('delete', Employee::class);
+        \App\Helpers\LogActivity::addToLog();
         $data=Storage::disk('local');
         $data->delete('/public/foto_profil/' . $employee->pp);
         $data->delete('/public/Kartu Keluarga/' . $employee->kk);
