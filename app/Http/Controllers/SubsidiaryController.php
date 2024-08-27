@@ -16,7 +16,7 @@ class SubsidiaryController extends Controller
         $this->authorize('view', Subsidiary::class);
         \App\Helpers\LogActivity::addToLog();
         $subsidiaries = Subsidiary::Index()->get();
-        return view('subsidiaries.index', ['subsidiaries' => $subsidiaries]);
+        return view('subsidiaries.index', compact('subsidiaries'));
     }
 
     /**

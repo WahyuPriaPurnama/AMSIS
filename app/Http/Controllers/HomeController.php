@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\Subsidiary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -14,7 +17,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-       
     }
 
     /**
@@ -24,8 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Employee::class);
+        $ams = Employee::where('subsidiary_id', 1)->count();
+        $eln1 = Employee::where('subsidiary_id', 2)->count();
+        $eln2 = Employee::where('subsidiary_id', 3)->count();
+        $bofi = Employee::where('subsidiary_id', 4)->count();
+        $hk = Employee::where('subsidiary_id', 5)->count();
+        $rmm = Employee::where('subsidiary_id', 6)->count();
         
-        return view('home');
+        return view('home', compact('ams', 'eln1', 'eln2', 'bofi', 'hk', 'rmm'));
     }
 
 

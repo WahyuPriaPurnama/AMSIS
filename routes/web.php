@@ -31,12 +31,12 @@ route::middleware('auth')->group(function () {
     route::get('/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('users', UserController::class);
-    route::get('logActivity',[HomeController::class,'logActivity'])->name('log.activity');
+    route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');
+    route::get('/home',[HomeController::class,'index']);
 });
 
 Auth::routes([
     'register' => false
 ]);
-route::redirect('/home', '/employees');
 route::redirect('/', '/login');
 route::get('/kirim-email', [EmployeeController::class, 'mail']);
