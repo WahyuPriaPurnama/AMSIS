@@ -32,9 +32,9 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead class="text-center">
+                        <thead>
                             <tr>
-                                <th>NO</th>
+                                <th>#</th>
                                 <th>NIP</th>
                                 <th>NAMA</th>
                                 <th>JABATAN</th>

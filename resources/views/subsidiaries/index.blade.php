@@ -40,7 +40,7 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>NO</th>
+                                <th>#</th>
                                 <th>NAMA</th>
                                 <th>KARYAWAN</th>
                                 <th>ALAMAT</th>

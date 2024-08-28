@@ -14,7 +14,7 @@ class SubsidiaryController extends Controller
     public function index()
     {
         $this->authorize('view', Subsidiary::class);
-        \App\Helpers\LogActivity::addToLog();
+      
         $subsidiaries = Subsidiary::Index()->get();
         return view('subsidiaries.index', compact('subsidiaries'));
     }
@@ -33,6 +33,7 @@ class SubsidiaryController extends Controller
     public function store(SubsidiaryRequest $request)
     {
         $this->authorize('create', Subsidiary::class);
+        \App\Helpers\LogActivity::addToLog();
         Subsidiary::create($request->all());
         return redirect()->route('subsidiaries.index')->with('alert', "Input data {$request['name']} berhasil");
     }
@@ -61,6 +62,7 @@ class SubsidiaryController extends Controller
     public function update(Request $request, Subsidiary $subsidiary)
     {
         $this->authorize('update', Subsidiary::class);
+        \App\Helpers\LogActivity::addToLog();
         $validated = $request->validate([
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
@@ -79,6 +81,7 @@ class SubsidiaryController extends Controller
     public function destroy(Subsidiary $subsidiary)
     {
         $this->authorize('delete', Subsidiary::class);
+        \App\Helpers\LogActivity::addToLog();
         $subsidiary->delete();
         return redirect()->route('subsidiaries.index')->with('alert', "hapus data $subsidiary->name berhasil");
     }
