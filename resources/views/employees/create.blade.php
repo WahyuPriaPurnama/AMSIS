@@ -10,7 +10,7 @@
                 <div class="col-sm-6 col-md-2">
                     <label class="form-label" for="nip">NIP</label>
                     <input type="text" id="nip" name="nip" value="{{ old('nip') }}"
-                        class="form-control @error('nip') is-invalid @enderror" required>
+                        class="form-control @error('nip') is-invalid @enderror">
                     @error('nip')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -18,7 +18,7 @@
                 <div class="col-sm-6 col-md-3">
                     <label class="form-label" for="nama">Nama Lengkap</label>
                     <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
-                        class="form-control @error('nama') is-invalid @enderror" required>
+                        class="form-control @error('nama') is-invalid @enderror" >
                     @error('nama')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -26,7 +26,7 @@
                 <div class="col">
                     <label class="form-label" for="nik">NIK</label>
                     <input type="text" id="nik" name="nik" value="{{ old('nik') }}"
-                        class="form-control @error('nik') is-invalid @enderror" required>
+                        class="form-control @error('nik') is-invalid @enderror" >
                     @error('nik')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -34,8 +34,8 @@
                 <div class="col">
                     <label class="form-label" for="subsidiary_id">Perusahaan</label>
                     <select class="form-select @error('subsidiary_id') is-invalid @enderror" name="subsidiary_id"
-                        id="subsidiary_id">
-                        <option selected>Pilih Perusahaan</option>
+                        id="subsidiary_id" >
+                        <option selected value="">Pilih Perusahaan</option>
                         @foreach ($subsidiaries as $subsidiary)
                             <option value="{{ $subsidiary->id }}">{{ $subsidiary->name }}</option>
                         @endforeach
@@ -47,7 +47,7 @@
                 <div class="col">
                     <label class="form-label" for="divisi">Divisi</label>
                     <input type="text" id="divisi" name="divisi" value="{{ old('divisi') }}"
-                        class="form-control @error('divisi') is-invalid @enderror" required>
+                        class="form-control @error('divisi') is-invalid @enderror" >
                     @error('divisi')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -57,7 +57,7 @@
                 <div class="col-md-3 col-sm-6">
                     <label class="form-label" for="departemen">Departemen</label>
                     <input type="text" id="departemen" name="departemen" value="{{ old('departemen') }}"
-                        class="form-control @error('departemen') is-invalid @enderror" required>
+                        class="form-control @error('departemen') is-invalid @enderror" >
                     @error('departemen')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -65,7 +65,7 @@
                 <div class="col-md-3 col-sm-6">
                     <label class="form-label" for="seksi">Seksi</label>
                     <input type="text" id="seksi" name="seksi" value="{{ old('seksi') }}"
-                        class="form-control @error('seksi') is-invalid @enderror" required>
+                        class="form-control @error('seksi') is-invalid @enderror" >
                     @error('seksi')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -73,8 +73,8 @@
                 <div class="col-6 col-md-3">
                     <label class="form-label" for="posisi">Jabatan</label>
                     <select class="form-select @error('posisi') is-invalid @enderror" name="posisi" id="posisi"
-                        value="{{ old('posisi') }}" required>
-                        <option selected>Pilih Jabatan</option>
+                        value="{{ old('posisi') }}" >
+                        <option selected value="">Pilih Jabatan</option>
                         <option value="Direktur" @selected(old('posisi') == 'Direktur')>
                             Direktur
                         </option>
@@ -101,8 +101,8 @@
                 <div class="col-6 col-md-3">
                     <label class="form-label" for="status_peg">Status Pegawai</label>
                     <select class="form-select @error('status_peg') is-invalid @enderror" name="status_peg" id="status_peg"
-                        value="{{ old('status_peg') }}" required>
-                        <option  selected>Pilih Status Pegawai</option>
+                        value="{{ old('status_peg') }}" >
+                        <option value="" selected>Pilih Status Pegawai</option>
                         <option value="PKWT" @selected(old('status_peg') == 'PKWT')>PKWT</option>
                         <option value="PKWTT" @selected(old('status_peg') == 'PKWTT')>PKWTT</option>
                         <option value="-" @selected(old('status_peg') == '-')> - </option>
@@ -116,7 +116,7 @@
                 <div class="col">
                     <label class="form-label" for="tgl_masuk">Tanggal Masuk Kerja</label>
                     <input type="date" id="tgl_masuk" name="tgl_masuk" value="{{ old('tgl_masuk') }}"
-                        class="form-control @error('tgl_masuk') is-invalid @enderror" required>
+                        class="form-control @error('tgl_masuk') is-invalid @enderror" >
                     @error('tgl_masuk')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
