@@ -39,6 +39,7 @@
                                 <th>NAMA</th>
                                 <th>JABATAN</th>
                                 <th>SEKSI</th>
+                                <th>DEPARTEMEN</th>
                                 <th>STATUS</th>
                                 <th><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
@@ -63,6 +64,7 @@
 
                                 <td>{{ $employee->posisi }}</td>
                                 <td>{{ $employee->seksi }}</td>
+                                <td>{{$employee->departemen}}</td>
                                 <td>{{ $employee->status_peg }}</td>
                                 @if ($employee->status_peg == 'PKWT')
                                     <td>{{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) }} hari</td>

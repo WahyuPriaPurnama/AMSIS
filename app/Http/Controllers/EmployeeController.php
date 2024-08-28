@@ -282,7 +282,7 @@ class EmployeeController extends Controller
     {
         $this->authorize('delete', Employee::class);
         \App\Helpers\LogActivity::addToLog();
-        $data=Storage::disk('local');
+        $data = Storage::disk('local');
         $data->delete('/public/foto_profil/' . $employee->pp);
         $data->delete('/public/Kartu Keluarga/' . $employee->kk);
         $data->delete('/public/BPJS Kesehatan/' . $employee->bpjs_kes);
@@ -363,5 +363,10 @@ class EmployeeController extends Controller
         $result = Employee::find($employee);
         $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $result])->setPaper('letter', 'landscape');
         return $pdf->stream();
+    }
+
+    public function trash()
+    {
+        return 'oke';
     }
 }

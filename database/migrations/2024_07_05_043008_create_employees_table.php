@@ -48,6 +48,7 @@ return new class extends Migration
             $table->string('bpjs_ket')->nullable();
             $table->string('bpjs_kes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
