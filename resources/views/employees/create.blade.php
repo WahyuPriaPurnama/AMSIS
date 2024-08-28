@@ -35,6 +35,7 @@
                     <label class="form-label" for="subsidiary_id">Perusahaan</label>
                     <select class="form-select @error('subsidiary_id') is-invalid @enderror" name="subsidiary_id"
                         id="subsidiary_id">
+                        <option selected>Pilih Perusahaan</option>
                         @foreach ($subsidiaries as $subsidiary)
                             <option value="{{ $subsidiary->id }}">{{ $subsidiary->name }}</option>
                         @endforeach
