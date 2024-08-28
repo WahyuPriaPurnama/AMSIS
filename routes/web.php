@@ -29,7 +29,6 @@ route::middleware('auth')->group(function () {
     route::get('employee/BPJS-kes/{bpjs_kes}', [EmployeeController::class, 'bpjs_kes'])->name('employee.bpjs_kes');
     route::get('/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
     route::get('/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
-    route::get('employee/trash', [EmployeeController::class, 'trash'])->name('employee.trash');
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('users', UserController::class);
     route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');

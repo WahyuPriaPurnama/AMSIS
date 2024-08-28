@@ -365,8 +365,5 @@ class EmployeeController extends Controller
         return $pdf->stream();
     }
 
-    public function trash()
-    {
-        return 'oke';
-    }
+
 }

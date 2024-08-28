@@ -10,10 +10,10 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Employee extends Model
 {
-    use HasFactory, Sortable, HasUuids, SoftDeletes;
+    use HasFactory, Sortable, HasUuids;
     protected $guarded = [];
     public $sortable = ['nip', 'nama', 'akhir_kontrak'];
-    protected $date = ['deleted_at'];
+  
 
     public function subsidiary()
     {
