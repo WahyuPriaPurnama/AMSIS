@@ -94,7 +94,7 @@
     <footer class="bg-dark py-4 text-white  mt-auto">
         @vite('resources/js/app.js')
         <div class="container text-center">
-            AMS Information System | Copyright © {{ date('Y') }}
+            AMS Information System | © {{ date('Y') }} WPP. All rights reserved.
         </div>
     </footer>
 </body>
