@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 route::middleware('auth')->group(function () {
-    //route::get('employee/search', [EmployeeController::class, 'search'])->name('employee.search');
+    route::get('employee/search', [EmployeeController::class, 'search'])->name('employee.search');
     route::resource('employees', EmployeeController::class);
     route::get('employee/foto_profil/{pp}', [EmployeeController::class, 'pp'])->name('employee.pp');
     route::get('employee/KTP/{ktp}', [EmployeeController::class, 'ktp'])->name('employee.ktp');

@@ -302,7 +302,38 @@ class EmployeeController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $employees = Employee::where('nama', 'like', "%" . $search . "%")->paginate(25);
+        $user = Auth::user()->role;
+        if ($user == 'holding-admin' or $user == 'super-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
+                return $query->where('name', 'like', "%" . $search . "%");
+            })->orWhere('nip', 'like', "%" . $search . "%")
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+        } elseif ($user == 'eln-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
+                return $query->where('id', '2');
+            })->orWhere('nip', 'like', "%" . $search . "%")
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+        } elseif ($user == 'eln2-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
+                return $query->where('id', '3');
+            })->orWhere('nip', 'like', "%" . $search . "%")
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+        } elseif ($user == 'bofi-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
+                return $query->where('id', '4');
+            })->orWhere('nip', 'like', "%" . $search . "%")
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+        } elseif ($user == 'haka-admin') {
+            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
+                return $query->where('id', '5');
+            })->orWhere('nip', 'like', "%" . $search . "%")
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+        } else {
+            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
+                return $query->where('id', '6');
+            })->orWhere('nip', 'like', "%" . $search . "%")
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+        }
 
         return view('employees.index', ['employees' => $employees]);
     }
@@ -364,6 +395,4 @@ class EmployeeController extends Controller
         $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $result])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
-
-
 }
