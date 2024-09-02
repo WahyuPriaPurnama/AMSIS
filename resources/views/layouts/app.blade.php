@@ -46,7 +46,9 @@
                                 <a class="nav-link @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">Data
                                     Perusahaan</a>
                             </li>
-                           
+                            <li class="nav-item">
+                                <a href="{{route('esp32.index')}}" class="nav-link">Data Suhu</a>
+                            </li>
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\Esp32Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubsidiaryController;
 use App\Http\Controllers\UserController;
@@ -40,3 +41,7 @@ Auth::routes([
 ]);
 route::redirect('/', '/login');
 route::get('/kirim-email', [EmployeeController::class, 'mail']);
+
+route::get('/esp32', [Esp32Controller::class, 'index'])->name('esp32.index');
+route::get('/esp32/{sensor}/{location}/{value1}/{value2}/{value3}', [Esp32Controller::class, 'store']);
+route::delete('/esp32-delete/{id}', [Esp32Controller::class, 'destroy']);
