@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('esp32s', function (Blueprint $table) {
             $table->id();
-            $table->char('sensor',30);
-            $table->char('location',30);
-            $table->char('value1',10);
-            $table->char('value2',10);
-            $table->char('value3',10);
+            $table->float('suhu');
             $table->timestamps();
         });
     }

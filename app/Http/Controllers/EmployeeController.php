@@ -384,7 +384,10 @@ class EmployeeController extends Controller
     {
         $this->authorize('view', Employee::class);
         $employees = Employee::all();
-        $pdf = pdf::loadview('employees.pdf.index', ['employees' => $employees])->setPaper('letter', 'landscape');
+        ini_set('max_execution_time', 500);
+        ini_set('memory_limit', '512M');
+        $pdf = pdf::loadview('employees.pdf.index', ['employees' => $employees])
+            ->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
 

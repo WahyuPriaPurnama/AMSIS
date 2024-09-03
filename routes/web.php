@@ -43,5 +43,5 @@ route::redirect('/', '/login');
 route::get('/kirim-email', [EmployeeController::class, 'mail']);
 
 route::get('/esp32', [Esp32Controller::class, 'index'])->name('esp32.index');
-route::get('/esp32/{sensor}/{location}/{value1}/{value2}/{value3}', [Esp32Controller::class, 'store']);
-route::delete('/esp32-delete/{id}', [Esp32Controller::class, 'destroy']);
+route::post('/data', [Esp32Controller::class, 'store']);
+
