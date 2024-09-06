@@ -3,8 +3,6 @@
 @section('menuEmployees', 'active')
 @section('content')
     <div class="container mt-3">
-
-
         <form action="{{ route('employee.search') }}" method="get">
             <div class="input-group mb-3">
                 <input type="text" name="search" class="form-control"
@@ -22,7 +20,7 @@
                 {{ session()->get('alert') }}
             </div>
         @endif
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <b>DATA KARYAWAN</b>
                 <div class="text-end">

@@ -6,9 +6,9 @@
         @session('pesan')
             
         @endsession
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">
-                DATA SUHU
+                <b>DATA SUHU</b>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -16,10 +16,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Sensor</th>
-                                <th>Lokasi</th>
                                 <th>Suhu</th>
-                                <th>Kelembaban</th>
                                 <th>Timestamp</th>
                             </tr>
                         </thead>
@@ -27,10 +24,7 @@
                             @forelse ($data as $d)
                             <tr>
                                     <td>{{ $d->id }}</td>
-                                    <td>{{ $d->sensor }}</td>
-                                    <td>{{ $d->location }}</td>
-                                    <td>{{ $d->value1 }}</td>
-                                    <td>{{ $d->value2 }}</td>
+                                    <td>{{ $d->suhu }}</td>
                                     <td>{{$d->updated_at}}</td>
                                 </tr>
                                     @empty

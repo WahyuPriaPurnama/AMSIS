@@ -2,6 +2,11 @@
 @section('title', 'Input Data Karyawan')
 @section('content')
     <div class="container">
+        <div class="card shadow">
+            <div class="card-header">
+                <b>INPUT DATA KARYAWAN</b>
+            </div>
+            <div class="card-body">
         <form action="{{ route('employees.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row mb-3">
@@ -315,7 +320,7 @@
                 <div class="col-3">
                     <label class="form-label" for="kk">Kartu Keluarga</label>
                     <input type="file" id="kk" name="kk"
-                        class="form-control @error('kk') is-invalid @enderror" accept="image/png, image/jpeg, image/jpg">
+                        class="form-control @error('kk') is-invalid @enderror" accept="application/pdf">
                     @error('kk')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -349,5 +354,7 @@
             </div>
             <button type="submit" class="btn btn-primary mb-2">Simpan</button>
         </form>
+    </div>
+</div>
     </div>
 @endsection

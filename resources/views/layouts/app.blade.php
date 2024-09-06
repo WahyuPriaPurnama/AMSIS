@@ -39,14 +39,19 @@
                         <ul class="navbar-nav me-auto">
 
                             <li class="nav-item">
-                                <a class="nav-link @yield('menuEmployees')" href="{{ route('employees.index') }}">Data
+                                <a class="nav-link @yield('menuEmployees')" href="{{ route('employees.index') }}">
                                     Karyawan</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">Data
+                                <a class="nav-link @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">
                                     Perusahaan</a>
                             </li>
-                            
+                            @if (Auth::user()->role == 'super-admin')
+                            <li class="nav-item">
+                                <a class="nav-link @yield('menuSuhu')" href="{{ route('suhu.index') }}">
+                                    Temperatur</a>
+                            </li>
+                            @endif
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->

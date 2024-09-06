@@ -14,12 +14,12 @@ class Esp32Controller extends Controller
 
         return view('esp32.index', compact('data'));
     }
-    public function store(Request $request)
+    public function store($suhu)
     {
-        $data = new esp32;
-        $data->suhu = $request->suhu;
-        $data->save();
 
-        return response()->json(['message' => 'Data berhasil disimpan']);
+        $data = esp32::create([
+            'suhu' => $suhu
+        ]);
+        return 'Data berhasil disimpan';
     }
 }

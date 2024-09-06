@@ -24,7 +24,7 @@
                 {{ session()->get('alert') }}
             </div>
         @endif
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <b>DATA PERUSAHAAN</b>
                 @can('create', App\Models\Subsidiary::class)

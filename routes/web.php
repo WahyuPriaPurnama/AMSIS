@@ -42,6 +42,6 @@ Auth::routes([
 route::redirect('/', '/login');
 route::get('/kirim-email', [EmployeeController::class, 'mail']);
 
-route::get('/esp32', [Esp32Controller::class, 'index'])->name('esp32.index');
-route::post('/data', [Esp32Controller::class, 'store']);
+route::get('/suhu', [Esp32Controller::class, 'index'])->name('suhu.index');
+route::get('/data/{suhu}', [Esp32Controller::class, 'store']);
 
