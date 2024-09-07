@@ -190,7 +190,7 @@ class EmployeeController extends Controller
             'status' => '',
             'jml_ank' => '',
             'nama_kd' => 'max:50',
-            'no_kd' => 'max:12',
+            'no_kd' => '',
             'hubungan' => 'max:15',
             'pp' => 'mimes:png,jpg,jpeg|max:2048',
             'ktp' => 'mimes:pdf|max:2048',

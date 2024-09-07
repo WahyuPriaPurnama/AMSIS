@@ -28,7 +28,7 @@ return new class extends Migration
             $table->date('tgl_lahir')->nullable();
             $table->char('jenis_kelamin', 1)->nullable();
             $table->text('alamat')->nullable();
-            $table->char('no_telp', 12)->nullable();
+            $table->char('no_telp', 15)->nullable();
             $table->string('email')->nullable();
             $table->char('pend_trkhr', 10)->nullable();
             $table->char('jurusan', 25)->nullable();
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->char('status', 11)->nullable();
             $table->char('jml_ank', 2)->nullable();
             $table->string('nama_kd')->nullable();
-            $table->char('no_kd', 12)->nullable();
+            $table->char('no_kd', 15)->nullable();
             $table->char('hubungan', 15)->nullable();
             $table->string('pp')->nullable();
             $table->foreignId('subsidiary_id')->constrained()->onDelete('cascade');
