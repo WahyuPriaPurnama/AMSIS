@@ -52,6 +52,7 @@
             <th>-</th>
             <th>TMPT LHR</th>
             <th>TGL LHR</th>
+            <th>USIA</th>
             <th>L/P</th>
             <th>ALAMAT</th>
             <th>NO. TELP</th>
@@ -92,6 +93,7 @@
             @endif
             <td>{{ $employee->tmpt_lahir }}</td>
             <td>{{ $employee->tgl_lahir }}</td>
+            <td>{{ Carbon\Carbon::parse($employee->tgl_lahir)->age }}</td>
             <td>{{ $employee->jenis_kelamin }}</td>
             <td>{{ $employee->alamat }}</td>
             <td>{{ $employee->no_telp }}</td>
