@@ -31,6 +31,8 @@
                     <li>{{ $subsidiary->email }}</li>
                     <li>{{ $subsidiary->phone }}</li>
                     <li>{{ $subsidiary->address }}</li>
+                    
+                    
                 </ul>
 
                 <div class="table-responsive">
