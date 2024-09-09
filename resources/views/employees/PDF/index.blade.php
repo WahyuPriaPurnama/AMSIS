@@ -36,7 +36,7 @@
         <tr>
             <th colspan="11">ORGANISASI</th>
             <th colspan="13">BIODATA</th>
-            <th colspan="3">KONTAK DARURAT</th>
+            <th colspan="4">KONTAK DARURAT</th>
         </tr>
         <tr>
             <th>NO</th>
