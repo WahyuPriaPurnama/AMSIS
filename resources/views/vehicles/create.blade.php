@@ -136,16 +136,16 @@
                     </div>
                     <div class="col-md-3 col-6">
                         <label class="form-label" for="j_asuransi">Jenis Asuransi</label>
-                        <input type="text" class="form-control @error('j_asuransi') is-invalid @enderror" name="j_asuransi"
-                            value="{{ old('j_asuransi') }}" id="">
+                        <input type="text" class="form-control @error('j_asuransi') is-invalid @enderror"
+                            name="j_asuransi" value="{{ old('j_asuransi') }}" id="">
                         @error('j_asuransi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-3 col-6">
                         <label class="form-label" for="p_asuransi">Perusahaan Asuransi</label>
-                        <input type="text" class="form-control @error('p_asuransi') is-invalid @enderror" name="p_asuransi"
-                            value="{{ old('p_asuransi') }}" id="">
+                        <input type="text" class="form-control @error('p_asuransi') is-invalid @enderror"
+                            name="p_asuransi" value="{{ old('p_asuransi') }}" id="">
                         @error('p_asuransi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -154,10 +154,10 @@
                 <div class="row mb-3">
                     <div class="col-md-3 col-6">
                         <label class="form-label" for="no_asuransi">No. Asuransi</label>
-                        <input type="text" class="form-control @error('no_asuransi') is-invalid @enderror" name="no_asuransi"
-                        value="{{ old('no_asuransi') }}" id="">
+                        <input type="text" class="form-control @error('no_asuransi') is-invalid @enderror"
+                            name="no_asuransi" value="{{ old('no_asuransi') }}" id="">
                         @error('no_asuransi')
-                        <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-3 col-6">
@@ -181,10 +181,34 @@
                     </div>
                     <div class="col-md-3 col-6">
                         <label class="form-label" for="keterangan">Keterangan</label>
-                        <input type="text" name="keterangan" class="form-control">
+                        <input type="text" name="keterangan"
+                            class="form-control @error('keterangan') is-invalid @enderror">
                     </div>
                 </div>
-
+                <h3>Lampiran</h3>
+                <hr>
+                <div class="row mb-3">
+                    <div class="col-md-3 col-3">
+                        <label for="foto" class="form-label">Foto Kendaraan</label>
+                        <input type="file" name="foto" id=""
+                            class="form-control @error('foto') is-invalid @enderror" accept="image/png, image/jpeg, image/jpg, application/pdf">
+                    </div>
+                    <div class="col-md-3 col-3">
+                        <label for="f_stnk" class="form-label">Foto STNK</label>
+                        <input type="file" name="f_stnk" id=""
+                            class="form-control @error('f_stnk') is-invalid @enderror" accept="image/png, image/jpeg, image/jpg, application/pdf">
+                    </div>
+                    <div class="col-md-3 col-3">
+                        <label for="f_pajak" class="form-label">Foto Pajak</label>
+                        <input type="file" name="f_pajak" id=""
+                            class="form-control @error('f_pajak') is-invalid @enderror" accept="image/png, image/jpeg, image/jpg, application/pdf">
+                    </div>
+                    <div class="col-md-3 col-3">
+                        <label for="f_kir" class="form-label">Foto KIR</label>
+                        <input type="file" name="f_kir" id=""
+                            class="form-control @error('f_kir') is-invalid @enderror" accept="image/png, image/jpeg, image/jpg, application/pdf">
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         @endcomponent
