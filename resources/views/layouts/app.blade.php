@@ -46,11 +46,14 @@
                                 <a class="nav-link @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">
                                     Perusahaan</a>
                             </li>
-                            @if (Auth::user()->role == 'super-admin')
                             <li class="nav-item">
-                                <a class="nav-link @yield('menuSuhu')" href="{{ route('suhu.index') }}">
-                                    Temperatur</a>
+                                <a href="{{ route('vehicle.index') }}" class="nav-link @yield('menuVehicle')">Kendaraan</a>
                             </li>
+                            @if (Auth::user()->role == 'super-admin')
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('menuSuhu')" href="{{ route('suhu.index') }}">
+                                        Temperatur</a>
+                                </li>
                             @endif
                         </ul>
                     @endguest
@@ -106,4 +109,5 @@
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>
+
 </html>

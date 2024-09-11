@@ -2,16 +2,15 @@
 @section('title', 'Dashboard')
 @section('content')
     <div class="container">
-        <div class="card shadow">
-            <div class="card-header">
+        @component('components.card')
+            @slot('header')
                 GRAFIK JUMLAH KARYAWAN PER PLANT
+            @endslot
+
+            <div>
+                <canvas id="myChart"></canvas>
             </div>
-            <div class="card-body">
-                <div>
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-        </div>
+        @endcomponent
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -41,5 +40,5 @@
             });
         </script>
 
-    </div>
-@endsection
+        </div>
+    @endsection

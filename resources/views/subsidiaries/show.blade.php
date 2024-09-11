@@ -1,29 +1,28 @@
 @extends('layouts.app')
 @section('title', "Data $subsidiary->name")
 @section('content')
-    <div class="container">
+    <div class="container mt-3">
         @if (session()->has('alert'))
             <div class="alert alert-success" role="alert">
                 {{ session()->get('alert') }}
             </div>
         @endif
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
+        @component('components.card')
+            @slot('header')
                 <b>{{ $subsidiary->name }}</b>
-                <div class="d-flex">
+                <div class="btn-group">
                     @can('update', $subsidiary)
-                        <a href="{{ route('subsidiaries.edit', ['subsidiary' => $subsidiary->id]) }}"
-                            class="btn btn-primary">Edit</a>
+                        <a href="{{ route('subsidiaries.edit', ['subsidiary' => $subsidiary->id]) }}" class="btn btn-primary">Edit</a>
                     @endcan
                     @can('delete', $subsidiary)
-                        <form action="{{ route('subsidiaries.destroy', ['subsidiary' => $subsidiary->id]) }}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger ms-3">Hapus</button>
-                        </form>
+                    <form action="{{ route('subsidiaries.destroy', ['subsidiary' => $subsidiary->id]) }}" id="hapus" method="post">
+                        @method('DELETE')
+                        @csrf
+                    </form>
+                    <button type="submit" form="hapus" class="btn btn-danger">Hapus</button>
                     @endcan
                 </div>
-            </div>
+            @endslot
             <div class="card-body">
                 <ul>
                     <li>{{ $subsidiary->tagline }}</li>
@@ -31,8 +30,8 @@
                     <li>{{ $subsidiary->email }}</li>
                     <li>{{ $subsidiary->phone }}</li>
                     <li>{{ $subsidiary->address }}</li>
-                    
-                    
+
+
                 </ul>
 
                 <div class="table-responsive">
@@ -58,7 +57,7 @@
                     </table>
                 </div>
             </div>
-        </div>
-
+        @endcomponent
     </div>
+
 @endsection

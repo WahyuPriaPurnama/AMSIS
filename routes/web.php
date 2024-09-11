@@ -5,6 +5,7 @@ use App\Http\Controllers\Esp32Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubsidiaryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ route::middleware('auth')->group(function () {
     route::resource('users', UserController::class);
     route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('/home', [HomeController::class, 'index']);
+    route::resource('vehicle', VehicleController::class);
 });
 
 Auth::routes([
@@ -44,4 +46,3 @@ route::get('/kirim-email', [EmployeeController::class, 'mail']);
 
 route::get('/suhu', [Esp32Controller::class, 'index'])->name('suhu.index');
 route::get('/data/{suhu}', [Esp32Controller::class, 'store']);
-

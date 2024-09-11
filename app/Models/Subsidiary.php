@@ -20,5 +20,8 @@ class Subsidiary extends Model
     {
         return $query->withCount('employees');
     }
-
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
 }
