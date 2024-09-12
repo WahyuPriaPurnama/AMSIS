@@ -22,15 +22,32 @@ class VehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'jenis_kendaraan' =>'required',
-            'subsidiary_id'=>'required',
-            'tgl_perolehan'=>'required',
-            'pengguna'=>'required',
-            'warna'=>'required',
-            'tahun'=>'required',
-            'atas_nama'=>'required',
-            'nopol'=>'required|unique:vehicles',
-            'kondisi'=>'required'
+            'jenis_kendaraan' => 'required',
+            'subsidiary_id' => 'required',
+            'tgl_perolehan' => 'required',
+            'pengguna' => 'required',
+            'nama_warna' => 'required',
+            'warna' => 'required',
+            'tahun' => 'required',
+            'atas_nama' => 'required',
+            'nopol' => 'required|unique:vehicles',
+            'no_rangka' => '',
+            'no_bpkb' => '',
+            'no_mesin' => '',
+            'stnk' => '',
+            'pajak' => '',
+            'kir' => '',
+            'j_asuransi' => '',
+            'p_asuransi' => '',
+            'no_asuransi' => '',
+            'jth_tempo' => '',
+            'kondisi' => '',
+            'keterangan' => '',
+            'foto' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'kondisi' => 'required'
         ];
     }
 }

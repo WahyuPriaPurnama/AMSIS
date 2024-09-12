@@ -14,7 +14,7 @@ class SubsidiaryController extends Controller
     public function index()
     {
         $this->authorize('view', Subsidiary::class);
-      
+
         $subsidiaries = Subsidiary::Index()->get();
         return view('subsidiaries.index', compact('subsidiaries'));
     }
@@ -41,10 +41,9 @@ class SubsidiaryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($subsidiary)
+    public function show(Subsidiary $subsidiary)
     {
-        $result = Subsidiary::find($subsidiary);
-        return view('subsidiaries.show', ['subsidiary' => $result]);
+        return view('subsidiaries.show', compact('subsidiary'));
     }
 
     /**

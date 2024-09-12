@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Input Data Karyawan')
+@section('menuEmployees', 'active')
 @section('content')
     <div class="container mt-3">
         @component('components.card')

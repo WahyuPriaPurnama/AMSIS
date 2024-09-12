@@ -47,7 +47,7 @@
                                     Perusahaan</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('vehicle.index') }}" class="nav-link @yield('menuVehicle')">Kendaraan</a>
+                                <a  class="nav-link @yield('menuVehicles')" href="{{ route('vehicle.index') }}">Kendaraan</a>
                             </li>
                             @if (Auth::user()->role == 'super-admin')
                                 <li class="nav-item">

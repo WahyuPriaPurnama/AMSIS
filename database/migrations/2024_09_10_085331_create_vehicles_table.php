@@ -17,13 +17,14 @@ return new class extends Migration
             $table->foreignId('subsidiary_id')->constrained()->onDelete('cascade');
             $table->date('tgl_perolehan');
             $table->string('pengguna');
+            $table->string('nama_warna');
             $table->string('warna');
             $table->string('tahun');
             $table->string('atas_nama');
-            $table->string('nopol');
-            $table->string('no_rangka')->nullable();
-            $table->string('no_bpkb')->nullable();
-            $table->string('no_mesin')->nullable();
+            $table->string('nopol')->unique();
+            $table->string('no_rangka')->unique()->nullable();
+            $table->string('no_bpkb')->unique()->nullable();
+            $table->string('no_mesin')->unique()->nullable();
             $table->date('stnk')->nullable();
             $table->date('pajak')->nullable();
             $table->date('kir')->nullable();

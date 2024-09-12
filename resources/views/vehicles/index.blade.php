@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Data Kendaraan')
-@section('menuVehicle', 'active')
+@section('menuVehicles', 'active')
 @section('content')
     <div class="container mt-3">
         @if (session()->has('alert'))
@@ -22,30 +22,28 @@
                             <th>#</th>
                             <th>JENIS KENDARAAN</th>
                             <th>PLANT</th>
-                            <th>PENGGUNA</th>
                             <th>NOPOL</th>
                             <th>STNK</th>
                             <th>PAJAK</th>
                             <th>KIR</th>
                             <th>ASURANSI</th>
                             <th>KONDISI</th>
-                            <th>KETERANGAN</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->jenis_kendaraan }}</td>
+                                <td><a href="{{route('vehicle.show',['vehicle'=>$item->id])}}" class="text-decoration-none">
+                                {{ $item->jenis_kendaraan }}</a></td>
                                 <td>{{$item->subsidiary->name}}</td>
-                                <td>{{$item->pengguna}}</td>
                                 <td>{{$item->nopol}}</td>
                                 <td>{{$item->stnk}}</td>
                                 <td>{{$item->pajak}}</td>
                                 <td>{{$item->kir}}</td>
                                 <td>{{$item->jth_tempo}}</td>
                                 <td>{{$item->kondisi}}</td>
-                                <td>{{$item->keterangan}}</td>
+   
                             </tr>
                             @empty
                             <td colspan="12" class="text-center">Tidak ada data...</td>

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', "Data $subsidiary->name")
+@section('menuSubsidiaries','active')
 @section('content')
     <div class="container mt-3">
         @if (session()->has('alert'))
@@ -10,6 +11,7 @@
         @component('components.card')
             @slot('header')
                 <b>{{ $subsidiary->name }}</b>
+                @endslot
                 <div class="btn-group">
                     @can('update', $subsidiary)
                         <a href="{{ route('subsidiaries.edit', ['subsidiary' => $subsidiary->id]) }}" class="btn btn-primary">Edit</a>
@@ -22,7 +24,6 @@
                     <button type="submit" form="hapus" class="btn btn-danger">Hapus</button>
                     @endcan
                 </div>
-            @endslot
             <div class="card-body">
                 <ul>
                     <li>{{ $subsidiary->tagline }}</li>

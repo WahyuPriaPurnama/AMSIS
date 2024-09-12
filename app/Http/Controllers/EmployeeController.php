@@ -114,8 +114,6 @@ class EmployeeController extends Controller
             $data->update(['bpjs_ket' => $bpjs_ket->hashName()]);
         }
 
-
-
         if ($data) {
             return redirect()->route('employees.index')->with('alert', "Input data berhasil");
         } else {
@@ -126,11 +124,10 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($employee)
+    public function show(Employee $employee)
     {
 
-        $result = Employee::find($employee);
-        return view('employees.show', ['employee' => $result]);
+        return view('employees.show', compact('employee'));
     }
 
     /**

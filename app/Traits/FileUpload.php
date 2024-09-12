@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\Employee;
-use Illuminate\Support\Facades\Storage;
 
 trait FileUpload
 {

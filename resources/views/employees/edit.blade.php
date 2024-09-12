@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Edit Data Karyawan')
+@section('menuEmployees', 'active')
 @section('content')
     <div class="container mt-3">
         @component('components.card')
@@ -42,7 +43,7 @@
                         <select class="form-select" name="subsidiary_id" id="plant" value="{{ $employee->subsidiary_id }}">
 
                             @foreach ($subsidiaries as $subsidiary)
-                                <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == $employee->subsidiary->id)>
+                                <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == $employee->subsidiary_id)>
                                     {{ $subsidiary->name }}
                                 </option>
                             @endforeach

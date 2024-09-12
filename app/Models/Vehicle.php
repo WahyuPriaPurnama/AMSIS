@@ -14,4 +14,8 @@ class Vehicle extends Model
     {
         return $this->belongsTo(Subsidiary::class);
     }
+    public function scopeIndex($query)
+    {
+        return $query->with('subsidiary');
+    }
 }

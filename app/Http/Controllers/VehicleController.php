@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VehicleRequest;
 use App\Models\Subsidiary;
 use App\Models\Vehicle;
+use App\Traits\FileUpload;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
+    use FileUpload;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Vehicle::all();
+        $data = Vehicle::Index()->get();
         return view('vehicles.index', compact('data'));
     }
 
@@ -33,9 +35,25 @@ class VehicleController extends Controller
      */
     public function store(VehicleRequest $request)
     {
-
+        \App\Helpers\LogActivity::addToLog();
         $data = Vehicle::create($request->all());
-        return view('vehicles.index')->with('alert', 'data berhasil disimpan');
+        if ($request->file('foto')) {
+            $foto = $this->fileUpload($request, 'public/vehicles/foto', 'foto');
+            $data->update(['foto' => $foto->hashName()]);
+        }
+        if ($request->file('f_stnk')) {
+            $stnk = $this->fileUpload($request, 'public/vehicles/stnk', 'f_stnk');
+            $data->update(['f_stnk' => $stnk->hashName()]);
+        }
+        if ($request->file('f_pajak')) {
+            $pajak = $this->fileUpload($request, 'public/vehicles/pajak', 'f_pajak');
+            $data->update(['f_pajak' => $pajak->hashName()]);
+        }
+        if ($request->file('f_kir')) {
+            $kir = $this->fileUpload($request, 'public/vehicles/kir', 'f_kir');
+            $data->update(['f_kir' => $kir->hashName()]);
+        }
+        return view('vehicles.index', compact('data'))->with('alert', 'data berhasil disimpan');
     }
 
     /**
@@ -43,7 +61,7 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        //
+        return view('vehicles.show', compact('vehicle'));
     }
 
     /**
@@ -51,7 +69,8 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        //
+        $sub = Subsidiary::all();
+        return view('vehicles.edit', compact('sub', 'vehicle'));
     }
 
     /**

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Edit Perusahaan')
+@section('menuSubsidiaries', 'active')
 @section('content')
     <div class="container mt-3">
         <h3>Edit Perusahaan</h3>
