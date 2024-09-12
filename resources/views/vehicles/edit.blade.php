@@ -7,7 +7,7 @@
             @slot('header')
                 EDIT {{ $vehicle->jenis_kendaraan }}
             @endslot
-            <form action="{{ route('vehicle.update', ['vehicle' => $vehicle->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('vehicle.update',  $vehicle->id) }}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row">

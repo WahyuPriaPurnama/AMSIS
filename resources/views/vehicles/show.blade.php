@@ -152,7 +152,7 @@
                                                     <div class="p-2">{{ $vehicle->nama_warna }}</div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Kode Warna</div>
+                                                    <div class="p-2">Visual Warna</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">

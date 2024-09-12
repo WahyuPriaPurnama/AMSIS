@@ -19,9 +19,9 @@ class VehiclePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Vehicle $vehicle): bool
+    public function view(User $user): bool
     {
-        return true;
+        return in_array($user->role, ['super-admin', 'holding-admin']);
     }
 
     /**

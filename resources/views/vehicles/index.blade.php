@@ -35,7 +35,7 @@
                        
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('vehicle.show', $item->id) }}" class="text-decoration-none">
+                                <td><a href="{{ route('vehicle.show', ['vehicle'=>$item->id]) }}" class="text-decoration-none">
                                         {{ $item->jenis_kendaraan }}</a></td>
                                 <td>{{ $item->subsidiary->name }}</td>
                                 <td>{{ $item->nopol }}</td>

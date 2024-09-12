@@ -55,7 +55,7 @@ class VehicleController extends Controller
             $kir = $this->fileUpload($request, 'public/vehicles/kir', 'f_kir');
             $data->update(['f_kir' => $kir->hashName()]);
         }
-        return view('vehicles.index', compact('data'))->with('alert', 'data berhasil disimpan');
+        return redirect()->route('vehicle.index')->with('alert', 'data berhasil disimpan');
     }
 
     /**
@@ -154,8 +154,8 @@ class VehicleController extends Controller
 
         if ($request->file('f_kir')) {
             Storage::disk('local')->delete('public/vehicles/kir/' . $vehicle->f_kir);
-            $kir = $this->fileUpload($request, 'public/vehicles/', 'f_kir');
-            $vehicle->update(['kir' => $kir->hashName()]);
+            $kir = $this->fileUpload($request, 'public/vehicles/kir', 'f_kir');
+            $vehicle->update(['f_kir' => $kir->hashName()]);
         }
 
         if ($vehicle) {
