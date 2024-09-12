@@ -197,7 +197,7 @@ class EmployeeController extends Controller
             'bpjs_ket' => 'mimes:pdf|max:2048',
         ]);
 
-        $employee = Employee::findOrFail($employee->id);
+        $employee::findOrFail($employee->id);
 
         $employee->update([
             'nip' => $request->nip,

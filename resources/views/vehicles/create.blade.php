@@ -36,7 +36,7 @@
                         <label class="form-label" for="tgl_perolehan">Tanggal Perolehan</label>
                         <input type="date" class="form-control @error('tgl_perolehan') is-invalid @enderror"
                             name="tgl_perolehan" value="{{ old('tgl_perolehan') }}" id="">
-                        @error('subsidiary_id')
+                        @error('tgl_perolehan')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>

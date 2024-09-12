@@ -26,15 +26,15 @@
         @component('components.card')
             @slot('header')
                 DATA PERUSAHAAN
-                @endslot
-                <div class="text-end">
+            @endslot
+            <div class="text-end">
 
-                    @can('create', App\Models\Subsidiary::class)
+                @can('create', App\Models\Subsidiary::class)
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Tambah
                     </button>
-                    @endcan
-                </div>
+                @endcan
+            </div>
 
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -52,8 +52,7 @@
                                 <th>{{ $loop->iteration }}</th>
                                 <td>
                                     @if (Auth::user()->role == 'super-admin' or Auth::user()->role == 'holding-admin')
-                                        <a href="{{ route('subsidiaries.show', ['subsidiary' => $subsidiary->id]) }}"
-                                            class="text-decoration-none">
+                                        <a href="{{ route('subsidiaries.show', $subsidiary->id) }}" class="text-decoration-none">
                                             {{ $subsidiary->name }}
                                         </a>
                                     @else

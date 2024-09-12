@@ -7,6 +7,8 @@ use App\Models\Subsidiary;
 use App\Models\Vehicle;
 use App\Traits\FileUpload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class VehicleController extends Controller
 {
@@ -78,7 +80,89 @@ class VehicleController extends Controller
      */
     public function update(Request $request, Vehicle $vehicle)
     {
-        //
+        $this->authorize('update', Vehicle::class);
+        \App\Helpers\LogActivity::addToLog();
+        $request->validate([
+            'jenis_kendaraan' => 'required',
+            'subsidiary_id' => 'required',
+            'tgl_perolehan' => 'required',
+            'pengguna' => 'required',
+            'nama_warna' => 'required',
+            'warna' => 'required',
+            'tahun' => 'required',
+            'atas_nama' => 'required',
+            'nopol' => 'required|unique:vehicles,nopol,' . $vehicle->id,
+            'no_rangka' => 'unique:vehicles,no_rangka,' . $vehicle->id,
+            'no_bpkb' => 'unique:vehicles,no_bpkb,' . $vehicle->id,
+            'no_mesin' => 'unique:vehicles,no_mesin,' . $vehicle->id,
+            'stnk' => '',
+            'pajak' => '',
+            'kir' => '',
+            'j_asuransi' => '',
+            'p_asuransi' => '',
+            'no_asuransi' => '',
+            'jth_tempo' => '',
+            'kondisi' => '',
+            'keterangan' => '',
+            'kondisi' => 'required',
+            'foto' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048'
+        ]);
+        $vehicle::findOrFail($vehicle->id);
+        $vehicle->update([
+            'jenis_kendaraan' => $request->jenis_kendaraan,
+            'subsidiary_id' => $request->subsidiary_id,
+            'tgl_perolehan' => $request->tgl_perolehan,
+            'pengguna' => $request->pengguna,
+            'nama_warna' => $request->nama_warna,
+            'warna' => $request->warna,
+            'tahun' => $request->tahun,
+            'atas_nama' => $request->atas_nama,
+            'nopol' => $request->nopol,
+            'no_rangka' => $request->no_rangka,
+            'no_bpkb' => $request->no_bpkb,
+            'no_mesin' => $request->no_mesin,
+            'stnk' => $request->stnk,
+            'pajak' => $request->pajak,
+            'kir' => $request->kir,
+            'j_asuransi' => $request->j_asuransi,
+            'p_asuransi' => $request->p_asuransi,
+            'no_asuransi' => $request->no_asuransi,
+            'jth_tempo' => $request->jth_tempo,
+            'kondisi' => $request->kondisi,
+            'keterangan' => $request->keterangan,
+            'kondisi' => $request->kondisi,
+        ]);
+
+        if ($request->file('foto')) {
+            Storage::disk('local')->delete('public/vehicles/foto' . $vehicle->foto);
+            $foto = $this->fileUpload($request, 'public/vehicles/foto', 'foto');
+            $vehicle->update(['foto' => $foto->hashName()]);
+        }
+        if ($request->file('f_stnk')) {
+            Storage::disk('local')->delete('public/vehicles/stnk' . $vehicle->stnk);
+            $stnk = $this->fileUpload($request, 'public/vehicles/stnk', 'f_stnk');
+            $vehicle->update(['f_stnk' => $stnk->hashName()]);
+        }
+        if ($request->file('f_pajak')) {
+            Storage::disk('local')->delete('public/vehicles/pajak' . $vehicle->f_pajak);
+            $pajak = $this->fileUpload($request, 'public/vehicles/pajak/', 'f_pajak');
+            $vehicle->update(['f_pajak' => $pajak->hashName()]);
+        }
+
+        if ($request->file('f_kir')) {
+            Storage::disk('local')->delete('public/vehicles/kir/' . $vehicle->f_kir);
+            $kir = $this->fileUpload($request, 'public/vehicles/', 'f_kir');
+            $vehicle->update(['kir' => $kir->hashName()]);
+        }
+
+        if ($vehicle) {
+            return redirect()->route('vehicle.show', ['vehicle' => $vehicle->id])->with('alert', "update data berhasil");
+        } else {
+            return redirect()->route('vehicle.show', ['vehicle' => $vehicle->id])->with('alert', "update data  gagal");
+        }
     }
 
     /**
@@ -86,6 +170,44 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $this->authorize('delete', Vehicle::class);
+        \App\Helpers\LogActivity::addToLog();
+        $data = Storage::disk('local');
+        $data->delete('/public/vehicles/foto/' . $vehicle->foto);
+        $data->delete('/public/vehicles/stnk/' . $vehicle->stnk);
+        $data->delete('/public/vehicles/pajak/' . $vehicle->pajak);
+        $data->delete('/public/vehicles/kir/' . $vehicle->kir);
+
+        $vehicle->delete();
+
+        if ($vehicle) {
+            return redirect()->route('vehicle.index')->with('alert', "hapus data $vehicle->jenis_kendaraan berhasil");
+        } else {
+            return redirect()->route('vehicle.index')->with('alert', "hapus data $vehicle->jenis_kendaraan gagal");
+        }
+    }
+
+    public function foto($foto)
+    {
+        $this->authorize('view', Vehicle::class);
+        return Response::download('storage/vehicles/foto/' . $foto);
+    }
+
+    public function stnk($stnk)
+    {
+        $this->authorize('view', Vehicle::class);
+        return Response::download('storage/vehicles/stnk/' . $stnk);
+    }
+
+    public function pajak($pajak)
+    {
+        $this->authorize('view', Vehicle::class);
+        return Response::download('storage/vehicles/pajak/' . $pajak);
+    }
+
+    public function kir($kir)
+    {
+        $this->authorize('view', Vehicle::class);
+        return Response::download('storage/vehicles/kir/' . $kir);
     }
 }

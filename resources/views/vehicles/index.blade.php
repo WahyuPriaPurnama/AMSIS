@@ -32,20 +32,21 @@
                     </thead>
                     <tbody>
                         @forelse ($data as $item)
+                       
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{route('vehicle.show',['vehicle'=>$item->id])}}" class="text-decoration-none">
-                                {{ $item->jenis_kendaraan }}</a></td>
-                                <td>{{$item->subsidiary->name}}</td>
-                                <td>{{$item->nopol}}</td>
-                                <td>{{$item->stnk}}</td>
-                                <td>{{$item->pajak}}</td>
-                                <td>{{$item->kir}}</td>
-                                <td>{{$item->jth_tempo}}</td>
-                                <td>{{$item->kondisi}}</td>
-   
+                                <td><a href="{{ route('vehicle.show', $item->id) }}" class="text-decoration-none">
+                                        {{ $item->jenis_kendaraan }}</a></td>
+                                <td>{{ $item->subsidiary->name }}</td>
+                                <td>{{ $item->nopol }}</td>
+                                <td>{{ $item->stnk }}</td>
+                                <td>{{ $item->pajak }}</td>
+                                <td>{{ $item->kir }}</td>
+                                <td>{{ $item->jth_tempo }}</td>
+                                <td>{{ $item->kondisi }}</td>
+
                             </tr>
-                            @empty
+                        @empty
                             <td colspan="12" class="text-center">Tidak ada data...</td>
                         @endforelse
                     </tbody>

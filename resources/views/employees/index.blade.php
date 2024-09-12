@@ -67,9 +67,8 @@
                             @endif
                             <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
                             <td> {{ $employee->nip }}</td>
-                            <td><a href="{{ route('employees.show', ['employee' => $employee->id]) }}"
-                                    class="text-decoration-none" data-bs-toggle="tooltip"
-                                    data-bs-title="klik untuk lihat detail">
+                            <td><a href="{{ route('employees.show', $employee->id) }}" class="text-decoration-none"
+                                    data-bs-toggle="tooltip" data-bs-title="klik untuk lihat detail">
                                     {{ $employee->nama }}
                                 </a></td>
                             {{-- $employee->subsidiary->name --}}

@@ -64,14 +64,14 @@
                                         <div class="card-body text-center">
                                             <div class="mb-3">
                                                 <img class="img-thumbnail"
-                                                    @if ($vehicle->pp == null) src="
+                                                    @if ($vehicle->foto == null) src="
                                                 {{ Storage::url('public/vehicles/foto/default.png') }}"
                                                @else
                                               src="  {{ Storage::url('public/vehicles/foto/') . $vehicle->foto }}" @endif
                                                     alt="" srcset="">
                                             </div>
                                             <h5 class="mb-1">{{ $vehicle->jenis_kendaraan }}</h5>
-                                            </b>Usia: {{ Carbon\Carbon::parse($vehicle->tahun)->age }} Tahun
+                                            </b>Usia Kendaraan: {{ Carbon\Carbon::parse($vehicle->tahun)->age }} Tahun
                                             <p class="text-secondary">{{ $vehicle->nopol }}</p>
                                             <h4>Kondisi: {{ $vehicle->kondisi }}</h4>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -95,15 +95,14 @@
                                                 aria-controls="ringkasan-tab-pane" aria-selected="true">Ringkasan</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="detail-tab" data-bs-toggle="tab"
-                                                data-bs-target="#detail-tab-pane" type="button" role="tab"
-                                                aria-controls="detail-tab-pane" aria-selected="false">Detail</button>
+                                            <button class="nav-link" id="kelengkapan-tab" data-bs-toggle="tab"
+                                                data-bs-target="#kelengkapan-tab-pane" type="button" role="tab"
+                                                aria-controls="kelengkapan-tab-pane" aria-selected="false">Kelengkapan</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="emergency-tab" data-bs-toggle="tab"
-                                                data-bs-target="#emergency-tab-pane" type="button" role="tab"
-                                                aria-controls="emergency-tab-pane" aria-selected="false">Kontak
-                                                Darurat</button>
+                                            <button class="nav-link" id="jatuh-tempo-tab" data-bs-toggle="tab"
+                                                data-bs-target="#jatuh-tempo-tab-pane" type="button" role="tab"
+                                                aria-controls="jatuh-tempo-tab-pane" aria-selected="false">Jatuh Tempo</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="lampiran-tab" data-bs-toggle="tab"
@@ -198,8 +197,8 @@
                                         </div>
 
 
-                                        <div class="tab-pane fade show" id="detail-tab-pane" role="tabpanel"
-                                            aria-labelledby="detail-tab" tabindex="0">
+                                        <div class="tab-pane fade show" id="kelengkapan-tab-pane" role="tabpanel"
+                                            aria-labelledby="kelengkapan-tab" tabindex="0">
                                             <div class="row g-0">
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
                                                     <div class="p-2">No. Rangka</div>
@@ -226,103 +225,64 @@
                                                         {{ $vehicle->no_mesin }}</div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Alamat</div>
+                                                    <div class="p-2">Jenis Asuransi</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->alamat }}</div>
+                                                    <div class="p-2">
+                                                        {{ $vehicle->j_asuransi }}</div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">No. Telepon</div>
+                                                    <div class="p-2">Polis Asuransi</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->no_telp }}</div>
+                                                    <div class="p-2">
+                                                        {{ $vehicle->p_asuransi }}</div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Email</div>
+                                                    <div class="p-2">No. Asuransi</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->email }}</div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Pendidikan Terakhir</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->pend_trkhr }}</div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Jurusan</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->jurusan }}</div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Tahun Lulus</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->thn_lulus }}</div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Nama Ibu</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->nama_ibu }}</div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">NPWP</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->npwp }}</div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Status Pernikahan</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->status }}</div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Jumlah Anak</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->jml_ank }}</div>
+                                                    <div class="p-2">
+                                                        {{ $vehicle->no_asuransi }}</div>
                                                 </div>
                                             </div>
                                         </div>
 
-
-                                        <div class="tab-pane fade show" id="emergency-tab-pane" role="tabpanel"
-                                            aria-labelledby="emergency-tab" tabindex="0">
+                                        <div class="tab-pane fade show" id="jatuh-tempo-tab-pane" role="tabpanel"
+                                            aria-labelledby="jatuh-tempo-tab" tabindex="0">
 
                                             <div class="row g-0">
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Nama</div>
+                                                    <div class="p-2">Asuransi</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->nama_kd }}</div>
+                                                    <div class="p-2">{{ $vehicle->jth_tempo }}</div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">No. Telepon</div>
+                                                    <div class="p-2">STNK</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->no_kd }}</div>
+                                                    <div class="p-2">{{ $vehicle->stnk }}</div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Hubungan</div>
+                                                    <div class="p-2">Pajak</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">{{ $vehicle->hubungan }}</div>
+                                                    <div class="p-2">{{ $vehicle->pajak }}</div>
+                                                </div>
+                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                    <div class="p-2">KIR</div>
+                                                </div>
+                                                <div
+                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                    <div class="p-2">
+                                                        {{ $vehicle->kir }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -332,36 +292,15 @@
 
                                             <div class="row g-0">
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Foto Profil</div>
+                                                    <div class="p-2">Foto Kendaraan</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
                                                     <div class="p-2">
-                                                        @if ($vehicle->pp == null)
+                                                        @if ($vehicle->foto == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.pp', $vehicle->pp) }}" target="_blank"
-                                                                class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">KTP</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">
-                                                        @if ($vehicle->ktp == null)
-                                                            <p class="font-monospace">kosong</p>
-                                                        @else
-                                                            <a href="{{ route('vehicle.ktp', $vehicle->ktp) }}"
+                                                            <a href="{{ route('vehicle.foto', $vehicle->foto) }}"
                                                                 target="_blank" class="btn btn-primary"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
@@ -374,15 +313,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">NPWP</div>
+                                                    <div class="p-2">STNK</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
                                                     <div class="p-2">
-                                                        @if ($vehicle->npwp2 == null)
+                                                        @if ($vehicle->f_stnk == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.npwp', $vehicle->npwp2) }}"
+                                                            <a href="{{ route('vehicle.stnk', $vehicle->f_stnk) }}"
                                                                 target="_blank" class="btn btn-primary"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
@@ -395,36 +334,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Kartu Keluarga</div>
+                                                    <div class="p-2">PAJAK</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
                                                     <div class="p-2">
-                                                        @if ($vehicle->kk == null)
+                                                        @if ($vehicle->f_pajak == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.kk', $vehicle->kk) }}" target="_blank"
-                                                                class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">BPJS Ketenagakerjaan</div>
-                                                </div>
-                                                <div
-                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                                    <div class="p-2">
-                                                        @if ($vehicle->bpjs_ket == null)
-                                                            <p class="font-monospace">kosong</p>
-                                                        @else
-                                                            <a href="{{ route('vehicle.bpjs_ket', $vehicle->bpjs_ket) }}"
+                                                            <a href="{{ route('vehicle.pajak', $vehicle->f_pajak) }}"
                                                                 target="_blank" class="btn btn-primary"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
@@ -437,15 +355,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">BPJS Kesehatan</div>
+                                                    <div class="p-2">KIR</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
                                                     <div class="p-2">
-                                                        @if ($vehicle->bpjs_kes == null)
+                                                        @if ($vehicle->f_kir == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.bpjs_kes', $vehicle->bpjs_kes) }}"
+                                                            <a href="{{ route('vehicle.kir', $vehicle->f_kir) }}"
                                                                 target="_blank" class="btn btn-primary"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
