@@ -194,6 +194,9 @@
                         <label class="form-label" for="keterangan">Keterangan</label>
                         <input type="text" name="keterangan"
                             class="form-control @error('keterangan') is-invalid @enderror">
+                        @error('keterangan')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <h3>Lampiran</h3>
@@ -204,24 +207,45 @@
                         <input type="file" name="foto" id=""
                             class="form-control @error('foto') is-invalid @enderror"
                             accept="image/png, image/jpeg, image/jpg, application/pdf">
+                        @error('foto')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-3 col-3 mb-3">
-                        <label for="f_stnk" class="form-label">Foto STNK</label>
+                        <label for="f_stnk" class="form-label">STNK</label>
                         <input type="file" name="f_stnk" id=""
                             class="form-control @error('f_stnk') is-invalid @enderror"
                             accept="image/png, image/jpeg, image/jpg, application/pdf">
+                        @error('stnk')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-3 col-3 mb-3">
-                        <label for="f_pajak" class="form-label">Foto Pajak</label>
+                        <label for="f_pajak" class="form-label">Pajak</label>
                         <input type="file" name="f_pajak" id=""
                             class="form-control @error('f_pajak') is-invalid @enderror"
                             accept="image/png, image/jpeg, image/jpg, application/pdf">
+                        @error('f_pajak')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-3 col-3 mb-3">
-                        <label for="f_kir" class="form-label">Foto KIR</label>
+                        <label for="f_kir" class="form-label">KIR</label>
                         <input type="file" name="f_kir" id=""
                             class="form-control @error('f_kir') is-invalid @enderror"
                             accept="image/png, image/jpeg, image/jpg, application/pdf">
+                        @error('f_kir')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-3 col-3 mb-3">
+                        <label for="qr" class="form-label">QR Code</label>
+                        <input type="file" name="qr" id=""
+                            class="form-control @error('qr') is-invalid @enderror"
+                            accept="image/png, image/jpeg, image/jpg, application/pdf">
+                        @error('qr')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>

@@ -30,4 +30,11 @@ class SubsidiaryRequest extends FormRequest
             'address' => 'required'
         ];
     }
+    public function messages()
+    {
+        return [
+            '*.required' => 'wajib diisi',
+            '*.unique' => 'tidak boleh sama'
+        ];
+    }
 }

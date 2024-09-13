@@ -31,9 +31,9 @@ class VehicleRequest extends FormRequest
             'tahun' => 'required',
             'atas_nama' => 'required',
             'nopol' => 'required|unique:vehicles',
-            'no_rangka' => '',
-            'no_bpkb' => '',
-            'no_mesin' => '',
+            'no_rangka' => 'unique:vehicles',
+            'no_bpkb' => 'unique:vehicles',
+            'no_mesin' => 'unique:vehicles',
             'stnk' => '',
             'pajak' => '',
             'kir' => '',
@@ -47,7 +47,17 @@ class VehicleRequest extends FormRequest
             'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'kondisi' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            '*.required'=>'wajib diisi',
+            '*.unique'=>'tidak boleh sama',
+            '*.mimes'=>'format yang diijinkan png, jpg, jpeg dan pdf'
         ];
     }
 }

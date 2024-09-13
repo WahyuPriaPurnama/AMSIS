@@ -22,40 +22,48 @@ class EmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nip' => 'required|size:9|unique:employees',
-            'nama' => 'required|min:3|max:50',
-            'nik' => 'required|size:16|unique:employees',
+            'nip' => 'required|unique:employees',
+            'nama' => 'required',
+            'nik' => 'required|unique:employees',
             'subsidiary_id' => 'required',
-            'divisi' => 'required|max:20',
-            'departemen' => 'required|max:20',
-            'seksi' => 'required|max:20',
+            'divisi' => 'required',
+            'departemen' => 'required',
+            'seksi' => 'required',
             'posisi' => 'required',
             'status_peg' => 'required',
             'tgl_masuk' => 'required',
             'awal_kontrak' => '',
             'akhir_kontrak' => '',
-            'tmpt_lahir' => 'max:20',
+            'tmpt_lahir' => '',
             'tgl_lahir' => '',
             'jenis_kelamin' => 'in:L,P',
             'alamat' => '',
-            'no_telp' => 'max:15',
+            'no_telp' => '',
             'email' => '',
             'pend_trkhr' => '',
-            'jurusan' => 'max:25',
-            'thn_lulus' => 'max:4',
-            'nama_ibu' => 'max:25',
-            'npwp' => 'max:31',
+            'jurusan' => '',
+            'thn_lulus' => '',
+            'nama_ibu' => '',
+            'npwp' => '',
             'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'max:50',
-            'no_kd' => 'max:15',
-            'hubungan' => 'max:15',
+            'nama_kd' => '',
+            'no_kd' => '',
+            'hubungan' => '',
             'pp' => 'mimes:png,jpg,jpeg|max:2048',
             'ktp' => 'mimes:pdf|max:2048',
             'kk' => 'mimes:pdf|max:2048',
             'npwp2' => 'mimes:pdf|max:2048',
             'bpjs_kes' => 'mimes:pdf|max:2048',
             'bpjs_ket' => 'mimes:pdf|max:2048',
+        ];
+    }
+    
+    public function messages()
+    {
+        return [
+            '*.required' => 'wajib diisi',
+            '*.unique' => 'tidak boleh sama'
         ];
     }
 }

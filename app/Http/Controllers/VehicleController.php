@@ -80,6 +80,7 @@ class VehicleController extends Controller
      */
     public function update(Request $request, Vehicle $vehicle)
     {
+        // dd($vehicle);
         $this->authorize('update', Vehicle::class);
         \App\Helpers\LogActivity::addToLog();
         $request->validate([
@@ -92,9 +93,9 @@ class VehicleController extends Controller
             'tahun' => 'required',
             'atas_nama' => 'required',
             'nopol' => 'required|unique:vehicles,nopol,' . $vehicle->id,
-            'no_rangka' => 'unique:vehicles,no_rangka,' . $vehicle->id,
-            'no_bpkb' => 'unique:vehicles,no_bpkb,' . $vehicle->id,
-            'no_mesin' => 'unique:vehicles,no_mesin,' . $vehicle->id,
+            'no_rangka' => 'required|unique:vehicles,no_rangka,' . $vehicle->id,
+            'no_bpkb' => 'required|unique:vehicles,no_bpkb,' . $vehicle->id,
+            'no_mesin' => 'required|unique:vehicles,no_mesin,' . $vehicle->id,
             'stnk' => '',
             'pajak' => '',
             'kir' => '',
@@ -108,7 +109,8 @@ class VehicleController extends Controller
             'foto' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-            'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048'
+            'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
         ]);
         $vehicle::findOrFail($vehicle->id);
         $vehicle->update([
@@ -148,7 +150,7 @@ class VehicleController extends Controller
         }
         if ($request->file('f_pajak')) {
             Storage::disk('local')->delete('public/vehicles/pajak' . $vehicle->f_pajak);
-            $pajak = $this->fileUpload($request, 'public/vehicles/pajak/', 'f_pajak');
+            $pajak = $this->fileUpload($request, 'public/vehicles/pajak', 'f_pajak');
             $vehicle->update(['f_pajak' => $pajak->hashName()]);
         }
 
@@ -156,6 +158,12 @@ class VehicleController extends Controller
             Storage::disk('local')->delete('public/vehicles/kir/' . $vehicle->f_kir);
             $kir = $this->fileUpload($request, 'public/vehicles/kir', 'f_kir');
             $vehicle->update(['f_kir' => $kir->hashName()]);
+        }
+
+        if ($request->file('qr')) {
+            Storage::disk('local')->delete('public/vehicles/qr/' . $vehicle->qr);
+            $qr = $this->fileUpload($request, 'public/vehicles/qr', 'qr');
+            $vehicle->update(['qr' => $qr->hashName()]);
         }
 
         if ($vehicle) {
@@ -177,7 +185,7 @@ class VehicleController extends Controller
         $data->delete('/public/vehicles/stnk/' . $vehicle->stnk);
         $data->delete('/public/vehicles/pajak/' . $vehicle->pajak);
         $data->delete('/public/vehicles/kir/' . $vehicle->kir);
-
+        $data->delete('/public/vehicles/qr/' . $vehicle->qr);
         $vehicle->delete();
 
         if ($vehicle) {
@@ -209,5 +217,11 @@ class VehicleController extends Controller
     {
         $this->authorize('view', Vehicle::class);
         return Response::download('storage/vehicles/kir/' . $kir);
+    }
+
+    public function qr($qr)
+    {
+        $this->authorize('view', Vehicle::class);
+        return Response::download('storage/vehicles/qr/' . $qr);
     }
 }

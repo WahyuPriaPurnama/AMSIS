@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('f_stnk')->nullable();
             $table->string('f_pajak')->nullable();
             $table->string('f_kir')->nullable();
+            $table->string('qr')->nullable();
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@
     <div class="container mt-3">
         <h3>Edit Perusahaan</h3>
         <hr>
-        <form action="{{ route('subsidiaries.update', ['subsidiary' => $subsidiary->id]) }}" method="post">
+        <form action="{{ route('subsidiaries.update', $subsidiary->id) }}" method="post">
             @method('PUT')
             @csrf
             <div class="mb-3">

@@ -40,6 +40,7 @@ route::middleware('auth')->group(function () {
     route::get('vehicle/stnk/{stnk}',[VehicleController::class,'stnk'])->name('vehicle.stnk');
     route::get('vehicle/pajak/{pajak}',[VehicleController::class,'pajak'])->name('vehicle.pajak');
     route::get('vehicle/kir/{kir}',[VehicleController::class,'kir'])->name('vehicle.kir');
+    route::get('vehicle/qr/{qr}',[VehicleController::class,'qr'])->name('vehicle.qr');
 });
 
 Auth::routes([
