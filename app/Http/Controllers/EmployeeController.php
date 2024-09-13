@@ -82,7 +82,7 @@ class EmployeeController extends Controller
     {
         $this->authorize('create', Employee::class);
         \App\Helpers\LogActivity::addToLog();
-        $data = Employee::create($request->all());
+        $data = Employee::create($request->validated());
 
         if ($request->file('pp')) {
             $pp = $this->fileUpload($request, 'public/foto_profil', 'pp');
@@ -161,34 +161,34 @@ class EmployeeController extends Controller
         $this->authorize('update', Employee::class);
         \App\Helpers\LogActivity::addToLog();
         $request->validate([
-            'nip' => 'size:9|unique:employees,nip,' . $employee->id,
-            'nama' => 'min:3|max:50',
-            'nik' => 'size:16|unique:employees,nik,' . $employee->id,
+            'nip' => 'unique:employees,nip,' . $employee->id,
+            'nama' => 'max:50',
+            'nik' => 'unique:employees,nik,' . $employee->id,
             'subsidiary_id' => '',
-            'divisi' => 'max:20',
-            'departemen' => 'max:20',
-            'seksi' => 'max:20',
+            'divisi' => '',
+            'departemen' => '',
+            'seksi' => '',
             'posisi' => '',
             'status_peg' => '',
             'tgl_masuk' => '',
             'awal_kontrak' => '',
             'akhir_kontrak' => '',
-            'tmpt_lahir' => 'max:20',
+            'tmpt_lahir' => '',
             'tgl_lahir' => '',
             'jenis_kelamin' => 'in:L,P',
             'alamat' => '',
             'no_telp' => '',
             'email' => '',
             'pend_trkhr' => '',
-            'jurusan' => 'max:25',
-            'thn_lulus' => 'max:4',
-            'nama_ibu' => 'max:25',
-            'npwp' => 'max:31',
+            'jurusan' => '',
+            'thn_lulus' => '',
+            'nama_ibu' => '',
+            'npwp' => '',
             'status' => '',
             'jml_ank' => '',
-            'nama_kd' => 'max:50',
+            'nama_kd' => '',
             'no_kd' => '',
-            'hubungan' => 'max:15',
+            'hubungan' => '',
             'pp' => 'mimes:png,jpg,jpeg|max:2048',
             'ktp' => 'mimes:pdf|max:2048',
             'kk' => 'mimes:pdf|max:2048',
@@ -196,7 +196,13 @@ class EmployeeController extends Controller
             'bpjs_kes' => 'mimes:pdf|max:2048',
             'bpjs_ket' => 'mimes:pdf|max:2048',
         ]);
-
+        $messages = [
+            'required' => 'wajib diisi',
+            'unique' => 'tidak boleh sama',
+            'mimes' => 'format yang diijinkan png, jpg, jpeg dan pdf',
+            'foto.mimes' => 'format yang diijinkan png, jpg dan jpeg',
+            'max' => 'ukuran file maksimum 2 MB'
+        ];
         $employee::findOrFail($employee->id);
 
         $employee->update([

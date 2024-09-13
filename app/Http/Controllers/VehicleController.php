@@ -38,7 +38,7 @@ class VehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         \App\Helpers\LogActivity::addToLog();
-        $data = Vehicle::create($request->all());
+        $data = Vehicle::create($request->validated());
         if ($request->file('foto')) {
             $foto = $this->fileUpload($request, 'public/vehicles/foto', 'foto');
             $data->update(['foto' => $foto->hashName()]);
@@ -93,9 +93,9 @@ class VehicleController extends Controller
             'tahun' => 'required',
             'atas_nama' => 'required',
             'nopol' => 'required|unique:vehicles,nopol,' . $vehicle->id,
-            'no_rangka' => 'required|unique:vehicles,no_rangka,' . $vehicle->id,
-            'no_bpkb' => 'required|unique:vehicles,no_bpkb,' . $vehicle->id,
-            'no_mesin' => 'required|unique:vehicles,no_mesin,' . $vehicle->id,
+            'no_rangka' => 'unique:vehicles,no_rangka,' . $vehicle->id,
+            'no_bpkb' => 'unique:vehicles,no_bpkb,' . $vehicle->id,
+            'no_mesin' => 'unique:vehicles,no_mesin,' . $vehicle->id,
             'stnk' => '',
             'pajak' => '',
             'kir' => '',
@@ -106,12 +106,19 @@ class VehicleController extends Controller
             'kondisi' => '',
             'keterangan' => '',
             'kondisi' => 'required',
-            'foto' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'foto' => 'mimes:png,jpg,jpeg|max:2048',
             'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
         ]);
+        $messages = [
+            'required' => 'wajib diisi',
+            'unique' => 'tidak boleh sama',
+            'mimes' => 'format yang diijinkan png, jpg, jpeg dan pdf',
+            'foto.mimes' => 'format yang diijinkan png, jpg dan jpeg',
+            'max' => 'ukuran file maksimum 2 MB'
+        ];
         $vehicle::findOrFail($vehicle->id);
         $vehicle->update([
             'jenis_kendaraan' => $request->jenis_kendaraan,

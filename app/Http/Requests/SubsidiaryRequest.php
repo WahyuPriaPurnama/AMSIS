@@ -33,8 +33,10 @@ class SubsidiaryRequest extends FormRequest
     public function messages()
     {
         return [
-            '*.required' => 'wajib diisi',
-            '*.unique' => 'tidak boleh sama'
+            'required' => 'wajib diisi',
+            'unique' => 'tidak boleh sama',
+            'min' => 'minimal 3 karakter',
+            'max' => 'maksimal 50 karakter',
         ];
     }
 }

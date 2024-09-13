@@ -206,7 +206,7 @@
                         <label for="foto" class="form-label">Foto Kendaraan</label>
                         <input type="file" name="foto" id=""
                             class="form-control @error('foto') is-invalid @enderror"
-                            accept="image/png, image/jpeg, image/jpg, application/pdf">
+                            accept="image/png, image/jpeg, image/jpg">
                         @error('foto')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

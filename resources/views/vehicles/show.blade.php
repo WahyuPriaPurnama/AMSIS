@@ -152,7 +152,7 @@
                                                     <div class="p-2">{{ $vehicle->nama_warna }}</div>
                                                 </div>
                                                 <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                                    <div class="p-2">Visual Warna</div>
+                                                    <div class="p-2">Visual dan Kode Warna</div>
                                                 </div>
                                                 <div
                                                     class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
@@ -384,8 +384,8 @@
                                                         @if ($vehicle->qr == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.qr', $vehicle->qr) }}"
-                                                                target="_blank" class="btn btn-primary"><svg
+                                                            <a href="{{ route('vehicle.qr', $vehicle->qr) }}" target="_blank"
+                                                                class="btn btn-primary"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
                                                                     class="bi bi-file-earmark-arrow-down-fill"

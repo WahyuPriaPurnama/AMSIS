@@ -51,19 +51,22 @@ class EmployeeRequest extends FormRequest
             'no_kd' => '',
             'hubungan' => '',
             'pp' => 'mimes:png,jpg,jpeg|max:2048',
-            'ktp' => 'mimes:pdf|max:2048',
-            'kk' => 'mimes:pdf|max:2048',
-            'npwp2' => 'mimes:pdf|max:2048',
-            'bpjs_kes' => 'mimes:pdf|max:2048',
-            'bpjs_ket' => 'mimes:pdf|max:2048',
+            'ktp' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'kk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'npwp2' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'bpjs_kes' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'bpjs_ket' => 'mimes:png,jpg,jpeg,pdf|max:2048',
         ];
     }
-    
+
     public function messages()
     {
         return [
-            '*.required' => 'wajib diisi',
-            '*.unique' => 'tidak boleh sama'
+            'required' => 'wajib diisi',
+            'unique' => 'tidak boleh sama',
+            'pp.mimes' => 'format yang diizinkan png, jpg dan jpeg',
+            'mimes' => 'format yang diizinkan png, jpg, jpeg dan pdf',
+            'max' => 'ukuran file maksimum 2 MB'
         ];
     }
 }

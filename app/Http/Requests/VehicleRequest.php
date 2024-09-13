@@ -43,7 +43,7 @@ class VehicleRequest extends FormRequest
             'jth_tempo' => '',
             'kondisi' => '',
             'keterangan' => '',
-            'foto' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'foto' => 'mimes:png,jpg,jpeg|max:2048',
             'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
@@ -54,10 +54,12 @@ class VehicleRequest extends FormRequest
 
     public function messages()
     {
-        return[
-            '*.required'=>'wajib diisi',
-            '*.unique'=>'tidak boleh sama',
-            '*.mimes'=>'format yang diijinkan png, jpg, jpeg dan pdf'
+        return [
+            'required' => 'wajib diisi',
+            'unique' => 'tidak boleh sama',
+            'mimes' => 'format yang diijinkan png, jpg, jpeg dan pdf',
+            'foto.mimes' => 'format yang diijinkan png, jpg dan jpeg',
+            'max' => 'ukuran file maksimum 2 MB'
         ];
     }
 }

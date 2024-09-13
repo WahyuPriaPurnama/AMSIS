@@ -36,11 +36,11 @@ route::middleware('auth')->group(function () {
     route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('/home', [HomeController::class, 'index']);
     route::resource('vehicle', VehicleController::class);
-    route::get('vehicle/foto/{foto}',[VehicleController::class,'foto'])->name('vehicle.foto');
-    route::get('vehicle/stnk/{stnk}',[VehicleController::class,'stnk'])->name('vehicle.stnk');
-    route::get('vehicle/pajak/{pajak}',[VehicleController::class,'pajak'])->name('vehicle.pajak');
-    route::get('vehicle/kir/{kir}',[VehicleController::class,'kir'])->name('vehicle.kir');
-    route::get('vehicle/qr/{qr}',[VehicleController::class,'qr'])->name('vehicle.qr');
+    route::get('vehicle/foto/{foto}', [VehicleController::class, 'foto'])->name('vehicle.foto');
+    route::get('vehicle/stnk/{stnk}', [VehicleController::class, 'stnk'])->name('vehicle.stnk');
+    route::get('vehicle/pajak/{pajak}', [VehicleController::class, 'pajak'])->name('vehicle.pajak');
+    route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
+    route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
 });
 
 Auth::routes([

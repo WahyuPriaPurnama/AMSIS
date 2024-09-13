@@ -34,7 +34,7 @@ class SubsidiaryController extends Controller
     {
         $this->authorize('create', Subsidiary::class);
         \App\Helpers\LogActivity::addToLog();
-        Subsidiary::create($request->all());
+        Subsidiary::create($request->validated());
         return redirect()->route('subsidiaries.index')->with('alert', "Input data {$request['name']} berhasil");
     }
 
@@ -70,6 +70,13 @@ class SubsidiaryController extends Controller
             'phone' => 'required',
             'address' => 'required'
         ]);
+
+        $message = [
+            'required' => 'wajib diisi',
+            'unique' => 'tidak boleh sama',
+            'min' => 'minimal 3 karakter',
+            'max' => 'maksimal 50 karakter',
+        ];
         Subsidiary::where('id', $subsidiary->id)->update($validated);
         return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data {$validated['name']} berhasil");
     }
