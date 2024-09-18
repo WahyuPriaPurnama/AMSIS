@@ -121,7 +121,7 @@ class VehicleController extends Controller
         ];
         $vehicle::findOrFail($vehicle->id);
         $vehicle->update([
-            'jenis_kendaraan' => $request->jenis_kendaraan,
+            'jenis_kendaraan' => ucwords(strtolower($request->jenis_kendaraan)),
             'subsidiary_id' => $request->subsidiary_id,
             'tgl_perolehan' => $request->tgl_perolehan,
             'pengguna' => $request->pengguna,

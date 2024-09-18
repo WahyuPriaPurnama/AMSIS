@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-6 col-12 mb-3">
                         <label class="form-label" for="jenis_kendaraan">Jenis Kendaraan</label>
-                        <input type="text" id="jenis_kendaraan" placeholder="Toyota Starlet" name="jenis_kendaraan"
+                        <input type="text" id="jenis_kendaraan" placeholder="Contoh: Toyota Starlet" name="jenis_kendaraan"
                             value="{{ $vehicle->jenis_kendaraan }}"
                             class="form-control @error('jenis_kendaraan') is-invalid @enderror">
                         @error('jenis_kendaraan')
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-2 col-3 mb-3">
                         <label class="form-label" for="nopol">Nopol</label>
-                        <input type="text" class="form-control @error('nopol') is-invalid @enderror" placeholder="X 1111 XX"
+                        <input type="text" class="form-control @error('nopol') is-invalid @enderror" placeholder="Contoh X 1234 XX"
                             name="nopol" value="{{ $vehicle->nopol }}" id="">
                         @error('nopol')
                             <div class="text-danger">{{ $message }}</div>

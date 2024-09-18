@@ -58,27 +58,13 @@ class SubsidiaryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subsidiary $subsidiary)
+    public function update(SubsidiaryRequest $request, Subsidiary $subsidiary)
     {
         $this->authorize('update', Subsidiary::class);
         \App\Helpers\LogActivity::addToLog();
-        $validated = $request->validate([
-            'name' => 'required|min:3|max:50',
-            'tagline' => 'required',
-            'npwp' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'address' => 'required'
-        ]);
-
-        $message = [
-            'required' => 'wajib diisi',
-            'unique' => 'tidak boleh sama',
-            'min' => 'minimal 3 karakter',
-            'max' => 'maksimal 50 karakter',
-        ];
-        Subsidiary::where('id', $subsidiary->id)->update($validated);
-        return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data {$validated['name']} berhasil");
+     
+        Subsidiary::where('id', $subsidiary->id)->update($request->validated());
+        return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data berhasil");
     }
 
     /**

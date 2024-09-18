@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
+
 return [
 
     /*
@@ -212,7 +213,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
-        'LogActivity'=>App\Helpers\LogActivity::class,
+        'LogActivity' => App\Helpers\LogActivity::class,
+        'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
 
     ])->toArray(),
 

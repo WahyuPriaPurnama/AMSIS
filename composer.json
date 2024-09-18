@@ -8,6 +8,7 @@
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
+        "irazasyed/telegram-bot-sdk": "^3.14",
         "kyslik/column-sortable": "^6.6",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",

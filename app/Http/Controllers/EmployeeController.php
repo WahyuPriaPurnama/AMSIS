@@ -207,7 +207,7 @@ class EmployeeController extends Controller
 
         $employee->update([
             'nip' => $request->nip,
-            'nama' => $request->nama,
+            'nama' => ucwords(strtolower($request->nama)),
             'nik' => $request->nik,
             'subsidiary_id' => $request->subsidiary_id,
             'divisi' => $request->divisi,
@@ -341,15 +341,15 @@ class EmployeeController extends Controller
         return view('employees.index', ['employees' => $employees]);
     }
 
-    public function mail()
+    public static function mail($title,$body)
     {
+    
         $mailData = [
-            'title' => 'Mail dari AMSIS',
-            'body' => 'tes email SMTP'
+            'title' => 'Reminder Sisa Kontrak ' . $title,
+            'body' => "Dengan Email ini kami mau menginformasikan bahwa karyawan dengan nama " . $title . " memiliki sisa masa kontrak " . $body . " hari lagi."
         ];
 
         Mail::to('wahyupriapurnama@gmail.com')->send(new MyTestMail($mailData));
-        dd('email sukses terkirim!');
     }
 
     public function pp($pp)

@@ -2,16 +2,16 @@
 <html>
 
 <head>
-    <title>ItsolutionStuff.com</title>
+    <title>AMSIS</title>
 </head>
 
 <body>
-    <h1>{{ $mailData['title'] }}</h1>
-    <p>{{ $mailData['body'] }}</p>
+    <b>{{ $mailData['title'] }}</b>
+    <p>Halo, Selamat Pagi <br><br>{{ $mailData['body'] }}</p>
 
-    <p>ini adalah email percobaan boskuhhhhh</p>
+    <p>harap untuk tidak membalas email ini</p>
 
-    <p>Thank you</p>
+    <p>Terima kasih, Mator Sekelangkong</p>
 </body>
 
 </html>

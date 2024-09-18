@@ -62,28 +62,34 @@
                         @forelse ($employees as $employee)
                             @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45 and $employee->status_peg == 'PKWT')
                                 <tr class="table-danger">
-                                @else
+                                    @if ((Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) == 30)
+                                        {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) }}
+                                    @elseif((Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) == 15)
+                                        {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) }}
+                                    @elseif((Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) == 7)
+                                        {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) }}
                                 <tr>
                             @endif
-                            <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
-                            <td> {{ $employee->nip }}</td>
-                            <td><a href="{{ route('employees.show', $employee->id) }}" class="text-decoration-none"
-                                    data-bs-toggle="tooltip" data-bs-title="klik untuk lihat detail">
-                                    {{ $employee->nama }}
-                                </a></td>
-                            {{-- $employee->subsidiary->name --}}
-                            <td>{{ $employee->posisi }}</td>
-                            <td>{{ $employee->seksi }}</td>
-                            <td>{{ $employee->departemen }}</td>
-                            <td>{{ $employee->status_peg }}</td>
-                            @if ($employee->status_peg == 'PKWT')
-                                <td>{{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) }} hari</td>
-                            @else
-                                <td> - </td>
-                            @endif
-                            </tr>
-                        @empty
-                            <td colspan="9" class="text-center">Tidak ada data...</td>
+                        @endif
+                        <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
+                        <td> {{ $employee->nip }}</td>
+                        <td><a href="{{ route('employees.show', $employee->id) }}" class="text-decoration-none"
+                                data-bs-toggle="tooltip" data-bs-title="klik untuk lihat detail">
+                                {{ $employee->nama }}
+                            </a></td>
+                        {{-- $employee->subsidiary->name --}}
+                        <td>{{ $employee->posisi }}</td>
+                        <td>{{ $employee->seksi }}</td>
+                        <td>{{ $employee->departemen }}</td>
+                        <td>{{ $employee->status_peg }}</td>
+                        @if ($employee->status_peg == 'PKWT')
+                            <td>{{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) }} hari</td>
+                        @else
+                            <td> - </td>
+                        @endif
+                        </tr>
+                    @empty
+                        <td colspan="9" class="text-center">Tidak ada data...</td>
                         @endforelse
                     </tbody>
                 </table>

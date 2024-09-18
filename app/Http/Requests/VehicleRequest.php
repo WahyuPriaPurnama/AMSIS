@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Stringable;
 
 class VehicleRequest extends FormRequest
 {
