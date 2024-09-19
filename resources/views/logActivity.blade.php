@@ -2,12 +2,12 @@
 @section('title', 'Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <b>LOG ACTIVITY</b>
-            </div>
-            <div class="card-body">
+    <div class="container mt-3">
+        @component('components.card')
+        @slot('header')
+                LOG ACTIVITY
+            @endslot
+            
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -34,7 +34,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            @endcomponent
         </div>
     </div>
 
