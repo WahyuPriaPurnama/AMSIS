@@ -397,7 +397,7 @@ class EmployeeController extends Controller
     {
         $this->authorize('view', Employee::class);
         $result = Employee::find($employee);
-        $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $result])->setPaper('letter', 'landscape');
+        $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.PDF.show', ['employee' => $result])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
 }
