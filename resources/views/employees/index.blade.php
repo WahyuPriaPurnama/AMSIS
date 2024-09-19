@@ -14,7 +14,6 @@
             @endslot
             <div class="row">
                 <div class="col">
-
                     <form action="{{ route('employee.search') }}" method="get">
                         <div class="input-group mb-3">
                             <input type="text" name="search" class="form-control"
@@ -22,7 +21,7 @@
             @else
             placeholder="Cari Nama atau NIP" @endif
                                 value="{{ old('search') }}">
-                            <button type="submit" class="btn btn-success">Search</button>
+                            <button type="submit" class="btn btn-success">Cari</button>
                         </div>
                     </form>
                 </div>
@@ -62,11 +61,11 @@
                         @forelse ($employees as $employee)
                             @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45 and $employee->status_peg == 'PKWT')
                                 <tr class="table-danger">
-                                    @if ((Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) == 30)
+                                    @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) == 30)
                                         {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) }}
-                                    @elseif((Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) == 15)
+                                    @elseif(Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) == 15)
                                         {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) }}
-                                    @elseif((Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) == 7)
+                                    @elseif(Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) == 7)
                                         {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak)) }}
                                 <tr>
                             @endif

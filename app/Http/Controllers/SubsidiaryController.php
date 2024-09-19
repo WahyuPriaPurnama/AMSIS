@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubsidiaryRequest;
 use App\Models\Subsidiary;
+use App\Traits\FileUpload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SubsidiaryController extends Controller
 {
+    use FileUpload;
     /**
      * Display a listing of the resource.
      */
@@ -34,8 +37,12 @@ class SubsidiaryController extends Controller
     {
         $this->authorize('create', Subsidiary::class);
         \App\Helpers\LogActivity::addToLog();
-        Subsidiary::create($request->validated());
-        return redirect()->route('subsidiaries.index')->with('alert', "Input data {$request['name']} berhasil");
+        $data = Subsidiary::create($request->validated());
+        if ($request->file('logo')) {
+            $logo = $this->fileUpload($request, 'public/subsidiary/logo', 'logo');
+            $data->update(['logo' => $logo->hashName()]);
+        }
+        return redirect()->route('subsidiaries.index')->with('alert', "Input data berhasil");
     }
 
     /**
@@ -62,8 +69,12 @@ class SubsidiaryController extends Controller
     {
         $this->authorize('update', Subsidiary::class);
         \App\Helpers\LogActivity::addToLog();
-     
-        Subsidiary::where('id', $subsidiary->id)->update($request->validated());
+        $subsidiary::where('id', $subsidiary->id)->update($request->validated());
+        if ($request->file('logo')) {
+            Storage::disk('local')->delete('public/subsidiary/logo/' . $subsidiary->logo);
+            $logo = $this->fileUpload($request, 'public/subsidiary/logo/', 'logo');
+            $subsidiary->update(['logo' => $logo->hashName()]);
+        }
         return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data berhasil");
     }
 
@@ -74,6 +85,7 @@ class SubsidiaryController extends Controller
     {
         $this->authorize('delete', Subsidiary::class);
         \App\Helpers\LogActivity::addToLog();
+        Storage::disk('local')->delete('public/subsidiary/logo/' . $subsidiary->logo);
         $subsidiary->delete();
         return redirect()->route('subsidiaries.index')->with('alert', "hapus data $subsidiary->name berhasil");
     }

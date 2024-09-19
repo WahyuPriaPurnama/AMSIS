@@ -1,4 +1,4 @@
-<form action="{{ route('subsidiaries.store') }}" method="post">
+<form action="{{ route('subsidiaries.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row mb-3">
         <div class="col">
@@ -44,11 +44,16 @@
             @enderror
         </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label" for="address">Address</label>
-        <textarea class="form-control w-50" id="address" rows="3" name="address">{{ old('address') }}</textarea>
+    <div class="row mb-3">
+        <div class="col-8">
+            <label class="form-label" for="address">Address</label>
+            <textarea class="form-control" id="address" name="address">{{ old('address') }}</textarea>
+        </div>
+        <div class="col-4">
+            <label for="logo" class="form-label">Logo</label>
+            <input type="file" name="logo" id="" class="form-control" accept="image/png, image/jpeg, image/jpg">
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary mb-2">Daftar</button>
 </form>
-

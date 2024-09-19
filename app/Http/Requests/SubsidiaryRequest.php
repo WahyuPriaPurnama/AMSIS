@@ -27,7 +27,8 @@ class SubsidiaryRequest extends FormRequest
             'npwp' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'logo' => 'mimes:png,jpeg,jpg | max:2048'
         ];
     }
     public function messages()
@@ -35,8 +36,10 @@ class SubsidiaryRequest extends FormRequest
         return [
             'required' => 'wajib diisi',
             'unique' => 'tidak boleh sama',
-            'min' => 'minimal 3 karakter',
-            'max' => 'maksimal 50 karakter',
+            'name.max' => 'nama maksimal 50 karakter',
+            'name.min' => 'nama minimal 3 karakter',
+            'logo.mimes' => 'format yang diizinkan png, jpeg atau jpg',
+            'logo.max' => 'maksimal ukuran foto 2 MB'
         ];
     }
 }
