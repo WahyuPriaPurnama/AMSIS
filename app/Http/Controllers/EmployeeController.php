@@ -341,15 +341,14 @@ class EmployeeController extends Controller
         return view('employees.index', ['employees' => $employees]);
     }
 
-    public static function mail($title,$body)
+    public static function mail($title, $body)
     {
-    
         $mailData = [
             'title' => 'Reminder Sisa Kontrak ' . $title,
-            'body' => "Dengan Email ini kami mau menginformasikan bahwa karyawan dengan nama " . $title . " memiliki sisa masa kontrak " . $body . " hari lagi."
+            'body' => "Dengan Email ini kami menginformasikan bahwa karyawan dengan nama " . $title . " memiliki sisa masa kontrak " . $body . " hari lagi."
         ];
 
-        Mail::to('wahyupriapurnama@gmail.com')->send(new MyTestMail($mailData));
+        Mail::to(['wahyupriapurnama@gmail.com', 'hrd@amsgroup.co.id', 'hrdmgr@amsgroup.co.id'])->send(new MyTestMail($mailData));
     }
 
     public function pp($pp)
