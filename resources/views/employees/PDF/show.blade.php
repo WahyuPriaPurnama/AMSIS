@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td>
-                    NIP:{{ $employee->nip }}<br>
+                {{ $employee->nip }}<br>
                 {{ $employee->nama }}<br>
                 {{ $employee->nik }}<br>
                 {{ $employee->divisi }}<br>
