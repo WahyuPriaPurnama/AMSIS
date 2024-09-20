@@ -2,7 +2,7 @@
 @section('title', 'Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         @if (session()->has('alert'))
             <div class="alert alert-success my-3">
                 {{ session()->get('alert') }}
@@ -43,9 +43,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>PERUSAHAAN</th>
                             <th>NIP</th>
                             <th>NAMA</th>
-                            {{-- PERUSAHAAN --}}
                             <th>JABATAN</th>
                             <th>SEKSI</th>
                             <th>DEPARTEMEN</th>
@@ -71,12 +71,12 @@
                             @endif
                         @endif
                         <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
+                        <td>{{ $employee->subsidiary->name }}</td>
                         <td> {{ $employee->nip }}</td>
                         <td><a href="{{ route('employees.show', $employee->id) }}" class="text-decoration-none"
                                 data-bs-toggle="tooltip" data-bs-title="klik untuk lihat detail">
                                 {{ $employee->nama }}
                             </a></td>
-                        {{-- $employee->subsidiary->name --}}
                         <td>{{ $employee->posisi }}</td>
                         <td>{{ $employee->seksi }}</td>
                         <td>{{ $employee->departemen }}</td>
