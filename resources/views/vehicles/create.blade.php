@@ -239,7 +239,7 @@
                         @enderror
                     </div>
                     <div class="col-md-3 col-3 mb-3">
-                        <label for="qr" class="form-label">QR Code</label>
+                        <label for="qr" class="form-label">QR Code BBM Subsidi</label>
                         <input type="file" name="qr" id=""
                             class="form-control @error('qr') is-invalid @enderror"
                             accept="image/png, image/jpeg, image/jpg, application/pdf">
