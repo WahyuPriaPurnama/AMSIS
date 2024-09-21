@@ -5,7 +5,7 @@
         @component('components.card')
             @slot('header')
                 <div class="d-flex justify-content-between">
-                    GRAFIK JUMLAH KARYAWAN PER PLANT
+                    JUMLAH KARYAWAN
                     @if ($jam = Carbon\Carbon::now()->format('H:m'))
                         @if ($jam <= '11:00')
                             <div>Selamat Pagi</div>
