@@ -4,7 +4,20 @@
     <div class="container">
         @component('components.card')
             @slot('header')
-                GRAFIK JUMLAH KARYAWAN PER PLANT
+                <div class="d-flex justify-content-between">
+                    GRAFIK JUMLAH KARYAWAN PER PLANT
+                    @if ($jam = Carbon\Carbon::now()->format('H:m'))
+                        @if ($jam <= '11:00')
+                            <div>Selamat Pagi</div>
+                        @elseif($jam <= '15:00')
+                            <div>Selamat Siang</div>
+                        @elseif($jam <= '18:00')
+                            <div>Selamat Sore</div>
+                        @elseif($jam <= '23:59')
+                            <div>Selamat Malam</div>
+                        @endif
+                    @endif
+                </div>
             @endslot
 
             <div>
@@ -40,5 +53,5 @@
             });
         </script>
 
-        </div>
-    @endsection
+    </div>
+@endsection

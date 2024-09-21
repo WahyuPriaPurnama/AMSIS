@@ -1,5 +1,5 @@
 <div class="card shadow">
-    <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-header">
        <b> {{$header}} </b>
     </div>
     <div class="card-body">
