@@ -25,8 +25,8 @@
                     <button type="submit" form="hapus" class="btn btn-danger">Hapus</button>
                 @endcan
             </div>
-            <div class="row m-5">
-                <div class="col-md-3">
+            <div class="row mt-5 align-items-center text-center">
+                <div class="col-md-3 mx-auto">
                     <img class="img-thumbnail"
                         @if ($subsidiary->logo == null) src="
                 {{ Storage::url('public/subsidiary/logo/default.png') }}"
@@ -34,18 +34,24 @@
               src="  {{ Storage::url('public/subsidiary/logo/') . $subsidiary->logo }}" @endif
                         alt="" srcset="">
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 mt-3 mx-auto">
                     <h3>{{ $subsidiary->name }}</h3>
-                    <hr>
-                    <ul>
-                        <li>{{ $subsidiary->tagline }}</li>
-                        <li>{{ $subsidiary->npwp }}</li>
-                        <li>{{ $subsidiary->email }}</li>
-                        <li>{{ $subsidiary->phone }}</li>
-                        <li>{{ $subsidiary->address }}</li>
-                    </ul>
+                    <div>
+                        {{ $subsidiary->tagline }}
+                    </div>
+                    <div>
+                        {{ $subsidiary->npwp }}
+                    |
+                        {{ $subsidiary->email }}
+                    |
+                        {{ $subsidiary->phone }}
+                    </div>
+                    <div>
+                        {{ $subsidiary->address }}
+                    </div>
                 </div>
             </div>
+            <hr>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
