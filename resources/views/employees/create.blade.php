@@ -14,7 +14,7 @@
                     <hr>
                     <div class="col-sm-6 col-md-2">
                         <label class="form-label" for="nip">NIP</label>
-                        <input type="text" id="nip" placeholder="111222333" name="nip" value="{{ old('nip') }}"
+                        <input type="text" id="nip" placeholder="masukkan NIP 9 digit" name="nip" value="{{ old('nip') }}"
                             class="form-control @error('nip') is-invalid @enderror">
                         @error('nip')
                             <div class="text-danger">{{ $message }}</div>
