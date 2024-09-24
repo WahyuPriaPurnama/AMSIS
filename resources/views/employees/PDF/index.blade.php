@@ -1,5 +1,5 @@
 <head>
-    <title>Data Karyawan AMS Holding</title>
+    <title>Data Karyawan</title>
     <style>
         table,
         th,
