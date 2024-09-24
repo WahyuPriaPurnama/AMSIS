@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Esp32Controller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductAddMoreController;
 use App\Http\Controllers\SubsidiaryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
@@ -51,3 +52,9 @@ route::get('/kirim-email', [EmployeeController::class, 'mail']);
 
 route::get('/suhu', [Esp32Controller::class, 'index'])->name('suhu.index');
 route::get('/data/{suhu}', [Esp32Controller::class, 'store']);
+
+route::get('addmore', [HomeController::class, 'addMore']);
+route::post('addmore', [HomeController::class, 'addMorePost']);
+
+route::get('addmore2', [ProductAddMoreController::class, 'addMore']);
+route::post('addmore2', [ProductAddMoreController::class, 'addMorePost'])->name('addMorePost');

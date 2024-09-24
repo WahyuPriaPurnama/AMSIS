@@ -11,8 +11,8 @@ class Employee extends Model
 {
     use HasFactory, Sortable, HasUuids;
     protected $guarded = [];
-    public $sortable = ['nip', 'nama', 'akhir_kontrak'];
-  
+    public $sortable = ['subsidiary_id', 'nip', 'nama', 'jabatan', 'seksi', 'departemen', 'status_peg','posisi'];
+
 
     public function subsidiary()
     {
@@ -23,5 +23,4 @@ class Employee extends Model
     {
         return $query->with('subsidiary');
     }
-
 }
