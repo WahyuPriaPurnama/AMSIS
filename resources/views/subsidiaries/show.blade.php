@@ -27,7 +27,7 @@
             </div>
             <div class="row mt-5 align-items-center text-center">
                 <div class="col-md-3 mx-auto">
-                    <img class="img-thumbnail"
+                    <img class="img-thumbnail" oncontextmenu="return false"
                         @if ($subsidiary->logo == null) src="
                 {{ Storage::url('public/subsidiary/logo/default.png') }}"
                @else

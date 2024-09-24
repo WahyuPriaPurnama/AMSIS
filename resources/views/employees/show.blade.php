@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="card-body text-center">
                                             <div class="mb-3">
-                                                <img class="img-thumbnail"
+                                                <img class="img-thumbnail" oncontextmenu="return false"
                                                     @if ($employee->pp == null) src="
                                                 {{ Storage::url('public/foto_profil/default.png') }}"
                                                @else
