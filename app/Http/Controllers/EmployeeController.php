@@ -26,27 +26,27 @@ class EmployeeController extends Controller
         $this->authorize('view', Employee::class);
         $user = Auth::user()->role;
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
-            $employees = Employee::Index()->sortable()->latest()->paginate(100);
+            $employees = Employee::Index()->sortable()->latest()->paginate(500);
         } elseif ($user == 'eln-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '2');
-            })->sortable()->latest()->paginate(100);
+            })->sortable()->latest()->paginate(250);
         } elseif ($user == 'eln2-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '3');
-            })->sortable()->latest()->paginate(100);
+            })->sortable()->latest()->paginate(250);
         } elseif ($user == 'bofi-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '4');
-            })->sortable()->latest()->paginate(100);
+            })->sortable()->latest()->paginate(250);
         } elseif ($user == 'rmm-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '6');
-            })->sortable()->latest()->paginate(100);
+            })->sortable()->latest()->paginate(250);
         } else {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '5');
-            })->sortable()->latest()->paginate(100);
+            })->sortable()->latest()->paginate(250);
         }
 
         return view('employees.index', compact('employees'));
