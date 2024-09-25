@@ -63,4 +63,13 @@ class VehicleRequest extends FormRequest
             'max' => 'ukuran file maksimum 2 MB'
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'jenis_kendaraan' => ucwords(strtolower($this->jenis_kendaraan)),
+            'pengguna' => ucwords(strtolower($this->pengguna)),
+            'nama_warna' => ucwords(strtolower($this->nama_warna))
+        ]);
+    }
 }

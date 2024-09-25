@@ -69,4 +69,13 @@ class EmployeeRequest extends FormRequest
             'max' => 'ukuran file maksimum 2 MB'
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'nama' => ucwords(strtolower($this->nama)),
+            'nama_ibu' => ucwords(strtolower($this->nama_ibu)),
+            'kd' => ucwords(strtolower($this->nama_kd))
+        ]);
+    }
 }

@@ -228,11 +228,11 @@ class EmployeeController extends Controller
             'pend_trkhr' => $request->pend_trkhr,
             'jurusan' => $request->jurusan,
             'thn_lulus' => $request->thn_lulus,
-            'nama_ibu' => $request->nama_ibu,
+            'nama_ibu' => ucwords(strtolower($request->nama_ibu)),
             'npwp' => $request->npwp,
             'status' => $request->status,
             'jml_ank' => $request->jml_ank,
-            'nama_kd' => $request->nama_kd,
+            'nama_kd' => ucwords(strtolower($request->nama_kd)),
             'no_kd' => $request->no_kd,
             'hubungan' => $request->hubungan,
         ]);

@@ -124,11 +124,11 @@ class VehicleController extends Controller
             'jenis_kendaraan' => ucwords(strtolower($request->jenis_kendaraan)),
             'subsidiary_id' => $request->subsidiary_id,
             'tgl_perolehan' => $request->tgl_perolehan,
-            'pengguna' => $request->pengguna,
-            'nama_warna' => $request->nama_warna,
+            'pengguna' => ucwords(strtolower($request->pengguna)),
+            'nama_warna' =>ucwords(strtolower($request->nama_warna)),
             'warna' => $request->warna,
             'tahun' => $request->tahun,
-            'atas_nama' => $request->atas_nama,
+            'atas_nama' =>ucwords(strtolower($request->atas_nama)),
             'nopol' => $request->nopol,
             'no_rangka' => $request->no_rangka,
             'no_bpkb' => $request->no_bpkb,
@@ -142,7 +142,6 @@ class VehicleController extends Controller
             'jth_tempo' => $request->jth_tempo,
             'kondisi' => $request->kondisi,
             'keterangan' => $request->keterangan,
-            'kondisi' => $request->kondisi,
         ]);
 
         if ($request->file('foto')) {
