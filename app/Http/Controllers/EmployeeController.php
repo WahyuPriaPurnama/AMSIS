@@ -393,10 +393,10 @@ class EmployeeController extends Controller
         return $pdf->stream();
     }
 
-    public function show_pdf($employee)
+    public function show_pdf($id)
     {
         $this->authorize('view', Employee::class);
-        $result = Employee::find($employee);
+        $result = Employee::find($id);
         $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.PDF.show', ['employee' => $result])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
