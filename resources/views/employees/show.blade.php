@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', "Biodata $employee->nama")
-@section('menuEmployees','active')
+@section('menuEmployees', 'active')
 @section('content')
     <div class="container mt-3">
         @component('components.card')
@@ -65,7 +65,7 @@
                                             <div class="mb-3">
                                                 <img class="img-thumbnail" oncontextmenu="return false"
                                                     @if ($employee->pp == null) src="
-                                                {{Storage::url('public/foto_profil/default.png') }}"
+                                                {{ Storage::url('public/foto_profil/default.png') }}"
                                                @else
                                               src="  {{ Storage::url('public/foto_profil/') . $employee->pp }}" @endif
                                                     alt="" srcset="">
