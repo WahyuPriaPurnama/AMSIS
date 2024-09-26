@@ -40,7 +40,7 @@
                             {!! $bofi !!}, {!! $hk !!}, {!! $rmm !!}
                         ],
                         borderWidth: 1,
-                        backgroundColor: ['#36a2eb', '#fe6383', '#4ac0c0', '#ff9f40', '#9966ff', '#ffcc56']
+                        backgroundColor: ['#0000ff', '#daa520', '#daa520', '#0000ff', '#008000', '#ff00ff']
                     }]
                 },
                 options: {
@@ -52,6 +52,5 @@
                 }
             });
         </script>
-
     </div>
 @endsection
