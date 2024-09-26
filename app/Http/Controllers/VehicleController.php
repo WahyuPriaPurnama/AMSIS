@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVehicleRequest;
+use App\Http\Requests\UpdateVehicleRequest;
 use App\Http\Requests\VehicleRequest;
 use App\Models\Subsidiary;
 use App\Models\Vehicle;
 use App\Traits\FileUpload;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,7 +36,7 @@ class VehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(VehicleRequest $request)
+    public function store(StoreVehicleRequest $request)
     {
         \App\Helpers\LogActivity::addToLog();
         $data = Vehicle::create($request->validated());
@@ -78,71 +79,12 @@ class VehicleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vehicle $vehicle)
+    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
-        // dd($vehicle);
         $this->authorize('update', Vehicle::class);
         \App\Helpers\LogActivity::addToLog();
-        $request->validate([
-            'jenis_kendaraan' => 'required',
-            'subsidiary_id' => 'required',
-            'tgl_perolehan' => 'required',
-            'pengguna' => 'required',
-            'nama_warna' => 'required',
-            'warna' => 'required',
-            'tahun' => 'required',
-            'atas_nama' => 'required',
-            'nopol' => 'required|unique:vehicles,nopol,' . $vehicle->id,
-            'no_rangka' => 'unique:vehicles,no_rangka,' . $vehicle->id,
-            'no_bpkb' => 'unique:vehicles,no_bpkb,' . $vehicle->id,
-            'no_mesin' => 'unique:vehicles,no_mesin,' . $vehicle->id,
-            'stnk' => '',
-            'pajak' => '',
-            'kir' => '',
-            'j_asuransi' => '',
-            'p_asuransi' => '',
-            'no_asuransi' => '',
-            'jth_tempo' => '',
-            'kondisi' => '',
-            'keterangan' => '',
-            'kondisi' => 'required',
-            'foto' => 'mimes:png,jpg,jpeg|max:2048',
-            'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-            'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-            'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-            'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-        ]);
-        $messages = [
-            'required' => 'wajib diisi',
-            'unique' => 'tidak boleh sama',
-            'mimes' => 'format yang diijinkan png, jpg, jpeg dan pdf',
-            'foto.mimes' => 'format yang diijinkan png, jpg dan jpeg',
-            'max' => 'ukuran file maksimum 2 MB'
-        ];
         $vehicle::findOrFail($vehicle->id);
-        $vehicle->update([
-            'jenis_kendaraan' => ucwords(strtolower($request->jenis_kendaraan)),
-            'subsidiary_id' => $request->subsidiary_id,
-            'tgl_perolehan' => $request->tgl_perolehan,
-            'pengguna' => ucwords(strtolower($request->pengguna)),
-            'nama_warna' =>ucwords(strtolower($request->nama_warna)),
-            'warna' => $request->warna,
-            'tahun' => $request->tahun,
-            'atas_nama' =>ucwords(strtolower($request->atas_nama)),
-            'nopol' => $request->nopol,
-            'no_rangka' => $request->no_rangka,
-            'no_bpkb' => $request->no_bpkb,
-            'no_mesin' => $request->no_mesin,
-            'stnk' => $request->stnk,
-            'pajak' => $request->pajak,
-            'kir' => $request->kir,
-            'j_asuransi' => $request->j_asuransi,
-            'p_asuransi' => $request->p_asuransi,
-            'no_asuransi' => $request->no_asuransi,
-            'jth_tempo' => $request->jth_tempo,
-            'kondisi' => $request->kondisi,
-            'keterangan' => $request->keterangan,
-        ]);
+        $vehicle->update($request->validated());
 
         if ($request->file('foto')) {
             Storage::disk('local')->delete('public/vehicles/foto' . $vehicle->foto);

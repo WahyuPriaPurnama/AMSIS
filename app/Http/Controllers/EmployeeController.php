@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Mail\MyTestMail;
 use App\Models\Employee;
 use App\Models\Subsidiary;
@@ -78,7 +79,7 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EmployeeRequest $request)
+    public function store(StoreEmployeeRequest $request)
     {
         $this->authorize('create', Employee::class);
         \App\Helpers\LogActivity::addToLog();
@@ -156,86 +157,11 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         $this->authorize('update', Employee::class);
         \App\Helpers\LogActivity::addToLog();
-        $request->validate([
-            'nip' => 'unique:employees,nip,' . $employee->id,
-            'nama' => 'max:50',
-            'nik' => 'unique:employees,nik,' . $employee->id,
-            'subsidiary_id' => '',
-            'divisi' => '',
-            'departemen' => '',
-            'seksi' => '',
-            'posisi' => '',
-            'status_peg' => '',
-            'tgl_masuk' => '',
-            'awal_kontrak' => '',
-            'akhir_kontrak' => '',
-            'tmpt_lahir' => '',
-            'tgl_lahir' => '',
-            'jenis_kelamin' => 'in:L,P',
-            'alamat' => '',
-            'no_telp' => '',
-            'email' => '',
-            'pend_trkhr' => '',
-            'jurusan' => '',
-            'thn_lulus' => '',
-            'nama_ibu' => '',
-            'npwp' => '',
-            'status' => '',
-            'jml_ank' => '',
-            'nama_kd' => '',
-            'no_kd' => '',
-            'hubungan' => '',
-            'pp' => 'mimes:png,jpg,jpeg|max:2048',
-            'ktp' => 'mimes:pdf|max:2048',
-            'kk' => 'mimes:pdf|max:2048',
-            'npwp2' => 'mimes:pdf|max:2048',
-            'bpjs_kes' => 'mimes:pdf|max:2048',
-            'bpjs_ket' => 'mimes:pdf|max:2048',
-        ]);
-        $messages = [
-            'required' => 'wajib diisi',
-            'unique' => 'tidak boleh sama',
-            'mimes' => 'format yang diijinkan png, jpg, jpeg dan pdf',
-            'foto.mimes' => 'format yang diijinkan png, jpg dan jpeg',
-            'max' => 'ukuran file maksimum 2 MB'
-        ];
-        $employee::findOrFail($employee->id);
-
-        $employee->update([
-            'nip' => $request->nip,
-            'nama' => ucwords(strtolower($request->nama)),
-            'nik' => $request->nik,
-            'subsidiary_id' => $request->subsidiary_id,
-            'divisi' => ucwords(strtolower($request->divisi)),
-            'departemen' => ucwords(strtolower($request->departemen)),
-            'seksi' => ucwords(strtolower($request->seksi)),
-            'posisi' => $request->posisi,
-            'status_peg' => $request->status_peg,
-            'tgl_masuk' => $request->tgl_masuk,
-            'awal_kontrak' => $request->awal_kontrak,
-            'akhir_kontrak' => $request->akhir_kontrak,
-
-            'tmpt_lahir' => ucwords(strtolower($request->tmpt_lahir)),
-            'tgl_lahir' => $request->tgl_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat' => $request->alamat,
-            'no_telp' => $request->no_telp,
-            'email' => $request->email,
-            'pend_trkhr' => $request->pend_trkhr,
-            'jurusan' => ucwords(strtolower($request->jurusan)),
-            'thn_lulus' => $request->thn_lulus,
-            'nama_ibu' => ucwords(strtolower($request->nama_ibu)),
-            'npwp' => $request->npwp,
-            'status' => $request->status,
-            'jml_ank' => $request->jml_ank,
-            'nama_kd' => ucwords(strtolower($request->nama_kd)),
-            'no_kd' => $request->no_kd,
-            'hubungan' => ucwords(strtolower($request->hubungan)),
-        ]);
+        $employee->update($request->validated());
 
         if ($request->file('pp')) {
             Storage::disk('local')->delete('public/foto_profil/' . $employee->pp);

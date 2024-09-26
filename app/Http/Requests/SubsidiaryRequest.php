@@ -21,6 +21,7 @@ class SubsidiaryRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'name' => 'required|min:3|max:50',
             'tagline' => 'required',
@@ -42,4 +43,13 @@ class SubsidiaryRequest extends FormRequest
             'logo.max' => 'maksimal ukuran foto 2 MB'
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'name' => strtoupper($this->name),
+            'tagline' => ucwords(strtolower($this->tagline))
+        ]);
+    }
+
 }

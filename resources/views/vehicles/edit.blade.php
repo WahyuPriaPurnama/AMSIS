@@ -7,14 +7,14 @@
             @slot('header')
                 EDIT {{ $vehicle->jenis_kendaraan }}
             @endslot
-            <form action="{{ route('vehicle.update', $vehicle->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('vehicle.update', ['vehicle' => $vehicle->id]) }}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row">
                     <div class="col-md-6 col-12 mb-3">
                         <label class="form-label" for="jenis_kendaraan">Jenis Kendaraan</label>
                         <input type="text" id="jenis_kendaraan" placeholder="Contoh: Toyota Starlet" name="jenis_kendaraan"
-                            value="{{ $vehicle->jenis_kendaraan }}"
+                            value="{{ old('jenis_kendaraan') ?? $vehicle->jenis_kendaraan }}"
                             class="form-control @error('jenis_kendaraan') is-invalid @enderror">
                         @error('jenis_kendaraan')
                             <div class="text-danger">{{ $message }}</div>
@@ -36,7 +36,7 @@
                     <div class="col-md-2 col-6 mb-3">
                         <label class="form-label" for="tgl_perolehan">Tanggal Perolehan</label>
                         <input type="date" class="form-control @error('tgl_perolehan') is-invalid @enderror"
-                            name="tgl_perolehan" value="{{ $vehicle->tgl_perolehan }}" id="">
+                            name="tgl_perolehan" value="{{ old('tgl_perolehan') ?? $vehicle->tgl_perolehan }}" id="">
                         @error('subsidiary_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -46,7 +46,7 @@
                     <div class="col-md-2 col-6 mb-3">
                         <label class="form-label" for="pengguna">Pengguna</label>
                         <input type="text" class="form-control @error('pengguna') is-invalid @enderror" placeholder="Samsul"
-                            name="pengguna" value="{{ $vehicle->pengguna }}" id="">
+                            name="pengguna" value="{{ old('pengguna') ?? $vehicle->pengguna }}" id="">
                         @error('pengguna')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -54,7 +54,7 @@
                     <div class="col-md-2 col-3 mb-3">
                         <label class="form-label" for="nama_warna">Warna</label>
                         <input type="text" class="form-control @error('nama_warna') is-invalid @enderror" name="nama_warna"
-                            value="{{ $vehicle->nama_warna }}" id="">
+                            value="{{ old('nama_warna') ?? $vehicle->nama_warna }}" id="">
                         @error('nama_warna')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -62,7 +62,7 @@
                     <div class="col-md-1 col-3 mb-3">
                         <label class="form-label" for="warna">Palet</label>
                         <input type="color" class="form-control @error('warna') is-invalid @enderror" name="warna"
-                            value="{{ $vehicle->warna }}" id="">
+                            value="{{ old('warna') ?? $vehicle->warna }}" id="">
                         <div class="form-text">
                             pilih warna
                         </div>
@@ -73,7 +73,7 @@
                     <div class="col-md-2 col-3 mb-3">
                         <label class="form-label" for="tahun">Tahun</label>
                         <input type="number" class="form-control @error('tahun') is-invalid @enderror" name="tahun"
-                            placeholder="2022" value="{{ $vehicle->tahun }}" id="">
+                            placeholder="2022" value="{{ old('tahun') ?? $vehicle->tahun }}" id="">
                         @error('tahun')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -81,15 +81,16 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="atas_nama">Atas Nama</label>
                         <input type="text" class="form-control @error('atas_nama') is-invalid @enderror" placeholder="Toha"
-                            name="atas_nama" value="{{ $vehicle->atas_nama }}" id="">
+                            name="atas_nama" value="{{ old('atas_nama') ?? $vehicle->atas_nama }}" id="">
                         @error('atas_nama')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-2 col-3 mb-3">
                         <label class="form-label" for="nopol">Nopol</label>
-                        <input type="text" class="form-control @error('nopol') is-invalid @enderror" placeholder="Contoh X 1234 XX"
-                            name="nopol" value="{{ $vehicle->nopol }}" id="">
+                        <input type="text" class="form-control @error('nopol') is-invalid @enderror"
+                            placeholder="Contoh X 1234 XX" name="nopol" value="{{ old('nopol') ?? $vehicle->nopol }}"
+                            id="">
                         @error('nopol')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -99,7 +100,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="no_rangka">No. Rangka</label>
                         <input type="text" class="form-control @error('no_rangka') is-invalid @enderror" name="no_rangka"
-                            value="{{ $vehicle->no_rangka }}" id="">
+                            value="{{ old('no_rangka') ?? $vehicle->no_rangka }}" id="">
                         @error('no_rangka')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -107,7 +108,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="no_bpkb">No. BPKB</label>
                         <input type="text" class="form-control @error('no_bpkb') is-invalid @enderror" name="no_bpkb"
-                            value="{{ $vehicle->no_bpkb }}" id="">
+                            value="{{ old('no_bpkb') ?? $vehicle->no_bpkb }}" id="">
                         @error('no_bpkb')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -115,7 +116,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="no_mesin">No. Mesin</label>
                         <input type="text" class="form-control @error('no_mesin') is-invalid @enderror" name="no_mesin"
-                            value="{{ $vehicle->no_mesin }}" id="">
+                            value="{{ old('no_mesin') ?? $vehicle->no_mesin }}" id="">
                         @error('no_mesin')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -123,7 +124,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="stnk">STNK</label>
                         <input type="date" class="form-control @error('stnk') is-invalid @enderror" name="stnk"
-                            value="{{ $vehicle->stnk }}" id="">
+                            value="{{ old('stnk') ?? $vehicle->stnk }}" id="">
                         @error('stnk')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -133,7 +134,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="pajak">Pajak</label>
                         <input type="date" class="form-control @error('pajak') is-invalid @enderror" name="pajak"
-                            value="{{ $vehicle->pajak }}" id="">
+                            value="{{ old('pajak') ?? $vehicle->pajak }}" id="">
                         @error('pajak')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -141,7 +142,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="kir">KIR</label>
                         <input type="date" class="form-control @error('kir') is-invalid @enderror" name="kir"
-                            value="{{ $vehicle->kir }}" id="">
+                            value="{{ old('kir') ?? $vehicle->kir }}" id="">
                         @error('kir')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -149,7 +150,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="j_asuransi">Jenis Asuransi</label>
                         <input type="text" class="form-control @error('j_asuransi') is-invalid @enderror"
-                            name="j_asuransi" value="{{ $vehicle->j_asuransi }}" id="">
+                            name="j_asuransi" value="{{ old('j_asuransi') ?? $vehicle->j_asuransi }}" id="">
                         @error('j_asuransi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -157,7 +158,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="p_asuransi">Perusahaan Asuransi</label>
                         <input type="text" class="form-control @error('p_asuransi') is-invalid @enderror"
-                            name="p_asuransi" value="{{ $vehicle->p_asuransi }}" id="">
+                            name="p_asuransi" value="{{ old('p_asuransi') ?? $vehicle->p_asuransi }}" id="">
                         @error('p_asuransi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -167,7 +168,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="no_asuransi">No. Asuransi</label>
                         <input type="text" class="form-control @error('no_asuransi') is-invalid @enderror"
-                            name="no_asuransi" value="{{ $vehicle->no_asuransi }}" id="">
+                            name="no_asuransi" value="{{ old('no_asuransi') ?? $vehicle->no_asuransi }}" id="">
                         @error('no_asuransi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -175,7 +176,7 @@
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="jth_tempo">Jatuh Tempo</label>
                         <input type="date" class="form-control @error('jth_tempo') is-invalid @enderror" name="jth_tempo"
-                            value="{{ $vehicle->jth_tempo }}" id="">
+                            value="{{ old('jth_tempo') ?? $vehicle->jth_tempo }}" id="">
                         @error('jth_tempo')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -192,9 +193,9 @@
                     </div>
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="keterangan">Keterangan</label>
-                        <input type="text" name="keterangan" value="{{ $vehicle->keterangan }}"
+                        <input type="text" name="keterangan" value="{{ old('keterangan') ?? $vehicle->keterangan }}"
                             class="form-control @error('keterangan') is-invalid @enderror">
-                            @error('keterangan')
+                        @error('keterangan')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>

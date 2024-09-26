@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Stringable;
 
-class VehicleRequest extends FormRequest
+class StoreVehicleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +21,7 @@ class VehicleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $vehicle = $this->route('vehicle');
         return [
             'jenis_kendaraan' => 'required',
             'subsidiary_id' => 'required',
@@ -69,7 +69,13 @@ class VehicleRequest extends FormRequest
         $this->merge([
             'jenis_kendaraan' => ucwords(strtolower($this->jenis_kendaraan)),
             'pengguna' => ucwords(strtolower($this->pengguna)),
-            'nama_warna' => ucwords(strtolower($this->nama_warna))
+            'nama_warna' => ucwords(strtolower($this->nama_warna)),
+            'nopol' => strtoupper($this->nopol),
+            'no_rangka' => strtoupper($this->no_rangka),
+            'no_mesin' => strtoupper($this->no_mesin),
+            'j_asuransi' => ucwords(strtolower($this->j_asuransi)),
+            'no_asuransi' => strtoupper($this->no_asuransi),
+            'p_asuransi' => ucwords(strtolower($this->p_asuransi))
         ]);
     }
 }
