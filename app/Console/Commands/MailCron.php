@@ -6,23 +6,24 @@ use App\Mail\MyTestMail;
 use App\Models\Employee;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class SendMails extends Command
+class MailCron extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'auto:mails';
+    protected $signature = 'mail:cron';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'send mail reminder to HRD & GA';
 
     /**
      * Execute the console command.
@@ -43,6 +44,6 @@ class SendMails extends Command
                 Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@eln.amsgroup.co.id'])->send(new MyTestMail($mailData));
             }
         }
-        return 0;
+        Log::info('cron job berhasil dijalankan ' . date('Y-m-d H:i:s'));
     }
 }
