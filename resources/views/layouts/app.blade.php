@@ -55,13 +55,7 @@
                                     </li>
                                 </ul>
                             </li>
-                
-                            @if (Auth::user()->role == 'super-admin')
-                                <li class="nav-item">
-                                    <a class="nav-link @yield('menuSuhu')" href="{{ route('suhu.index') }}">
-                                        Temperatur</a>
-                                </li>
-                            @endif
+            
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
