@@ -48,13 +48,11 @@ Auth::routes([
     'register' => false
 ]);
 route::redirect('/', '/login');
-route::get('/kirim-email', [EmployeeController::class, 'mail']);
-
-route::get('/suhu', [Esp32Controller::class, 'index'])->name('suhu.index');
-route::get('/data/{suhu}', [Esp32Controller::class, 'store']);
 
 route::get('addmore', [HomeController::class, 'addMore']);
 route::post('addmore', [HomeController::class, 'addMorePost']);
 
 route::get('addmore2', [ProductAddMoreController::class, 'addMore']);
 route::post('addmore2', [ProductAddMoreController::class, 'addMorePost'])->name('addMorePost');
+
+route::get('/tes',[EmployeeController::class,'notification']);
