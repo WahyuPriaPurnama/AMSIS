@@ -41,7 +41,7 @@ class MailCron extends Command
                     'body' => "Dengan Email ini kami menginformasikan bahwa karyawan dengan nama " . $d->nama . " dari plant " . $d->subsidiary->name . " memiliki sisa masa kontrak " . $time . " hari lagi."
                 ];
 
-                Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@eln.amsgroup.co.id'])->send(new MyTestMail($mailData));
+                Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
             }
         }
         Log::info('cron job berhasil dijalankan ' . date('Y-m-d H:i:s'));
