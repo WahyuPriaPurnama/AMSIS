@@ -62,18 +62,12 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
 
-
         if ($validator->passes()) {
             foreach ($request->input('name') as $key => $value) {
                 TagList::create(['name' => $value]);
             }
-
-
-
             return response()->json(['success' => 'done']);
         }
-
-
 
         return response()->json(['error' => $validator->errors()->all()]);
     }

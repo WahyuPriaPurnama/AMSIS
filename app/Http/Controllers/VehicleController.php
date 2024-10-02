@@ -56,6 +56,10 @@ class VehicleController extends Controller
             $kir = $this->fileUpload($request, 'public/vehicles/kir', 'f_kir');
             $data->update(['f_kir' => $kir->hashName()]);
         }
+        if ($request->file('qr')) {
+            $qr = $this->fileUpload($request, 'public/vehicles/qr', 'qr');
+            $data->update(['qr' => $qr->hashName()]);
+        }
         return redirect()->route('vehicle.index')->with('alert', 'data berhasil disimpan');
     }
 

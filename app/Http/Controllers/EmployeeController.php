@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use App\Mail\MyTestMail;
+use App\Models\EksternalExperience;
 use App\Models\Employee;
+use App\Models\InternalExperience;
 use App\Models\Subsidiary;
 use App\Traits\FileUpload;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -86,6 +84,14 @@ class EmployeeController extends Controller
         $this->authorize('create', Employee::class);
         \App\Helpers\LogActivity::addToLog();
         $data = Employee::create($request->validated());
+
+        foreach ($request->int as $key => $value) {
+            InternalExperience::create($value);
+        }
+
+        foreach ($request->eks as $key => $value) {
+            EksternalExperience::create($value);
+        }
 
         if ($request->file('pp')) {
             $pp = $this->fileUpload($request, 'public/foto_profil', 'pp');
@@ -320,15 +326,4 @@ class EmployeeController extends Controller
         $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.PDF.show', ['employee' => $result])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
-
-    // public static function mail($title, $time, $plant)
-    // {
-    //     $mailData = [
-    //         'title' => 'Reminder Sisa Kontrak ' . $title,
-    //         'body' => "Dengan Email ini kami menginformasikan bahwa karyawan dengan nama " . $title . " dari plant " . $plant . " memiliki sisa masa kontrak " . $time . " hari lagi."
-    //     ];
-
-    //     Mail::to(['wahyupriapurnama@gmail.com', 'hrd@amsgroup.co.id', 'hrdmgr@amsgroup.co.id'])->send(new MyTestMail($mailData));
-    // }
-
 }
