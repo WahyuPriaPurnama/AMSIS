@@ -12,7 +12,7 @@
                 <div class="row mb-3">
                     <h3>Organisasi</h3>
                     <hr>
-                    <div class="col-sm-6 col-md-2">
+                    <div class="col-sm-6 col-md-2 mb-3">
                         <label class="form-label" for="nip">NIP</label>
                         <input type="text" id="nip" placeholder="masukkan NIP 9 digit" name="nip" value="{{ old('nip') }}"
                             class="form-control @error('nip') is-invalid @enderror">
@@ -20,7 +20,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-3 mb-3">
                         <label class="form-label" for="nama">Nama Lengkap</label>
                         <input type="text" id="nama"  name="nama" value="{{ old('nama') }}"
                             class="form-control @error('nama') is-invalid @enderror">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 mb-3">
                         <label class="form-label" for="departemen">Departemen</label>
                         <input type="text" id="departemen" name="departemen" value="{{ old('departemen') }}"
                             class="form-control @error('departemen') is-invalid @enderror">
@@ -67,7 +67,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 mb-3">
                         <label class="form-label" for="seksi">Seksi</label>
                         <input type="text" id="seksi" name="seksi" value="{{ old('seksi') }}"
                             class="form-control @error('seksi') is-invalid @enderror">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col">
+                    <div class="col mb-3">
                         <label class="form-label" for="tgl_masuk">Tanggal Masuk Kerja</label>
                         <input type="date" id="tgl_masuk" name="tgl_masuk" value="{{ old('tgl_masuk') }}"
                             class="form-control @error('tgl_masuk') is-invalid @enderror">
@@ -126,7 +126,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label class="form-label" for="awal_kontrak">Awal Kontrak</label>
                         <input type="date" id="awal_kontrak" name="awal_kontrak" value="{{ old('awal_kontrak') }}"
                             class="form-control @error('awal_kontrak') is-invalid @enderror">
@@ -147,7 +147,7 @@
                 <div class="row mb-3 pt-3">
                     <h3>Biodata</h3>
                     <hr>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label class="form-label" for="tmpt_lahir">Tempat Lahir</label>
                         <input type="text" id="tmpt_lahir" name="tmpt_lahir" value="{{ old('tmpt_lahir') }}"
                             class="form-control @error('tmpt_lahir') is-invalid @enderror">
@@ -155,7 +155,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label class="form-label" for="tgl_lahir">Tanggal Lahir</label>
                         <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control"
                             value="{{ old('tgl_lahir') }}">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-2 mb-3">
                         <label class="form-label" for="no_telp">No. Telp / WhatsApp</label>
                         <input type="text" id="no_telp" name="no_telp" value="{{ old('no_telp') }}"
                             class="form-control @error('no_telp') is-invalid @enderror">
@@ -193,7 +193,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-4 col-md-3">
+                    <div class="col-sm-4 col-md-3 mb-3">
                         <label class="form-label" for="email">Email</label>
                         <input type="text" id="email" name="email" value="{{ old('email') }}"
                             class="form-control @error('email') is-invalid @enderror">
@@ -201,7 +201,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-2 mb-3">
                         <label class="form-label" for="pend_trkhr">Pendidikan Terakhir</label>
                         <select name="pend_trkhr" id="pend_trkhr" class="form-select">
                             <option value="SD" @selected(old('pend_trkhr') == 'SD')>SD</option>
@@ -216,7 +216,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-4 col-md-3">
+                    <div class="col-sm-4 col-md-3 mb-3">
                         <label class="form-label" for="jurusan">Jurusan</label>
                         <input type="text" id="jurusan" name="jurusan" value="{{ old('jurusan') }}"
                             class="form-control @error('jurusan') is-invalid @enderror">
@@ -224,7 +224,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-2 mb-3">
                         <label class="form-label" for="thn_lulus">Tahun Lulus</label>
                         <input type="text" id="thn_lulus" name="thn_lulus" value="{{ old('thn_lulus') }}"
                             class="form-control @error('thn_lulus') is-invalid @enderror">
@@ -234,7 +234,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 mb-3">
                         <label class="form-label" for="nama_ibu">Nama Ibu</label>
                         <input type="text" id="nama_ibu" name="nama_ibu" value="{{ old('nama_ibu') }}"
                             class="form-control @error('nama_ibu') is-invalid @enderror">
@@ -242,7 +242,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label class="form-label" for="npwp">NPWP</label>
                         <input type="text" id="npwp" name="npwp" value="{{ old('npwp') }}"
                             class="form-control @error('npwp') is-invalid @enderror">
@@ -250,7 +250,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 mb-3">
                         <label class="form-label" for="status">Pernikahan</label>
                         <select name="status" id="status" class="form-select">
                             <option value="Kawin" @selected(old('status') == 'Kawin')>Kawin</option>
@@ -261,7 +261,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-1 mb-3">
                         <label class="form-label" for="jml_ank">Anak</label>
                         <input type="number" id="jml_ank" name="jml_ank" value="{{ old('jml_ank') }}"
                             class="form-control @error('jml_ank') is-invalid @enderror">
@@ -273,7 +273,7 @@
                 <div class="row mb-3 pt-3">
                     <h3>Kontak Darurat</h3>
                     <hr>
-                    <div class="col">
+                    <div class="col-md-4 mb-3">
                         <label class="form-label" for="nama_kd">Nama Kontak Darurat</label>
                         <input type="text" id="nama_ibu" name="nama_kd" value="{{ old('nama_kd') }}"
                             class="form-control @error('nama_kd') is-invalid @enderror">
@@ -281,7 +281,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
+                    <div class="col-md-4 mb-3">
                         <label class="form-label" for="no_kd">No. Kontak Darurat</label>
                         <input type="number" id="no_kd" name="no_kd" value="{{ old('no_kd') }}"
                             class="form-control @error('no_kd') is-invalid @enderror">
@@ -289,7 +289,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
+                    <div class="col-md-4 mb-3">
                         <label class="form-label" for="hubungan">Hubungan</label>
                         <input type="text" id="hubungan" name="hubungan" value="{{ old('hubungan') }}"
                             class="form-control @error('hubungan') is-invalid @enderror">
@@ -301,7 +301,7 @@
                 <div class="row mb-3 pt-3">
                     <h3>Lampiran</h3>
                     <hr>
-                    <div class="col-3">
+                    <div class="col-md-3 mb-3">
                         <label class="form-label" for="pp">Foto Profil</label>
                         <input type="file" id="pp" name="pp"
                             class="form-control @error('pp') is-invalid @enderror" accept="image/png, image/jpeg, image/jpg">
@@ -309,7 +309,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-3 mb-3">
                         <label class="form-label" for="ktp">KTP</label>
                         <input type="file" id="ktp" name="ktp"
                             class="form-control @error('ktp') is-invalid @enderror" accept="application/pdf">
@@ -317,7 +317,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-3 mb-3">
                         <label class="form-label" for="kk">Kartu Keluarga</label>
                         <input type="file" id="kk" name="kk"
                             class="form-control @error('kk') is-invalid @enderror" accept="application/pdf">
@@ -325,7 +325,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-3 mb-3">
                         <label class="form-label" for="npwp2">NPWP</label>
                         <input type="file" id="npwp2" name="npwp2"
                             class="form-control @error('npwp2') is-invalid @enderror" accept="application/pdf">
@@ -333,9 +333,8 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3 pt-3">
-                    <div class="col-3">
+                
+                    <div class="col-md-3 mb-3">
                         <label class="form-label" for="bpjs_kes">BPJS Kesehatan</label>
                         <input type="file" id="bpjs_kes" name="bpjs_kes"
                             class="form-control @error('bpjs_kes') is-invalid @enderror" accept="application/pdf">
@@ -343,7 +342,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-3 mb-3">
                         <label class="form-label" for="bpjs_ket">BPJS Ketenagakerjaan</label>
                         <input type="file" id="bpjs_ket" name="bpjs_ket"
                             class="form-control @error('bpjs_ket') is-invalid @enderror" accept="application/pdf">

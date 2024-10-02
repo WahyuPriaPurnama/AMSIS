@@ -3,11 +3,7 @@
 @section('menuSubsidiaries', 'active')
 @section('content')
     <div class="container mt-3">
-        @if (session()->has('alert'))
-            <div class="alert alert-success my-3">
-                {{ session()->get('alert') }}
-            </div>
-        @endif
+    
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">

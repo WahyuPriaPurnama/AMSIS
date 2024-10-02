@@ -3,11 +3,6 @@
 @section('menuVehicles', 'active')
 @section('content')
     <div class="container mt-3">
-        @if (session()->has('alert'))
-            <div class="alert alert-success my-3">
-                {{ session()->get('alert') }}
-            </div>
-        @endif
         @component('components.card')
             @slot('header')
                 DATA KENDARAAN

@@ -21,7 +21,7 @@ class SparepartController extends Controller
      */
     public function create()
     {
-        //
+        return view('spareparts.create');
     }
 
     /**

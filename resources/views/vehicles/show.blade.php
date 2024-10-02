@@ -3,6 +3,7 @@
 @section('menuVehicles', 'active')
 @section('content')
     <div class="container mt-3">
+        
         @component('components.card')
             @slot('header')
                 {{ $vehicle->jenis_kendaraan }}
@@ -46,11 +47,7 @@
 
             </div>
             <hr>
-            @if (session()->has('alert'))
-                <div class="alert alert-success" role="alert">
-                    {{ session()->get('alert') }}
-                </div>
-            @endif
+            
             <section class="bg-light py-3 py-md-5 py-xl-8">
                 <div class="container">
                     <div class="row gy-4 gy-lg-0">

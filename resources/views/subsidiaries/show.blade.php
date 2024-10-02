@@ -3,11 +3,6 @@
 @section('menuSubsidiaries', 'active')
 @section('content')
     <div class="container mt-3">
-        @if (session()->has('alert'))
-            <div class="alert alert-success" role="alert">
-                {{ session()->get('alert') }}
-            </div>
-        @endif
         @component('components.card')
             @slot('header')
                 Data Perusahaan
