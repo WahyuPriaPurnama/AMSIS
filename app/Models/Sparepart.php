@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
-class TagList extends Model
+class Sparepart extends Model
 {
-    use HasFactory;
-
-    public $table = 'taglist';
-    public $fillable = ['name'];
+    use HasFactory, Sortable;
+    protected $guarded = [];
 }

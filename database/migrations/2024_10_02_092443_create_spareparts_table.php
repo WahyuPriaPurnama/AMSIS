@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('taglist', function (Blueprint $table) {
+        Schema::create('spareparts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('kode_barang');
+            $table->string('serial_number');
+            $table->string('nama_barang');
+            $table->integer('jumlah');
+            $table->string('satuan');
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('taglist');
+        Schema::dropIfExists('spareparts');
     }
 };
