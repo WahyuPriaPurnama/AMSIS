@@ -57,16 +57,6 @@ class StoreEmployeeRequest extends FormRequest
             'bpjs_kes' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'bpjs_ket' => 'mimes:png,jpg,jpeg,pdf|max:2048',
 
-            'int.*.perusahaan' => 'string',
-            'int.*.jbtn' => 'string',
-            'int.*.thn1' => 'string',
-            'int.*.thn2' => 'string',
-
-            'eks.*.perusahaan' => 'string',
-            'eks.*.jbtn' => 'string',
-            'eks.*.thn1' => 'string',
-            'eks.*.thn2' => 'string',
-
         ];
     }
 
@@ -91,7 +81,7 @@ class StoreEmployeeRequest extends FormRequest
         $this->merge([
             'nama' => ucwords(strtolower($this->nama)),
             'divisi' => ucwords(strtolower($this->divisi)),
-            'departement' => ucwords(strtolower($this->departement)),
+            'departemen' => ucwords(strtolower($this->departemen)),
             'seksi' => ucwords(strtolower($this->seksi)),
             'tmpt_lahir' => ucwords(strtolower($this->tmpt_lahir)),
             'jurusan' => ucwords(strtolower($this->jurusan)),
