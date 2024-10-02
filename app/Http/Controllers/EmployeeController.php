@@ -85,13 +85,6 @@ class EmployeeController extends Controller
         \App\Helpers\LogActivity::addToLog();
         $data = Employee::create($request->validated());
 
-        foreach ($request->int as $key => $value) {
-            InternalExperience::create($value);
-        }
-
-        foreach ($request->eks as $key => $value) {
-            EksternalExperience::create($value);
-        }
 
         if ($request->file('pp')) {
             $pp = $this->fileUpload($request, 'public/foto_profil', 'pp');

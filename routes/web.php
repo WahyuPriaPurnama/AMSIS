@@ -48,11 +48,3 @@ Auth::routes([
     'register' => false
 ]);
 route::redirect('/', '/login');
-
-route::get('addmore', [HomeController::class, 'addMore']);
-route::post('addmore', [HomeController::class, 'addMorePost']);
-
-route::get('addmore2', [ProductAddMoreController::class, 'addMore']);
-route::post('addmore2', [ProductAddMoreController::class, 'addMorePost'])->name('addMorePost');
-
-route::get('/tes',[EmployeeController::class,'notification']);
