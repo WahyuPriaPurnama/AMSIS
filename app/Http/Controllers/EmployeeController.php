@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use App\Models\EksternalExperience;
 use App\Models\Employee;
-use App\Models\InternalExperience;
 use App\Models\Subsidiary;
 use App\Traits\FileUpload;
 use Barryvdh\DomPDF\Facade\Pdf;

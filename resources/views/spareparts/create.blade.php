@@ -1,4 +1,4 @@
-<form action="" method="post">
+<form action="{{route('spareparts.store')}}" method="post">
     @csrf
     <div class="row mb-3">
         <div class="col-md-2">

@@ -56,14 +56,7 @@
                         @forelse ($employees as $employee)
                             @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45 and $employee->status_peg == 'PKWT')
                                 <tr class="table-danger">
-                                    {{-- @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) == 30)
-                                        {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak), $employee->subsidiary->name) }}
-                                    @elseif(Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) == 15)
-                                        {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak), $employee->subsidiary->name) }}
-                                    @elseif(Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) == 7)
-                                        {{ App\Http\Controllers\EmployeeController::mail($employee->nama, Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak), $employee->subsidiary->name) }} --}}
-
-                                    {{-- @endif --}}
+                                   
                             @endif
                             <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
                             <td>{{ $employee->subsidiary->name }}</td>
