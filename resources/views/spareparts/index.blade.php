@@ -3,7 +3,7 @@
 @section('menuSparepart', 'active')
 @section('content')
     <div class="container mt-3">
-
+        {{-- modal tambah data --}}
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -18,6 +18,10 @@
                 </div>
             </div>
         </div>
+
+        {{-- modal edit data --}}
+
+
         @component('components.card')
             @slot('header')
                 DATA SPAREPART
@@ -47,15 +51,35 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><a href="{{ route('spareparts.edit', $item->id) }}" class="text-decoration-none"
-                                        data-bs-toggle="modal" data-bs-target="#showSparepart">
+                                        data-bs-toggle="modal" data-bs-target="#editSparepart{{ $item->id }}">
                                         {{ $item->kode_barang }}
-                                    </a></td>
+                                    </a>
+                                    <div class="modal fade" id="editSparepart{{ $item->id }}" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data {{$item->nama_barang}}
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @include('spareparts.edit')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ $item->serial_number }}</td>
                                 <td>{{ $item->nama_barang }}</td>
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->satuan }}</td>
                                 <td>
                                     <a href="#" class="btn btn-success">Update</a>
+
+
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#deleteSparepart{{ $item->id }}">
                                         Hapus
@@ -75,9 +99,10 @@
                                                 <div class="modal-body">
                                                     <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak
                                                         Jadi</button>
-                                                    <button type="submit" form="delete{{$item->id}}" class="btn btn-danger ms-3">Iya,
+                                                    <button type="submit" form="delete{{ $item->id }}"
+                                                        class="btn btn-danger ms-3">Iya,
                                                         Yakin</button>
-                                                    <form id="delete{{$item->id}}"
+                                                    <form id="delete{{ $item->id }}"
                                                         action="{{ route('spareparts.destroy', ['sparepart' => $item->id]) }}"
                                                         method="post">
                                                         @method('DELETE')

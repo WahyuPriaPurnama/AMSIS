@@ -51,8 +51,7 @@ class SparepartController extends Controller
      */
     public function edit(Sparepart $sparepart)
     {
-        $data = Sparepart::all();
-        return view('spareparts.edit', compact('data'));
+     
     }
 
     /**
