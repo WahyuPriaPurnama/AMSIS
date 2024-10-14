@@ -1,5 +1,4 @@
-
-<form action="" method="post">
+<form action="{{ route('spareparts.update', $item->id) }}" method="post">
     @csrf
     <div class="row mb-3">
         <div class="col-md-2">

@@ -38,6 +38,7 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
+        $this->authorize('create', Vehicle::class);
         \App\Helpers\LogActivity::addToLog();
         $data = Vehicle::create($request->validated());
         if ($request->file('foto')) {

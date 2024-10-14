@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SparepartRequest;
+use App\Http\Requests\StoreSparepartRequest;
 use App\Models\Sparepart;
 use Illuminate\Http\Request;
 
@@ -28,7 +28,7 @@ class SparepartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SparepartRequest $request)
+    public function store(StoreSparepartRequest $request)
     {
         $data = Sparepart::create($request->validated());
         if ($data) {
@@ -49,17 +49,16 @@ class SparepartController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sparepart $sparepart)
-    {
-     
-    }
+    public function edit(Sparepart $sparepart) {}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Sparepart $sparepart)
     {
-        //
+        $sparepart->update($request->validated());
+
+        return redirect()->route('spareparts.index')->with('alert', 'update data berhasil');
     }
 
     /**
@@ -67,7 +66,7 @@ class SparepartController extends Controller
      */
     public function destroy(Sparepart $sparepart)
     {
-     
+
         $sparepart->delete();
         if ($sparepart) {
             return redirect()->route('spareparts.index')->with('alert', "hapus data berhasil");

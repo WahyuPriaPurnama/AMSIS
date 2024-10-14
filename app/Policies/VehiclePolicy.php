@@ -21,7 +21,7 @@ class VehiclePolicy
      */
     public function view(User $user): bool
     {
-        return in_array($user->role, ['super-admin', 'holding-admin']);
+        return in_array($user->role, ['super-admin', 'holding-admin','rmm-admin']);
     }
 
     /**
@@ -29,7 +29,7 @@ class VehiclePolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role, ['super-admin', 'holding-admin']);
+        return in_array($user->role, ['super-admin', 'holding-admin','rmm-admin']);
     }
 
     /**
@@ -37,7 +37,7 @@ class VehiclePolicy
      */
     public function update(User $user): bool
     {
-        return in_array($user->role, ['super-admin', 'holding-admin']);
+        return in_array($user->role, ['super-admin', 'holding-admin','rmm-admin']);
     }
 
     /**
@@ -45,7 +45,7 @@ class VehiclePolicy
      */
     public function delete(User $user): bool
     {
-        return in_array($user->role, ['super-admin', 'holding-admin']);
+        return in_array($user->role, ['super-admin', 'holding-admin','rmm-admin']);
     }
 
     /**

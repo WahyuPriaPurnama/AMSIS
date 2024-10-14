@@ -60,7 +60,8 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data {{$item->nama_barang}}
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data
+                                                        {{ $item->nama_barang }}
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
@@ -77,9 +78,32 @@
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->satuan }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-success">Update</a>
+                                    {{-- update qty --}}
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#updateSparepart{{ $item->id }}">
+                                        Update
+                                    </button>
+                                    <div class="modal fade" id="updateSparepart{{ $item->id }}" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Jumlah
+                                                        {{ $item->nama_barang }}
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @include('spareparts.update')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
+                                    {{-- hapus data --}}
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#deleteSparepart{{ $item->id }}">
                                         Hapus

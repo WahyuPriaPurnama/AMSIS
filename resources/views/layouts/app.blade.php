@@ -52,10 +52,12 @@
                                             Karyawan</a></li>
                                     <li><a class="dropdown-item @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">
                                             Perusahaan</a></li>
-                                    <li>
-                                        <a class="dropdown-item @yield('menuVehicles')"
-                                            href="{{ route('vehicle.index') }}">Kendaraan</a>
-                                    </li>
+                                    @can('create', App\Models\Vehicle::class)
+                                        <li>
+                                            <a class="dropdown-item @yield('menuVehicles')"
+                                                href="{{ route('vehicle.index') }}">Kendaraan</a>
+                                        </li>
+                                    @endcan
                                 </ul>
                             </li>
 

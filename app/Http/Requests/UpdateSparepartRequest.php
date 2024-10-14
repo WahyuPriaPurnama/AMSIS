@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SparepartRequest extends FormRequest
+class UpdateSparepartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,9 +21,10 @@ class SparepartRequest extends FormRequest
      */
     public function rules(): array
     {
+        $data = $this->route('sparepart');
         return [
-            'kode_barang' => 'required|unique:spareparts',
-            'serial_number' => 'unique:spareparts',
+            'kode_barang' => 'required|unique:spareparts,kode_barang,' . $data->id,
+            'serial_number' => 'unique:spareparts,serial_number,' . $data->id,
             'nama_barang' => 'required',
             'jumlah' => 'required',
             'satuan' => 'required|string',
