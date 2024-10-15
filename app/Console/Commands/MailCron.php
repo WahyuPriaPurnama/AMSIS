@@ -59,28 +59,28 @@ class MailCron extends Command
                     'body' => "Dengan email ini kami menginformasikan bahwa masa berlaku STNK " . $vehicle->jenis_kendaraan . " dari plant " . $vehicle->subsidiary->name . " tinggal " . $stnk . " hari lagi."
                 ];
 
-                Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
+                Mail::to(['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com'])->send(new MyTestMail($mailData));
             } elseif ($pajak == 30 or $pajak == 15) {
                 $mailData = [
                     'title' => 'Reminder Perpanjangan Pajak Kendaraan ' . $vehicle->jenis_kendaraan,
                     'body' => "Dengan email ini kami menginformasikan bahwa masa berlaku Pajak " . $vehicle->pajak . " dari plant " . $vehicle->subsidiary->name . " tinggal " . $pajak . " hari lagi."
                 ];
 
-                Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
+                Mail::to(['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com'])->send(new MyTestMail($mailData));
             } elseif ($kir == 30 or $kir == 15) {
                 $mailData = [
                     'title' => 'Reminder Perpanjangan KIR ' . $vehicle->jenis_kendaraan,
                     'body' => "Dengan email ini kami menginformasikan bahwa masa berlaku KIR " . $vehicle->kir . " dari plant " . $vehicle->subsidiary->name . " tinggal " . $kir . " hari lagi."
                 ];
 
-                Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
+                Mail::to(['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com'])->send(new MyTestMail($mailData));
             } elseif ($asuransi == 30 or $asuransi == 15) {
                 $mailData = [
                     'title' => 'Reminder Perpanjangan Asuransi ' . $vehicle->jenis_kendaraan,
                     'body' => "Dengan email ini kami menginformasikan bahwa masa berlaku asuransi " . $vehicle->kir . " dari plant " . $vehicle->subsidiary->name . " tinggal " . $kir . " hari lagi."
                 ];
 
-                Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
+                Mail::to(['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com'])->send(new MyTestMail($mailData));
             }
         }
         Log::info('cron job berhasil dijalankan ' . date('Y-m-d H:i:s'));
