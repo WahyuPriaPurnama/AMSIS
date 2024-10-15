@@ -9,7 +9,7 @@
             @endslot
             <div class="row">
                 <div class="col">
-                    <form action="{{ route('vehicle.search') }}" method="get">
+                    <form action="{{route('vehicle.search')}}" method="get">
                         <div class="input-group mb-3">
                             <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
                                 placeholder="cari nama kendaraan" id="">

@@ -41,7 +41,6 @@
                         Tambah
                     </button>
                 </div>
-
             </div>
             <div class="table table-responsive">
                 <table class="table table-hover">
