@@ -181,7 +181,9 @@ class VehicleController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $data = Vehicle::where('jenis_kendaraan', 'like', "%" . $search . "%")->get();
+        $data = Vehicle::where('jenis_kendaraan', 'like', "%" . $search . "%")
+            ->orWhere('pengguna', 'like', "%" . $search . "%")
+            ->get();
 
         return view('vehicles.index', compact('data'));
     }

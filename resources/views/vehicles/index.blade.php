@@ -12,7 +12,7 @@
                     <form action="{{route('vehicle.search')}}" method="get">
                         <div class="input-group mb-3">
                             <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
-                                placeholder="cari nama kendaraan" id="">
+                                placeholder="cari nama kendaraan atau nama pengguna" id="">
                             <button type="submit" class="btn btn-primary">Cari</button>
                         </div>
                     </form>
