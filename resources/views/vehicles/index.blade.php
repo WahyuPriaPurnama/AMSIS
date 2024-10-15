@@ -26,14 +26,14 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>JENIS KENDARAAN</th>
-                            <th>KATEGORI</th>
-                            <th>PLANT</th>
+                            <th>@sortablelink('jenis_kendaraan', 'NAMA KENDARAAN')</th>
+                            <th>@sortablelink('kategori', 'KATEGORI')</th>
+                            <th>@sortablelink('subsidiary_id', 'PLANT')</th>
                             <th>NOPOL</th>
-                            <th>STNK</th>
-                            <th>PAJAK</th>
-                            <th>KIR</th>
-                            <th>ASURANSI</th>
+                            <th>@sortablelink('stnk', 'STNK')</th>
+                            <th>@sortablelink('pajak', 'PAJAK')</th>
+                            <th>@sortablelink('kir', 'KIR')</th>
+                            <th>@sortablelink('jth_tempo', 'ASURANSI')</th>
                             <th>KONDISI</th>
                         </tr>
                     </thead>
@@ -41,7 +41,8 @@
                         @forelse ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('vehicle.show', ['vehicle' => $item->id]) }}" class="text-decoration-none">
+                                <td><a href="{{ route('vehicle.show', ['vehicle' => $item->id]) }}"
+                                        class="text-decoration-none">
                                         {{ $item->jenis_kendaraan }}</a></td>
                                 <td>{{ $item->kategori }}</td>
                                 <td>{{ $item->subsidiary->name }}</td>
