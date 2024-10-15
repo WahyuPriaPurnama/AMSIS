@@ -7,8 +7,19 @@
             @slot('header')
                 DATA KENDARAAN
             @endslot
-            <div class="text-end">
-                <a href="{{ route('vehicle.create') }}" class="btn btn-primary">Tambah</a>
+            <div class="row">
+                <div class="col">
+                    <form action="{{ route('vehicle.search') }}" method="get">
+                        <div class="input-group mb-3">
+                            <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
+                                placeholder="cari nama kendaraan" id="">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col text-end">
+                    <a href="{{ route('vehicle.create') }}" class="btn btn-primary">Tambah</a>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -16,6 +27,7 @@
                         <tr>
                             <th>#</th>
                             <th>JENIS KENDARAAN</th>
+                            <th>KATEGORI</th>
                             <th>PLANT</th>
                             <th>NOPOL</th>
                             <th>STNK</th>
@@ -27,11 +39,11 @@
                     </thead>
                     <tbody>
                         @forelse ($data as $item)
-                       
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('vehicle.show', ['vehicle'=>$item->id]) }}" class="text-decoration-none">
+                                <td><a href="{{ route('vehicle.show', ['vehicle' => $item->id]) }}" class="text-decoration-none">
                                         {{ $item->jenis_kendaraan }}</a></td>
+                                <td>{{ $item->kategori }}</td>
                                 <td>{{ $item->subsidiary->name }}</td>
                                 <td>{{ $item->nopol }}</td>
                                 <td>{{ $item->stnk }}</td>

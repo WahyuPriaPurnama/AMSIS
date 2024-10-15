@@ -7,16 +7,28 @@
             @slot('header')
                 EDIT {{ $vehicle->jenis_kendaraan }}
             @endslot
-            <form action="{{ route('vehicle.update',  ) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('vehicle.update', ['vehicle' => $vehicle->id]) }}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row">
-                    <div class="col-md-6 col-12 mb-3">
+                    <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="jenis_kendaraan">Jenis Kendaraan</label>
                         <input type="text" id="jenis_kendaraan" placeholder="Contoh: Toyota Starlet" name="jenis_kendaraan"
                             value="{{ old('jenis_kendaraan') ?? $vehicle->jenis_kendaraan }}"
                             class="form-control @error('jenis_kendaraan') is-invalid @enderror">
                         @error('jenis_kendaraan')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <label for="kategori" class="form-label">Kategori</label>
+                        <select name="kategori" id="" class="form-select @error('kategori') is-invalid @enderror">
+                            <option value="" selected>Pilih Kategori</option>
+                            <option value="Pribadi" @selected($vehicle->kategori == 'Pribadi')>Pribadi</option>
+                            <option value="Kantor" @selected($vehicle->kategori == 'Kantor')>Kantor</option>
+                            <option value="Umum" @selected($vehicle->kategori == 'Umum')>Umum</option>
+                        </select>
+                        @error('kategori')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>

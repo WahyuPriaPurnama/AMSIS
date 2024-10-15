@@ -45,8 +45,10 @@ route::middleware('auth')->group(function () {
     route::get('vehicle/pajak/{pajak}', [VehicleController::class, 'pajak'])->name('vehicle.pajak');
     route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
     route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
+    route::get('vehicle/search', [VehicleController::class, 'search'])->name('vehicle.search');
 
     route::resource('spareparts', SparepartController::class);
+    route::get('sparepart/search', [SparepartController::class, 'search'])->name('sparepart.search');
 });
 
 Auth::routes([

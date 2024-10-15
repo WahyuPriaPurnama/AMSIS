@@ -24,6 +24,7 @@ class StoreVehicleRequest extends FormRequest
         $vehicle = $this->route('vehicle');
         return [
             'jenis_kendaraan' => 'required',
+            'kategori' => 'required',
             'subsidiary_id' => 'required',
             'tgl_perolehan' => 'required',
             'pengguna' => 'required',
@@ -49,7 +50,7 @@ class StoreVehicleRequest extends FormRequest
             'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-           
+
         ];
     }
 
@@ -75,7 +76,8 @@ class StoreVehicleRequest extends FormRequest
             'no_mesin' => strtoupper($this->no_mesin),
             'j_asuransi' => ucwords(strtolower($this->j_asuransi)),
             'no_asuransi' => strtoupper($this->no_asuransi),
-            'p_asuransi' => ucwords(strtolower($this->p_asuransi))
+            'p_asuransi' => ucwords(strtolower($this->p_asuransi)),
+            'kategori' => ucwords(strtolower($this->kategori))
         ]);
     }
 }

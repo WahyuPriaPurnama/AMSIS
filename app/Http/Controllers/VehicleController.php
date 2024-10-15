@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
-use App\Http\Requests\VehicleRequest;
 use App\Models\Subsidiary;
 use App\Models\Vehicle;
 use App\Traits\FileUpload;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -176,5 +176,14 @@ class VehicleController extends Controller
     {
         $this->authorize('view', Vehicle::class);
         return Response::download('storage/vehicles/qr/' . $qr);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        dd($search);
+        $data = Vehicle::where('jenis_kendaraan', 'like', "%" . $search . "%")->get();
+
+        return view('vehicles.index', compact('data'));
     }
 }

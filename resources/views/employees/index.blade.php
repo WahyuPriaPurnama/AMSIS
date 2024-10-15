@@ -15,21 +15,19 @@
                                 @if (Auth::user()->role == 'super-admin' or Auth::user() == 'holding-admin') placeholder="Cari Nama, NIP atau Perusahaan.."
             @else
             placeholder="Cari Nama atau NIP" @endif
-                                value="{{ old('search') }}">
+                                value="{{ request()->input('search') }}">
                             <button type="submit" class="btn btn-success">Cari</button>
                         </div>
                     </form>
                 </div>
-                <div class="col">
-                    <div class="text-end">
-                        @can('create', App\Models\Employee::class)
-                            <div class="btn-group">
-                                <a href="{{ route('employees.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-                                    data-bs-title="tambah data karyawan">Tambah</a>
-                            @endcan
-                            <a href="{{ route('employees.pdf') }}" class="btn btn-danger" target="_blank"
-                                data-bs-toggle="tooltip" data-bs-title="export PDF">PDF</a>
-                        </div>
+                <div class="col text-end">
+                    @can('create', App\Models\Employee::class)
+                        <div class="btn-group">
+                            <a href="{{ route('employees.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+                                data-bs-title="tambah data karyawan">Tambah</a>
+                        @endcan
+                        <a href="{{ route('employees.pdf') }}" class="btn btn-danger" target="_blank" data-bs-toggle="tooltip"
+                            data-bs-title="export PDF">PDF</a>
                     </div>
                 </div>
             </div>
@@ -56,7 +54,6 @@
                         @forelse ($employees as $employee)
                             @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45 and $employee->status_peg == 'PKWT')
                                 <tr class="table-danger">
-                                   
                             @endif
                             <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
                             <td>{{ $employee->subsidiary->name }}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSparepartRequest;
+use App\Http\Requests\UpdateSparepartRequest;
 use App\Models\Sparepart;
 use Illuminate\Http\Request;
 
@@ -54,7 +55,7 @@ class SparepartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sparepart $sparepart)
+    public function update(UpdateSparepartRequest $request, Sparepart $sparepart)
     {
         $sparepart->update($request->validated());
 
@@ -73,5 +74,14 @@ class SparepartController extends Controller
         } else {
             return redirect()->route('spareparts.index')->with('alert', "hapus data gagal");
         }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        dd($search);
+        $data = Sparepart::where('nama_barang', 'like', "%" . $search . "%")->get();
+
+        return view('spareparts.index', compact('data'));
     }
 }

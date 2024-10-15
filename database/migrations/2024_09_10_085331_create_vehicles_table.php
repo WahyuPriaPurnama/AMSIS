@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_kendaraan');
+            $table->string('kategori');
             $table->foreignId('subsidiary_id')->constrained()->onDelete('cascade');
             $table->date('tgl_perolehan');
             $table->string('pengguna');

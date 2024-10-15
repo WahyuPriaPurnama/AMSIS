@@ -10,7 +10,7 @@
             <form action="{{ route('vehicle.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-md-6 col-12 mb-3">
+                    <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="jenis_kendaraan">Jenis Kendaraan</label>
                         <input type="text" id="jenis_kendaraan" placeholder="Contoh: Toyota Starlet" name="jenis_kendaraan"
                             value="{{ old('jenis_kendaraan') }}"
@@ -19,6 +19,18 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <label for="kategori" class="form-label">Kategori</label>
+                        <select name="kategori" id="" class="form-select @error('kategori') is-invalid @enderror">
+                            <option value="" selected>Pilih Kategori</option>
+                            <option value="pribadi">Pribadi</option>
+                            <option value="kantor">Kantor</option>
+                            <option value="umum">Umum</option>
+                        </select>
+                    </div>
+                    @error('kategori')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <div class="col-md-4 col-6 mb-3">
                         <label class="form-label" for="subsidiary_id">Plant</label>
                         <select class="form-select @error('subsidiary_id') is-invalid @enderror" name="subsidiary_id"
@@ -87,8 +99,8 @@
                     </div>
                     <div class="col-md-2 col-3 mb-3">
                         <label class="form-label" for="nopol">Nopol</label>
-                        <input type="text" class="form-control @error('nopol') is-invalid @enderror" placeholder="Contoh: X 1234 XX"
-                            name="nopol" value="{{ old('nopol') }}" id="">
+                        <input type="text" class="form-control @error('nopol') is-invalid @enderror"
+                            placeholder="Contoh: X 1234 XX" name="nopol" value="{{ old('nopol') }}" id="">
                         @error('nopol')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

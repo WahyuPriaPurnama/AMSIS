@@ -26,11 +26,21 @@
             @slot('header')
                 DATA SPAREPART
             @endslot
-            <div class="text-end">
-
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Tambah
-                </button>
+            <div class="row">
+                <div class="col">
+                    <form action="{{ route('sparepart.search') }}" method="get">
+                        <div class="input-group mb-3">
+                            <input type="text" name="search" value="{{request()->input('search')}}" class="form-control" placeholder="cari nama sparepart"
+                                id="">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col text-end">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Tambah
+                    </button>
+                </div>
 
             </div>
             <div class="table table-responsive">
@@ -121,7 +131,8 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak
+                                                    <button type="button" class="btn btn-success"
+                                                        data-bs-dismiss="modal">Gak
                                                         Jadi</button>
                                                     <button type="submit" form="delete{{ $item->id }}"
                                                         class="btn btn-danger ms-3">Iya,
