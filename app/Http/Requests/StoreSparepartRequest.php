@@ -42,7 +42,6 @@ class StoreSparepartRequest extends FormRequest
         $this->merge([
             'kode_barang' => strtoupper($this->kode_barang),
             'serial_number' => strtoupper($this->serial_number),
-            'nama_barang' => ucwords(strtolower($this->nama_barang)),
             'satuan' => ucwords(strtolower($this->satuan)),
         ]);
     }
