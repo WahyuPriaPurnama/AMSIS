@@ -10,19 +10,19 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="col-md-2">
-            <label for="serial_number" class="form-label">Serial Number</label>
-            <input type="text" name="serial_number" class="form-control @error('serial_number') is-invalid @enderror"
-                value="{{ old('serial_number') ?? $item->serial_number }}">
-            @error('serial_number')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
         <div class="col-md-4">
             <label for="nama_barang" class="form-label">Nama Barang</label>
             <input type="text" name="nama_barang" class="form-control @error('nama_barang') is-invalid @enderror"
                 value="{{ old('nama_barang') ?? $item->nama_barang }}" id="">
             @error('nama_barang')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-md-2">
+            <label for="serial_number" class="form-label">Spesifikasi</label>
+            <input type="text" name="serial_number" class="form-control @error('serial_number') is-invalid @enderror"
+                value="{{ old('serial_number') ?? $item->serial_number }}">
+            @error('serial_number')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>

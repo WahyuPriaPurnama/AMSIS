@@ -50,8 +50,8 @@
                         <tr>
                             <th>#</th>
                             <th>KODE</th>
-                            <th>SN</th>
                             <th>NAMA BARANG</th>
+                            <th>SPESIFIKASI</th>
                             <th>JUMLAH</th>
                             <th>SATUAN</th>
                             <th>MENU</th>
@@ -88,8 +88,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $item->serial_number }}</td>
                                 <td>{{ $item->nama_barang }}</td>
+                                <td>{{ $item->serial_number }}</td>
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->satuan }}</td>
                                 <td>
