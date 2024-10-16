@@ -54,6 +54,7 @@
                             <th>SPESIFIKASI</th>
                             <th>JUMLAH</th>
                             <th>SATUAN</th>
+                            <th>DIPERBARUI</th>
                             <th>MENU</th>
                         </tr>
                     </thead>
@@ -92,6 +93,7 @@
                                 <td>{{ $item->serial_number }}</td>
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->satuan }}</td>
+                                <td>{{$item->updated_at}}</td>
                                 <td>
                                     {{-- update qty --}}
                                     @can('update', App\Models\Sparepart::class)
