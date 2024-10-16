@@ -30,16 +30,18 @@
                 <div class="col">
                     <form action="{{ route('sparepart.search') }}" method="get">
                         <div class="input-group mb-3">
-                            <input type="text" name="search" value="{{request()->input('search')}}" class="form-control" placeholder="cari nama sparepart"
-                                id="">
+                            <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
+                                placeholder="cari nama sparepart" id="">
                             <button type="submit" class="btn btn-primary">Cari</button>
                         </div>
                     </form>
                 </div>
                 <div class="col text-end">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Tambah
-                    </button>
+                    @can('create', App\Models\Sparepart::class)
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Tambah
+                        </button>
+                    @endcan
                 </div>
             </div>
             <div class="table table-responsive">
@@ -59,10 +61,14 @@
                         @forelse($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('spareparts.edit', $item->id) }}" class="text-decoration-none"
-                                        data-bs-toggle="modal" data-bs-target="#editSparepart{{ $item->id }}">
+                                <td>
+                                    @can('update', App\Models\Sparepart::class)
+                                        <a href="{{ route('spareparts.edit', $item->id) }}" class="text-decoration-none"
+                                            data-bs-toggle="modal" data-bs-target="#editSparepart{{ $item->id }}">
+                                        @endcan
                                         {{ $item->kode_barang }}
                                     </a>
+
                                     <div class="modal fade" id="editSparepart{{ $item->id }}" data-bs-backdrop="static"
                                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                         aria-hidden="true">
@@ -88,10 +94,12 @@
                                 <td>{{ $item->satuan }}</td>
                                 <td>
                                     {{-- update qty --}}
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#updateSparepart{{ $item->id }}">
-                                        Update
-                                    </button>
+                                    @can('update', App\Models\Sparepart::class)
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#updateSparepart{{ $item->id }}">
+                                            Update
+                                        </button>
+                                    @endcan
                                     <div class="modal fade" id="updateSparepart{{ $item->id }}" data-bs-backdrop="static"
                                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                         aria-hidden="true">
@@ -113,10 +121,12 @@
 
 
                                     {{-- hapus data --}}
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteSparepart{{ $item->id }}">
-                                        Hapus
-                                    </button>
+                                    @can('delete', App\Models\Sparepart::class)
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteSparepart{{ $item->id }}">
+                                            Hapus
+                                        </button>
+                                    @endcan
                                     <div class="modal fade" id="deleteSparepart{{ $item->id }}" data-bs-backdrop="static"
                                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteSparepartLabel"
                                         aria-hidden="true">

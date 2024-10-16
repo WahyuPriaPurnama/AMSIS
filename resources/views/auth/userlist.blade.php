@@ -64,6 +64,8 @@
                                         </option>
                                         <option value="eln-admin">
                                             eln-admin</option>
+                                        <option value="eln-sparepart">
+                                            eln-sparepart</option>
                                         <option value="eln2-admin">
                                             eln2-admin
                                         </option>

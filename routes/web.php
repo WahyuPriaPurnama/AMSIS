@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\Esp32Controller;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductAddMoreController;
 use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\SubsidiaryController;
 use App\Http\Controllers\UserController;

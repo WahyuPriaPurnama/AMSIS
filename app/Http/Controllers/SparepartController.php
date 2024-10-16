@@ -14,6 +14,7 @@ class SparepartController extends Controller
      */
     public function index()
     {
+
         $data = Sparepart::all();
         return view('spareparts.index', compact('data'));
     }
@@ -31,6 +32,7 @@ class SparepartController extends Controller
      */
     public function store(StoreSparepartRequest $request)
     {
+        $this->authorize('create', Sparepart::class);
         $data = Sparepart::create($request->validated());
         if ($data) {
             return redirect()->route('spareparts.index')->with('alert', "Input data berhasil");
@@ -57,6 +59,7 @@ class SparepartController extends Controller
      */
     public function update(UpdateSparepartRequest $request, Sparepart $sparepart)
     {
+        $this->authorize('update', Sparepart::class);
         $sparepart->update($request->validated());
 
         return redirect()->route('spareparts.index')->with('alert', 'update data berhasil');
@@ -67,7 +70,7 @@ class SparepartController extends Controller
      */
     public function destroy(Sparepart $sparepart)
     {
-
+        $this->authorize('delete', Sparepart::class);
         $sparepart->delete();
         if ($sparepart) {
             return redirect()->route('spareparts.index')->with('alert', "hapus data berhasil");
@@ -79,7 +82,7 @@ class SparepartController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-    
+
         $data = Sparepart::where('nama_barang', 'like', "%" . $search . "%")->get();
 
         return view('spareparts.index', compact('data'));
