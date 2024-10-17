@@ -2,7 +2,7 @@
 @section('title', 'Daftar Sparepart')
 @section('menuSparepart', 'active')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         {{-- modal tambah data --}}
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
