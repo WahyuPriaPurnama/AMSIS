@@ -15,7 +15,7 @@ class SparepartController extends Controller
     public function index()
     {
 
-        $data = Sparepart::all();
+        $data = Sparepart::latest()->get();
         return view('spareparts.index', compact('data'));
     }
 
