@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SparepartExport;
 use App\Http\Requests\StoreSparepartRequest;
 use App\Http\Requests\UpdateSparepartRequest;
+use App\Models\Employee;
 use App\Models\Sparepart;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SparepartController extends Controller
 {
@@ -86,5 +89,11 @@ class SparepartController extends Controller
         $data = Sparepart::where('nama_barang', 'like', "%" . $search . "%")->get();
 
         return view('spareparts.index', compact('data'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new SparepartExport, 'data-spareparts.xlsx');
+
     }
 }

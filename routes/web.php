@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SensorController;
 use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\SubsidiaryController;
 use App\Http\Controllers\UserController;
@@ -30,13 +31,14 @@ route::middleware('auth')->group(function () {
     route::get('employee/BPJS-ket/{bpjs_ket}', [EmployeeController::class, 'bpjs_ket'])->name('employee.bpjs_ket');
     route::get('employee/BPJS-kes/{bpjs_kes}', [EmployeeController::class, 'bpjs_kes'])->name('employee.bpjs_kes');
     route::get('/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
+    route::get('/export-excel', [EmployeeController::class, 'index_excel'])->name('employees.excel');
     route::get('/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
-    
+
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('users', UserController::class);
     route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('/home', [HomeController::class, 'index']);
-    
+
     route::get('vehicle/search', [VehicleController::class, 'search'])->name('vehicle.search');
     route::resource('vehicle', VehicleController::class);
     route::get('vehicle/foto/{foto}', [VehicleController::class, 'foto'])->name('vehicle.foto');
@@ -47,6 +49,10 @@ route::middleware('auth')->group(function () {
 
     route::resource('spareparts', SparepartController::class);
     route::get('sparepart/search', [SparepartController::class, 'search'])->name('sparepart.search');
+    route::get('sparepart-export', [SparepartController::class, 'export'])->name('spareparts.export');
+
+    route::get('/data-suhu/{suhu}', [SensorController::class, 'store'])->name('suhu.store');
+    route::get('/data-suhu', [SensorController::class, 'index'])->name('suhu.index');
 });
 
 Auth::routes([

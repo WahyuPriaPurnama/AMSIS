@@ -37,6 +37,7 @@
                     </form>
                 </div>
                 <div class="col text-end">
+                    <a href="{{route('spareparts.export')}}" class="btn btn-success">Export Excel</a>
                     @can('create', App\Models\Sparepart::class)
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Tambah

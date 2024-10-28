@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EmployeeExport;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
 {
@@ -308,6 +309,12 @@ class EmployeeController extends Controller
         $pdf = pdf::loadview('employees.PDF.index', ['employees' => $employees])
             ->setPaper('letter', 'landscape');
         return $pdf->stream();
+    }
+
+    public function index_excel()
+    {
+        return Excel::download(new EmployeeExport, 'data-karyawan.xlsx');
+        // Employee::query()->where('nama', 'Wahyu Pria Purnama')->downloadExcel('query.xlsx');
     }
 
     public function show_pdf($id)

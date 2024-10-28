@@ -215,6 +215,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'LogActivity' => App\Helpers\LogActivity::class,
         'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'Excel'=>\Maatwebsite\Excel\Facades\Excel::class
 
     ])->toArray(),
 

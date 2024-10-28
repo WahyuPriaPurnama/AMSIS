@@ -22,7 +22,8 @@
                 </div>
                 <div class="col text-end">
                     @can('create', App\Models\Employee::class)
-                        <div class="btn-group">
+                    <div class="btn-group">
+                            <a href="{{route('employees.excel')}}" class="btn btn-success">Export Excel</a>
                             <a href="{{ route('employees.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
                                 data-bs-title="tambah data karyawan">Tambah</a>
                         @endcan
