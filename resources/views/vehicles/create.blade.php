@@ -23,9 +23,9 @@
                         <label for="kategori" class="form-label">Kategori</label>
                         <select name="kategori" id="" class="form-select @error('kategori') is-invalid @enderror">
                             <option value="" selected>Pilih Kategori</option>
-                            <option value="pribadi">Pribadi</option>
-                            <option value="kantor">Kantor</option>
-                            <option value="umum">Umum</option>
+                            <option value="Pribadi">Pribadi</option>
+                            <option value="Kantor">Kantor</option>
+                            <option value="Umum">Umum</option>
                         </select>
                     </div>
                     @error('kategori')

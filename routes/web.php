@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Purchasing\MasterBarangController;
+use App\Http\Controllers\Purchasing\MasterSupplierController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\SubsidiaryController;
@@ -50,6 +52,10 @@ route::middleware('auth')->group(function () {
     route::resource('spareparts', SparepartController::class);
     route::get('sparepart/search', [SparepartController::class, 'search'])->name('sparepart.search');
     route::get('sparepart-export', [SparepartController::class, 'export'])->name('spareparts.export');
+
+    route::resource('master-barang', MasterBarangController::class);
+    route::resource('master-supplier', MasterSupplierController::class);
+
 
     route::get('/data-suhu/{suhu}', [SensorController::class, 'store'])->name('suhu.store');
     route::get('/data-suhu', [SensorController::class, 'index'])->name('suhu.index');

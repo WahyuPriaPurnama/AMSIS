@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subsidiaries', function (Blueprint $table) {
+        Schema::create('master_barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('tagline');
-            $table->string('npwp');
-            $table->string('email');
-            $table->string('phone');
-            $table->text('address');
-            $table->string('logo')->nullable();
+            $table->string('nama_barang')->unique();
+            $table->string('harga');
+            $table->string('satuan');
+            $table->string('nama_toko');
+            $table->date('tgl_pembelian');
+            $table->string('jenis_pembayaran');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subsidiaries');
+        Schema::dropIfExists('master_barangs');
     }
 };

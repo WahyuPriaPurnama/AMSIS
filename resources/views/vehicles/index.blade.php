@@ -2,7 +2,7 @@
 @section('title', 'Data Kendaraan')
 @section('menuVehicles', 'active')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         @component('components.card')
             @slot('header')
                 DATA KENDARAAN

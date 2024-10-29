@@ -8,7 +8,7 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Subsidiary extends Model
 {
-    use HasFactory, Sortable;
+    use HasFactory;
     protected $guarded = [];
 
     public function employees()

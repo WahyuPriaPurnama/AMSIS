@@ -3,8 +3,8 @@
         {{ session()->get('alert') }}
     </div>
 @endif
-<div class="card shadow border-0">
-    <div class="card-header border-0">
+<div class="card shadow">
+    <div class="card-header">
         <b> {{ $header }} </b>
     </div>
     <div class="card-body">

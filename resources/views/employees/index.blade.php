@@ -22,14 +22,14 @@
                 </div>
                 <div class="col text-end">
                     @can('create', App\Models\Employee::class)
-                    <div class="btn-group">
+                    
                             <a href="{{route('employees.excel')}}" class="btn btn-success">Export Excel</a>
                             <a href="{{ route('employees.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
                                 data-bs-title="tambah data karyawan">Tambah</a>
                         @endcan
                         <a href="{{ route('employees.pdf') }}" class="btn btn-danger" target="_blank" data-bs-toggle="tooltip"
                             data-bs-title="export PDF">PDF</a>
-                    </div>
+                    
                 </div>
             </div>
             <div class="table-responsive">
