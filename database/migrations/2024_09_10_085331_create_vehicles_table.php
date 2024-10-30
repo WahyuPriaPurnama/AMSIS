@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('jenis_kendaraan');
             $table->string('kategori');
-            $table->foreignId('subsidiary_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subsidiary_id');
             $table->date('tgl_perolehan');
             $table->string('pengguna');
             $table->string('nama_warna');

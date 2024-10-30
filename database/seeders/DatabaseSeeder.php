@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Employee;
+use App\Models\Purchasing\MasterBarang;
+use App\Models\Purchasing\MasterSupplier;
 use App\Models\Sparepart;
 use App\Models\Subsidiary;
 use App\Models\User;
@@ -29,7 +31,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         Subsidiary::create([
-            'name' => 'CV. Anugerah Mulia Sejahtera',
+            'name' => 'CV. AMS',
             'tagline' => 'General Trading and Supplier',
             'npwp' => '70.651.906.3-657.000',
             'email' => 'headoffice@amsgroup.co.id',
@@ -37,7 +39,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
         ]);
         Subsidiary::create([
-            'name' => 'PT. Energy Lautan Nusantara Plant Malang',
+            'name' => 'PT. ELN Plant Malang',
             'tagline' => 'Can Maker',
             'npwp' => '94.024.473.4-657.000',
             'email' => 'headoffice@eln.co.id',
@@ -46,7 +48,7 @@ class DatabaseSeeder extends Seeder
                             East Java 65152'
         ]);
         Subsidiary::create([
-            'name' => 'PT. Energy Lautan Nusantara Plant Banyuwangi',
+            'name' => 'PT. ELN Plant Banyuwangi',
             'tagline' => 'ABF and Cold Storage',
             'npwp' => '94.024.473.4-657.000',
             'email' => 'headoffice@eln.co.id',
@@ -55,7 +57,7 @@ class DatabaseSeeder extends Seeder
                             East Java 68421'
         ]);
         Subsidiary::create([
-            'name' => 'PT. Blue Ocean Foods Indonesia',
+            'name' => 'PT. BOFI',
             'tagline' => 'Canning',
             'npwp' => '43.623.790.3-625.000',
             'email' => 'headoffice@blueoceanfoods.co.id',
@@ -63,7 +65,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
         ]);
         Subsidiary::create([
-            'name' => 'PT. Haka Arthacipta Unggul',
+            'name' => 'PT. HAKA',
             'tagline' => 'Open Trader With Us',
             'npwp' => '43.623.790.3-625.000',
             'email' => 'hkcipta@blueoceanfoods.co.id',
@@ -72,7 +74,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Subsidiary::create([
-            'name' => 'PT. Rania Mahanani Management',
+            'name' => 'PT. RMM',
             'tagline' => 'Canning',
             'npwp' => '43.623.790.3-625.000',
             'email' => 'headoffice@blueoceanfoods.co.id',
@@ -80,8 +82,46 @@ class DatabaseSeeder extends Seeder
             'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
         ]);
 
+        
+
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 10; $i++) {
+        MasterSupplier::create([
+            'nama_supplier' => 'Satelit',
+            'kontak' => $faker->numerify('085#########'),
+            'alamat' => $faker->address(),
+            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+            'hari' => $faker->numerify('##'),
+        ]);
+        MasterSupplier::create([
+            'nama_supplier' => 'Wardiman',
+            'kontak' => $faker->numerify('085#########'),
+            'alamat' => $faker->address(),
+            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+            'hari' => $faker->numerify('##'),
+        ]);
+        MasterSupplier::create([
+            'nama_supplier' => 'Depo Bangunan',
+            'kontak' => $faker->numerify('085#########'),
+            'alamat' => $faker->address(),
+            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+            'hari' => $faker->numerify('##'),
+        ]);
+        MasterSupplier::create([
+            'nama_supplier' => 'Rajawali',
+            'kontak' => $faker->numerify('085#########'),
+            'alamat' => $faker->address(),
+            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+            'hari' => $faker->numerify('##'),
+        ]);
+        MasterSupplier::create([
+            'nama_supplier' => 'Prima Teknik',
+            'kontak' => $faker->numerify('085#########'),
+            'alamat' => $faker->address(),
+            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+            'hari' => $faker->numerify('##'),
+        ]);
+
+        for ($i = 0; $i < 200; $i++) {
             Employee::create([
                 'nip' => $faker->randomNumber(9),
                 'nama' => $faker->name(),
@@ -124,18 +164,35 @@ class DatabaseSeeder extends Seeder
                 'warna' => $faker->hexColor(),
                 'tahun' => $faker->year(),
                 'atas_nama' => $faker->name(),
-                'nopol' => $faker->numerify('N #### QU'),
+                'nopol' => $faker->numerify('# #### ##'),
                 'no_rangka' => $faker->randomNumber(9),
                 'no_bpkb' => $faker->randomNumber(9),
                 'no_mesin' => $faker->randomNumber(9),
                 'stnk' => $faker->date(),
                 'pajak' => $faker->date(),
                 'kir' => $faker->date(),
-                'jth_tempo'=>$faker->date(),
+                'jth_tempo' => $faker->date(),
                 'kondisi' => $faker->randomElement(['Baik', 'Kurang Baik'])
             ]);
-        }
 
+            Sparepart::create([
+                'kode_barang' => $faker->randomNumber(9),
+                'serial_number' => $faker->randomNumber(9),
+                'nama_barang' => $faker->randomElement(['Paku', 'Obeng', 'Tang', 'Baut Baja', 'Kabel', 'Mur', 'Paku Rivet']),
+                'jumlah' => $faker->randomNumber(3),
+                'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
+            ]);
+
+            MasterBarang::create([
+                'nama_barang' => $faker->words(3, true),
+                'subsidiary_id' => $faker->numberBetween(1, 6),
+                'harga' => $faker->numerify('#.###,-'),
+                'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
+                'master_supplier_id' => $faker->numberBetween(1, 5),
+                'tgl_pembelian' => $faker->date(),
+            ]);
+        }
+        
 
 
 

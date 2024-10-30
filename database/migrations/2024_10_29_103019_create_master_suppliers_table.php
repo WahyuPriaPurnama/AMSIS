@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kontak');
             $table->text('alamat');
             $table->string('pembayaran');
+            $table->integer('hari');
             $table->timestamps();
         });
     }

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('master_barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_barang')->unique();
+            $table->foreignId('subsidiary_id')->constrained();
+            $table->string('nama_barang');
             $table->string('harga');
             $table->string('satuan');
-            $table->string('nama_toko');
+            $table->foreignId('master_supplier_id')->constrained();
             $table->date('tgl_pembelian');
-            $table->string('jenis_pembayaran');
             $table->timestamps();
         });
     }

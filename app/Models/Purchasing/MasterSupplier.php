@@ -12,7 +12,7 @@ class MasterSupplier extends Model
     use HasFactory;
     protected $guarded = [];
     
-    public function barang()
+    public function barangs()
     {
         return $this->hasMany(MasterBarang::class);
     }

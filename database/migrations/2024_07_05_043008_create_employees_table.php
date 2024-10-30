@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string('no_kd')->nullable();
             $table->string('hubungan')->nullable();
             $table->string('pp')->nullable();
-            $table->foreignId('subsidiary_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subsidiary_id')->constrained();
             $table->string('ktp')->nullable();
             $table->string('kk')->nullable();
             $table->string('npwp2')->nullable();

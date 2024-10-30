@@ -22,7 +22,7 @@
                         @forelse ($data as $item)
                             <tr>
                                 <td>{{ $data->firstItem() + $loop->iteration - 1 }}</td>
-                                <td>{{ $item->nama_Supplier }}</td>
+                                <td>{{ $item->nama_supplier }}</td>
                                 <td>{{ $item->kontak }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->pembayaran }}</td>
