@@ -23,7 +23,7 @@
                     <tbody>
                         @forelse ($data as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->firstItem() + $loop->iteration - 1 }}</td>
                                 <td>{{ $item->nama_barang }}</td>
                                 <td>{{ $item->harga }}</td>
                                 <td>{{ $item->satuan }}</td>

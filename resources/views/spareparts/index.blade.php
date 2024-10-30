@@ -62,7 +62,7 @@
                     <tbody>
                         @forelse($data as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->firstItem() + $loop->iteration - 1 }}</td>
                                 <td>
                                     @can('update', App\Models\Sparepart::class)
                                         <a href="{{ route('spareparts.edit', $item->id) }}" class="text-decoration-none"
