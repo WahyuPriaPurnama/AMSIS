@@ -87,8 +87,8 @@
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <a href="{{ route('master-barang.index') }}" class="dropdown-item">Master Barang</a>
-                                    <a href="{{ route('master-supplier.index') }}" class="dropdown-item">Master
+                                    <a href="{{ route('master-barang.index') }}" class="dropdown-item @yield('menuBarang')">Master Barang</a>
+                                    <a href="{{ route('master-supplier.index') }}" class="dropdown-item @yield('menuSupplier')">Master
                                         Supplier</a>
                                 </ul>
                             </li>
