@@ -13,7 +13,8 @@ class MasterSupplierController extends Controller
      */
     public function index()
     {
-        return view('purchasing.master_supplier.index');
+        $data = MasterSupplier::all();
+        return view('purchasing.master_supplier.index', compact('data'));
     }
 
     /**
