@@ -37,7 +37,7 @@
                     </form>
                 </div>
                 <div class="col text-end">
-                    <a href="{{route('spareparts.export')}}" class="btn btn-success">Export Excel</a>
+                    <a href="{{ route('spareparts.export') }}" class="btn btn-success">Export Excel</a>
                     @can('create', App\Models\Sparepart::class)
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Tambah
@@ -94,7 +94,7 @@
                                 <td>{{ $item->serial_number }}</td>
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->satuan }}</td>
-                                <td>{{$item->updated_at}}</td>
+                                <td>{{ $item->updated_at }}</td>
                                 <td>
                                     {{-- update qty --}}
                                     @can('update', App\Models\Sparepart::class)
@@ -166,6 +166,9 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div class="row">
+                {{ $data->links() }}
             </div>
         @endcomponent
     </div>

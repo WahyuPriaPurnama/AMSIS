@@ -26,27 +26,27 @@ class EmployeeController extends Controller
         $this->authorize('view', Employee::class);
         $user = Auth::user()->role;
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
-            $employees = Employee::Index()->sortable()->latest()->paginate(500);
+            $employees = Employee::Index()->sortable()->latest()->paginate(100);
         } elseif ($user == 'eln-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '2');
-            })->sortable()->latest()->paginate(250);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'eln2-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '3');
-            })->sortable()->latest()->paginate(250);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'bofi-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '4');
-            })->sortable()->latest()->paginate(250);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'rmm-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '6');
-            })->sortable()->latest()->paginate(250);
+            })->sortable()->latest()->paginate(100);
         } else {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '5');
-            })->sortable()->latest()->paginate(250);
+            })->sortable()->latest()->paginate(100);
         }
 
         return view('employees.index', compact('employees'));
@@ -236,32 +236,32 @@ class EmployeeController extends Controller
             $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
                 return $query->where('name', 'like', "%" . $search . "%");
             })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
         } elseif ($user == 'eln-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
                 return $query->where('id', '2');
             })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
         } elseif ($user == 'eln2-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
                 return $query->where('id', '3');
             })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
         } elseif ($user == 'bofi-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
                 return $query->where('id', '4');
             })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
         } elseif ($user == 'haka-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
                 return $query->where('id', '5');
             })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
         } else {
             $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
                 return $query->where('id', '6');
             })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(25);
+                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
         }
 
         return view('employees.index', ['employees' => $employees]);

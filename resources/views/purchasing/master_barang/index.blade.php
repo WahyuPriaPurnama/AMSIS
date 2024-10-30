@@ -22,21 +22,24 @@
                     </thead>
                     <tbody>
                         @forelse ($data as $item)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$item->nama_barang}}</td>
-                            <td>{{$item->harga}}</td>
-                            <td>{{$item->satuan}}</td>
-                            <td>{{$item->nama_toko}}</td>
-                            <td>{{$item->tgl_pembelian}}</td>
-                            <td>{{$item->jenis_pembayaran}}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->nama_barang }}</td>
+                                <td>{{ $item->harga }}</td>
+                                <td>{{ $item->satuan }}</td>
+                                <td>{{ $item->nama_toko }}</td>
+                                <td>{{ $item->tgl_pembelian }}</td>
+                                <td>{{ $item->jenis_pembayaran }}</td>
+                            </tr>
                         @empty
-                        <td colspan="7" class="text-center">tidak ada data...</td>
+                            <td colspan="7" class="text-center">tidak ada data...</td>
                         @endforelse
-                       
+
                     </tbody>
                 </table>
+            </div>
+            <div class="row">
+                {{ $data->links() }}
             </div>
         @endcomponent
     </div>

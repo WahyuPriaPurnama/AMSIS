@@ -13,7 +13,7 @@ class MasterBarangController extends Controller
      */
     public function index()
     {
-        $data = MasterBarang::all();
+        $data = MasterBarang::latest()->paginate(100);
         return view('purchasing.master_barang.index', compact('data'));
     }
 

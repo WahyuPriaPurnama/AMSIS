@@ -13,7 +13,7 @@ class MasterSupplierController extends Controller
      */
     public function index()
     {
-        $data = MasterSupplier::all();
+        $data = MasterSupplier::latest()->paginate(100);
         return view('purchasing.master_supplier.index', compact('data'));
     }
 
