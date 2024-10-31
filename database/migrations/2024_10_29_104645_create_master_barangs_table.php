@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('subsidiary_id')->constrained();
             $table->string('nama_barang');
-            $table->string('harga');
+            $table->integer('harga');
+            $table->integer('jumlah');
             $table->string('satuan');
             $table->foreignId('master_supplier_id')->constrained();
             $table->date('tgl_pembelian');

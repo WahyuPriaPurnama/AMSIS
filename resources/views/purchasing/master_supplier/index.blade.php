@@ -16,6 +16,7 @@
                             <th>Kontak</th>
                             <th>Alamat</th>
                             <th>Pembayaran</th>
+                            <th>Hari</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +27,13 @@
                                 <td>{{ $item->kontak }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->pembayaran }}</td>
+                                <td>
+                                    @if ($item->pembayaran == 'Cash')
+                                        -
+                                    @else
+                                        {{ $item->hari }}
+                                    @endif
+                                </td>
                             </tr>
                         @empty
                             <td colspan="5" class="text-center">tidak ada data...</td>

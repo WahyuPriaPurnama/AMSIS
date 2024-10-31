@@ -15,9 +15,11 @@
                             <th>Nama Plant</th>
                             <th>Nama Barang</th>
                             <th>Harga</th>
+                            <th>Jumlah</th>
                             <th>Satuan</th>
                             <th>Nama Supplier</th>
-                            <th>Pembelian Terakhir</th>
+                            <th>Pembelian</th>
+                            <th>Jatuh Tempo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,14 +28,21 @@
                                 <td>{{ $data->firstItem() + $loop->iteration - 1 }}</td>
                                 <td>{{ $item->subsidiary->name }}</td>
                                 <td>{{ $item->nama_barang }}</td>
-                                <td>{{ $item->harga }}</td>
+                                <td class="text-end">{{ number_format($item->harga) }}</td>
+                                <td class="text-end">{{ number_format($item->jumlah) }}</td>
                                 <td>{{ $item->satuan }}</td>
                                 <td>{{ $item->master_supplier->nama_supplier }}</td>
                                 <td>{{ $item->tgl_pembelian }}</td>
-                               
+                                <td>
+                                    @if ($item->master_supplier->pembayaran == 'Tempo')
+                                        {{ Carbon\Carbon::parse($item->tgl_pembelian)->addDay($item->master_supplier->hari)->toDateString() }}
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                             </tr>
                         @empty
-                            <td colspan="7" class="text-center">tidak ada data...</td>
+                            <td colspan="8" class="text-center">tidak ada data...</td>
                         @endforelse
 
                     </tbody>

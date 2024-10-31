@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
             'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
         ]);
 
-        
+
 
         $faker = \Faker\Factory::create('id_ID');
         MasterSupplier::create([
@@ -186,13 +186,14 @@ class DatabaseSeeder extends Seeder
             MasterBarang::create([
                 'nama_barang' => $faker->words(3, true),
                 'subsidiary_id' => $faker->numberBetween(1, 6),
-                'harga' => $faker->numerify('#.###,-'),
+                'harga' => $faker->randomNumber(7),
+                'jumlah' => $faker->randomNumber(2),
                 'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
                 'master_supplier_id' => $faker->numberBetween(1, 5),
                 'tgl_pembelian' => $faker->date(),
             ]);
         }
-        
+
 
 
 

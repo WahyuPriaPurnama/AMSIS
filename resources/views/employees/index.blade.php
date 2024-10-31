@@ -84,11 +84,13 @@
                             <td>{{ $employee->seksi }}</td>
                             <td>{{ $employee->departemen }}</td>
                             <td>{{ $employee->status_peg }}</td>
-                            @if ($employee->status_peg == 'PKWT')
-                                <td>{{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) }} hari</td>
-                            @else
-                                <td> - </td>
-                            @endif
+                            <td>
+                                @if ($employee->status_peg == 'PKWT')
+                                    {{ Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) }} hari
+                                @else
+                                    -
+                                @endif
+                            </td>
                             </tr>
                         @empty
                             <td colspan="9" class="text-center">Tidak ada data...</td>
