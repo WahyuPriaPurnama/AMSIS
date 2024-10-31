@@ -19,4 +19,9 @@ class MasterBarang extends Model
     {
         return $this->belongsTo(Subsidiary::class);
     }
+
+    public function scopeIndex($query)
+    {
+        return $query->with('master_supplier','subsidiary');
+    }
 }

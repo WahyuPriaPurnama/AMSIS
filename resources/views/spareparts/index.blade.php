@@ -106,7 +106,7 @@
                                 </td>
                                 <td>{{ $item->nama_barang }}</td>
                                 <td>{{ $item->serial_number }}</td>
-                                <td>{{ $item->jumlah }}</td>
+                                <td>{{ number_format($item->jumlah) }}</td>
                                 <td>{{ $item->satuan }}</td>
                                 <td>{{ $item->updated_at }}</td>
                                 <td>

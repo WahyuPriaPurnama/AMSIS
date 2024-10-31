@@ -28,7 +28,7 @@
                                 <td>{{ $data->firstItem() + $loop->iteration - 1 }}</td>
                                 <td>{{ $item->subsidiary->name }}</td>
                                 <td>{{ $item->nama_barang }}</td>
-                                <td class="text-end">{{ number_format($item->harga) }}</td>
+                                <td class="text-end">Rp. {{ number_format($item->harga) }},-</td>
                                 <td class="text-end">{{ number_format($item->jumlah) }}</td>
                                 <td>{{ $item->satuan }}</td>
                                 <td>{{ $item->master_supplier->nama_supplier }}</td>
