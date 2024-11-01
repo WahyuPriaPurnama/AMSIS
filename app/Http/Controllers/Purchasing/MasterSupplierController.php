@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Purchasing;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Purchasing\StoreMasterSupplierRequest;
+use App\Http\Requests\Purchasing\UpdateMasterSupplierRequest;
 use App\Models\Purchasing\MasterSupplier;
 use Illuminate\Http\Request;
 
@@ -58,9 +59,14 @@ class MasterSupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MasterSupplier $masterSupplier)
+    public function update(UpdateMasterSupplierRequest $request, MasterSupplier $masterSupplier)
     {
-        //
+        $masterSupplier->update($request->validated());
+        if ($masterSupplier) {
+            return redirect()->route('master-supplier.index')->with('alert', "update data $request->nama_supplier berhasil");
+        } else {
+            return redirect()->route('master-supplier.index')->with('alert', "update data $request->nama_supplier gagal");
+        }
     }
 
     /**

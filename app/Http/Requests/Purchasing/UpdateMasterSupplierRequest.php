@@ -4,7 +4,7 @@ namespace App\Http\Requests\Purchasing;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMasterSupplierRequest extends FormRequest
+class UpdateMasterSupplierRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,12 @@ class StoreMasterSupplierRequest extends FormRequest
      */
     public function rules(): array
     {
+        $supplier = $this->route('master_supplier');
         return [
-            'nama_supplier' => 'required|unique:master_suppliers',
-            'kontak' => 'string',
-            'alamat' => 'string',
+            'nama_supplier' => 'required|unique:master_suppliers,nama_supplier,' . $supplier->id,
+            'jenis_supplier' => '',
+            'kontak' => '',
+            'alamat' => '',
             'pembayaran' => 'required',
             'hari' => ''
         ];
@@ -34,7 +36,7 @@ class StoreMasterSupplierRequest extends FormRequest
     {
         return [
             'required' => 'wajib diisi',
-            'string' => 'hanya boleh berisi teks',
+            'unique' => 'nama supplier sudah ada'
         ];
     }
 }

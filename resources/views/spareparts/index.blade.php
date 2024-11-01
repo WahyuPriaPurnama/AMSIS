@@ -19,9 +19,6 @@
             </div>
         </div>
 
-        {{-- modal edit data --}}
-
-
         @component('components.card')
             @slot('header')
                 DATA SPAREPART

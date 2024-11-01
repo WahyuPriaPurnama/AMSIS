@@ -67,12 +67,31 @@
                                 <td>
                                     <a href="{{ route('master-supplier.edit', $item->id) }}" class="text-decoration-none"
                                         data-bs-toggle="modal" data-bs-target="#editSupplier{{ $item->id }}">
-
                                         {{ $item->nama_supplier }}
                                     </a>
+                                    <div class="modal fade" id="editSupplier{{ $item->id }}" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data Supplier
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                   
+                                                    @include('purchasing.master_supplier.edit')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>{{ $item->jenis_supplier }}</td>
-                                <td><a href="http://wa.me/62{{ $item->kontak }}" target="_blank" data-bs-toggle="tooltip" data-bs-title="Default tooltip">{{ $item->kontak }}</a></td>
+                                <td><a href="http://wa.me/62{{ $item->kontak }}" target="_blank" data-bs-toggle="tooltip"
+                                        data-bs-title="Default tooltip">{{ $item->kontak }}</a></td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->pembayaran }}</td>
                                 <td>
