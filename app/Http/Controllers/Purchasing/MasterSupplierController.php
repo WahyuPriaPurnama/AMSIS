@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Purchasing;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Purchasing\StoreMasterSupplierRequest;
 use App\Models\Purchasing\MasterSupplier;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,14 @@ class MasterSupplierController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMasterSupplierRequest $request)
     {
-        //
+        $data = MasterSupplier::create($request->validated());
+        if ($data) {
+            return redirect()->route('master-supplier.index')->with('alert', "Input data $request->nama_supplier berhasil");
+        } else {
+            return redirect()->route('master-supplier.index')->with('alert', "Input data $request->nama_supplier gagal");
+        }
     }
 
     /**

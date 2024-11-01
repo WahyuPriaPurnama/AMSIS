@@ -53,6 +53,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nama Supplier</th>
+                            <th>Jenis Supplier</th>
                             <th>Kontak</th>
                             <th>Alamat</th>
                             <th>Pembayaran</th>
@@ -63,8 +64,15 @@
                         @forelse ($data as $item)
                             <tr>
                                 <td>{{ $data->firstItem() + $loop->iteration - 1 }}</td>
-                                <td>{{ $item->nama_supplier }}</td>
-                                <td>{{ $item->kontak }}</td>
+                                <td>
+                                    <a href="{{ route('master-supplier.edit', $item->id) }}" class="text-decoration-none"
+                                        data-bs-toggle="modal" data-bs-target="#editSupplier{{ $item->id }}">
+
+                                        {{ $item->nama_supplier }}
+                                    </a>
+                                </td>
+                                <td>{{ $item->jenis_supplier }}</td>
+                                <td><a href="http://wa.me/62{{ $item->kontak }}" target="_blank" data-bs-toggle="tooltip" data-bs-title="Default tooltip">{{ $item->kontak }}</a></td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->pembayaran }}</td>
                                 <td>

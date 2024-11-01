@@ -87,6 +87,7 @@ class DatabaseSeeder extends Seeder
         $faker = \Faker\Factory::create('id_ID');
         MasterSupplier::create([
             'nama_supplier' => 'Satelit',
+            'jenis_supplier' => $faker->words(3, true),
             'kontak' => $faker->numerify('085#########'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
@@ -94,6 +95,7 @@ class DatabaseSeeder extends Seeder
         ]);
         MasterSupplier::create([
             'nama_supplier' => 'Wardiman',
+            'jenis_supplier' => $faker->words(3, true),
             'kontak' => $faker->numerify('085#########'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
@@ -101,6 +103,7 @@ class DatabaseSeeder extends Seeder
         ]);
         MasterSupplier::create([
             'nama_supplier' => 'Depo Bangunan',
+            'jenis_supplier' => $faker->words(3, true),
             'kontak' => $faker->numerify('085#########'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
@@ -108,6 +111,7 @@ class DatabaseSeeder extends Seeder
         ]);
         MasterSupplier::create([
             'nama_supplier' => 'Rajawali',
+            'jenis_supplier' => $faker->words(3, true),
             'kontak' => $faker->numerify('085#########'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
@@ -115,6 +119,7 @@ class DatabaseSeeder extends Seeder
         ]);
         MasterSupplier::create([
             'nama_supplier' => 'Prima Teknik',
+            'jenis_supplier' => $faker->words(3, true),
             'kontak' => $faker->numerify('085#########'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),

@@ -1,4 +1,4 @@
-<form action="{{ route('master-supplier.store') }}" method="post">
+<form action="{{ route('master-supplier.update') }}" method="post">
     @csrf
     <div class="row mb-3">
         <div class="col-sm-4 col-md-4">
@@ -48,6 +48,6 @@
             <textarea class="form-control" id="alamat" rows="3" name="alamat">{{ old('alamat') }}</textarea>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Simpan</button>
+    <button type="submit" class="btn btn-primary">Update</button>
     <button type="reset" class="btn btn-warning">Reset</button>
 </form>

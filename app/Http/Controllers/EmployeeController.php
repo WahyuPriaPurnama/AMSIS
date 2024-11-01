@@ -84,7 +84,6 @@ class EmployeeController extends Controller
         \App\Helpers\LogActivity::addToLog();
         $data = Employee::create($request->validated());
 
-
         if ($request->file('pp')) {
             $pp = $this->fileUpload($request, 'public/foto_profil', 'pp');
             $data->update(['pp' => $pp->hashName()]);
@@ -116,9 +115,9 @@ class EmployeeController extends Controller
         }
 
         if ($data) {
-            return redirect()->route('employees.index')->with('alert', "Input data berhasil");
+            return redirect()->route('employees.index')->with('alert', "Input data $request->nama berhasil");
         } else {
-            return redirect()->route('employees.index')->with('alert', "Input data gagal");
+            return redirect()->route('employees.index')->with('alert', "Input data $request->nama gagal");
         }
     }
 
@@ -198,9 +197,9 @@ class EmployeeController extends Controller
         }
 
         if ($employee) {
-            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data berhasil");
+            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data $request->nama berhasil");
         } else {
-            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data  gagal");
+            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data $request->nama gagal");
         }
     }
 
