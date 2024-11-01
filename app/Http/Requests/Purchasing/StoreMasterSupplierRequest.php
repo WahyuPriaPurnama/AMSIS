@@ -23,6 +23,7 @@ class StoreMasterSupplierRequest extends FormRequest
     {
         return [
             'nama_supplier' => 'required|unique:master_suppliers',
+            'jenis_supplier' => '',
             'kontak' => '',
             'alamat' => '',
             'pembayaran' => 'required',
@@ -34,7 +35,7 @@ class StoreMasterSupplierRequest extends FormRequest
     {
         return [
             'required' => 'wajib diisi',
-            'unique'=>'nama supplier sudah ada'
+            'unique' => 'nama supplier sudah ada'
         ];
     }
 }
