@@ -81,4 +81,11 @@ class MasterSupplierController extends Controller
             return redirect()->route('master-supplier.index')->with('alert', "hapus data $masterSupplier->nama_supplier gagal");
         }
     }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        // dd($search);
+        $data = MasterSupplier::where('nama_supplier', 'like', "%" . $search . "%")->paginate(100);
+        return view('purchasing.master_supplier.index', compact('data'));
+    }
 }

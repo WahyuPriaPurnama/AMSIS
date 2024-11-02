@@ -24,7 +24,7 @@
             @endslot
             <div class="row">
                 <div class="col">
-                    <form action="#" method="get">
+                    <form action="{{ route('master-supplier.search') }}" method="get">
                         <div class="input-group mb-3">
                             <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
                                 placeholder="cari nama supplier" id="">
@@ -146,7 +146,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <td colspan="6" class="text-center">tidak ada data...</td>
+                            <td colspan="8" class="text-center">tidak ada data...</td>
                         @endforelse
 
                     </tbody>

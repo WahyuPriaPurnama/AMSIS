@@ -86,7 +86,7 @@ class SparepartController extends Controller
     {
         $search = $request->search;
 
-        $data = Sparepart::where('nama_barang', 'like', "%" . $search . "%")->get();
+        $data = Sparepart::where('nama_barang', 'like', "%" . $search . "%")->paginate(100);
 
         return view('spareparts.index', compact('data'));
     }
