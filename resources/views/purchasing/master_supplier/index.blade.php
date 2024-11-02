@@ -146,7 +146,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <td colspan="5" class="text-center">tidak ada data...</td>
+                            <td colspan="6" class="text-center">tidak ada data...</td>
                         @endforelse
 
                     </tbody>

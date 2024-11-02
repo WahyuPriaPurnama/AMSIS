@@ -79,6 +79,7 @@
                                     <a href="{{ route('master-supplier.index') }}"
                                         class="dropdown-item @yield('menuSupplier')">Master
                                         Supplier</a>
+                                        <a href="#" class="dropdown-item">Transaksi Selesai</a>
                                 </ul>
                             </li>
                         </ul>
