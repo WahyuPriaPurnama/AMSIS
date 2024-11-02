@@ -17,7 +17,9 @@
                     <div class="col">
                         <label class="form-label" for="nip">NIP</label>
                         <input type="text" id="nip" name="nip" value="{{ $employee->nip }}"
-                            class="form-control @error('nip') is-invalid @enderror">
+                            class="form-control @error('nip') is-invalid @enderror" aria-describedby="NIPHelpBlock">
+                        <div id="NIPHelpBlock" class="form-text">
+                            standarnya 9 digit </div>
                         @error('nip')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -129,7 +131,9 @@
                     <div class="col">
                         <label class="form-label" for="awal_kontrak">Awal Kontrak</label>
                         <input type="date" id="awal_kontrak" name="awal_kontrak" value="{{ $employee->awal_kontrak }}"
-                            class="form-control @error('awal_kontrak') is-invalid @enderror">
+                            class="form-control @error('awal_kontrak') is-invalid @enderror"aria-describedby="statusHelpBlock">
+                        <div id="statusHelpBlock" class="form-text">
+                            kosongi jika PKWTT</div>
                         @error('awal_kontrak')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -138,7 +142,9 @@
                         <label class="form-label" for="akhir_kontrak">Akhir Kontrak</label>
                         <input type="date" id="akhir_kontrak" name="akhir_kontrak"
                             value="{{ $employee->akhir_kontrak }}"
-                            class="form-control @error('akhir_kontrak') is-invalid @enderror">
+                            class="form-control @error('akhir_kontrak') is-invalid @enderror"aria-describedby="statusHelpBlock">
+                        <div id="statusHelpBlock" class="form-text">
+                            kosongi jika PKWTT</div>
                         @error('akhir_kontrak')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -265,7 +271,9 @@
                     <div class="col-2">
                         <label class="form-label" for="jml_ank">Jumlah Anak</label>
                         <input type="text" id="jml_ank" name="jml_ank" value="{{ $employee->jml_ank }}"
-                            class="form-control @error('jml_ank') is-invalid @enderror">
+                            class="form-control @error('jml_ank') is-invalid @enderror"aria-describedby="statusHelpBlock">
+                        <div id="statusHelpBlock" class="form-text">
+                            kosongi jika Lajang</div>
                         @error('jml_ank')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

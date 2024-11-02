@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('jumlah');
             $table->string('satuan');
-            $table->foreignId('master_supplier_id')->constrained();
+            $table->foreignId('master_supplier_id')->constrained()->cascadeOnDelete();
             $table->date('tgl_pembelian');
             $table->timestamps();
         });

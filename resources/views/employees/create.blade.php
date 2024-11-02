@@ -14,15 +14,17 @@
                     <hr>
                     <div class="col-sm-6 col-md-2 mb-3">
                         <label class="form-label" for="nip">NIP</label>
-                        <input type="text" id="nip" placeholder="masukkan NIP 9 digit" name="nip" value="{{ old('nip') }}"
-                            class="form-control @error('nip') is-invalid @enderror">
+                        <input type="text" id="nip" name="nip" value="{{ old('nip') }}"
+                            class="form-control @error('nip') is-invalid @enderror" aria-describedby="NIPHelpBlock">
+                        <div id="NIPHelpBlock" class="form-text">
+                            standarnya 9 digit </div>
                         @error('nip')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-sm-6 col-md-3 mb-3">
                         <label class="form-label" for="nama">Nama Lengkap</label>
-                        <input type="text" id="nama"  name="nama" value="{{ old('nama') }}"
+                        <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
                             class="form-control @error('nama') is-invalid @enderror">
                         @error('nama')
                             <div class="text-danger">{{ $message }}</div>
@@ -129,7 +131,10 @@
                     <div class="col mb-3">
                         <label class="form-label" for="awal_kontrak">Awal Kontrak</label>
                         <input type="date" id="awal_kontrak" name="awal_kontrak" value="{{ old('awal_kontrak') }}"
-                            class="form-control @error('awal_kontrak') is-invalid @enderror">
+                            class="form-control @error('awal_kontrak') is-invalid @enderror"
+                            aria-describedby="statusHelpBlock">
+                        <div id="statusHelpBlock" class="form-text">
+                            kosongi jika PKWTT</div>
                         @error('awal_kontrak')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -137,7 +142,9 @@
                     <div class="col">
                         <label class="form-label" for="akhir_kontrak">Akhir Kontrak</label>
                         <input type="date" id="akhir_kontrak" name="akhir_kontrak" value="{{ old('akhir_kontrak') }}"
-                            class="form-control @error('akhir_kontrak') is-invalid @enderror">
+                            class="form-control @error('akhir_kontrak') is-invalid @enderror"aria-describedby="statusHelpBlock">
+                        <div id="statusHelpBlock" class="form-text">
+                            kosongi jika PKWTT</div>
                         @error('akhir_kontrak')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -264,7 +271,9 @@
                     <div class="col-sm-1 mb-3">
                         <label class="form-label" for="jml_ank">Anak</label>
                         <input type="number" id="jml_ank" name="jml_ank" value="{{ old('jml_ank') }}"
-                            class="form-control @error('jml_ank') is-invalid @enderror">
+                            class="form-control @error('jml_ank') is-invalid @enderror"aria-describedby="statusHelpBlock">
+                            <div id="statusHelpBlock" class="form-text">
+                           kosongi jika Lajang</div>
                         @error('jml_ank')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -333,7 +342,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                
+
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="bpjs_kes">BPJS Kesehatan</label>
                         <input type="file" id="bpjs_kes" name="bpjs_kes"

@@ -74,6 +74,11 @@ class MasterSupplierController extends Controller
      */
     public function destroy(MasterSupplier $masterSupplier)
     {
-        //
+        $masterSupplier->delete();
+        if ($masterSupplier) {
+            return redirect()->route('master-supplier.index')->with('alert', "hapus data $masterSupplier->nama_supplier berhasil");
+        } else {
+            return redirect()->route('master-supplier.index')->with('alert', "hapus data $masterSupplier->nama_supplier gagal");
+        }
     }
 }

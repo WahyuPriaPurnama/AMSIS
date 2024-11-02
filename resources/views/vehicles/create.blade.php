@@ -12,9 +12,11 @@
                 <div class="row">
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="jenis_kendaraan">Jenis Kendaraan</label>
-                        <input type="text" id="jenis_kendaraan" placeholder="Contoh: Toyota Starlet" name="jenis_kendaraan"
+                        <input type="text" id="jenis_kendaraan" name="jenis_kendaraan"
                             value="{{ old('jenis_kendaraan') }}"
-                            class="form-control @error('jenis_kendaraan') is-invalid @enderror">
+                            class="form-control @error('jenis_kendaraan') is-invalid @enderror" aria-describedby="jenis_kendaraan">
+                            <div id="jenis_kendaraan" class="form-text">
+                           contoh: Toyota Starlet</div>
                         @error('jenis_kendaraan')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -56,7 +58,7 @@
                 <div class="row">
                     <div class="col-md-2 col-6 mb-3">
                         <label class="form-label" for="pengguna">Pengguna</label>
-                        <input type="text" class="form-control @error('pengguna') is-invalid @enderror" placeholder="Samsul"
+                        <input type="text" class="form-control @error('pengguna') is-invalid @enderror"
                             name="pengguna" value="{{ old('pengguna') }}" id="">
                         @error('pengguna')
                             <div class="text-danger">{{ $message }}</div>
@@ -82,16 +84,16 @@
                         @enderror
                     </div>
                     <div class="col-md-2 col-3 mb-3">
-                        <label class="form-label" for="tahun">Tahun</label>
+                        <label class="form-label" for="tahun">Tahun Produksi</label>
                         <input type="number" class="form-control @error('tahun') is-invalid @enderror" name="tahun"
-                            placeholder="2022" value="{{ old('tahun') }}" id="">
+                            value="{{ old('tahun') }}" id="">
                         @error('tahun')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-3 col-6 mb-3">
                         <label class="form-label" for="atas_nama">Atas Nama</label>
-                        <input type="text" class="form-control @error('atas_nama') is-invalid @enderror" placeholder="Toha"
+                        <input type="text" class="form-control @error('atas_nama') is-invalid @enderror"
                             name="atas_nama" value="{{ old('atas_nama') }}" id="">
                         @error('atas_nama')
                             <div class="text-danger">{{ $message }}</div>
@@ -100,7 +102,9 @@
                     <div class="col-md-2 col-3 mb-3">
                         <label class="form-label" for="nopol">Nopol</label>
                         <input type="text" class="form-control @error('nopol') is-invalid @enderror"
-                            placeholder="Contoh: X 1234 XX" name="nopol" value="{{ old('nopol') }}" id="">
+                            name="nopol" value="{{ old('nopol') }}" id="" aria-describedby="nopol">
+                            <div id="nopol" class="form-text">
+                           contoh: X 1234 XX</div>
                         @error('nopol')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

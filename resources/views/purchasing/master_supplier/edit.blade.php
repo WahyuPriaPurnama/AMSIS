@@ -31,9 +31,9 @@
         <div class="col-sm-6 col-md-3">
             <label class="form-label" for="pembayaran">Pembayaran</label>
             <select class="form-select @error('pembayaran') is-invalid @enderror" name="pembayaran" id="pembayaran">
-                <option selected value="">Pilih</option>
+                <option value="">Pilih</option>
                 <option @selected($item->pembayaran == 'Cash') value="Cash">Cash</option>
-                <option @selected($item->pembayarn == 'Tempo') value="Tempo">Tempo</option>
+                <option @selected($item->pembayaran == 'Tempo') value="Tempo">Tempo</option>
             </select>
             @error('pembayaran')
                 <div class="text-danger">{{ $message }}</div>
@@ -42,7 +42,9 @@
         <div class="col-md-3 col-sm-6">
             <label for="hari" class="form-label">Hari</label>
             <input type="number" name="hari" class="form-control @error('hari') is-invalid @enderror"
-                value="{{ old('hari') ?? $item->hari }}" id="">
+                value="{{ old('hari') ?? $item->hari }}" id="" aria-describedby="hariHelpBlock">
+                <div id="hariHelpBlock" class="form-text">
+               kosongkan jika cash   </div>
         </div>
         <div class="col-sm-12 col-md-6 mb-3">
             <label class="form-label" for="alamat">Alamat</label>

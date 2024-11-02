@@ -41,7 +41,9 @@
         <div class="col-md-3 col-sm-6">
             <label for="hari" class="form-label">Hari</label>
             <input type="number" name="hari" class="form-control @error('hari') is-invalid @enderror"
-                value="{{ old('hari') }}" id="">
+                value="{{ old('hari') }}" id="" aria-describedby="hariHelpBlock">
+            <div id="hariHelpBlock" class="form-text">
+                kosongkan jika cash </div>
         </div>
         <div class="col-sm-12 col-md-6 mb-3">
             <label class="form-label" for="alamat">Alamat</label>
