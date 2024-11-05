@@ -75,7 +75,7 @@ class SubsidiaryController extends Controller
             $logo = $this->fileUpload($request, 'public/subsidiary/logo/', 'logo');
             $subsidiary->update(['logo' => $logo->hashName()]);
         }
-        return redirect()->route('subsidiaries.show', ['subsidiary' => $subsidiary->id])->with('alert', "update data berhasil");
+        return redirect()->route('subsidiaries.index')->with('alert', "update data $subsidiary->name berhasil");
     }
 
     /**

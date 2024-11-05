@@ -53,6 +53,7 @@ route::middleware('auth')->group(function () {
     route::get('sparepart/search', [SparepartController::class, 'search'])->name('sparepart.search');
     route::get('sparepart-export', [SparepartController::class, 'export'])->name('spareparts.export');
 
+    route::get('master-barang/search', [MasterBarangController::class, 'search'])->name('master-barang.search');
     route::resource('master-barang', MasterBarangController::class);
 
     route::get('master-supplier/search', [MasterSupplierController::class, 'search'])->name('master-supplier.search');

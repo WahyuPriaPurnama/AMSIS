@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Purchasing;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Purchasing\StoreMasterBarangRequest;
 use App\Models\Purchasing\MasterBarang;
+use App\Models\Purchasing\MasterSupplier;
+use App\Models\Subsidiary;
 use Illuminate\Http\Request;
 
 class MasterBarangController extends Controller
@@ -14,23 +17,27 @@ class MasterBarangController extends Controller
     public function index()
     {
         $data = MasterBarang::Index()->latest()->paginate(100);
-        return view('purchasing.master_barang.index', compact('data'));
+        $subsidiaries = Subsidiary::all();
+        $suppliers = MasterSupplier::all();
+        return view('purchasing.master_barang.index', compact('data', 'subsidiaries', 'suppliers'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMasterBarangRequest $request)
     {
-        //
+        $data = MasterBarang::create($request->validated());
+        if ($data) {
+            return redirect()->route('master-barang.index')->with('alert', "input data $request->nama_barang berhasil");
+        } else {
+            return redirect()->route('master-barang.index')->with('alert', "input data $request->nama_barang gagal");
+        }
     }
 
     /**
@@ -63,5 +70,15 @@ class MasterBarangController extends Controller
     public function destroy(MasterBarang $masterBarang)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        // dd($search);
+        $subsidiaries = Subsidiary::all();
+        $suppliers = MasterSupplier::all();
+        $data = MasterBarang::where('nama_barang', 'like', "%" . $search . "%")->paginate(100);
+        return view('master-barang.index', compact('data', 'suppliers', 'subsidiaries'));
     }
 }

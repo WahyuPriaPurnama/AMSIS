@@ -4,7 +4,7 @@ namespace App\Http\Requests\Purchasing;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMasterSupplierRequest extends FormRequest
+class StoreMasterBarangRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,20 +22,22 @@ class StoreMasterSupplierRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_supplier' => 'required|unique:master_suppliers',
-            'jenis_supplier' => 'required',
-            'kontak' => 'required',
-            'alamat' => 'required',
-            'pembayaran' => 'required',
-            'hari' => ''
+            'subsidiary_id' => 'required',
+            'nomor_rfo' => 'required',
+            'nomor_po' => 'required|unique:master_barangs',
+            'nama_barang' => 'required',
+            'harga' => 'required',
+            'jumlah' => 'required',
+            'satuan' => 'required',
+            'master_supplier_id' => 'required',
+            'tgl_pembelian' => 'required'
         ];
     }
-
     public function messages()
     {
         return [
             'required' => 'wajib diisi',
-            'unique' => 'nama supplier sudah ada'
+            'unique' => 'nomor po tidak boleh sama'
         ];
     }
 }
