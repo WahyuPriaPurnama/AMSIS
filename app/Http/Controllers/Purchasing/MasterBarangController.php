@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Purchasing;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Purchasing\StoreMasterBarangRequest;
+use App\Http\Requests\Purchasing\UpdateMasterBarangRequest;
 use App\Models\Purchasing\MasterBarang;
 use App\Models\Purchasing\MasterSupplier;
 use App\Models\Subsidiary;
@@ -36,7 +37,7 @@ class MasterBarangController extends Controller
         if ($data) {
             return redirect()->route('master-barang.index')->with('alert', "input data $request->nama_barang berhasil");
         } else {
-            return redirect()->route('master-barang.index')->with('alert', "input data $request->nama_barang gagal");
+            return redirect()->route('master-barang.index')->with('alert2', "input data $request->nama_barang gagal");
         }
     }
 
@@ -59,9 +60,14 @@ class MasterBarangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MasterBarang $masterBarang)
+    public function update(UpdateMasterBarangRequest $request, MasterBarang $masterBarang)
     {
-        //
+        $masterBarang->update($request->validated());
+        if ($masterBarang) {
+            return redirect()->route('master-barang.index')->with('alert', "update $request->nama_barang berhasil");
+        } else {
+            return redirect()->route('master-barang.index')->with('alert2', "update $request->nama_barang gagal");
+        }
     }
 
     /**

@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-   
+    @vite('resources/sass/app.scss')
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -79,7 +79,7 @@
                                     <a href="{{ route('master-supplier.index') }}"
                                         class="dropdown-item @yield('menuSupplier')">Master
                                         Supplier</a>
-                                        <a href="#" class="dropdown-item">Transaksi Selesai</a>
+                                    <a href="#" class="dropdown-item">Transaksi Selesai</a>
                                 </ul>
                             </li>
                         </ul>
@@ -130,6 +130,7 @@
             AMS Information System | © {{ date('Y') }} WPP. All rights reserved.
         </div>
     </footer>
+    @vite('resources/js/app.js')
 </body>
 
 </html>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\SparepartExport;
 use App\Http\Requests\StoreSparepartRequest;
 use App\Http\Requests\UpdateSparepartRequest;
-use App\Models\Employee;
 use App\Models\Sparepart;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -38,9 +37,9 @@ class SparepartController extends Controller
         $this->authorize('create', Sparepart::class);
         $data = Sparepart::create($request->validated());
         if ($data) {
-            return redirect()->route('spareparts.index')->with('alert', "Input data berhasil");
+            return redirect()->route('spareparts.index')->with('alert', "input $request->nama_barang berhasil");
         } else {
-            return redirect()->route('spareparts.index')->with('alert', "Input data gagal");
+            return redirect()->route('spareparts.index')->with('alert2', "input $request->nama_barang gagal");
         }
     }
 
@@ -64,8 +63,11 @@ class SparepartController extends Controller
     {
         $this->authorize('update', Sparepart::class);
         $sparepart->update($request->validated());
-
-        return redirect()->route('spareparts.index')->with('alert', 'update data berhasil');
+        if ($sparepart) {
+            return redirect()->route('spareparts.index')->with('alert', "update $request->nama_barang berhasil");
+        } else {
+            return redirect()->route('spareparts.index')->with('alerts', "update $request->nama_barang gagal");
+        }
     }
 
     /**
@@ -78,7 +80,7 @@ class SparepartController extends Controller
         if ($sparepart) {
             return redirect()->route('spareparts.index')->with('alert', "hapus data berhasil");
         } else {
-            return redirect()->route('spareparts.index')->with('alert', "hapus data gagal");
+            return redirect()->route('spareparts.index')->with('alert2', "hapus data gagal");
         }
     }
 
@@ -94,6 +96,5 @@ class SparepartController extends Controller
     public function export()
     {
         return Excel::download(new SparepartExport, 'data-spareparts.xlsx');
-
     }
 }

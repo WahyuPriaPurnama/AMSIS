@@ -7,7 +7,7 @@
             <select class="form-select @error('subsidiary_id') is-invalid @enderror" name="subsidiary_id"
                 id="subsidiary_id">
                 @foreach ($subsidiaries as $subsidiary)
-                    <option @selected($subsidiary->id == $item->subsidiary_id) value="{{ $item->subsidiary_id }}">{{ $subsidiary->name }}
+                    <option @selected($subsidiary->id == $item->subsidiary_id) value="{{ $subsidiary->id }}">{{ $subsidiary->name }}
                     </option>
                 @endforeach
             </select>
@@ -20,7 +20,7 @@
             <select class="form-select @error('master_supplier_id') is-invalid @enderror" name="master_supplier_id"
                 id="master_supplier_id">
                 @foreach ($suppliers as $supplier)
-                    <option @selected($supplier->id == $item->master_supplier_id) value="{{ $item->master_supplier_id }}">
+                    <option @selected($supplier->id == $item->master_supplier_id) value="{{ $supplier->id }}">
                         {{ $supplier->nama_supplier }}</option>
                 @endforeach
             </select>

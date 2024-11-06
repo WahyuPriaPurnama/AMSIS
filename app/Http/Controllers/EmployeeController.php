@@ -117,7 +117,7 @@ class EmployeeController extends Controller
         if ($data) {
             return redirect()->route('employees.index')->with('alert', "Input data $request->nama berhasil");
         } else {
-            return redirect()->route('employees.index')->with('alert', "Input data $request->nama gagal");
+            return redirect()->route('employees.index')->with('alert2', "Input data $request->nama gagal");
         }
     }
 
@@ -199,7 +199,7 @@ class EmployeeController extends Controller
         if ($employee) {
             return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data $request->nama berhasil");
         } else {
-            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert', "update data $request->nama gagal");
+            return redirect()->route('employees.show', ['employee' => $employee->id])->with('alert2', "update data $request->nama gagal");
         }
     }
 
@@ -223,7 +223,7 @@ class EmployeeController extends Controller
         if ($employee) {
             return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama berhasil");
         } else {
-            return redirect()->route('employees.index')->with('alert', "hapus data $employee->nama gagal");
+            return redirect()->route('employees.index')->with('alert2', "hapus data $employee->nama gagal");
         }
     }
 

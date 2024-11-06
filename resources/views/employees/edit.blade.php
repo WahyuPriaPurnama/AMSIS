@@ -42,7 +42,7 @@
                     </div>
                     <div class="col">
                         <label class="form-label" for="plant">Plant</label>
-                        <select class="form-select" name="subsidiary_id" id="plant" value="{{ $employee->subsidiary_id }}">
+                        <select class="form-select" name="subsidiary_id" id="plant">
 
                             @foreach ($subsidiaries as $subsidiary)
                                 <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == $employee->subsidiary_id)>

@@ -36,7 +36,7 @@ class MasterSupplierController extends Controller
         if ($data) {
             return redirect()->route('master-supplier.index')->with('alert', "Input data $request->nama_supplier berhasil");
         } else {
-            return redirect()->route('master-supplier.index')->with('alert', "Input data $request->nama_supplier gagal");
+            return redirect()->route('master-supplier.index')->with('alert2', "Input data $request->nama_supplier gagal");
         }
     }
 
@@ -65,7 +65,7 @@ class MasterSupplierController extends Controller
         if ($masterSupplier) {
             return redirect()->route('master-supplier.index')->with('alert', "update data $request->nama_supplier berhasil");
         } else {
-            return redirect()->route('master-supplier.index')->with('alert', "update data $request->nama_supplier gagal");
+            return redirect()->route('master-supplier.index')->with('alert2', "update data $request->nama_supplier gagal");
         }
     }
 
@@ -78,7 +78,7 @@ class MasterSupplierController extends Controller
         if ($masterSupplier) {
             return redirect()->route('master-supplier.index')->with('alert', "hapus data $masterSupplier->nama_supplier berhasil");
         } else {
-            return redirect()->route('master-supplier.index')->with('alert', "hapus data $masterSupplier->nama_supplier gagal");
+            return redirect()->route('master-supplier.index')->with('alert2', "hapus data $masterSupplier->nama_supplier gagal");
         }
     }
     public function search(Request $request)
