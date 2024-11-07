@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('master_supplier_id')->constrained()->cascadeOnDelete();
             $table->date('tgl_pembelian');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

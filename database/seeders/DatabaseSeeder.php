@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
         ]);
         Subsidiary::create([
-            'name' => 'PT. ELN Plant Malang',
+            'name' => 'PT. ELN 1',
             'tagline' => 'Can Maker',
             'npwp' => '94.024.473.4-657.000',
             'email' => 'headoffice@eln.co.id',
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
                             East Java 65152'
         ]);
         Subsidiary::create([
-            'name' => 'PT. ELN Plant Banyuwangi',
+            'name' => 'PT. ELN 2',
             'tagline' => 'ABF and Cold Storage',
             'npwp' => '94.024.473.4-657.000',
             'email' => 'headoffice@eln.co.id',
@@ -126,7 +126,7 @@ class DatabaseSeeder extends Seeder
             'hari' => $faker->numerify('##'),
         ]);
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Employee::create([
                 'nip' => $faker->randomNumber(9),
                 'nama' => $faker->name(),
@@ -216,28 +216,30 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('HoldingAdmin_9H!7'),
             'role' => 'holding-admin'
         ]);
-
+        User::create([
+            'name'=>'Holding Purchasing',
+            'email'=>'purchasing.admin@amsgroup.co.id',
+            'password'=>Hash::make('HoldingPurchasing'),
+            'role'=>'holding-purchasing'
+        ]);
         User::create([
             'name' => 'ELN Admin',
             'email' => 'eln.admin@amsgroup.co.id',
             'password' => Hash::make('ELNAdmin_6c\9'),
             'role' => 'eln-admin'
         ]);
-
         User::create([
             'name' => 'ELN Sparepart',
             'email' => 'eln.sparepart@amsgroup.co.id',
             'password' => Hash::make('ELNSparepart_6c\9'),
             'role' => 'eln-sparepart'
         ]);
-
         User::create([
             'name' => 'ELN 2 Admin',
             'email' => 'eln2.admin@amsgroup.co.id',
             'password' => Hash::make('ELN2Admin_tT45'),
             'role' => 'eln2-admin'
         ]);
-
         User::create([
             'name' => 'Haka Admin',
             'email' => 'haka.admin@amsgroup.co.id',

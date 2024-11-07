@@ -17,7 +17,8 @@ class MasterBarangController extends Controller
      */
     public function index()
     {
-        $data = MasterBarang::Index()->latest()->paginate(100);
+        $this->authorize('view', MasterBarang::class);
+        $data = MasterBarang::Index()->sortable()->latest()->paginate(50);
         $subsidiaries = Subsidiary::all();
         $suppliers = MasterSupplier::all();
         return view('purchasing.master_barang.index', compact('data', 'subsidiaries', 'suppliers'));
@@ -33,6 +34,7 @@ class MasterBarangController extends Controller
      */
     public function store(StoreMasterBarangRequest $request)
     {
+        $this->authorize('create', MasterBarang::class);
         $data = MasterBarang::create($request->validated());
         if ($data) {
             return redirect()->route('master-barang.index')->with('alert', "input data $request->nama_barang berhasil");
@@ -62,6 +64,7 @@ class MasterBarangController extends Controller
      */
     public function update(UpdateMasterBarangRequest $request, MasterBarang $masterBarang)
     {
+        $this->authorize('update', MasterBarang::class);
         $masterBarang->update($request->validated());
         if ($masterBarang) {
             return redirect()->route('master-barang.index')->with('alert', "update $request->nama_barang berhasil");
@@ -75,7 +78,7 @@ class MasterBarangController extends Controller
      */
     public function destroy(MasterBarang $masterBarang)
     {
-        //
+        $this->authorize('forceDelete', MasterBarang::class);
     }
 
     public function search(Request $request)
@@ -84,7 +87,7 @@ class MasterBarangController extends Controller
         // dd($search);
         $subsidiaries = Subsidiary::all();
         $suppliers = MasterSupplier::all();
-        $data = MasterBarang::where('nama_barang', 'like', "%" . $search . "%")->paginate(100);
+        $data = MasterBarang::where('nama_barang', 'like', "%" . $search . "%")->paginate(50);
         return view('master-barang.index', compact('data', 'suppliers', 'subsidiaries'));
     }
 }

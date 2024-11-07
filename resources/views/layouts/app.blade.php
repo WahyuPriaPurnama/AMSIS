@@ -69,19 +69,21 @@
                                     </ul>
                                 </li>
                             @endcan
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                    Purchasing
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <a href="{{ route('master-barang.index') }}"
-                                        class="dropdown-item @yield('menuBarang')">Master Barang</a>
-                                    <a href="{{ route('master-supplier.index') }}"
-                                        class="dropdown-item @yield('menuSupplier')">Master
-                                        Supplier</a>
-                                    <a href="#" class="dropdown-item">Transaksi Selesai</a>
-                                </ul>
-                            </li>
+                            @can('view', App\Models\Purchasing\MasterBarang::class)
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                        Purchasing
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <a href="{{ route('master-barang.index') }}"
+                                            class="dropdown-item @yield('menuBarang')">Master Barang</a>
+                                        <a href="{{ route('master-supplier.index') }}"
+                                            class="dropdown-item @yield('menuSupplier')">Master
+                                            Supplier</a>
+                                        <a href="#" class="dropdown-item">Transaksi Selesai</a>
+                                    </ul>
+                                </li>
+                            @endcan
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
@@ -131,6 +133,12 @@
         </div>
     </footer>
     @vite('resources/js/app.js')
+    <script>
+        document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            .forEach(tooltip => {
+                new bootstrap.Tooltip(tooltip)
+            })
+    </script>
 </body>
 
 </html>

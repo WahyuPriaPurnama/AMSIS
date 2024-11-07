@@ -37,14 +37,15 @@
                     </form>
                 </div>
                 <div class="col text-end">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
-                        </svg>
-                    </button>
-
+                    @can('create', App\Models\Purchasing\MasterBarang::class)
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                            </svg>
+                        </button>
+                    @endcan
                 </div>
             </div>
             <div class="table-responsive">
@@ -52,7 +53,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nama Plant</th>
+                            <th>@sortablelink('subsidiary_id', 'Nama Plant')</th>
                             <th>Nama Supplier</th>
                             <th>Nomor RFO</th>
                             <th>Nomor PO</th>
@@ -108,15 +109,27 @@
                                         -
                                     @endif
                                 </td>
-                                <td><a href="#" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                                </svg></a>
-                                <a href="#" class="btn btn-success">Selesai</a></td>
+                                <td>
+                                    @can('delete', App\Models\Purchasing\MasterBarang::class)
+                                        <a href="#" class="btn btn-success"  data-bs-toggle="tooltip" data-bs-title="selesaikan transaksi"><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                            </svg></a>
+                                    @endcan
+                                    @can('forceDelete', App\Models\Purchasing\MasterBarang::class)
+                                        <a href="#" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="hapus"><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                                            </svg></a>
+                                    @endcan
+                                </td>
                             </tr>
                         @empty
-                            <td colspan="9" class="text-center">tidak ada data...</td>
+                            <td colspan="12" class="text-center">tidak ada data...</td>
                         @endforelse
 
                     </tbody>

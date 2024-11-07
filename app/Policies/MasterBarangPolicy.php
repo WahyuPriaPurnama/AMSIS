@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Sparepart;
+use App\Models\Purchasing\MasterBarang;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class SparepartPolicy
+class MasterBarangPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -21,7 +21,7 @@ class SparepartPolicy
      */
     public function view(User $user): bool
     {
-        return in_array($user->role, ['super-admin', 'holding-admin', 'eln-sparepart']);
+        return in_array($user->role, ['super-admin', 'holding-admin', 'holding-purchasing']);
     }
 
     /**
@@ -29,15 +29,14 @@ class SparepartPolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role, ['super-admin', 'eln-sparepart']);
+        return in_array($user->role, ['super-admin', 'holding-purchasing']);
     }
-
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user): bool
+    public function update(User $user, MasterBarang $masterBarang): bool
     {
-        return in_array($user->role, ['super-admin', 'eln-sparepart']);
+        return in_array($user->role, ['super-admin', 'holding-purchasing']);
     }
 
     /**
@@ -45,13 +44,12 @@ class SparepartPolicy
      */
     public function delete(User $user): bool
     {
-        return in_array($user->role, ['super-admin', 'eln-sparepart']);
+        return in_array($user->role, ['super-admin', 'holding-purchasing']);
     }
-
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Sparepart $sparepart): bool
+    public function restore(User $user, MasterBarang $masterBarang): bool
     {
         return true;
     }
@@ -59,8 +57,8 @@ class SparepartPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Sparepart $sparepart): bool
+    public function forceDelete(User $user): bool
     {
-        return true;
+        return in_array($user->role, ['super-admin', 'holding-purchasing']);
     }
 }
