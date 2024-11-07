@@ -1,8 +1,5 @@
 import './bootstrap';
-() => {
+import * as bootstrap from 'bootstrap';
 
-    document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        .forEach(tooltip => {
-            new bootstrap.Tooltip(tooltip)
-        })
-}
+new bootstrap.Popover(document.getElementById('myPopover'));
+new bootstrap.Tooltip(document.getElementById('tooltip'));

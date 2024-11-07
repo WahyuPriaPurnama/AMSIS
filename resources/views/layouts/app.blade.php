@@ -15,7 +15,8 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 
     <!-- Scripts -->
-    @vite('resources/sass/app.scss')
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 
 </head>
 
@@ -71,7 +72,8 @@
                             @endcan
                             @can('view', App\Models\Purchasing\MasterBarang::class)
                                 <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    <a href="{{ route('master-barang.trash') }}" class="nav-link dropdown-toggle"
+                                        data-bs-toggle="dropdown">
                                         Purchasing
                                     </a>
                                     <ul class="dropdown-menu">
@@ -80,7 +82,8 @@
                                         <a href="{{ route('master-supplier.index') }}"
                                             class="dropdown-item @yield('menuSupplier')">Master
                                             Supplier</a>
-                                        <a href="#" class="dropdown-item">Transaksi Selesai</a>
+                                        <a href="{{ route('master-barang.trash') }}"
+                                            class="dropdown-item @yield('menuRiwayat')">Transaksi Selesai</a>
                                     </ul>
                                 </li>
                             @endcan
@@ -132,13 +135,7 @@
             AMS Information System | © {{ date('Y') }} WPP. All rights reserved.
         </div>
     </footer>
-    @vite('resources/js/app.js')
-    <script>
-        document.querySelectorAll('[data-bs-toggle="tooltip"]')
-            .forEach(tooltip => {
-                new bootstrap.Tooltip(tooltip)
-            })
-    </script>
+
 </body>
 
 </html>

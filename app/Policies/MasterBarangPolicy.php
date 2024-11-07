@@ -49,9 +49,9 @@ class MasterBarangPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, MasterBarang $masterBarang): bool
+    public function restore(User $user): bool
     {
-        return true;
+        return in_array($user->role, ['super-admin', 'holding-purchasing']);
     }
 
     /**
