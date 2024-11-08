@@ -43,7 +43,7 @@ class StoreVehicleRequest extends FormRequest
             'p_asuransi' => '',
             'no_asuransi' => '',
             'jth_tempo' => '',
-            'kondisi' => '',
+            'kondisi' => 'required',
             'keterangan' => '',
             'foto' => 'mimes:png,jpg,jpeg|max:2048',
             'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
