@@ -34,7 +34,9 @@ class LoginController extends Controller
             case 'eln-sparepart':
                 return '/spareparts';
                 break;
-
+            case 'holding-purchasing':
+                return '/master-barang';
+                break;
             default:
                 return '/home';
                 break;
