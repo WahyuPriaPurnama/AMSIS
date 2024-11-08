@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Mail\MyTestMail;
 use App\Models\Employee;
+use App\Models\Purchasing\MasterBarang;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -43,6 +44,24 @@ class MailCron extends Command
                 ];
 
                 Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
+            }
+        }
+
+        $barangs = MasterBarang::all();
+
+        foreach ($barangs as $barang) {
+            if ($barang->master_supplier->pembayaran == 'Tempo') {
+                $jatuhTempo = Carbon::parse($barang->tgl_pembelian)->addDay($barang->master_supplier->hari)->toDateString();
+                $hari = Carbon::now()->diffInDays($jatuhTempo);
+                if ($hari == 7) {
+
+                    $mailData = [
+                        'title' => 'Reminder Jatuh Tempo ' . $barang->nama_barang,
+                        'body' => "Dengan Email ini kami menginformasikan bahwa pembayaran tagihan  " . $barang->nama_barang . " dari plant " . $barang->subsidiary->name . " akan jatuh tempo " . $hari . " hari lagi."
+                    ];
+
+                    Mail::to(['wahyupriapurnama@gmail.com', 'purchasing@amsgroup.co.id'])->send(new MyTestMail($mailData));
+                }
             }
         }
 

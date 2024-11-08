@@ -110,9 +110,19 @@ class MasterBarangController extends Controller
         $data = MasterBarang::onlyTrashed()->where('id', $id);
         $data->restore();
         if ($data) {
-            return redirect()->route('master-barang.trash')->with('alert', "restore berhasil");
+            return redirect()->route('master-barang.trash')->with('alert', "data berhasil direstore");
         } else {
-            return redirect()->route('master-barang.trash')->with('alert2', "restore gagal");
+            return redirect()->route('master-barang.trash')->with('alert2', "data gagal direstore");
+        }
+    }
+    public function forceDelete($id)
+    {
+        $data = MasterBarang::onlyTrashed()->where('id', $id);
+        $data->forceDelete();
+        if ($data) {
+            return redirect()->route('master-barang.trash')->with('alert', 'data berhasil dihapus');
+        } else {
+            return redirect()->route('master-barang.trash')->with('alert2', 'data gagal dihapus');
         }
     }
 }
