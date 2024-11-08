@@ -88,15 +88,15 @@ class DatabaseSeeder extends Seeder
         MasterSupplier::create([
             'nama_supplier' => 'Satelit',
             'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('085#########'),
+            'kontak' => $faker->numerify('085100892492'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
             'hari' => $faker->numerify('##'),
         ]);
         MasterSupplier::create([
-            'nama_supplier' => 'Wardiman',
+            'nama_supplier' => 'Jaya Sentosa',
             'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('085#########'),
+            'kontak' => $faker->numerify('085330830199'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
             'hari' => $faker->numerify('##'),
@@ -104,102 +104,87 @@ class DatabaseSeeder extends Seeder
         MasterSupplier::create([
             'nama_supplier' => 'Depo Bangunan',
             'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('085#########'),
+            'kontak' => $faker->numerify('081133308276'),
             'alamat' => $faker->address(),
             'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
             'hari' => $faker->numerify('##'),
         ]);
-        MasterSupplier::create([
-            'nama_supplier' => 'Rajawali',
-            'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('085#########'),
-            'alamat' => $faker->address(),
-            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-            'hari' => $faker->numerify('##'),
-        ]);
-        MasterSupplier::create([
-            'nama_supplier' => 'Prima Teknik',
-            'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('085#########'),
-            'alamat' => $faker->address(),
-            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-            'hari' => $faker->numerify('##'),
-        ]);
+       
 
-        for ($i = 0; $i < 100; $i++) {
-            Employee::create([
-                'nip' => $faker->randomNumber(9),
-                'nama' => $faker->name(),
-                'nik' => $faker->nik(),
-                'subsidiary_id' => $faker->numberBetween(1, 6),
-                'divisi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
-                'departemen' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
-                'seksi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
-                'posisi' => $faker->randomElement(['Manager', 'Supervisor', 'Staff', 'Operator']),
-                'status_peg' => $faker->randomElement(['PKWT', 'PKWTT']),
-                'tgl_masuk' => $faker->date(),
-                'awal_kontrak' => $faker->dateTimeBetween('2019-01-01', '2022-01-01'),
-                'akhir_kontrak' => $faker->dateTimeBetween('2024-11-11', '2025-01-01'),
+        // for ($i = 0; $i < 100; $i++) {
+        //     Employee::create([
+        //         'nip' => $faker->randomNumber(9),
+        //         'nama' => $faker->name(),
+        //         'nik' => $faker->nik(),
+        //         'subsidiary_id' => $faker->numberBetween(1, 6),
+        //         'divisi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
+        //         'departemen' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
+        //         'seksi' => $faker->randomElement(['IT', 'HRD', 'Teknik', 'Produksi']),
+        //         'posisi' => $faker->randomElement(['Manager', 'Supervisor', 'Staff', 'Operator']),
+        //         'status_peg' => $faker->randomElement(['PKWT', 'PKWTT']),
+        //         'tgl_masuk' => $faker->date(),
+        //         'awal_kontrak' => $faker->dateTimeBetween('2019-01-01', '2022-01-01'),
+        //         'akhir_kontrak' => $faker->dateTimeBetween('2024-11-11', '2025-01-01'),
 
-                'tmpt_lahir' => $faker->city(),
-                'tgl_lahir' => $faker->date(),
-                'jenis_kelamin' => $faker->randomElement(['L', 'P']),
-                'alamat' => $faker->address(),
-                'no_telp' => $faker->numerify('085#########'),
-                'email' => $faker->email(),
-                'pend_trkhr' => $faker->randomElement(['Diploma', 'Sarjana', 'Magister', 'Doktor']),
-                'jurusan' => $faker->randomElement(['Teknik Komputer', 'Ekonomi', 'Akutansi', 'Teknik Sipil']),
-                'thn_lulus' => $faker->randomElement(['2020', '2014', '2015', '2016']),
-                'nama_ibu' => $faker->name(),
-                'npwp' => '61.314.708.1-625.000',
-                'status' => $faker->randomElement(['Kawin', 'Belum Kawin']),
-                'jml_ank' => $faker->randomDigit(),
-                'nama_kd' => $faker->name(),
-                'no_kd' => $faker->numerify('085#########'),
-                'hubungan' => $faker->randomElement(['Saudara Kandung', 'Saudara Sepupu', 'Ipar'])
-            ]);
+        //         'tmpt_lahir' => $faker->city(),
+        //         'tgl_lahir' => $faker->date(),
+        //         'jenis_kelamin' => $faker->randomElement(['L', 'P']),
+        //         'alamat' => $faker->address(),
+        //         'no_telp' => $faker->numerify('085#########'),
+        //         'email' => $faker->email(),
+        //         'pend_trkhr' => $faker->randomElement(['Diploma', 'Sarjana', 'Magister', 'Doktor']),
+        //         'jurusan' => $faker->randomElement(['Teknik Komputer', 'Ekonomi', 'Akutansi', 'Teknik Sipil']),
+        //         'thn_lulus' => $faker->randomElement(['2020', '2014', '2015', '2016']),
+        //         'nama_ibu' => $faker->name(),
+        //         'npwp' => '61.314.708.1-625.000',
+        //         'status' => $faker->randomElement(['Kawin', 'Belum Kawin']),
+        //         'jml_ank' => $faker->randomDigit(),
+        //         'nama_kd' => $faker->name(),
+        //         'no_kd' => $faker->numerify('085#########'),
+        //         'hubungan' => $faker->randomElement(['Saudara Kandung', 'Saudara Sepupu', 'Ipar'])
+        //     ]);
 
-            Vehicle::create([
-                'jenis_kendaraan' => $faker->randomElement(['Toyota Starlet', 'Toyota Avanza', 'Toyota Veloz', 'Toyota Fortuner', 'Honda Jazz']),
-                'kategori' => $faker->randomElement(['Pribadi', 'Kantor', 'Umum']),
-                'subsidiary_id' => $faker->numberBetween(1, 6),
-                'tgl_perolehan' => $faker->date(),
-                'pengguna' => $faker->name(),
-                'nama_warna' => $faker->colorName(),
-                'warna' => $faker->hexColor(),
-                'tahun' => $faker->year(),
-                'atas_nama' => $faker->name(),
-                'nopol' => $faker->numerify('# #### ##'),
-                'no_rangka' => $faker->randomNumber(9),
-                'no_bpkb' => $faker->randomNumber(9),
-                'no_mesin' => $faker->randomNumber(9),
-                'stnk' => $faker->date(),
-                'pajak' => $faker->date(),
-                'kir' => $faker->date(),
-                'jth_tempo' => $faker->date(),
-                'kondisi' => $faker->randomElement(['Baik', 'Kurang Baik'])
-            ]);
+        //     Vehicle::create([
+        //         'jenis_kendaraan' => $faker->randomElement(['Toyota Starlet', 'Toyota Avanza', 'Toyota Veloz', 'Toyota Fortuner', 'Honda Jazz']),
+        //         'kategori' => $faker->randomElement(['Pribadi', 'Kantor', 'Umum']),
+        //         'subsidiary_id' => $faker->numberBetween(1, 6),
+        //         'tgl_perolehan' => $faker->date(),
+        //         'pengguna' => $faker->name(),
+        //         'nama_warna' => $faker->colorName(),
+        //         'warna' => $faker->hexColor(),
+        //         'tahun' => $faker->year(),
+        //         'atas_nama' => $faker->name(),
+        //         'nopol' => $faker->numerify('# #### ##'),
+        //         'no_rangka' => $faker->randomNumber(9),
+        //         'no_bpkb' => $faker->randomNumber(9),
+        //         'no_mesin' => $faker->randomNumber(9),
+        //         'stnk' => $faker->date(),
+        //         'pajak' => $faker->date(),
+        //         'kir' => $faker->date(),
+        //         'jth_tempo' => $faker->date(),
+        //         'kondisi' => $faker->randomElement(['Baik', 'Kurang Baik'])
+        //     ]);
 
-            Sparepart::create([
-                'kode_barang' => $faker->randomNumber(9),
-                'serial_number' => $faker->randomNumber(9),
-                'nama_barang' => $faker->randomElement(['Paku', 'Obeng', 'Tang', 'Baut Baja', 'Kabel', 'Mur', 'Paku Rivet']),
-                'jumlah' => $faker->randomNumber(3),
-                'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
-            ]);
+        //     Sparepart::create([
+        //         'kode_barang' => $faker->randomNumber(9),
+        //         'serial_number' => $faker->randomNumber(9),
+        //         'nama_barang' => $faker->randomElement(['Paku', 'Obeng', 'Tang', 'Baut Baja', 'Kabel', 'Mur', 'Paku Rivet']),
+        //         'jumlah' => $faker->randomNumber(3),
+        //         'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
+        //     ]);
 
-            MasterBarang::create([
-                'nama_barang' => $faker->words(3, true),
-                'subsidiary_id' => $faker->numberBetween(1, 6),
-                'nomor_rfo' => $faker->randomNumber(9),
-                'nomor_po' => $faker->randomNumber(9),
-                'harga' => $faker->randomNumber(7),
-                'jumlah' => $faker->randomNumber(2),
-                'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
-                'master_supplier_id' => $faker->numberBetween(1, 5),
-                'tgl_pembelian' => $faker->date(),
-            ]);
-        }
+        //     MasterBarang::create([
+        //         'nama_barang' => $faker->words(3, true),
+        //         'subsidiary_id' => $faker->numberBetween(1, 6),
+        //         'nomor_rfo' => $faker->randomNumber(9),
+        //         'nomor_po' => $faker->randomNumber(9),
+        //         'harga' => $faker->randomNumber(7),
+        //         'jumlah' => $faker->randomNumber(2),
+        //         'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
+        //         'master_supplier_id' => $faker->numberBetween(1, 5),
+        //         'tgl_pembelian' => $faker->date(),
+        //     ]);
+        // }
 
 
 
@@ -217,10 +202,10 @@ class DatabaseSeeder extends Seeder
             'role' => 'holding-admin'
         ]);
         User::create([
-            'name'=>'Holding Purchasing',
-            'email'=>'purchasing.admin@amsgroup.co.id',
-            'password'=>Hash::make('HoldingPurchasing'),
-            'role'=>'holding-purchasing'
+            'name' => 'Holding Purchasing',
+            'email' => 'purchasing.admin@amsgroup.co.id',
+            'password' => Hash::make('HoldingPurchasing'),
+            'role' => 'holding-purchasing'
         ]);
         User::create([
             'name' => 'ELN Admin',
