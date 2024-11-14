@@ -39,4 +39,13 @@ class UpdateMasterSupplierRequest extends FormRequest
             'unique' => 'nama supplier sudah ada'
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'nama_supplier' => ucwords(strtolower($this->nama_supplier)),
+            'jenis_supplier' => ucwords(strtolower($this->jenis_supplier)),
+            'alamat' => ucwords(strtolower($this->alamat))
+        ]);
+    }
 }
