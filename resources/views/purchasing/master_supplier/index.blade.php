@@ -2,7 +2,7 @@
 @section('title', 'Master Supplier')
 @section('menuSupplier', 'active')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         {{-- modal tambah data --}}
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -55,6 +55,8 @@
                             <th>Nama Supplier</th>
                             <th>Jenis Supplier</th>
                             <th>Kontak</th>
+                            <th>Email</th>
+                            <th>UP</th>
                             <th>Alamat</th>
                             <th>Pembayaran</th>
                             <th>Hari</th>
@@ -93,6 +95,8 @@
                                 <td>{{ $item->jenis_supplier }}</td>
                                 <td><a href="http://wa.me/62{{ $item->kontak }}" target="_blank" data-bs-toggle="tooltip"
                                         data-bs-title="Default tooltip">{{ $item->kontak }}</a></td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->up }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->pembayaran }}</td>
                                 <td>

@@ -27,6 +27,21 @@
         </div>
     </div>
     <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id=""
+                class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+            @error('email')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-md-6">
+            <label for="up" class="form-label">UP</label>
+            <input type="text" name="up" class="form-control @error('up') is-invalid @enderror"
+                value="{{ old('up') }}" id="">
+        </div>
+    </div>
+    <div class="row mb-3">
         <div class="col-sm-6 col-md-3">
             <label class="form-label" for="pembayaran">Pembayaran</label>
             <select class="form-select @error('pembayaran') is-invalid @enderror" name="pembayaran" id="pembayaran">

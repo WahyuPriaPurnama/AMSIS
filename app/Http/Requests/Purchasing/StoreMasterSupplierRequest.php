@@ -25,9 +25,11 @@ class StoreMasterSupplierRequest extends FormRequest
             'nama_supplier' => 'required|unique:master_suppliers',
             'jenis_supplier' => 'required',
             'kontak' => 'required',
+            'email' => 'email|nullable',
+            'up' => 'nullable',
             'alamat' => 'required',
             'pembayaran' => 'required',
-            'hari' => ''
+            'hari' => 'nullable'
         ];
     }
 
@@ -38,12 +40,13 @@ class StoreMasterSupplierRequest extends FormRequest
             'unique' => 'nama supplier sudah ada'
         ];
     }
-    
+
     protected function prepareForValidation()
     {
         $this->merge([
-            'nama_supplier' => ucwords(strtolower($this->nama_supplier)),
-            'jenis_supplier' => ucwords(strtolower($this->jenis_supplier)),
+            // 'nama_supplier' => ucwords(strtolower($this->nama_supplier)),
+            // 'jenis_supplier' => ucwords(strtolower($this->jenis_supplier)),
+            'up' => ucwords(strtolower($this->up)),
             'alamat' => ucwords(strtolower($this->alamat))
         ]);
     }

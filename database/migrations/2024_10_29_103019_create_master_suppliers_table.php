@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('jenis_supplier')->nullable();
             $table->string('kontak')->nullable();
             $table->text('alamat')->nullable();
+            $table->string('email')->nullable();
+            $table->string('up')->nullable();
             $table->string('pembayaran');
             $table->integer('hari')->nullable();
             $table->timestamps();
