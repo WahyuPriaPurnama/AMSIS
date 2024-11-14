@@ -46,7 +46,7 @@
     </style>
 
     <!-- render the button and direct it to wa.me -->
-    <a href="https://wa.me/6285745334330?text=Halo," class="floating" target="_blank" >
+    <a href="https://wa.me/6285745334330?text=Halo, Saya butuh bantuan" class="floating" target="_blank" >
         <i class="fab fa-whatsapp fab-icon"></i>
     </a>
    
