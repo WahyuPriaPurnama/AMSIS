@@ -33,6 +33,7 @@
                 <option selected value="">Pilih</option>
                 <option value="Cash">Cash</option>
                 <option value="Tempo">Tempo</option>
+                <option value="BG">Billyet Giro</option>
             </select>
             @error('pembayaran')
                 <div class="text-danger">{{ $message }}</div>

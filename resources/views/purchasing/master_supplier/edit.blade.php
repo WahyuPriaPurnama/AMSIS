@@ -34,6 +34,7 @@
                 <option value="">Pilih</option>
                 <option @selected($item->pembayaran == 'Cash') value="Cash">Cash</option>
                 <option @selected($item->pembayaran == 'Tempo') value="Tempo">Tempo</option>
+                <option @selected($item->pembayaran == 'BG') value="BG">Billyet Giro</option>
             </select>
             @error('pembayaran')
                 <div class="text-danger">{{ $message }}</div>
@@ -43,8 +44,8 @@
             <label for="hari" class="form-label">Hari</label>
             <input type="number" name="hari" class="form-control @error('hari') is-invalid @enderror"
                 value="{{ old('hari') ?? $item->hari }}" id="" aria-describedby="hariHelpBlock">
-                <div id="hariHelpBlock" class="form-text">
-               kosongkan jika cash   </div>
+            <div id="hariHelpBlock" class="form-text">
+                kosongkan jika cash </div>
         </div>
         <div class="col-sm-12 col-md-6 mb-3">
             <label class="form-label" for="alamat">Alamat</label>
@@ -53,6 +54,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Simpan</button>
     <button type="reset" class="btn btn-warning">Reset</button>
-    
+
 </form>
-   
