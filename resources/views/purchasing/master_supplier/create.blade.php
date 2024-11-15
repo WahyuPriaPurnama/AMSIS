@@ -4,15 +4,23 @@
         <div class="col-sm-4 col-md-4">
             <label for="nama_supplier" class="form-label">Nama Supplier</label>
             <input type="text" name="nama_supplier" value="{{ old('nama_supplier') }}"
-                class="form-control @error('nama_supplier') is-invalid @enderror">
+                class="form-control @error('nama_supplier') is-invalid @enderror" required>
             @error('nama_supplier')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-sm-4 col-md-4">
-            <label for="jenis_supplier" class="form-label">Jenis Supplier</label>
-            <input type="text" name="jenis_supplier" value="{{ old('jenis_supplier') }}"
-                class="form-control @error('jenis_supplier') is-invalid @enderror">
+            <label class="form-label" for="jenis_supplier">Jenis Supplier</label>
+            <select class="form-select @error('jenis_supplier') is-invalid @enderror" name="jenis_supplier" id="jenis_supplier" required>
+                <option selected value="">Pilih</option>
+                <option value="Umum">Umum</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Kelistrikan">Kelistrikan</option>
+                <option value="Chemical dan Alat Lab">Chemical dan Alat Lab</option>
+                <option value="Pelumas">Pelumas</option>
+                <option value="ATK">ATK</option>
+                <option value="Lain-lain">Lain-lain</option>
+            </select>
             @error('jenis_supplier')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -20,7 +28,7 @@
         <div class="col-sm-4 col-md-4">
             <label for="kontak" class="form-label">Nomor Kontak</label>
             <input type="text" name="kontak" class="form-control @error('kontak') is-invalid @enderror"
-                value="{{ old('kontak') }}" id="">
+                value="{{ old('kontak') }}" id="" required>
             @error('kontak')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -44,7 +52,7 @@
     <div class="row mb-3">
         <div class="col-sm-6 col-md-3">
             <label class="form-label" for="pembayaran">Pembayaran</label>
-            <select class="form-select @error('pembayaran') is-invalid @enderror" name="pembayaran" id="pembayaran">
+            <select class="form-select @error('pembayaran') is-invalid @enderror" name="pembayaran" id="pembayaran" required>
                 <option selected value="">Pilih</option>
                 <option value="Cash">Cash</option>
                 <option value="Tempo">Tempo</option>
@@ -63,7 +71,7 @@
         </div>
         <div class="col-sm-12 col-md-6 mb-3">
             <label class="form-label" for="alamat">Alamat</label>
-            <textarea class="form-control" id="alamat" rows="3" name="alamat">{{ old('alamat') }}</textarea>
+            <textarea class="form-control" id="alamat" rows="3" name="alamat" required>{{ old('alamat') }}</textarea>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Simpan</button>

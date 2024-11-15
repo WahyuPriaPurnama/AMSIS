@@ -53,10 +53,7 @@ route::middleware('auth')->group(function () {
     route::get('sparepart/search', [SparepartController::class, 'search'])->name('sparepart.search');
     route::get('sparepart-export', [SparepartController::class, 'export'])->name('spareparts.export');
 
-    route::get('master-barang/riwayat-transaksi', [MasterBarangController::class, 'trash'])->name('master-barang.trash');
     route::get('master-barang/search', [MasterBarangController::class, 'search'])->name('master-barang.search');
-    route::get('master-barang/restore/{master_barang}', [MasterBarangController::class, 'restore'])->name('master-barang.restore');
-    route::get('master-barang/delete/{master_barang}', [MasterBarangController::class, 'forceDelete'])->name('master-barang.forcedestroy');
     route::resource('master-barang', MasterBarangController::class);
 
     route::get('master-supplier/search', [MasterSupplierController::class, 'search'])->name('master-supplier.search');

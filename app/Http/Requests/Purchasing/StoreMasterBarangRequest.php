@@ -23,13 +23,13 @@ class StoreMasterBarangRequest extends FormRequest
     {
         return [
             'subsidiary_id' => 'required',
-            'nomor_rfo' => 'required',
-            'nomor_po' => 'required|unique:master_barangs',
+            'master_supplier_id' => 'required',
             'nama_barang' => 'required',
+            'kategori' => 'required',
+            'periode' => 'nullable',
             'harga' => 'required',
             'jumlah' => 'required',
             'satuan' => 'required',
-            'master_supplier_id' => 'required',
             'tgl_pembelian' => 'required'
         ];
     }

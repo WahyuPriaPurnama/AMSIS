@@ -104,7 +104,7 @@
                             @endcan
                             @can('view', App\Models\Purchasing\MasterBarang::class)
                                 <li class="nav-item dropdown">
-                                    <a href="{{ route('master-barang.trash') }}" class="nav-link dropdown-toggle"
+                                    <a href="#" class="nav-link dropdown-toggle"
                                         data-bs-toggle="dropdown">
                                         Purchasing
                                     </a>
@@ -114,8 +114,6 @@
                                         <a href="{{ route('master-supplier.index') }}"
                                             class="dropdown-item @yield('menuSupplier')">Master
                                             Supplier</a>
-                                        <a href="{{ route('master-barang.trash') }}"
-                                            class="dropdown-item @yield('menuRiwayat')">Transaksi Selesai</a>
                                     </ul>
                                 </li>
                             @endcan

@@ -27,7 +27,7 @@
                     <form action="{{ route('master-supplier.search') }}" method="get">
                         <div class="input-group mb-3">
                             <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
-                                placeholder="cari nama supplier" id="">
+                                placeholder="nama supplier" id="">
                             <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg"
                                     width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path
@@ -124,7 +124,7 @@
                                         <div class="modal-dialog modal-sm">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="deleteSparepartLabel">Yakin mau hapus
+                                                    <h1 class="modal-title fs-5" id="deleteSparepartLabel">Hapus
                                                         {{ $item->nama_supplier }}?
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -132,11 +132,9 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <button type="button" class="btn btn-success"
-                                                        data-bs-dismiss="modal">Gak
-                                                        Jadi</button>
+                                                        data-bs-dismiss="modal">Tidak</button>
                                                     <button type="submit" form="delete{{ $item->id }}"
-                                                        class="btn btn-danger ms-3">Iya,
-                                                        Yakin</button>
+                                                        class="btn btn-danger ms-3">Iya</button>
                                                     <form id="delete{{ $item->id }}"
                                                         action="{{ route('master-supplier.destroy', ['master_supplier' => $item->id]) }}"
                                                         method="post">

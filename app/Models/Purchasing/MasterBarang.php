@@ -10,7 +10,7 @@ use Kyslik\ColumnSortable\Sortable;
 
 class MasterBarang extends Model
 {
-    use HasFactory, Sortable, SoftDeletes;
+    use HasFactory, Sortable;
     protected $guarded = [];
     public $sortable = ['subsidiary_id'];
     public function master_supplier()

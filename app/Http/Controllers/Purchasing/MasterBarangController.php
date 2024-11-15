@@ -81,9 +81,9 @@ class MasterBarangController extends Controller
         $this->authorize('delete', MasterBarang::class);
         $masterBarang->delete();
         if ($masterBarang) {
-            return redirect()->route('master-barang.index')->with('alert', "transaksi $masterBarang->nama_barang selesai");
+            return redirect()->route('master-barang.index')->with('alert', "$masterBarang->nama_barang dihapus");
         } else {
-            return redirect()->route('master-barang.index')->with('alert2', "transaksi $masterBarang->nama_barang gagal diselesaikan");
+            return redirect()->route('master-barang.index')->with('alert2', "$masterBarang->nama_barang gagal dihapus");
         }
     }
 
@@ -95,34 +95,5 @@ class MasterBarangController extends Controller
         $suppliers = MasterSupplier::all();
         $data = MasterBarang::where('nama_barang', 'like', "%" . $search . "%")->paginate(50);
         return view('purchasing.master_barang.index', compact('data', 'suppliers', 'subsidiaries'));
-    }
-
-    public function trash()
-    {
-        $this->authorize('Forcedelete', MasterBarang::class);
-        $data = MasterBarang::onlyTrashed()->Index()->sortable()->latest()->paginate(50);
-        // dd($data);
-        return view('purchasing.master_barang.trash', compact('data'));
-    }
-    public function restore($id)
-    {
-
-        $data = MasterBarang::onlyTrashed()->where('id', $id);
-        $data->restore();
-        if ($data) {
-            return redirect()->route('master-barang.trash')->with('alert', "data berhasil direstore");
-        } else {
-            return redirect()->route('master-barang.trash')->with('alert2', "data gagal direstore");
-        }
-    }
-    public function forceDelete($id)
-    {
-        $data = MasterBarang::onlyTrashed()->where('id', $id);
-        $data->forceDelete();
-        if ($data) {
-            return redirect()->route('master-barang.trash')->with('alert', 'data berhasil dihapus');
-        } else {
-            return redirect()->route('master-barang.trash')->with('alert2', 'data gagal dihapus');
-        }
     }
 }

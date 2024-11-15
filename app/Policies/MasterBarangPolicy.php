@@ -34,7 +34,7 @@ class MasterBarangPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, MasterBarang $masterBarang): bool
+    public function update(User $user): bool
     {
         return in_array($user->role, ['super-admin', 'holding-purchasing']);
     }

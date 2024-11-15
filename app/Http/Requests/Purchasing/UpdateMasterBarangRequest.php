@@ -21,16 +21,15 @@ class UpdateMasterBarangRequest extends FormRequest
      */
     public function rules(): array
     {
-        $barang = $this->route('master_barang');
         return [
             'subsidiary_id' => 'required',
-            'nomor_rfo' => 'required',
-            'nomor_po' => 'required|unique:master_barangs,nomor_po,' . $barang->id,
+            'master_supplier_id' => 'required',
             'nama_barang' => 'required',
+            'kategori' => 'required',
+            'periode' => 'nullable',
             'harga' => 'required',
             'jumlah' => 'required',
             'satuan' => 'required',
-            'master_supplier_id' => 'required',
             'tgl_pembelian' => 'required'
         ];
     }

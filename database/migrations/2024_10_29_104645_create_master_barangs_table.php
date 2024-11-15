@@ -14,16 +14,15 @@ return new class extends Migration
         Schema::create('master_barangs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('subsidiary_id')->constrained();
-            $table->string('nomor_rfo');
-            $table->string('nomor_po')->unique();
             $table->string('nama_barang');
+            $table->string('kategori');
+            $table->integer('periode');
             $table->integer('harga');
             $table->integer('jumlah');
             $table->string('satuan');
             $table->foreignId('master_supplier_id')->constrained()->cascadeOnDelete();
             $table->date('tgl_pembelian');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

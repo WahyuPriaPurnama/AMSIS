@@ -72,6 +72,8 @@
                         @forelse ($employees as $employee)
                             @if (Carbon\Carbon::now()->diffInDays($employee->akhir_kontrak) <= 45 and $employee->status_peg == 'PKWT')
                                 <tr class="table-danger">
+                                @else
+                                <tr>
                             @endif
                             <th>{{ $employees->firstItem() + $loop->iteration - 1 }}</th>
                             <td>{{ $employee->subsidiary->name }}</td>
