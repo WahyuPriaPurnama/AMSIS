@@ -54,7 +54,7 @@
             <input type="number" name="periode" value="{{ old('periode') }}" class="form-control"
                 aria-describedby="hariHelpBlock">
             <div id="hariHelpBlock" class="form-text">
-                kosongkan jika berupa Aset </div>
+                kosongkan jika non periodik </div>
             @error('periode')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
