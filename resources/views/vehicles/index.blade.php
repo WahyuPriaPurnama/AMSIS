@@ -34,10 +34,10 @@
                             <th>@sortablelink('kategori', 'KATEGORI')</th>
                             <th>@sortablelink('subsidiary_id', 'PLANT')</th>
                             <th>NOPOL</th>
-                            <th>@sortablelink('stnk', 'STNK')</th>
-                            <th>@sortablelink('pajak', 'PAJAK')</th>
-                            <th>@sortablelink('kir', 'KIR')</th>
-                            <th>@sortablelink('jth_tempo', 'ASURANSI')</th>
+                            <th>STNK</th>
+                            <th>PAJAK</th>
+                            <th>KIR</th>
+                            <th>ASURANSI</th>
                             <th>KONDISI</th>
                         </tr>
                     </thead>

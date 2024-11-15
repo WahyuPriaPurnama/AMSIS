@@ -10,7 +10,7 @@ class Vehicle extends Model
 {
     use HasFactory, Sortable;
     protected $guarded = [];
-    public $sortable = ['jenis_kendaraan', 'kategori', 'subsidiary_id', 'stnk', 'pajak', 'kir', 'jth_tempo'];
+    public $sortable = ['jenis_kendaraan', 'kategori', 'subsidiary_id'];
 
     public function subsidiary()
     {
