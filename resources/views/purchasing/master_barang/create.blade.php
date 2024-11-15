@@ -40,8 +40,8 @@
             <label class="form-label" for="kategori">Kategori</label>
             <select class="form-select @error('kategori') is-invalid @enderror" name="kategori" id="kategori" required>
                 <option selected value="">Pilih Kategori</option>
-                <option value="Periodik">Consumable</option>
-                <option value="Non Periodik">Aset</option>
+                <option value="Periodik">Periodik</option>
+                <option value="Non Periodik">Non Periodik</option>
             </select>
             @error('kategori')
                 <div class="text-danger">{{ $message }}</div>

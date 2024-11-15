@@ -39,8 +39,8 @@
         <div class="col-md-2 mb-3">
             <label class="form-label" for="kategori">Kategori</label>
             <select class="form-select @error('kategori') is-invalid @enderror" name="kategori" id="kategori" required>
-                <option @selected($item->kategori == 'Periodik') value="Periodik">Consumable</option>
-                <option @selected($item->kategori == 'Non Periodik') value="Non Periodik">Aset</option>
+                <option @selected($item->kategori == 'Periodik') value="Periodik">Periodik</option>
+                <option @selected($item->kategori == 'Non Periodik') value="Non Periodik">Non Periodik</option>
             </select>
             @error('kategori')
                 <div class="text-danger">{{ $message }}</div>
