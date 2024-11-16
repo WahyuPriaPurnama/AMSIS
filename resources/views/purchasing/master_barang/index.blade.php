@@ -61,7 +61,6 @@
                             <th>Kategori</th>
                             <th>Harga</th>
                             <th>Jumlah</th>
-                            <th>Satuan</th>
                             <th>Last Order</th>
                             <th>Next Order</th>
                         </tr>
@@ -104,8 +103,7 @@
                             </td>
                             <td>{{ $item->kategori }}</td>
                             <td>Rp. {{ number_format($item->harga) }},-</td>
-                            <td>{{ number_format($item->jumlah) }}</td>
-                            <td>{{ $item->satuan }}</td>
+                            <td>{{ number_format($item->jumlah) }} {{ $item->satuan }}</td>
                             <td>{{ $item->tgl_pembelian }}</td>
                             <td>
                                 @if ($item->kategori == 'Periodik')

@@ -65,7 +65,6 @@
                             <th>NAMA BARANG</th>
                             <th>SPESIFIKASI</th>
                             <th>JUMLAH</th>
-                            <th>SATUAN</th>
                             <th>DIPERBARUI</th>
                             <th>MENU</th>
                         </tr>
@@ -103,8 +102,7 @@
                                 </td>
                                 <td>{{ $item->nama_barang }}</td>
                                 <td>{{ $item->serial_number }}</td>
-                                <td>{{ number_format($item->jumlah) }}</td>
-                                <td>{{ $item->satuan }}</td>
+                                <td>{{ number_format($item->jumlah) }} {{ $item->satuan }}</td>
                                 <td>{{ $item->updated_at }}</td>
                                 <td>
                                     {{-- update qty --}}
