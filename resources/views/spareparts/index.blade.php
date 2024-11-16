@@ -103,7 +103,7 @@
                                 <td>{{ $item->nama_barang }}</td>
                                 <td>{{ $item->serial_number }}</td>
                                 <td>{{ number_format($item->jumlah) }} {{ $item->satuan }}</td>
-                                <td>{{ $item->updated_at }}</td>
+                                <td>{{ date_format($item->updated_at, 'Y-m-d') }}</td>
                                 <td>
                                     {{-- update qty --}}
                                     @can('update', App\Models\Sparepart::class)
