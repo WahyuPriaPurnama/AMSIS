@@ -61,7 +61,7 @@ class MailCron extends Command
                         'body' => "Dengan Email ini kami menginformasikan bahwa waktu pembelian " . $barang->nama_barang . " dari plant " . $barang->subsidiary->name . " tinggal " . $periode . " hari lagi."
                     ];
 
-                    Mail::to(['wahyupriapurnama@gmail.com', 'purchasing@amsgroup.co.id'])->send(new MyTestMail($mailData));
+                    Mail::to(['wahyupriapurnama@gmail.com', 'purchasing@amsgroup.co.id', 'hrd@eln.amsgroup.co.id'])->send(new MyTestMail($mailData));
                 }
             }
         }
