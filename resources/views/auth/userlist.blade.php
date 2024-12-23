@@ -2,11 +2,6 @@
 
 @section('content')
     <div class="container mt-3">
-        @if (session()->has('alert'))
-            <div class="alert alert-success m-3">
-                {{ session()->get('alert') }}
-            </div>
-        @endif
         @component('components.card')
             @slot('header')
                 LIST USER
