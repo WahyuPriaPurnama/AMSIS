@@ -201,6 +201,8 @@
                                                                 <option value="eln-admin" @selected($user->role == 'eln-admin')>
                                                                     eln-admin
                                                                 </option>
+                                                                <option value="eln-sparepart" @selected($user->role == 'eln-sparepart')>
+                                                                    eln-sparepart</option>
                                                                 <option value="eln2-admin" @selected($user->role == 'eln2-admin')>
                                                                     eln2-admin</option>
                                                                 <option value="haka-admin" @selected($user->role == 'haka-admin')>
