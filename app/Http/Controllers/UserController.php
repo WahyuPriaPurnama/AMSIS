@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
         $validated = $request->validate([
-            'name' => 'required|max:50|string|alpha',
+            'name' => 'required|max:50|string',
             'role' => 'required|string|max:25',
             'email' => 'required|email',
             'password' => 'min:8|nullable|confirmed'
@@ -72,8 +72,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->authorize('update', User::class);
+       
         $validated = $request->validate([
-            'name' => 'required|max:50|string|alpha',
+            'name' => 'required|max:50|string',
             'role' => 'required|string|max:25',
             'email' => 'required|email',
             'password' => 'min:8|nullable|confirmed'
