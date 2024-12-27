@@ -30,85 +30,85 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Subsidiary::create([
-            'name' => 'CV. AMS',
-            'tagline' => 'General Trading and Supplier',
-            'npwp' => '70.651.906.3-657.000',
-            'email' => 'headoffice@amsgroup.co.id',
-            'phone' => '0341 5054969',
-            'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
-        ]);
-        Subsidiary::create([
-            'name' => 'PT. ELN 1',
-            'tagline' => 'Can Maker',
-            'npwp' => '94.024.473.4-657.000',
-            'email' => 'headoffice@eln.co.id',
-            'phone' => '0341 5058269',
-            'address' => 'Dusun Boro Nggondang, RT 52 / RW 13, Tawangargo Karangploso, Malang
-                            East Java 65152'
-        ]);
-        Subsidiary::create([
-            'name' => 'PT. ELN 2',
-            'tagline' => 'ABF and Cold Storage',
-            'npwp' => '94.024.473.4-657.000',
-            'email' => 'headoffice@eln.co.id',
-            'phone' => '0333 424150',
-            'address' => 'Jalan Bawean No. 7, Klatak, Kalipuro, Banyuwangi
-                            East Java 68421'
-        ]);
-        Subsidiary::create([
-            'name' => 'PT. BOFI',
-            'tagline' => 'Canning',
-            'npwp' => '43.623.790.3-625.000',
-            'email' => 'headoffice@blueoceanfoods.co.id',
-            'phone' => '0333 2815013',
-            'address' => 'Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
-        ]);
-        Subsidiary::create([
-            'name' => 'PT. HAKA',
-            'tagline' => 'Open Trader With Us',
-            'npwp' => '43.623.790.3-625.000',
-            'email' => 'hkcipta@blueoceanfoods.co.id',
-            'phone' => '0333 2815013',
-            'address' => 'Kalipuro'
-        ]);
+        // Subsidiary::create([
+        //     'name' => 'CV. AMS',
+        //     'tagline' => 'General Trading and Supplier',
+        //     'npwp' => '70.651.906.3-657.000',
+        //     'email' => 'headoffice@amsgroup.co.id',
+        //     'phone' => '0341 5054969',
+        //     'address' => 'Perum P. Pratama B2/1P, Karangploso, Malang - East Java 65152, Indonesia'
+        // ]);
+        // Subsidiary::create([
+        //     'name' => 'PT. ELN 1',
+        //     'tagline' => 'Can Maker',
+        //     'npwp' => '94.024.473.4-657.000',
+        //     'email' => 'headoffice@eln.co.id',
+        //     'phone' => '0341 5058269',
+        //     'address' => 'Dusun Boro Nggondang, RT 52 / RW 13, Tawangargo Karangploso, Malang
+        //                     East Java 65152'
+        // ]);
+        // Subsidiary::create([
+        //     'name' => 'PT. ELN 2',
+        //     'tagline' => 'ABF and Cold Storage',
+        //     'npwp' => '94.024.473.4-657.000',
+        //     'email' => 'headoffice@eln.co.id',
+        //     'phone' => '0333 424150',
+        //     'address' => 'Jalan Bawean No. 7, Klatak, Kalipuro, Banyuwangi
+        //                     East Java 68421'
+        // ]);
+        // Subsidiary::create([
+        //     'name' => 'PT. BOFI',
+        //     'tagline' => 'Canning',
+        //     'npwp' => '43.623.790.3-625.000',
+        //     'email' => 'headoffice@blueoceanfoods.co.id',
+        //     'phone' => '0333 2815013',
+        //     'address' => 'Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
+        // ]);
+        // Subsidiary::create([
+        //     'name' => 'PT. HAKA',
+        //     'tagline' => 'Open Trader With Us',
+        //     'npwp' => '43.623.790.3-625.000',
+        //     'email' => 'hkcipta@blueoceanfoods.co.id',
+        //     'phone' => '0333 2815013',
+        //     'address' => 'Kalipuro'
+        // ]);
 
-        Subsidiary::create([
-            'name' => 'PT. RMM',
-            'tagline' => 'Canning',
-            'npwp' => '43.623.790.3-625.000',
-            'email' => 'headoffice@blueoceanfoods.co.id',
-            'phone' => '0333 2815013',
-            'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
-        ]);
+        // Subsidiary::create([
+        //     'name' => 'PT. RMM',
+        //     'tagline' => 'Canning',
+        //     'npwp' => '43.623.790.3-625.000',
+        //     'email' => 'headoffice@blueoceanfoods.co.id',
+        //     'phone' => '0333 2815013',
+        //     'address' => ' Dusun Sampangan, Kedungrejo, Muncar, Banyuwangi Regency, East Java'
+        // ]);
 
 
 
-        $faker = \Faker\Factory::create('id_ID');
-        MasterSupplier::create([
-            'nama_supplier' => 'Satelit',
-            'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('085100892492'),
-            'alamat' => $faker->address(),
-            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-            'hari' => $faker->numerify('##'),
-        ]);
-        MasterSupplier::create([
-            'nama_supplier' => 'Jaya Sentosa',
-            'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('085330830199'),
-            'alamat' => $faker->address(),
-            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-            'hari' => $faker->numerify('##'),
-        ]);
-        MasterSupplier::create([
-            'nama_supplier' => 'Depo Bangunan',
-            'jenis_supplier' => $faker->words(3, true),
-            'kontak' => $faker->numerify('081133308276'),
-            'alamat' => $faker->address(),
-            'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-            'hari' => $faker->numerify('##'),
-        ]);
+        // $faker = \Faker\Factory::create('id_ID');
+        // MasterSupplier::create([
+        //     'nama_supplier' => 'Satelit',
+        //     'jenis_supplier' => $faker->words(3, true),
+        //     'kontak' => $faker->numerify('085100892492'),
+        //     'alamat' => $faker->address(),
+        //     'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+        //     'hari' => $faker->numerify('##'),
+        // ]);
+        // MasterSupplier::create([
+        //     'nama_supplier' => 'Jaya Sentosa',
+        //     'jenis_supplier' => $faker->words(3, true),
+        //     'kontak' => $faker->numerify('085330830199'),
+        //     'alamat' => $faker->address(),
+        //     'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+        //     'hari' => $faker->numerify('##'),
+        // ]);
+        // MasterSupplier::create([
+        //     'nama_supplier' => 'Depo Bangunan',
+        //     'jenis_supplier' => $faker->words(3, true),
+        //     'kontak' => $faker->numerify('081133308276'),
+        //     'alamat' => $faker->address(),
+        //     'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
+        //     'hari' => $faker->numerify('##'),
+        // ]);
        
 
         // for ($i = 0; $i < 100; $i++) {
