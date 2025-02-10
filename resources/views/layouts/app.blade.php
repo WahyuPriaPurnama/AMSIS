@@ -22,8 +22,6 @@
 
     <!-- add your custom CSS -->
     <style>
-
-
         /* Add WA floating button CSS */
         .floating {
             position: fixed;
@@ -46,10 +44,10 @@
     </style>
 
     <!-- render the button and direct it to wa.me -->
-    <a href="https://wa.me/6285745334330?text=Halo, Saya butuh bantuan" class="floating" target="_blank" >
+    <a href="https://wa.me/6285745334330?text=Halo, Saya butuh bantuan" class="floating" target="_blank">
         <i class="fab fa-whatsapp fab-icon"></i>
     </a>
-   
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -66,8 +64,29 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     @guest
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    E-Slip
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item @yield('menuAMS')" href="/ams-malang">
+                                            AMS Holding</a></li>
+                                    <li><a class="dropdown-item @yield('menuRMM')" href="/rmm-malang">
+                                            RMM</a></li>
+                                    <li><a class="dropdown-item @yield('menuELN')" href="/eln-malang">
+                                            ELN Malang</a></li>
+                                    <li><a class="dropdown-item @yield('menuELN2')" href="/eln-bwi">
+                                            ELN Banyuwangi</a></li>
+                                    <li><a class="dropdown-item @yield('menuHAKA')" href="/haka-bwi">
+                                            HAKA</a></li>
+                                    <li><a class="dropdown-item @yield('menuBOFI')" href="/bofi-bwi">
+                                            BOFI</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     @else
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item dropdown">
@@ -104,8 +123,7 @@
                             @endcan
                             @can('view', App\Models\Purchasing\MasterBarang::class)
                                 <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle"
-                                        data-bs-toggle="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                         Purchasing
                                     </a>
                                     <ul class="dropdown-menu">
@@ -129,7 +147,6 @@
                                 </li>
                             @endif
                         @else
-        
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

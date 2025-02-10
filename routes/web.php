@@ -68,3 +68,23 @@ Auth::routes([
     'register' => false
 ]);
 route::redirect('/', '/login');
+
+//e-slip
+route::get('/ams-malang', function () {
+    return view('e-slip.ams');
+});
+route::get('/rmm-malang', function () {
+    return view('e-slip.rmm');
+});
+route::get('/eln-malang', function () {
+    return view('e-slip.eln1');
+});
+route::get('/eln-bwi', function () {
+    return view('e-slip.eln2');
+});
+route::get('/haka-bwi', function () {
+    return view('e-slip.haka');
+});
+route::get('/bofi-bwi', function () {
+    return view('e-slip.bofi');
+});

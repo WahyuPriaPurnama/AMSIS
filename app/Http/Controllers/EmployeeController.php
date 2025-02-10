@@ -323,4 +323,5 @@ class EmployeeController extends Controller
         $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.PDF.show', ['employee' => $result])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
+   
 }
