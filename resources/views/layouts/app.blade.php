@@ -97,8 +97,10 @@
                                 <ul class="dropdown-menu">
                                     @can('view', App\Models\Employee::class)
                                         <li><a class="dropdown-item @yield('menuEmployees')" href="{{ route('employees.index') }}">
-                                                Karyawan</a></li>
-                                        <li><a href="{{ route('eslip.index') }}" class="dropdown-item @yield('menuEslip')"></a>
+                                                Karyawan</a>
+                                        </li>
+                                        <li><a href="{{ route('eslip.index') }}"
+                                                class="dropdown-item @yield('menuEslip')">E-Slip</a>
                                         </li>
                                     @endcan
                                     @can('view', App\Models\Subsidiary::class)

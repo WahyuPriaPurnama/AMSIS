@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eslip;
+use App\Models\Subsidiary;
 use Illuminate\Http\Request;
 
 class EslipController extends Controller
@@ -12,17 +13,15 @@ class EslipController extends Controller
      */
     public function index()
     {
-        $eslips = Eslip::get();
-        return view('eslip.index', compact('eslips'));
+        $data = Eslip::latest()->paginate(10);
+        $subsidiaries = Subsidiary::all();
+        return view('e-slip.index', compact('data', 'subsidiaries'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -62,5 +61,12 @@ class EslipController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $data = Eslip::where('nama', 'like', "%" . $search . "%");
+        return view('e-slip.index', ['data' => $data]);
     }
 }
