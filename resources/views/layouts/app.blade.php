@@ -92,7 +92,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Human Resources
+                                    HRD
                                 </a>
                                 <ul class="dropdown-menu">
                                     @can('view', App\Models\Employee::class)
@@ -117,7 +117,7 @@
                             @can('view', App\Models\Sparepart::class)
                                 <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">Stockroom</a>
+                                        aria-expanded="false">Gudang</a>
                                     <ul class="dropdown-menu">
                                         <a href="{{ route('spareparts.index') }}"
                                             class="dropdown-item @yield('menuSparepart')">Sparepart</a>
@@ -127,7 +127,7 @@
                             @can('view', App\Models\Purchasing\MasterBarang::class)
                                 <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                        Purchasing
+                                        Pembelian
                                     </a>
                                     <ul class="dropdown-menu">
                                         <a href="{{ route('master-barang.index') }}"
