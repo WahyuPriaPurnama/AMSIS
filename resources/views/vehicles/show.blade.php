@@ -415,6 +415,27 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                    <div class="p-2">Polis Asuransi</div>
+                                                </div>
+                                                <div
+                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                    <div class="p-2">
+                                                        @if ($vehicle->f_polis == null)
+                                                            <p class="font-monospace">kosong</p>
+                                                        @else
+                                                            <a href="{{ route('vehicle.polis', $vehicle->f_polis) }}" target="_blank"
+                                                                class="btn btn-primary"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-file-earmark-arrow-down-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                                                                </svg></a>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
