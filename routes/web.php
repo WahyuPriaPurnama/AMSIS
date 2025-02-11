@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EslipController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Purchasing\MasterBarangController;
 use App\Http\Controllers\Purchasing\MasterSupplierController;
@@ -48,6 +49,7 @@ route::middleware('auth')->group(function () {
     route::get('vehicle/pajak/{pajak}', [VehicleController::class, 'pajak'])->name('vehicle.pajak');
     route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
     route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
+    route::get('vehicle/polis/{polis}', [VehicleController::class, 'polis'])->name('vehicle.polis');
 
     route::resource('spareparts', SparepartController::class);
     route::get('sparepart/search', [SparepartController::class, 'search'])->name('sparepart.search');
@@ -63,6 +65,7 @@ route::middleware('auth')->group(function () {
     route::get('/data-suhu/{suhu}', [SensorController::class, 'store'])->name('suhu.store');
     route::get('/data-suhu', [SensorController::class, 'index'])->name('suhu.index');
 });
+route::resource('eslip', EslipController::class);
 
 Auth::routes([
     'register' => false
@@ -70,6 +73,7 @@ Auth::routes([
 route::redirect('/', '/login');
 
 //e-slip
+
 route::get('/ams-malang', function () {
     return view('e-slip.ams');
 });

@@ -24,4 +24,8 @@ class Subsidiary extends Model
     {
         return $this->hasMany(Vehicle::class);
     }
+    public function eslip()
+    {
+        return $this->hasMany(Eslip::class);
+    }
 }

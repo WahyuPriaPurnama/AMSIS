@@ -263,6 +263,15 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="col-md-3 col-3 mb-3">
+                        <label for="polis" class="form-label">Polis Asuransi</label>
+                        <input type="file" name="f_polis" id=""
+                            class="form-control @error('polis') is-invalid @enderror"
+                            accept="image/png, image/jpeg, image/jpg, application/pdf">
+                        @error('polis')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>

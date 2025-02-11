@@ -61,6 +61,10 @@ class VehicleController extends Controller
             $qr = $this->fileUpload($request, 'public/vehicles/qr', 'qr');
             $data->update(['qr' => $qr->hashName()]);
         }
+        if ($request->file('f_polis')) {
+            $polis = $this->fileUpload($request, 'public/vehicles/polis', 'f_polis');
+            $data->update(['f_polis' => $polis->hashName()]);
+        }
         return redirect()->route('vehicle.index')->with('alert', 'data berhasil disimpan');
     }
 
@@ -118,6 +122,11 @@ class VehicleController extends Controller
             $qr = $this->fileUpload($request, 'public/vehicles/qr', 'qr');
             $vehicle->update(['qr' => $qr->hashName()]);
         }
+        if ($request->file('f_polis')) {
+            Storage::disk('local')->delete('public/vehicles/polis/' . $vehicle->f_polis);
+            $polis = $this->fileUpload($request, 'public/vehicles/polis', 'f_polis');
+            $vehicle->update(['f_polis' => $polis->hashName()]);
+        }
 
         if ($vehicle) {
             return redirect()->route('vehicle.show', ['vehicle' => $vehicle->id])->with('alert', "update data berhasil");
@@ -139,6 +148,7 @@ class VehicleController extends Controller
         $data->delete('/public/vehicles/pajak/' . $vehicle->pajak);
         $data->delete('/public/vehicles/kir/' . $vehicle->kir);
         $data->delete('/public/vehicles/qr/' . $vehicle->qr);
+        $data->delete('/public/vehicles/polis/' . $vehicle->polis);
         $vehicle->delete();
 
         if ($vehicle) {
@@ -176,6 +186,12 @@ class VehicleController extends Controller
     {
         $this->authorize('view', Vehicle::class);
         return Response::download('storage/vehicles/qr/' . $qr);
+    }
+
+    public function polis($polis)
+    {
+        $this->authorize('view', Vehicle::class);
+        return Response::download('storage/vehicles/polis/' . $polis);
     }
 
     public function search(Request $request)

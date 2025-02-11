@@ -49,6 +49,7 @@ class StoreVehicleRequest extends FormRequest
             'f_stnk' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_polis' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
 
         ];
