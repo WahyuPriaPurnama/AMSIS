@@ -99,13 +99,10 @@
                                         <li><a class="dropdown-item @yield('menuEmployees')" href="{{ route('employees.index') }}">
                                                 Karyawan</a>
                                         </li>
-                                        <li><a href="{{ route('eslip.index') }}"
-                                                class="dropdown-item @yield('menuEslip')">E-Slip</a>
-                                        </li>
                                     @endcan
+                                    
                                     @can('view', App\Models\Subsidiary::class)
-                                        <li><a class="dropdown-item @yield('menuSubsidiaries')"
-                                                href="{{ route('subsidiaries.index') }}">
+                                        <li><a class="dropdown-item @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">
                                                 Perusahaan</a></li>
                                     @endcan
                                     @can('view', App\Models\Vehicle::class)
@@ -158,7 +155,8 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                     <!-- <a class="dropdown-item" href="{ route('register') }}">Register</a>-->
