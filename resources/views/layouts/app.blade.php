@@ -100,9 +100,28 @@
                                                 Karyawan</a>
                                         </li>
                                     @endcan
-                                    
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            E-Slip &raquo;
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-submenu">
+                                            <li><a class="dropdown-item @yield('menuAMS')" href="/ams-malang">
+                                                    AMS Holding</a></li>
+                                            <li><a class="dropdown-item @yield('menuRMM')" href="/rmm-malang">
+                                                    RMM</a></li>
+                                            <li><a class="dropdown-item @yield('menuELN')" href="/eln-malang">
+                                                    ELN Malang</a></li>
+                                            <li><a class="dropdown-item @yield('menuELN2')" href="/eln-bwi">
+                                                    ELN Banyuwangi</a></li>
+                                            <li><a class="dropdown-item @yield('menuHAKA')" href="/haka-bwi">
+                                                    HAKA</a></li>
+                                            <li><a class="dropdown-item @yield('menuBOFI')" href="/bofi-bwi">
+                                                    BOFI</a></li>
+                                        </ul>
+                                    </li>
                                     @can('view', App\Models\Subsidiary::class)
-                                        <li><a class="dropdown-item @yield('menuSubsidiaries')" href="{{ route('subsidiaries.index') }}">
+                                        <li><a class="dropdown-item @yield('menuSubsidiaries')"
+                                                href="{{ route('subsidiaries.index') }}">
                                                 Perusahaan</a></li>
                                     @endcan
                                     @can('view', App\Models\Vehicle::class)
