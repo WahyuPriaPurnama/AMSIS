@@ -76,20 +76,20 @@ route::redirect('/', '/login');
 //e-slip
 
 route::get('/ams-malang', function () {
-    return view('e-slip.plant.ams');
+    return view('e-slip.ams');
 });
 route::get('/rmm-malang', function () {
-    return view('e-slip.plant.rmm');
+    return view('e-slip.rmm');
 });
 route::get('/eln-malang', function () {
-    return view('e-slip.plant.eln1');
+    return view('e-slip.eln1');
 });
 route::get('/eln-bwi', function () {
-    return view('e-slip.plant.eln2');
+    return view('e-slip.eln2');
 });
 route::get('/haka-bwi', function () {
-    return view('e-slip.plant.haka');
+    return view('e-slip.haka');
 });
 route::get('/bofi-bwi', function () {
-    return view('e-slip.plant.bofi');
+    return view('e-slip.bofi');
 });
