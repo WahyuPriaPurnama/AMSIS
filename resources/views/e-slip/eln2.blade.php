@@ -11,7 +11,6 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>NAMA</th>
                             <th>E-Slip</th>
                         </tr>
