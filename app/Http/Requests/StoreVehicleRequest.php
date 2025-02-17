@@ -69,14 +69,12 @@ class StoreVehicleRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'pengguna' => ucwords(strtolower($this->pengguna)),
             'nama_warna' => ucwords(strtolower($this->nama_warna)),
             'nopol' => strtoupper($this->nopol),
             'no_rangka' => strtoupper($this->no_rangka),
             'no_mesin' => strtoupper($this->no_mesin),
             'j_asuransi' => ucwords(strtolower($this->j_asuransi)),
             'no_asuransi' => strtoupper($this->no_asuransi),
-            'p_asuransi' => ucwords(strtolower($this->p_asuransi)),
             'kategori' => ucwords(strtolower($this->kategori))
         ]);
     }
