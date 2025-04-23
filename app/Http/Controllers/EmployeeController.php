@@ -136,6 +136,7 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $this->authorize('update', Employee::class);
+        \App\Helpers\LogActivity::addToLog();
         $user = Auth::user()->role;
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
             $subsidiaries = Subsidiary::all();

@@ -23,7 +23,6 @@
                 Master Barang
             @endslot
             <div class="row">
-
                 <div class="col">
                     <form action="{{ route('master-barang.search') }}" method="get">
                         <div class="input-group mb-3">

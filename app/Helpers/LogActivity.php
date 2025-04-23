@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Request;
 
 class LogActivity
 {
-
-
     public static function addToLog()
     {
         $log = [];
@@ -20,7 +18,6 @@ class LogActivity
         $log['user_role'] = auth()->check() ? auth()->user()->role : 1;
         ModelsLogActivity::create($log);
     }
-
 
     public static function logActivityLists()
     {

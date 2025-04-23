@@ -156,6 +156,12 @@
                                     </ul>
                                 </li>
                             @endcan
+                            <li class="nav-item">
+                                <a href="/cctv" class="nav-link @yield('menuCCTV')">
+                                    CCTV
+                                </a>
+                                
+                            </li>
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->

@@ -1,7 +1,5 @@
 <?php
-
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\EslipController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Purchasing\MasterBarangController;
 use App\Http\Controllers\Purchasing\MasterSupplierController;
@@ -61,12 +59,10 @@ route::middleware('auth')->group(function () {
     route::get('master-supplier/search', [MasterSupplierController::class, 'search'])->name('master-supplier.search');
     route::resource('master-supplier', MasterSupplierController::class);
 
-
     route::get('/data-suhu/{suhu}', [SensorController::class, 'store'])->name('suhu.store');
     route::get('/data-suhu', [SensorController::class, 'index'])->name('suhu.index');
+
 });
-route::resource('eslip', EslipController::class);
-route::get('eslip/search', [EslipController::class, 'search'])->name('eslip.search');
 
 Auth::routes([
     'register' => false
@@ -92,4 +88,8 @@ route::get('/haka-bwi', function () {
 });
 route::get('/bofi-bwi', function () {
     return view('e-slip.bofi');
+});
+
+route::get('/cctv',function(){
+    return view('cctv');
 });

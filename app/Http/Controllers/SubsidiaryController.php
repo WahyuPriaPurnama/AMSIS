@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubsidiaryRequest;
 use App\Models\Subsidiary;
 use App\Traits\FileUpload;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SubsidiaryController extends Controller
@@ -36,7 +35,6 @@ class SubsidiaryController extends Controller
     public function store(SubsidiaryRequest $request)
     {
         $this->authorize('create', Subsidiary::class);
-        \App\Helpers\LogActivity::addToLog();
         $data = Subsidiary::create($request->validated());
         if ($request->file('logo')) {
             $logo = $this->fileUpload($request, 'public/subsidiary/logo', 'logo');
@@ -68,7 +66,6 @@ class SubsidiaryController extends Controller
     public function update(SubsidiaryRequest $request, Subsidiary $subsidiary)
     {
         $this->authorize('update', Subsidiary::class);
-        \App\Helpers\LogActivity::addToLog();
         $subsidiary::where('id', $subsidiary->id)->update($request->validated());
         if ($request->file('logo')) {
             Storage::disk('local')->delete('public/subsidiary/logo/' . $subsidiary->logo);
@@ -84,7 +81,6 @@ class SubsidiaryController extends Controller
     public function destroy(Subsidiary $subsidiary)
     {
         $this->authorize('delete', Subsidiary::class);
-        \App\Helpers\LogActivity::addToLog();
         Storage::disk('local')->delete('public/subsidiary/logo/' . $subsidiary->logo);
         $subsidiary->delete();
         return redirect()->route('subsidiaries.index')->with('alert', "hapus data $subsidiary->name berhasil");

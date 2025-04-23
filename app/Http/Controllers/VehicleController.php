@@ -91,7 +91,6 @@ class VehicleController extends Controller
     public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
         $this->authorize('update', Vehicle::class);
-        \App\Helpers\LogActivity::addToLog();
         $vehicle::findOrFail($vehicle->id);
         $vehicle->update($request->validated());
 
@@ -141,7 +140,6 @@ class VehicleController extends Controller
     public function destroy(Vehicle $vehicle)
     {
         $this->authorize('delete', Vehicle::class);
-        \App\Helpers\LogActivity::addToLog();
         $data = Storage::disk('local');
         $data->delete('/public/vehicles/foto/' . $vehicle->foto);
         $data->delete('/public/vehicles/stnk/' . $vehicle->stnk);
