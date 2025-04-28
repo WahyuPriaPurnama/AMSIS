@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Purchasing\MasterBarangController;
@@ -61,7 +62,9 @@ route::middleware('auth')->group(function () {
 
     route::get('/data-suhu/{suhu}', [SensorController::class, 'store'])->name('suhu.store');
     route::get('/data-suhu', [SensorController::class, 'index'])->name('suhu.index');
-
+    route::get('/cctv', function () {
+        return view('cctv');
+    });
 });
 
 Auth::routes([
@@ -88,8 +91,4 @@ route::get('/haka-bwi', function () {
 });
 route::get('/bofi-bwi', function () {
     return view('e-slip.bofi');
-});
-
-route::get('/cctv',function(){
-    return view('cctv');
 });
