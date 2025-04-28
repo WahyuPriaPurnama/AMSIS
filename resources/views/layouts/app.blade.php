@@ -208,7 +208,7 @@
     </div>
     <footer class="bg-dark py-4 text-white  mt-auto">
         <div class="container text-center">
-            AMS Information System | © {{ date('Y') }} WPP. All rights reserved.
+            AMS Information System | © {{ date('Y') }} All rights reserved.
         </div>
     </footer>
 
