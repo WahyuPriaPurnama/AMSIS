@@ -9,7 +9,13 @@
             @endslot
 
             <div class="embed-responsive embed-responsive-16by9 text-center">
-                <iframe class="embed-responsive-item" src='https://rtsp.me/embed/kBGhz7Ai/"' frameborder='0'
+                <iframe class="embed-responsive-item" src='https://rtsp.me/embed/h7yA9ADf/' frameborder='0'
+                    allowfullscreen></iframe>
+                <iframe class="embed-responsive-item" src='https://rtsp.me/embed/5YGhAk6f/' frameborder='0'
+                    allowfullscreen></iframe>
+                <iframe class="embed-responsive-item" src='https://rtsp.me/embed/kBGhz7Ai/' frameborder='0'
+                    allowfullscreen></iframe>
+                <iframe class="embed-responsive-item" src='https://rtsp.me/embed/fHAbEyDt/' frameborder='0'
                     allowfullscreen></iframe>
                 <iframe class="embed-responsive-item" src='https://rtsp.me/embed/a9i7zSzf/' frameborder='0'
                     allowfullscreen></iframe>
