@@ -184,6 +184,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -215,7 +216,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'LogActivity' => App\Helpers\LogActivity::class,
         'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
-        'Excel'=>\Maatwebsite\Excel\Facades\Excel::class
+        'Excel'=>\Maatwebsite\Excel\Facades\Excel::class,
 
     ])->toArray(),
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Purchasing\MasterBarangController;
 use App\Http\Controllers\Purchasing\MasterSupplierController;
+use App\Http\Controllers\ScanlogController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\SubsidiaryController;
@@ -65,6 +66,11 @@ route::middleware('auth')->group(function () {
     route::get('/cctv', function () {
         return view('cctv');
     });
+
+    route::resource('scanlog', ScanlogController::class);
+    route::post('scanlog-import', [ScanlogController::class, 'import'])->name('scanlog.import');
+    route::get('scanlog-export', [ScanlogController::class, 'export'])->name('scanlog.export');
+    route::get('scanlog-proses', [ScanlogController::class, 'proses'])->name('scanlog.proses');
 });
 
 Auth::routes([
