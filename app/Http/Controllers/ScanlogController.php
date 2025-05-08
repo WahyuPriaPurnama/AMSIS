@@ -60,6 +60,7 @@ class ScanlogController extends Controller
         $proses = Scanlog::whereBetween('scan_1', ['06:30:00', '07:10:59'])->update(['scan_1' => '07:00:00']);
         $proses = Scanlog::whereBetween('scan_1', ['07:11:00', '07:40:59'])->update(['scan_1' => '07:30:00']);
         $proses = Scanlog::whereBetween('scan_1', ['07:41:00', '08:00:00'])->update(['scan_1' => '08:00:00']);
+        
         if ($proses) {
             return redirect()->route('scanlog.index')->with(['alert' => 'data berhasil diproses!']);
         } else {
