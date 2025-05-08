@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('bagian');
             $table->string('upah');
             $table->date('tanggal');
-            $table->time('scan_1');
-            $table->time('scan_2');
-            $table->time('scan_3');
-            $table->time('scan_4');
+            $table->time('scan_1')->nullable();
+            $table->time('scan_2')->nullable();
+            $table->time('scan_3')->nullable();
+            $table->time('scan_4')->nullable();
             $table->timestamps();
         });
     }
