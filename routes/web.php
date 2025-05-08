@@ -71,6 +71,7 @@ route::middleware('auth')->group(function () {
     route::post('scanlog-import', [ScanlogController::class, 'import'])->name('scanlog.import');
     route::get('scanlog-export', [ScanlogController::class, 'export'])->name('scanlog.export');
     route::get('scanlog-proses', [ScanlogController::class, 'proses'])->name('scanlog.proses');
+    route::get('scanlog-truncate', [ScanlogController::class, 'truncate'])->name('scanlog.truncate');
 });
 
 Auth::routes([

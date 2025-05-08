@@ -57,12 +57,25 @@ class ScanlogController extends Controller
 
     public function proses()
     {
-        $proses = DB::table('scanlogs')->where('scan_1', '<=', '07:10:59')->update(array('scan_1' => '07:00:00'));
 
+        $proses = Scanlog::whereBetween('scan_1', ['06:30:00', '07:10:59'])->update(['scan_1' => '07:00:00']);
+        $proses = Scanlog::whereBetween('scan_1', ['07:11:00', '07:40:59'])->update(['scan_1' => '07:30:00']);
+        $proses = Scanlog::whereBetween('scan_1', ['07:41:00', '08:00:00'])->update(['scan_1' => '08:00:00']);
         if ($proses) {
             return redirect()->route('scanlog.index')->with(['alert' => 'data berhasil diproses!']);
         } else {
             return redirect()->route('scanlog.index')->with(['alert2' => 'data gagal diproses!']);
+        }
+    }
+
+    public function truncate()
+    {
+        $truncate = Scanlog::query()->truncate();
+
+        if ($truncate) {
+            return redirect()->route('scanlog.index')->with(['alert' => 'data berhasil dikosongkan!']);
+        } else {
+            return redirect()->route('scanlog.index')->with(['alert2' => 'data gagal dikosongkan!']);
         }
     }
 
