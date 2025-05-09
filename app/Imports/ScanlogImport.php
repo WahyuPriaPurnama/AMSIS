@@ -23,10 +23,10 @@ class ScanlogImport implements ToModel
             'bagian' => $row[4],
             'upah' => $row[5],
             'tanggal' => date('Y-m-d', strtotime($row[6])),
-            'scan_1' => $row[7],
-            'scan_2' => $row[8],
-            'scan_3' => $row[9],
-            'scan_4' => $row[10],
+            'scan_1' => $row[7] ? '' : null,
+            'scan_2' => $row[8] ? '' : null,
+            'scan_3' => $row[9] ? '' : null,
+            'scan_4' => $row[10] ? '' : null,
         ]);
     }
 }
