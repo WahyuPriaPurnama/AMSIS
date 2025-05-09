@@ -25,7 +25,7 @@ class ScanlogImport implements ToModel
             'tanggal' => date('Y-m-d', strtotime($row[6])),
             'scan_1' => $row[7],
             'scan_2' => $row[8],
-            'scan_3' => date($row[9]),
+            'scan_3' => strtotime($row[9]),
             'scan_4' => $row[10],
         ]);
     }
