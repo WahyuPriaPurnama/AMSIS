@@ -26,7 +26,7 @@ class ScanlogImport implements ToModel
             'scan_1' => $row[7],
             'scan_2' => $row[8],
             'scan_3' => strtotime($row[9]),
-            'scan_4' => $row[10],
+            'scan_4' => strtotime($row[10]),
         ]);
     }
 }
