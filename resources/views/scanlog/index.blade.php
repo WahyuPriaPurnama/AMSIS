@@ -89,7 +89,10 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>PILIH FILE</label>
-                            <input type="file" name="file" class="form-control" required>
+                            <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" required>
+                            @error('file')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -115,7 +118,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="">Waktu Awal</label>
-                                <input type="time" name="awal" id="" class="form-control">
+                             
                             </div>
                             <div class="col">
                                 <label for="">Waktu Akhir</label>

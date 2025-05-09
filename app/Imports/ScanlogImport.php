@@ -14,9 +14,7 @@ class ScanlogImport implements ToModel
      */
     public function model(array $row)
     {
-        if (!array_filter($row)) {
-            return '00:00:00';
-        }
+
         return new Scanlog([
             'pin' => $row[0],
             'nip' => $row[1],
@@ -27,7 +25,7 @@ class ScanlogImport implements ToModel
             'tanggal' => date('Y-m-d', strtotime($row[6])),
             'scan_1' => $row[7],
             'scan_2' => $row[8],
-            'scan_3' => $row[9],
+            'scan_3' => date($row[9]),
             'scan_4' => $row[10],
         ]);
     }
