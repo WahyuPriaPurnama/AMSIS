@@ -15,7 +15,7 @@ class ScanlogImport implements ToModel
     public function model(array $row)
     {
         if (!array_filter($row)) {
-            return null;
+            return '00:00:00';
         }
         return new Scanlog([
             'pin' => $row[0],
