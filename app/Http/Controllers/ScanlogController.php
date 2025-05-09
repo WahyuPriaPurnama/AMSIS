@@ -6,8 +6,12 @@ use App\Exports\ScanlogExport;
 use App\Imports\ScanlogImport;
 use App\Models\Scanlog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+
+use function Laravel\Prompts\table;
 
 class ScanlogController extends Controller
 {
@@ -51,16 +55,22 @@ class ScanlogController extends Controller
 
     public function export()
     {
-        return Excel::download(new ScanlogExport(), 'scanlog.xlsx');
+        return Excel::download(new ScanlogExport(), "scanlog " . now() . ".xlsx");
     }
 
-    public function proses()
+    public function proses(Request $request)
     {
-        $proses = Scanlog::whereBetween('scan_1', ['06:30:00', '07:10:59'])->update(['scan_1' => '07:00:00']);
-        $proses = Scanlog::whereBetween('scan_1', ['07:11:00', '07:40:59'])->update(['scan_1' => '07:30:00']);
-        $proses = Scanlog::whereBetween('scan_1', ['07:41:00', '08:00:00'])->update(['scan_1' => '08:00:00']);
-
-        if ($proses) {
+        $col = ['scan_1', 'scan_2', 'scan_3', 'scan_4'];
+        $awal = $request->awal;
+        $akhir = $request->akhir;
+        $waktu = $request->waktu;
+        
+        foreach ($col as $k) {
+            $data = DB::table('scanlogs');
+            $data->whereBetween($k, [$awal . ':59', $akhir . ':59'])->update([$k => $waktu]);
+        }
+        
+        if ($data) {
             return redirect()->route('scanlog.index')->with(['alert' => 'data berhasil diproses!']);
         } else {
             return redirect()->route('scanlog.index')->with(['alert2' => 'data gagal diproses!']);
