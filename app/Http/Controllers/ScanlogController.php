@@ -64,12 +64,21 @@ class ScanlogController extends Controller
         $awal = $request->awal;
         $akhir = $request->akhir;
         $waktu = $request->waktu;
-        
+
         foreach ($col as $k) {
             $data = DB::table('scanlogs');
             $data->whereBetween($k, [$awal . ':59', $akhir . ':59'])->update([$k => $waktu]);
         }
-        
+
+        $rows = Scanlog::all();
+        foreach ($rows as $row) {
+            $to = Carbon::parse($row->scan_1);
+            $from = Carbon::parse($row->scan_2);
+            $selisih = $from->diffInSeconds($to);
+            $output = gmdate('H:i:s', $selisih);
+            $row->update(['selisih' => $output]);
+        }
+
         if ($data) {
             return redirect()->route('scanlog.index')->with(['alert' => 'data berhasil diproses!']);
         } else {

@@ -14,9 +14,7 @@ class ScanlogImport implements ToModel
      */
     public function model(array $row)
     {
-        if ($row == '') {
-            $row = null;
-        }
+    
         return new Scanlog([
             'pin' => $row[0],
             'nip' => $row[1],

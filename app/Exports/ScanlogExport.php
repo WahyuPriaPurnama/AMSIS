@@ -12,6 +12,6 @@ class ScanlogExport implements FromCollection
      */
     public function collection()
     {
-        return Scanlog::get(['pin', 'nip', 'nama', 'departement', 'bagian', 'upah', 'tanggal', 'scan_1', 'scan_2', 'scan_3', 'scan_4']);
+        return Scanlog::get(['pin', 'nip', 'nama', 'departement', 'bagian', 'upah', 'tanggal', 'scan_1', 'scan_2', 'scan_3', 'scan_4','selisih']);
     }
 }

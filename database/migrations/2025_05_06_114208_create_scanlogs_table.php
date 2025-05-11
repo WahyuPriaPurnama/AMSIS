@@ -24,6 +24,7 @@ return new class extends Migration
             $table->time('scan_2')->nullable();
             $table->time('scan_3')->nullable();
             $table->time('scan_4')->nullable();
+            $table->time('selisih')->nullable();
             $table->timestamps();
         });
     }
