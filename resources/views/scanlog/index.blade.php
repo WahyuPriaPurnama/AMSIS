@@ -39,7 +39,7 @@
             @endslot
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover" id="table">
+                    <table class="table table-hover display" id="table">
                         <thead>
                             <tr>
                                 <th scope="col">PIN</th>
@@ -69,6 +69,19 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">PIN</th>
+                                <th scope="col">NIP</th>
+                                <th scope="col">NAMA</th>
+                                <th scope="col">DEPARTEMENT</th>
+                                <th scope="col">UPAH</th>
+                                <th scope="col">TANGGAL</th>
+                                <th scope="col">SCAN 1</th>
+                                <th scope="col">SCAN 2</th>
+                                <th scope="col">JAM KERJA</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

@@ -32,19 +32,19 @@
                 Master Supplier
             @endslot
             <div class="table table-responsive">
-                <table class="table table-hover" id="table">
+                <table class="table table-hover display" id="table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nama Supplier</th>
-                            <th>Jenis Supplier</th>
-                            <th>Kontak</th>
-                            <th>Email</th>
+                            <th>NAMA SUPPLIER</th>
+                            <th>JENIS SUPPLIER</th>
+                            <th>KONTAK</th>
+                            <th>EMAIL</th>
                             <th>UP</th>
-                            <th>Alamat</th>
-                            <th>Pembayaran</th>
-                            <th>Hari</th>
-                            <th>Hapus</th>
+                            <th>ALAMAT</th>
+                            <th>PEMBAYARAN</th>
+                            <th>HARI</th>
+                            <th>MENU</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,6 +136,20 @@
                         @endforelse
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>NAMA SUPPLIER</th>
+                            <th>JENIS SUPPLIER</th>
+                            <th>KONTAK</th>
+                            <th>EMAIL</th>
+                            <th>UP</th>
+                            <th>ALAMAT</th>
+                            <th>PEMBAYARAN</th>
+                            <th>HARI</th>
+                            <th>MENU</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         @endcomponent

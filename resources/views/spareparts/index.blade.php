@@ -42,7 +42,7 @@
                 DATA SPAREPART
             @endslot
         <div class="table table-responsive">
-            <table class="table table-hover" id="table">
+            <table class="table table-hover display" id="table">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -165,6 +165,17 @@
                         <td colspan="7" class="text-center">Tidak ada data...</td>
                     @endforelse
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>KODE</th>
+                        <th>NAMA BARANG</th>
+                        <th>SPESIFIKASI</th>
+                        <th>JUMLAH</th>
+                        <th>DIPERBARUI</th>
+                        <th>MENU</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     @endcomponent

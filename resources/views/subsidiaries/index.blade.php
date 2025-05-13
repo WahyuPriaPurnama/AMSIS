@@ -32,7 +32,7 @@
                 DATA PERUSAHAAN
             @endslot
             <div class="table-responsive" >
-                <table class="table table-hover" id="table">
+                <table class="table table-hover display" id="table">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -61,6 +61,14 @@
                             <td colspan="7" class="text-center">Tidak ada data...</td>
                         @endforelse
                     </tbody>
+                    <tfoot>
+                         <tr>
+                            <th>#</th>
+                            <th>NAMA</th>
+                            <th>KARYAWAN</th>
+                            <th>ALAMAT</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         @endcomponent

@@ -35,19 +35,19 @@
                 Master Barang
             @endslot
             <div class="table table-responsive">
-                <table class="table table-hover" id="table">
+                <table class="table table-hover display" id="table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nama Plant</th>
-                            <th>Nama Supplier</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>Last Order</th>
-                            <th>Next Order</th>
-                            <th>Menu</th>
+                            <th>NAMA PLANT</th>
+                            <th>NAMA SUPPLIER</th>
+                            <th>NAMA BARANG</th>
+                            <th>KATEGORI</th>
+                            <th>HARGA</th>
+                            <th>JUMLAH</th>
+                            <th>LAST ORDER</th>
+                            <th>NEXT ORDER</th>
+                            <th>MENU</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,6 +141,20 @@
                             <td colspan="12" class="text-center">tidak ada data...</td>
                         @endforelse
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>NAMA PLANT</th>
+                            <th>NAMA SUPPLIER</th>
+                            <th>NAMA BARANG</th>
+                            <th>KATEGORI</th>
+                            <th>HARGA</th>
+                            <th>JUMLAH</th>
+                            <th>LAST ORDER</th>
+                            <th>NEXT ORDER</th>
+                            <th>MENU</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         @endcomponent
