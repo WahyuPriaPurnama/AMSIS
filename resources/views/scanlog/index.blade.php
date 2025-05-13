@@ -3,7 +3,6 @@
 @section('menuScanlog', 'active')
 @section('content')
     <div class="container-fluid mt-3">
-
         @component('components.card')
             <div class="button-action">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#import">
@@ -141,12 +140,4 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#table').DataTable();
-        });
-    </script>
 @endsection

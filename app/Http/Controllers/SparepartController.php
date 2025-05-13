@@ -84,15 +84,6 @@ class SparepartController extends Controller
         }
     }
 
-    public function search(Request $request)
-    {
-        $search = $request->search;
-
-        $data = Sparepart::where('nama_barang', 'like', "%" . $search . "%")->paginate(100);
-
-        return view('spareparts.index', compact('data'));
-    }
-
     public function export()
     {
         return Excel::download(new SparepartExport, 'data-spareparts.xlsx');

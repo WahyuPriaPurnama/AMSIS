@@ -5,6 +5,7 @@
     <div class="container mt-3">
     
         <!-- Modal -->
+        @component('components.card')
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -19,21 +20,19 @@
                 </div>
             </div>
         </div>
-        @component('components.card')
+        <div class="button-action mb-3">
+
+            @can('create', App\Models\Subsidiary::class)
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Tambah
+                </button>
+            @endcan
+        </div>
             @slot('header')
                 DATA PERUSAHAAN
             @endslot
-            <div class="text-end">
-
-                @can('create', App\Models\Subsidiary::class)
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Tambah
-                    </button>
-                @endcan
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-hover">
+            <div class="table-responsive" >
+                <table class="table table-hover" id="table">
                     <thead>
                         <tr>
                             <th>#</th>

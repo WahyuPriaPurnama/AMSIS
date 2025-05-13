@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 route::middleware('auth')->group(function () {
-    route::get('employee/search', [EmployeeController::class, 'search'])->name('employee.search');
     route::resource('employees', EmployeeController::class);
     route::get('employee/foto_profil/{pp}', [EmployeeController::class, 'pp'])->name('employee.pp');
     route::get('employee/KTP/{ktp}', [EmployeeController::class, 'ktp'])->name('employee.ktp');
@@ -36,13 +35,10 @@ route::middleware('auth')->group(function () {
     route::get('/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
     route::get('/export-excel', [EmployeeController::class, 'index_excel'])->name('employees.excel');
     route::get('/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
-
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('users', UserController::class);
     route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('/home', [HomeController::class, 'index']);
-
-    route::get('vehicle/search', [VehicleController::class, 'search'])->name('vehicle.search');
     route::resource('vehicle', VehicleController::class);
     route::get('vehicle/foto/{foto}', [VehicleController::class, 'foto'])->name('vehicle.foto');
     route::get('vehicle/stnk/{stnk}', [VehicleController::class, 'stnk'])->name('vehicle.stnk');
@@ -50,15 +46,9 @@ route::middleware('auth')->group(function () {
     route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
     route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
     route::get('vehicle/polis/{polis}', [VehicleController::class, 'polis'])->name('vehicle.polis');
-
     route::resource('spareparts', SparepartController::class);
-    route::get('sparepart/search', [SparepartController::class, 'search'])->name('sparepart.search');
     route::get('sparepart-export', [SparepartController::class, 'export'])->name('spareparts.export');
-
-    route::get('master-barang/search', [MasterBarangController::class, 'search'])->name('master-barang.search');
     route::resource('master-barang', MasterBarangController::class);
-
-    route::get('master-supplier/search', [MasterSupplierController::class, 'search'])->name('master-supplier.search');
     route::resource('master-supplier', MasterSupplierController::class);
 
     route::get('/data-suhu/{suhu}', [SensorController::class, 'store'])->name('suhu.store');

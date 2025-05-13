@@ -191,14 +191,4 @@ class VehicleController extends Controller
         $this->authorize('view', Vehicle::class);
         return Response::download('storage/vehicles/polis/' . $polis);
     }
-
-    public function search(Request $request)
-    {
-        $search = $request->search;
-        $data = Vehicle::where('jenis_kendaraan', 'like', "%" . $search . "%")
-            ->orWhere('pengguna', 'like', "%" . $search . "%")
-            ->get();
-
-        return view('vehicles.index', compact('data'));
-    }
 }

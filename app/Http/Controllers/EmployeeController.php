@@ -228,47 +228,6 @@ class EmployeeController extends Controller
         }
     }
 
-    public function search(Request $request)
-    {
-        $search = $request->search;
-        $user = Auth::user()->role;
-        if ($user == 'holding-admin' or $user == 'super-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
-                return $query->where('name', 'like', "%" . $search . "%");
-            })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
-        } elseif ($user == 'eln-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
-                return $query->where('id', '2');
-            })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
-        } elseif ($user == 'eln2-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
-                return $query->where('id', '3');
-            })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
-        } elseif ($user == 'bofi-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
-                return $query->where('id', '4');
-            })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
-        } elseif ($user == 'haka-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
-                return $query->where('id', '5');
-            })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
-        } else {
-            $employees = Employee::whereHas('subsidiary', function ($query) use ($search) {
-                return $query->where('id', '6');
-            })->orWhere('nip', 'like', "%" . $search . "%")
-                ->orWhere('nama', 'like', "%" . $search . "%")->paginate(100);
-        }
-
-        return view('employees.index', ['employees' => $employees]);
-    }
-
-
-
     public function pp($pp)
     {
         $this->authorize('view', Employee::class);

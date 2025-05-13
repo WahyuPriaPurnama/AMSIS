@@ -19,42 +19,27 @@
             </div>
         </div>
         @component('components.card')
+            <div class="button-action mb-3">
+                @can('create', App\Models\Purchasing\MasterBarang::class)
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                        id="tooltip" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                        </svg>
+                    </button>
+                @endcan
+            </div>
             @slot('header')
                 Master Barang
             @endslot
-            <div class="row">
-                <div class="col">
-                    <form action="{{ route('master-barang.search') }}" method="get">
-                        <div class="input-group mb-3">
-                            <input type="text" name="search" value="{{ request()->input('search') }}" class="form-control"
-                                placeholder="cari barang" id="">
-                            <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg"
-                                    width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                                </svg></button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col text-end">
-                    @can('create', App\Models\Purchasing\MasterBarang::class)
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                            id="tooltip" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
-                            </svg>
-                        </button>
-                    @endcan
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover">
+            <div class="table table-responsive">
+                <table class="table table-hover" id="table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>@sortablelink('subsidiary_id', 'Nama Plant')</th>
+                            <th>Nama Plant</th>
                             <th>Nama Supplier</th>
                             <th>Nama Barang</th>
                             <th>Kategori</th>
@@ -62,6 +47,7 @@
                             <th>Jumlah</th>
                             <th>Last Order</th>
                             <th>Next Order</th>
+                            <th>Menu</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +79,6 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-
                                                 @include('purchasing.master_barang.edit')
                                             </div>
                                         </div>
@@ -155,14 +140,9 @@
                         @empty
                             <td colspan="12" class="text-center">tidak ada data...</td>
                         @endforelse
-
                     </tbody>
                 </table>
             </div>
-            <div class="row">
-                {{ $data->links() }}
-            </div>
         @endcomponent
     </div>
-
 @endsection
