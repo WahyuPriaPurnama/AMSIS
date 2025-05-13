@@ -76,7 +76,9 @@ class ScanlogController extends Controller
             $from = Carbon::parse($row->scan_2);
             $selisih = $from->diffInSeconds($to);
             $output = gmdate('H:i:s', $selisih);
-            $row->update(['selisih' => $output]);
+            list($jam, $menit, $detik) = explode(':', $output);
+            $jamKerja = $jam + ($menit / 60) + ($detik / 3600);
+            $row->update(['selisih' => $jamKerja]);
         }
 
         if ($data) {

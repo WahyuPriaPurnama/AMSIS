@@ -47,12 +47,11 @@
                                 <th scope="col">NIP</th>
                                 <th scope="col">NAMA</th>
                                 <th scope="col">DEPARTEMENT</th>
-                                <th scope="col">BAGIAN</th>
                                 <th scope="col">UPAH</th>
                                 <th scope="col">TANGGAL</th>
                                 <th scope="col">SCAN 1</th>
                                 <th scope="col">SCAN 2</th>
-                                <th scope="col">SELISIH</th>
+                                <th scope="col">JAM KERJA</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,9 +61,9 @@
                                     <td>{{ $scan->nip }}</td>
                                     <td>{{ $scan->nama }}</td>
                                     <td>{{ $scan->departement }}</td>
-                                    <td>{{ $scan->bagian }}</td>
                                     <td>{{ $scan->upah }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($scan->tanggal)) }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($scan->tanggal)->translatedFormat('l') }}
+                                        {{ date('d-m-Y', strtotime($scan->tanggal)) }}</td>
                                     <td>{{ $scan->scan_1 }}</td>
                                     <td>{{ $scan->scan_2 }}</td>
                                     <td>{{ $scan->selisih }}</td>
