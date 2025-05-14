@@ -137,30 +137,7 @@
                                     @endcan
                                 </ul>
                             </li>
-                            @can('view', App\Models\Sparepart::class)
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">Gudang</a>
-                                    <ul class="dropdown-menu">
-                                        <a href="{{ route('spareparts.index') }}"
-                                            class="dropdown-item @yield('menuSparepart')">Sparepart</a>
-                                    </ul>
-                                </li>
-                            @endcan
-                            @can('view', App\Models\Purchasing\MasterBarang::class)
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                        Pembelian
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <a href="{{ route('master-barang.index') }}"
-                                            class="dropdown-item @yield('menuBarang')">Master Barang</a>
-                                        <a href="{{ route('master-supplier.index') }}"
-                                            class="dropdown-item @yield('menuSupplier')">Master
-                                            Supplier</a>
-                                    </ul>
-                                </li>
-                            @endcan
+                          
                             <li class="nav-item">
                                 <a href="/cctv" class="nav-link @yield('menuCCTV')">
                                     CCTV
