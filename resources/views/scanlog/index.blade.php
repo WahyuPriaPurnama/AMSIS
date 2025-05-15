@@ -130,12 +130,12 @@
                     <div class="modal-body">
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="">Waktu Awal</label>
+                                <label for="">Range Bawah</label>
                                 <input type="time" name="awal" id="" class="form-control">
                             </div>
                             <div class="col">
-                                <label for="">Waktu Akhir</label>
-                                <input type="time" name="akhir" class="form-control" id="">
+                                <label for="">Range Atas</label>
+                                <input type="time" name="akhir" class="form-control">
                             </div>
                         </div>
                         <div class="row">
