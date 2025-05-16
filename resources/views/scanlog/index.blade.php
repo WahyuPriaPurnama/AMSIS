@@ -74,7 +74,7 @@
                                 <th scope="col">PIN</th>
                                 <th scope="col">NIP</th>
                                 <th scope="col">NAMA</th>
-                                <th scope="col">DEPARTEMENT</th>
+                                <th scope="col">JABATAN</th>
                                 <th scope="col">UPAH</th>
                                 <th scope="col">TANGGAL</th>
                                 <th scope="col">SCAN 1</th>
