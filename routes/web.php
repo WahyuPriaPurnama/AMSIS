@@ -46,13 +46,6 @@ route::middleware('auth')->group(function () {
     route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
     route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
     route::get('vehicle/polis/{polis}', [VehicleController::class, 'polis'])->name('vehicle.polis');
-    route::resource('spareparts', SparepartController::class);
-    route::get('sparepart-export', [SparepartController::class, 'export'])->name('spareparts.export');
-    route::resource('master-barang', MasterBarangController::class);
-    route::resource('master-supplier', MasterSupplierController::class);
-
-    route::get('/data-suhu/{suhu}', [SensorController::class, 'store'])->name('suhu.store');
-    route::get('/data-suhu', [SensorController::class, 'index'])->name('suhu.index');
     route::get('/cctv', function () {
         return view('cctv');
     });
@@ -89,4 +82,8 @@ route::get('/haka-bwi', function () {
 });
 route::get('/bofi-bwi', function () {
     return view('e-slip.bofi');
+});
+
+route::get('/web-rtc', function () {
+    return view('webrtc');
 });

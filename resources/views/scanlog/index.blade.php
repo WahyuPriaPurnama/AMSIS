@@ -37,7 +37,7 @@
             @slot('header')
                 Data Scanlog
             @endslot
-            <div class="card-body">
+           
                 <div class="table-responsive">
                     <table class="table table-hover display" id="table">
                         <thead>
@@ -84,7 +84,7 @@
                         </tfoot>
                     </table>
                 </div>
-            </div>
+           
         @endcomponent
     </div>
     <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

@@ -7,8 +7,8 @@
             @slot('header')
                 E-Slip HAKA
             @endslot
-            <div class="table table-responsive">
-                <table class="table table-hover">
+            <div class="table-responsive">
+                <table class="table table-hover display" id="table">
                     <thead>
                         <tr>
                             <th>NAMA</th>

@@ -202,22 +202,10 @@ class DatabaseSeeder extends Seeder
             'role' => 'holding-admin'
         ]);
         User::create([
-            'name' => 'Holding Purchasing',
-            'email' => 'purchasing.admin@amsgroup.co.id',
-            'password' => Hash::make('HoldingPurchasing'),
-            'role' => 'holding-purchasing'
-        ]);
-        User::create([
             'name' => 'ELN Admin',
             'email' => 'eln.admin@amsgroup.co.id',
             'password' => Hash::make('ELNAdmin_6c\9'),
             'role' => 'eln-admin'
-        ]);
-        User::create([
-            'name' => 'ELN Sparepart',
-            'email' => 'eln.sparepart@amsgroup.co.id',
-            'password' => Hash::make('ELNSparepart_6c\9'),
-            'role' => 'eln-sparepart'
         ]);
         User::create([
             'name' => 'ELN 2 Admin',
