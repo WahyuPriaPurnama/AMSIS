@@ -4,13 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Kyslik\ColumnSortable\Sortable;
 
 class Vehicle extends Model
 {
-    use HasFactory, Sortable;
+    use HasFactory;
     protected $guarded = [];
-    public $sortable = ['jenis_kendaraan', 'kategori', 'subsidiary_id'];
 
     public function subsidiary()
     {

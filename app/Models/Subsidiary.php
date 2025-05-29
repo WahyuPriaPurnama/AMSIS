@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Kyslik\ColumnSortable\Sortable;
 
 class Subsidiary extends Model
 {
@@ -24,8 +23,5 @@ class Subsidiary extends Model
     {
         return $this->hasMany(Vehicle::class);
     }
-    public function eslip()
-    {
-        return $this->hasMany(Eslip::class);
-    }
+   
 }
