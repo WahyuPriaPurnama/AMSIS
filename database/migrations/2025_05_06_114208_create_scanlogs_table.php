@@ -13,18 +13,25 @@ return new class extends Migration
     {
         Schema::create('scanlogs', function (Blueprint $table) {
             $table->id();
+            $table->date('tgl');
+            $table->string('jadwal');
+            $table->string('jk');
             $table->integer('pin');
             $table->string('nip');
             $table->string('nama');
-            $table->string('departement');
+            $table->string('dept');
             $table->string('bagian');
             $table->string('upah');
-            $table->date('tanggal');
-            $table->time('scan_1')->nullable();
-            $table->time('scan_2')->nullable();
-            $table->time('scan_3')->nullable();
-            $table->time('scan_4')->nullable();
-            $table->decimal('selisih')->nullable();
+            $table->time('jm');
+            $table->time('sm');
+            $table->time('jp');
+            $table->time('sp');
+            $table->decimal('dk');
+            // $table->time('scan_1')->nullable();
+            // $table->time('scan_2')->nullable();
+            // $table->time('scan_3')->nullable();
+            // $table->time('scan_4')->nullable();
+            // $table->decimal('selisih')->nullable();
             $table->timestamps();
         });
     }

@@ -53,7 +53,8 @@ route::middleware('auth')->group(function () {
     route::resource('scanlog', ScanlogController::class);
     route::post('scanlog-import', [ScanlogController::class, 'import'])->name('scanlog.import');
     route::get('scanlog-export', [ScanlogController::class, 'export'])->name('scanlog.export');
-    route::post('scanlog-proses', [ScanlogController::class, 'proses'])->name('scanlog.proses');
+    route::post('scanlog-ctime', [ScanlogController::class, 'ctime'])->name('scanlog.ctime');
+    route::post('scanlog-convert', [ScanlogController::class, 'convert'])->name('scanlog.convert');
     route::get('scanlog-truncate', [ScanlogController::class, 'truncate'])->name('scanlog.truncate');
 });
 

@@ -15,7 +15,8 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 
     <!-- Scripts -->
-    @vite('resources/sass/app.scss')
+   
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <!-- load font awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
@@ -184,7 +185,6 @@
                                     </a>
                                 </div>
                             </li>
-
                         @endguest
                     </ul>
                 </div>
@@ -199,9 +199,8 @@
             AMS Information System | © {{ date('Y') }} All rights reserved.
         </div>
     </footer>
-    @vite('resources/js/app.js')
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 <script>

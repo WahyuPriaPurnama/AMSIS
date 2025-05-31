@@ -25,7 +25,7 @@ class EmployeeController extends Controller
         $this->authorize('view', Employee::class);
         $user = Auth::user()->role;
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
-            $employees = Employee::Index()->sortable()->latest()->paginate(1000);
+            $employees = Employee::Index()->latest()->paginate(1000);
         } elseif ($user == 'eln-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '2');

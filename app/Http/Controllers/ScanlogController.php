@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 
-use function Laravel\Prompts\table;
-
 class ScanlogController extends Controller
 {
     /**
@@ -58,7 +56,7 @@ class ScanlogController extends Controller
         return Excel::download(new ScanlogExport(), "scanlog " . now() . ".xlsx");
     }
 
-    public function proses(Request $request)
+    public function ctime(Request $request)
     {
         $col = ['scan_1', 'scan_2', 'scan_3', 'scan_4'];
         $awal = $request->awal;
@@ -82,9 +80,24 @@ class ScanlogController extends Controller
         }
 
         if ($data) {
-            return redirect()->route('scanlog.index')->with(['alert' => 'data berhasil diproses!']);
+            return redirect()->route('scanlog.index')->with('alert', 'data berhasil diproses!');
         } else {
-            return redirect()->route('scanlog.index')->with(['alert2' => 'data gagal diproses!']);
+            return redirect()->route('scanlog.index')->with('alert2', 'data gagal diproses!');
+        }
+    }
+
+    public function convert()
+    {
+        $dks = Scanlog::all();
+        foreach ($dks as $dk) {
+            $result = $dk->dk;
+            $hour = $result / 60;
+            $dk->update(['dk' => $hour]);
+        }
+        if ($dk) {
+            return redirect()->route('scanlog.index')->with('alert', 'menit berhasil diconvert');
+        } else {
+            return redirect()->route('scanlog.index')->with('alert2', 'menit gagal diconvert');
         }
     }
 
@@ -93,54 +106,9 @@ class ScanlogController extends Controller
         $truncate = Scanlog::query()->truncate();
 
         if ($truncate) {
-            return redirect()->route('scanlog.index')->with(['alert' => 'data berhasil dikosongkan!']);
+            return redirect()->route('scanlog.index')->with('alert', 'data berhasil dikosongkan!');
         } else {
-            return redirect()->route('scanlog.index')->with(['alert2' => 'data gagal dikosongkan!']);
+            return redirect()->route('scanlog.index')->with('alert2', 'data gagal dikosongkan!');
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Scanlog $scanlog)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Scanlog $scanlog)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Scanlog $scanlog) {}
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Scanlog $scanlog)
-    {
-        //
     }
 }

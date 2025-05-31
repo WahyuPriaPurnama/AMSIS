@@ -19,7 +19,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $data = Vehicle::Index()->sortable()->paginate(50);
+        $data = Vehicle::Index()->paginate(50);
         return view('vehicles.index', compact('data'));
     }
 
