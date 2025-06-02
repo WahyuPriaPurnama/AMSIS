@@ -46,7 +46,7 @@ class ScanlogExport implements FromCollection, WithHeadings, WithStyles
                 'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => ['rgb' => '3100ba'] // warna biru
+                    'startColor' => ['rgb' => '3100ba'] 
                 ],
                 'alignment' => ['horizontal' => 'center']
             ],
