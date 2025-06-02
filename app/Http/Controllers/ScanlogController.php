@@ -92,7 +92,7 @@ class ScanlogController extends Controller
         foreach ($dks as $dk) {
             $result = $dk->dk;
             $hour = $result / 60;
-            $dk->update(['dk' => $hour]);
+            $dk->update(['dk' => $hour, 'status' => 1]);
         }
         if ($dk) {
             return redirect()->route('scanlog.index')->with('alert', 'menit berhasil diconvert');

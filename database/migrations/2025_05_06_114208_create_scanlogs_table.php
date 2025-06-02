@@ -27,6 +27,7 @@ return new class extends Migration
             $table->time('jp');
             $table->time('sp');
             $table->decimal('dk');
+            $table->integer('status')->default(0);
             // $table->time('scan_1')->nullable();
             // $table->time('scan_2')->nullable();
             // $table->time('scan_3')->nullable();

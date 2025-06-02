@@ -16,7 +16,8 @@
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ctime">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-                <button type="submit" class="btn btn-success btn-md" form="myForm"><i class="bi bi-clock-fill"></i> Convert</button>
+                <button type="submit" class="btn btn-success btn-md" form="myForm"><i class="bi bi-clock-fill"></i>
+                    Convert</button>
                 <a href="{{ route('scanlog.truncate') }}" class="btn btn-secondary btn-md" data-toggle="tooltip"
                     data-placement="top" title="Kosongkan Database">
                     <i class="bi bi-trash-fill"></i></a>
@@ -43,12 +44,13 @@
                             <th>JAM PULANG</th>
                             <th>SCAN PULANG</th>
                             <th>DURASI KERJA</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($scanlog as $scan)
                             <tr>
-                                <td>{{$scan->tgl}}</td>
+                                <td>{{ $scan->tgl }}</td>
                                 <td>{{ $scan->jadwal }}</td>
                                 <td>{{ $scan->jk }}</td>
                                 <td>{{ $scan->pin }}</td>
@@ -59,6 +61,17 @@
                                 <td>{{ $scan->jp }}</td>
                                 <td>{{ $scan->sp }}</td>
                                 <td>{{ $scan->dk }}</td>
+                                <td>
+                                    @if ($scan->status == 0)
+                                        <span class="badge text-bg-danger">
+                                            Belum Diproses
+                                        </span>
+                                    @else
+                                        <span class="badge text-bg-success">
+                                            Sudah Diproses
+                                        </span>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
