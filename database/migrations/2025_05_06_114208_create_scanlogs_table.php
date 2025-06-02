@@ -28,11 +28,6 @@ return new class extends Migration
             $table->time('sp');
             $table->decimal('dk', 5, 2)->nullable();
             $table->integer('status')->default(0);
-            // $table->time('scan_1')->nullable();
-            // $table->time('scan_2')->nullable();
-            // $table->time('scan_3')->nullable();
-            // $table->time('scan_4')->nullable();
-            // $table->decimal('selisih')->nullable();
             $table->timestamps();
         });
     }
