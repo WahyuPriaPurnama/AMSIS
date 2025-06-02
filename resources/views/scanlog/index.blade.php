@@ -4,80 +4,89 @@
 @section('content')
     <div class="container-fluid mt-3">
         @component('components.card')
-            <div class="button-action mb-3">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#import">
+            <div class="button-action mb-3 d-flex gap-1">
+                <button type="button" class="btn btn-success w-auto h-100" data-bs-toggle="modal" data-bs-target="#import">
                     <i class="bi bi-file-earmark-arrow-down-fill">
                     </i>
                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                 </button>
-                <a href="{{ route('scanlog.export') }}" class="btn btn-success btn-md"><i
+                <a href="{{ route('scanlog.export') }}" class="btn btn-success w-auto h-100"><i
                         class="bi bi-file-earmark-arrow-up-fill"></i>
                     <i class="bi bi-file-earmark-spreadsheet-fill"></i></a>
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ctime">
+                <button type="button" class="btn btn-warning w-auto h-100" data-bs-toggle="modal" data-bs-target="#ctime">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-                <button type="submit" class="btn btn-success btn-md" form="myForm"><i class="bi bi-clock-fill"></i>
-                    Convert</button>
-                <a href="{{ route('scanlog.truncate') }}" class="btn btn-secondary btn-md" data-toggle="tooltip"
+                <button type="submit" class="btn btn-success w-auto h-100" form="myForm"><i class="bi bi-clock-fill"></i>
+                    Konversikan</button>
+                <a href="{{ route('scanlog.truncate') }}" class="btn btn-secondary w-auto h-100" data-toggle="tooltip"
                     data-placement="top" title="Kosongkan Database">
                     <i class="bi bi-trash-fill"></i></a>
                 <form action="{{ route('scanlog.convert') }}" id="myForm" method="post">
                     @csrf
                     <input type="hidden" name="jam" value="60">
                 </form>
+                {{-- <div class="alert alert-warning ms-auto">
+                    <i class="bi bi-info-circle-fill"></i> Durasi Kerja >= 10 jam potongan istirahat 1,5 jam
+                </div> --}}
             </div>
-            @slot('header')
-                Data Scanlog
-            @endslot
-            <div class="table-responsive">
-                <table class="table table-hover display" id="table">
-                    <thead>
+        @slot('header')
+            Data Scanlog
+        @endslot
+        <div class="table-responsive">
+            <table class="table table-hover display" id="table">
+                <thead>
+                    <tr>
+                        <th>TANGGAL</th>
+                        <th>SHIFT</th>
+                        <th>PIN</th>
+                        <th>NAMA</th>
+                        <th>DEPARTEMEN</th>
+                        <th>JAM MASUK</th>
+                        <th>SCAN MASUK</th>
+                        <th>JAM PULANG</th>
+                        <th>SCAN PULANG</th>
+                        <th>DURASI KERJA</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($scanlog as $scan)
                         <tr>
-                            <th>TANGGAL</th>
-                            <th>JADWAL</th>
-                            <th>SHIFT</th>
-                            <th>PIN</th>
-                            <th>NAMA</th>
-                            <th>DEPARTEMEN</th>
-                            <th>JAM MASUK</th>
-                            <th>SCAN MASUK</th>
-                            <th>JAM PULANG</th>
-                            <th>SCAN PULANG</th>
-                            <th>DURASI KERJA</th>
-                            <th>STATUS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($scanlog as $scan)
-                            <tr>
-                                <td>{{ $scan->tgl }}</td>
-                                <td>{{ $scan->jadwal }}</td>
-                                <td>{{ $scan->jk }}</td>
-                                <td>{{ $scan->pin }}</td>
-                                <td>{{ $scan->nama }}</td>
-                                <td>{{ $scan->dept }}</td>
-                                <td>{{ $scan->jm }}</td>
-                                <td>{{ $scan->sm }}</td>
-                                <td>{{ $scan->jp }}</td>
-                                <td>{{ $scan->sp }}</td>
-                                <td>{{ $scan->dk }}</td>
-                                <td>
-                                    @if ($scan->status == 0)
-                                        <span class="badge text-bg-danger">
-                                            Belum Diproses
-                                        </span>
-                                    @else
-                                        <span class="badge text-bg-success">
-                                            Sudah Diproses
-                                        </span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endcomponent
+                            <td>{{ $scan->tgl }}</td>
+                            <td>
+                                @if ($scan->jk == 'Tidak Hadir')
+                                    <span class="badge text-bg-danger">
+                                        {{ $scan->jk }}
+                                    </span>
+                                @else
+                                    {{ $scan->jk }}
+                            </td>
+                    @endif
+                    <td>{{ $scan->pin }}</td>
+                    <td>{{ $scan->nama }}</td>
+                    <td>{{ $scan->dept }}</td>
+                    <td>{{ $scan->jm }}</td>
+                    <td>{{ $scan->sm }}</td>
+                    <td>{{ $scan->jp }}</td>
+                    <td>{{ $scan->sp }}</td>
+                    <td>{{ $scan->dk }}</td>
+                    <td>
+                        @if ($scan->status == 0)
+                            <span class="badge text-bg-danger">
+                                Belum Diproses
+                            </span>
+                        @else
+                            <span class="badge text-bg-success">
+                                Sudah Diproses
+                            </span>
+                        @endif
+                    </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endcomponent
     </div>
     <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">

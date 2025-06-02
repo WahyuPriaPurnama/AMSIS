@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Scanlog;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class ScanlogImport implements ToModel
+class ScanlogImport implements ToModel, WithStartRow
 {
     /**
      * @param array $row
@@ -29,7 +30,11 @@ class ScanlogImport implements ToModel
             'sm' => $row[14],
             'jp' => $row[24],
             'sp' => $row[25],
-            'dk' => $row[27],
         ]);
+    }
+
+    public function startRow(): int
+    {
+        return 3;
     }
 }

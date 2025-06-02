@@ -21,31 +21,32 @@ class ScanlogExport implements FromCollection, WithHeadings, WithStyles
     public function headings(): array
     {
         return [
-            'tanggal',
-            'jadwal',
-            'jam kerja',
-            'pin',
-            'nip',
-            'nama',
-            'dept',
-            'bagian',
-            'upah',
-            'jam masuk',
-            'scan masuk',
-            'jam pulang',
-            'scan pulang',
-            'durasi kerja'
+            'TANGGAL',
+            'JADWAL',
+            'JAM KERJA',
+            'PIN',
+            'NIP',
+            'NAMA',
+            'DEPARTEMENT',
+            'BAGIAN',
+            'UPAH',
+            'JAM MASUK',
+            'SCAN MASUK',
+            'JAM PULANG',
+            'SCAN PULANG',
+            'DURASI KERJA'
         ];
     }
 
-    public function styles(Worksheet $sheet){
-         // Style untuk baris pertama (header)
+    public function styles(Worksheet $sheet)
+    {
+        // Style untuk baris pertama (header)
         return [
             1 => [ // baris ke-1 (header)
                 'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => ['rgb' => '1E90FF'] // warna biru
+                    'startColor' => ['rgb' => '3100ba'] // warna biru
                 ],
                 'alignment' => ['horizontal' => 'center']
             ],

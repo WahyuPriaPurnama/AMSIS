@@ -86,18 +86,78 @@ class ScanlogController extends Controller
         }
     }
 
+    public function scanMasuk(Carbon $datetime)
+    {
+        $menitMasuk = $datetime->minute;
+        if ($menitMasuk <= 10) {
+            return $datetime->startOfHour();
+        } else if ($menitMasuk <= 40) {
+            return $datetime->setMinute(30)->setSecond(0);
+        } else {
+            return $datetime->addHour()->startOfHour();
+        }
+    }
+
+    public function scanPulang(Carbon $datetime)
+    {
+        $menitPulang = $datetime->minute;
+        if ($menitPulang <= 25) {
+            return $datetime->startOfHour();
+        } else if ($menitPulang <= 55) {
+            return $datetime->setMinute(30)->setSecond(0);
+        } else {
+            return $datetime->addHour()->startOfHour();
+        }
+    }
+
+    public function durasiKerja(Carbon $masuk, Carbon $pulang)
+    {
+        $scanMasuk = $this->scanMasuk($masuk);
+        $scanPulang = $this->scanPulang($pulang);
+
+        $durasiMenit = $scanMasuk->diffInRealMinutes($scanPulang);
+        $durasiJam = $durasiMenit / 60;
+        return $durasiJam;
+    }
+
     public function convert()
     {
-        $dks = Scanlog::all();
-        foreach ($dks as $dk) {
-            $result = $dk->dk;
-            $hour = $result / 60;
-            $dk->update(['dk' => $hour, 'status' => 1]);
+        $datas = Scanlog::where('status', 0)->get();
+        $berhasil = false;
+        foreach ($datas as $data) {
+            if ($data->sm) {
+                $data->sm = $this->scanMasuk(Carbon::parse($data->sm));
+            }
+            if ($data->sp) {
+                $data->sp = $this->scanPulang(Carbon::parse($data->sp));
+            }
+            if ($data->sm && $data->sp) {
+                $durasi = $this->durasiKerja($data->sm, $data->sp);
+                $updated = $data->update([
+                    'dk' => $durasi,
+                    'sm' => $data->sm,
+                    'sp' => $data->sp,
+                    'status' => 1,
+                ]);
+            } else {
+                $updated = $data->update([
+                    'sm' => $data->sm,
+                    'sp' => $data->sp,
+                    'status' => 1,
+                ]);
+            }
+            // dd($durasi);
+
+            if ($updated) {
+                $berhasil = true;
+            }
         }
-        if ($dk) {
-            return redirect()->route('scanlog.index')->with('alert', 'menit berhasil diconvert');
+        if ($berhasil) {
+            return redirect()->route('scanlog.index')->with('alert', 'berhasil dikonversi ke jam');
+        } else if ($datas->isEmpty()) {
+            return redirect()->route('scanlog.index')->with('alert2', 'tidak ada data yang perlu diproses');
         } else {
-            return redirect()->route('scanlog.index')->with('alert2', 'menit gagal diconvert');
+            return redirect()->route('scanlog.index')->with('alert2', 'gagal dikonversi ke jam');
         }
     }
 
