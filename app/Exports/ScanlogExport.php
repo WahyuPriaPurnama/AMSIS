@@ -40,9 +40,9 @@ class ScanlogExport implements FromCollection, WithHeadings, WithStyles
 
     public function styles(Worksheet $sheet)
     {
-        // Style untuk baris pertama (header)
+       
         return [
-            1 => [ // baris ke-1 (header)
+            1 => [ 
                 'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
