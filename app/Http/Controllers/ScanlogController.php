@@ -178,7 +178,7 @@ class ScanlogController extends Controller
         }
 
         if ($berhasil > 0) {
-            return redirect()->route('scanlog.index')->with('alert', "$berhasil data berhasil dikonversi ke jam");
+            return redirect()->route('scanlog.index')->with('alert', "berhasil data berhasil dikonversi ke jam");
         } else if ($datas->isEmpty()) {
             return redirect()->route('scanlog.index')->with('alert2', 'Tidak ada data yang perlu diproses');
         } else {
