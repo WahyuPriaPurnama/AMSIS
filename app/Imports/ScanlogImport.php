@@ -11,7 +11,7 @@ class ScanlogImport implements ToModel, WithStartRow
     /**
      * @param array $row
      *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return \Illuminate\Database\Eloquen
      */
     public function model(array $row)
     {
@@ -25,11 +25,11 @@ class ScanlogImport implements ToModel, WithStartRow
             'nama' => $row[6],
             'dept' => $row[7],
             'bagian' => $row[8],
-            'upah' => $row[9],
-            'jm' => $row[13] ? '' : null,
-            'sm' => $row[14] ? '' : null,
-            'jp' => $row[24] ? '' : null,
-            'sp' => $row[25] ? '' : null,
+            'upah' => $row[9] === '' ? null : $row[9],
+            'jm' => $row[13] === '' ? null : $row[13],
+            'sm' => $row[14] === '' ? null : $row[14],
+            'jp' => $row[24] === '' ? null : $row[24],
+            'sp' => $row[25] === '' ? null : $row[25],
         ]);
     }
 
