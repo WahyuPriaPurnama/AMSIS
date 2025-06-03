@@ -4,12 +4,14 @@ namespace App\Exports;
 
 use App\Models\Scanlog;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ScanlogExport implements FromCollection, WithHeadings, WithStyles, WithMapping
+class ScanlogExport implements FromCollection, WithHeadings, WithStyles, WithMapping, WithColumnFormatting
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -71,6 +73,14 @@ class ScanlogExport implements FromCollection, WithHeadings, WithStyles, WithMap
                 ],
                 'alignment' => ['horizontal' => 'center']
             ],
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'K' => NumberFormat::FORMAT_DATE_TIME2,
+            'M' => NumberFormat::FORMAT_DATE_TIME3
         ];
     }
 }
