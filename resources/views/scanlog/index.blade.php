@@ -4,21 +4,21 @@
 @section('content')
     <div class="container-fluid mt-3">
         @component('components.card')
-            <div class="button-action mb-3 d-flex gap-1">
-                <button type="button" class="btn btn-success w-auto h-100" data-bs-toggle="modal" data-bs-target="#import">
+            <div class="button-action mb-3 d-flex flex-wrap gap-1">
+                <button type="button" class="btn btn-success w-sm-auto h-100" data-bs-toggle="modal" data-bs-target="#import">
                     <i class="bi bi-file-earmark-arrow-down-fill">
                     </i>
                     Import
                 </button>
-                <a href="{{ route('scanlog.export') }}" class="btn btn-success w-auto h-100">
+                <a href="{{ route('scanlog.export') }}" class="btn btn-success w-sm-auto h-100">
                     <i class="bi bi-file-earmark-arrow-up-fill"></i>
                     Export</a>
                 {{-- <button type="button" class="btn btn-warning w-auto h-100" data-bs-toggle="modal" data-bs-target="#ctime">
                     <i class="bi bi-pencil-square"></i>
                 </button> --}}
-                <button type="submit" class="btn btn-success w-auto h-100" form="myForm"><i class="bi bi-clock-fill"></i>
+                <button type="submit" class="btn btn-success w-sm-auto h-100" form="myForm"><i class="bi bi-clock-fill"></i>
                     Konversikan</button>
-                <a href="{{ route('scanlog.truncate') }}" class="btn btn-secondary w-auto h-100" data-toggle="tooltip"
+                <a href="{{ route('scanlog.truncate') }}" class="btn btn-secondary w-sm-auto h-100" data-toggle="tooltip"
                     data-placement="top" title="Kosongkan Database">
                     <i class="bi bi-trash-fill"></i></a>
                 <form action="{{ route('scanlog.convert') }}" id="myForm" method="post">
