@@ -19,13 +19,13 @@ return new class extends Migration
             $table->integer('pin');
             $table->string('nip');
             $table->string('nama');
-            $table->string('dept');
-            $table->string('bagian');
-            $table->string('upah');
+            $table->string('dept')->nullable();
+            $table->string('bagian')->nullable();
+            $table->string('upah')->nullable();
             $table->time('jm');
-            $table->time('sm');
+            $table->time('sm')->nullable();
             $table->time('jp');
-            $table->time('sp');
+            $table->time('sp')->nullable();
             $table->decimal('dk', 3, 1)->nullable();
             $table->decimal('de', 3, 1)->nullable();
             $table->integer('status')->default(0);

@@ -25,7 +25,7 @@ class ScanlogController extends Controller
     public function import(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
+            'file' => 'required|mimes:xlsx'
         ]);
 
         $file = $request->file('file');
