@@ -46,9 +46,6 @@ route::middleware('auth')->group(function () {
     route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
     route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
     route::get('vehicle/polis/{polis}', [VehicleController::class, 'polis'])->name('vehicle.polis');
-    route::get('/cctv', function () {
-        return view('cctv');
-    });
 
     route::resource('scanlog', ScanlogController::class);
     route::post('scanlog-import', [ScanlogController::class, 'import'])->name('scanlog.import');
@@ -58,6 +55,9 @@ route::middleware('auth')->group(function () {
     route::get('scanlog-truncate', [ScanlogController::class, 'truncate'])->name('scanlog.truncate');
 });
 
+route::get('/cctv', function () {
+    return view('cctv');
+});
 
 Auth::routes([
     'register' => false
