@@ -26,10 +26,10 @@ class ScanlogImport implements ToModel, WithStartRow
             'dept' => $row[6] === '' ? null : $row[6],
             'bagian' => $row[7] === '' ? null : $row[7],
             'upah' => $row[8] === '' ? null : $row[8],
-            'jm' => $row[12] === '' ? null : $row[12],
-            'sm' => $row[13] === '' ? null : $row[13],
-            'jp' => $row[14] === '' ? null : $row[14],
-            'sp' => $row[15] === '' ? null : $row[15],
+            'jm' => $row[9] === '' ? null : $row[9],
+            'sm' => $row[10] === '' ? null : $row[10],
+            'jp' => $row[11] === '' ? null : $row[11],
+            'sp' => $row[12] === '' ? null : $row[12],
         ]);
     }
 

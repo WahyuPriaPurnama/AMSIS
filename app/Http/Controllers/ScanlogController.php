@@ -55,8 +55,7 @@ class ScanlogController extends Controller
     {
         return Excel::download(new ScanlogExport(), "scanlog " . now() . ".xlsx");
     }
-
-    // public function ctime(Request $request)
+ // public function ctime(Request $request)
     // {
     //     $col = ['scan_1', 'scan_2', 'scan_3', 'scan_4'];
     //     $awal = $request->awal;
@@ -86,18 +85,6 @@ class ScanlogController extends Controller
     //     }
     // }
 
-    public function scanMasuk(Carbon $datetime)
-    {
-        $menitMasuk = $datetime->minute;
-        if ($menitMasuk <= 10) {
-            return $datetime->copy()->startOfHour();
-        } else if ($menitMasuk <= 40) {
-            return $datetime->copy()->setMinute(30)->setSecond(0);
-        } else {
-            return $datetime->copy()->addHour()->startOfHour();
-        }
-    }
-
     public function scanPulang(Carbon $datetime)
     {
         $menitPulang = $datetime->minute;
@@ -109,10 +96,23 @@ class ScanlogController extends Controller
             return $datetime->copy()->addHour()->startOfHour();
         }
     }
-
-    public function durasiKerja(Carbon $masuk, Carbon $pulang)
+    public function scanMasuk(Carbon $datetime, Carbon $jamMasukJadwal)
     {
-        $scanMasuk = $this->scanMasuk($masuk);
+        $menitMasuk = $datetime->minute;
+        if ($menitMasuk <= 10) {
+            $hasil = $datetime->copy()->startOfHour();
+        } else if ($menitMasuk <= 40) {
+            $hasil = $datetime->copy()->setMinute(30)->setSecond(0);
+        } else {
+            $hasil = $datetime->copy()->addHour()->startOfHour();
+        }
+        return $hasil->lt($jamMasukJadwal) ? $jamMasukJadwal : $hasil;
+    }
+
+
+    public function durasiKerja(Carbon $masuk, Carbon $pulang, Carbon $jamMasukJadwal)
+    {
+        $scanMasuk = $this->scanMasuk($masuk, $jamMasukJadwal);
         $scanPulang = $this->scanPulang($pulang);
 
         if (empty($scanMasuk) or empty($scanPulang) or $scanMasuk->format('H:i:s') === '00:00:00' or $scanPulang->format('H:i:s') === '00:00:00') {
@@ -145,7 +145,8 @@ class ScanlogController extends Controller
         $berhasil = 0;
 
         foreach ($datas as $data) {
-            $scanMasuk = $data->sm ? $this->scanMasuk(Carbon::parse($data->sm)) : null;
+            $jamMasukJadwal = $data->jm ? Carbon::parse($data->jm) : null;
+            $scanMasuk = $data->sm ? $this->scanMasuk(Carbon::parse($data->sm), $jamMasukJadwal) : null;
             $scanPulang = $data->sp ? $this->scanPulang(Carbon::parse($data->sp)) : null;
 
             // Cek tidak lengkap atau tidak valid
@@ -164,7 +165,7 @@ class ScanlogController extends Controller
             }
 
             // Durasi kerja valid
-            $durasi = $this->durasiKerja($scanMasuk, $scanPulang);
+            $durasi = $this->durasiKerja($scanMasuk, $scanPulang, $jamMasukJadwal);
             $updated = $data->update([
                 'dk' => $durasi,
                 'sm' => $scanMasuk,

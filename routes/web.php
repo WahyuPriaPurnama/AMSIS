@@ -2,11 +2,7 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Purchasing\MasterBarangController;
-use App\Http\Controllers\Purchasing\MasterSupplierController;
 use App\Http\Controllers\ScanlogController;
-use App\Http\Controllers\SensorController;
-use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\SubsidiaryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
