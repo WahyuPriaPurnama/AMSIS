@@ -122,42 +122,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="ctime" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Pilih Range Jam</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <form action="{{ route('scanlog.ctime') }}" method="post">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <label for="">Range Bawah</label>
-                                        <input type="time" name="awal" id="" class="form-control">
-                                    </div>
-                                    <div class="col">
-                                        <label for="">Range Atas</label>
-                                        <input type="time" name="akhir" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="">Menjadi</label>
-                                        <input type="time" name="waktu" class="form-control" id="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">TUTUP</button>
-                                <button type="submit" class="btn btn-success">PROSES</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 @endsection
