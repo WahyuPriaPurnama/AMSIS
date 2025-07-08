@@ -96,6 +96,7 @@ class ScanlogController extends Controller
             return $datetime->copy()->addHour()->startOfHour();
         }
     }
+    
     public function scanMasuk(Carbon $datetime, Carbon $jamMasukJadwal)
     {
         $menitMasuk = $datetime->minute;
