@@ -59,9 +59,9 @@ class ScanlogController extends Controller
     public function scanPulang(Carbon $datetime)
     {
         $menitPulang = $datetime->minute;
-        if ($menitPulang <= 25) {
+        if ($menitPulang <= 10) {
             return $datetime->copy()->startOfHour();
-        } else if ($menitPulang <= 55) {
+        } else if ($menitPulang <= 50) {
             return $datetime->copy()->setMinute(30)->setSecond(0);
         } else {
             return $datetime->copy()->addHour()->startOfHour();
