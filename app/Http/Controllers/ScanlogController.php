@@ -18,8 +18,33 @@ class ScanlogController extends Controller
      */
     public function index()
     {
-        $scanlog = Scanlog::latest()->get();
-        return view('scanlog.index', compact('scanlog'));
+        $scanlogs = Scanlog::latest()->get();
+        return view('scanlog.index', compact('scanlogs'));
+    }
+
+    public function prosesGaji()
+    {
+        $scanlogs = Scanlog::with('harian')->get();
+
+        foreach ($scanlogs as $scanlog) {
+            $harian = $scanlog->harian;
+            $pinTidakDitemukan = [];
+            if ($harian) {
+                // Update gaji based on durasi kerja
+                $gaji = $harian->gaji * $scanlog->dk; 
+                $scanlog->update(['tgaji' => $gaji]);
+            } else {
+                // Simpan pin yang tidak cocok
+                $pinTidakDitemukan[] = $scanlog->pin;
+            }
+        }
+        if (count($pinTidakDitemukan) > 0) {
+            $pesan = 'Gaji berhasil diproses! Namun, beberapa PIN tidak ditemukan di database harian: ' . implode(', ', $pinTidakDitemukan);
+        } else {
+            $pesan = 'Gaji berhasil diproses!';
+        }
+
+        return redirect()->route('scanlog.index')->with('alert', $pesan);
     }
 
     public function import(Request $request)
@@ -55,7 +80,7 @@ class ScanlogController extends Controller
     {
         return Excel::download(new ScanlogExport(), "scanlog " . now() . ".xlsx");
     }
- 
+
     public function scanPulang(Carbon $datetime)
     {
         $menitPulang = $datetime->minute;
@@ -67,7 +92,7 @@ class ScanlogController extends Controller
             return $datetime->copy()->addHour()->startOfHour();
         }
     }
-    
+
     public function scanMasuk(Carbon $datetime, Carbon $jamMasukJadwal)
     {
         $menitMasuk = $datetime->minute;

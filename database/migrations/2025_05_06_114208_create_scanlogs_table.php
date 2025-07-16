@@ -27,7 +27,7 @@ return new class extends Migration
             $table->time('jp');
             $table->time('sp')->nullable();
             $table->decimal('dk', 3, 1)->nullable();
-            $table->decimal('de', 3, 1)->nullable();
+            $table->decimal('tgaji', 10, 2)->default(0.00);
             $table->integer('status')->default(0);
             $table->timestamps();
         });

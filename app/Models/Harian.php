@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Scanlog extends Model
+class Harian extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+    protected $guarded = [];
 
-    public function harian()
+    public function scanlogs()
     {
-        return $this->belongsTo(Harian::class, 'pin', 'pin');
+        return $this->hasMany(Scanlog::class, 'pin', 'pin');
     }
 }

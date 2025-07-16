@@ -149,7 +149,9 @@
                                 <a href="{{ route('scanlog.index') }}" class="nav-link @yield('menuScanlog')">
                                     Scanlog
                                 </a>
-
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('karyawan-harian.index')}}" class="nav-link @yield('menuHarian')">Karyawan Harian</a>
                             </li>
                         </ul>
                     @endguest
