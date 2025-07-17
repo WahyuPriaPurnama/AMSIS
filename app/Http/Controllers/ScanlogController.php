@@ -86,7 +86,7 @@ class ScanlogController extends Controller
         $menitPulang = $datetime->minute;
         if ($menitPulang <= 20) {
             return $datetime->copy()->startOfHour();
-        } else if ($menitPulang <= 50) {
+        } else if ($menitPulang <= 49) {
             return $datetime->copy()->setMinute(30)->setSecond(0);
         } else {
             return $datetime->copy()->addHour()->startOfHour();
