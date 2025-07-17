@@ -76,16 +76,16 @@
                             Belum Diproses
                         </span>
                         @elseif($scanlog->status==1)
-                        <span class="badge text-bg-warning">
-                            scan tidak lengkap
-                        </span>
-                        @else
                         <span class="badge text-bg-success">
                             berhasil diproses
                         </span>
+                        @else
+                        <span class="badge text-bg-warning">
+                            scan tidak lengkap
+                        </span>
                         @endif
 
-                        
+
                     </td>
                 </tr>
                 @endforeach
