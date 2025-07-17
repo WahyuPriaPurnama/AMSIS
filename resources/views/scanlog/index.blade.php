@@ -85,12 +85,7 @@
                         </span>
                         @endif
 
-                        <!-- @elseif($scanlog->harian)
-                        @else
-                        <span class="badge text-bg-warning">
-                            PIN tidak ditemukan
-                        </span>
-                        @endif -->
+                        
                     </td>
                 </tr>
                 @endforeach
