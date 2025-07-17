@@ -10,7 +10,7 @@
             </i>
             Import
         </button>
-        <a href="#" class="btn btn-success w-sm-auto h-100">
+        <a href="{{route('karyawan-harian.export')}}" class="btn btn-success w-sm-auto h-100">
             <i class="bi bi-file-earmark-arrow-up-fill"></i>
             Export</a>
         <a href="{{route('karyawan-harian.truncate')}}" class="btn btn-secondary w-sm-auto h-100" data-toggle="tooltip"
@@ -46,8 +46,35 @@
                     <td>{{ $karyawan->bagian }}</td>
                     <td>{{ $karyawan->no_telp }}</td>
                     <td>{{$karyawan->gaji}}</td>
-                    <td><a href="" class="btn btn-success">Cetak Slip</a></td>
+                    <td><button type="button" class="btn btn-success w-sm-auto h-100" data-bs-toggle="modal" data-bs-target="#import{{$karyawan->id}}" data-bs-toggle="tooltip" title="Import Data">
+                            Cetak Slip
+                        </button></td>
                 </tr>
+                <div class="modal fade" id="import{{$karyawan->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Cetak Slip {{$karyawan->nama}}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <form action="{{route('karyawan-cetak-slip')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="modal-body">
+                                    <label>PILIH TANGGAL</label>
+                                    <div class="input-group">
+                                        <input type="date" name="start_date" class="form-control">
+                                        <input type="date" name="end_date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+                                    <button type="submit" class="btn btn-success">Cetak</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </tbody>
         </table>

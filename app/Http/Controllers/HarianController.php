@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\HarianExport;
 use App\Imports\HarianImport;
 use App\Models\Harian;
 use Illuminate\Http\Request;
@@ -11,6 +12,10 @@ use Maatwebsite\Excel\Facades\Excel;
 class HarianController extends Controller
 {
 
+    public function cetakSlip(Request $request)
+    {
+        dd($request->end_date);
+    }
     public function import(Request $request)
     {
         $this->validate($request, [
@@ -42,7 +47,7 @@ class HarianController extends Controller
 
     public function export()
     {
-        return Excel::download(new \App\Exports\HarianExport, 'karyawan_harian' . now() . 'xlsx');
+        return Excel::download(new HarianExport(), "karyawan " . now() . ".xlsx");
     }
 
     public function truncate()

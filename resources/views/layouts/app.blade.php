@@ -151,7 +151,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('karyawan-harian.index')}}" class="nav-link @yield('menuHarian')">Karyawan Harian</a>
+                                <a href="{{route('karyawan-harian.index')}}" class="nav-link @yield('menuHarian')">Karyawan</a>
                             </li>
                         </ul>
                     @endguest

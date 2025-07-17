@@ -50,11 +50,12 @@ route::middleware('auth')->group(function () {
     route::post('scanlog-convert', [ScanlogController::class, 'convert'])->name('scanlog.convert');
     route::get('scanlog-truncate', [ScanlogController::class, 'truncate'])->name('scanlog.truncate');
     route::get('scanlog-proses-gaji', [ScanlogController::class, 'prosesGaji'])->name('scanlog.proses.gaji');
-    
+
     route::resource('karyawan-harian', HarianController::class);
     route::post('karyawan-harian-import', [HarianController::class, 'import'])->name('karyawan-harian.import');
     route::get('karyawan-harian-export', [HarianController::class, 'export'])->name('karyawan-harian.export');
     route::get('karyawan-harian-truncate', [HarianController::class, 'truncate'])->name('karyawan-harian.truncate');
+    route::post('karyawan-cetak-slip', [HarianController::class, 'cetakSlip'])->name('karyawan-cetak-slip');
 });
 
 route::get('/cctv', function () {
@@ -86,5 +87,3 @@ route::get('/haka-bwi', function () {
 route::get('/bofi-bwi', function () {
     return view('e-slip.bofi');
 });
-
-

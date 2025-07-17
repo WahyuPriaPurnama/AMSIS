@@ -20,7 +20,7 @@
             @csrf
             <input type="hidden" name="jam" value="60">
         </form>
-        <a href="{{route('scanlog.proses.gaji')}}" class="btn btn-primary w-sm-auto h-100">Proses Gaji</a>
+        <a href="{{route('scanlog.proses.gaji')}}" class="btn btn-primary w-sm-auto h-100">Hitung Gaji</a>
         <div class="alert alert-warning small ms-auto">
             <i class="bi bi-info-circle-fill"></i> Jam Efektif = dipotong istirahat 1 jam atau
             1,5 jam
