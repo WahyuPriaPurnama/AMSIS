@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\HarianExport;
 use App\Imports\HarianImport;
 use App\Models\Harian;
+use App\Models\Scanlog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -14,7 +15,13 @@ class HarianController extends Controller
 
     public function cetakSlip(Request $request)
     {
-        dd($request->end_date);
+        $start = $request->start_date;
+        $end = $request->end_date;
+        $slips = Scanlog::with('harian')
+            ->whereBetween('tgl', [$start, $end])
+            ->get();
+
+        return view('scanlog.slip', compact('slips'));
     }
     public function import(Request $request)
     {
