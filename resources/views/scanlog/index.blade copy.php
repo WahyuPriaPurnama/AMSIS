@@ -20,6 +20,11 @@
             @csrf
             <input type="hidden" name="jam" value="60">
         </form>
+        <!-- @if(session('alert'))
+        <a href="{{route('scanlog.proses.gaji')}}" class="btn btn-primary w-sm-auto h-100">Hitung Gaji</a>
+        @else
+        <span class="text-muted">silahkan convert terlebih dahulu</span>
+        @endif -->
         <div class="alert alert-warning small ms-auto">
             <i class="bi bi-info-circle-fill"></i> Jam Efektif = dipotong istirahat 1 jam atau
             1,5 jam
@@ -41,6 +46,7 @@
                     <th>MASUK</th>
                     <th>PULANG</th>
                     <th><i class="bi bi-clock-fill"></i></th>
+                    <!-- <th>GAJI</th> -->
                     <th>STATUS</th>
                 </tr>
             </thead>
@@ -52,25 +58,39 @@
                     <td>{{ $scanlog->dept }}</td>
                     <td>{{ $scanlog->tgl }}</td>
                     <td>
+                        <!-- @if (in_array($scanlog->jk,['Tidak Hadir','Libur Rutin'])||!$scanlog->sm||!$scanlog->sp)
+                        <span class="badge text-bg-warning">
+                            {{ $scanlog->jk }}
+                        </span>
+                        @else
+                        @endif -->
                         {{ $scanlog->jk }}
                     </td>
                     <td>{{ $scanlog->sm }}</td>
                     <td>{{ $scanlog->sp }}</td>
                     <td>{{ $scanlog->dk }}</td>
+                    <!-- <td>{{'Rp'.number_format($scanlog->tgaji,2,',','.')}}</td> -->
                     <td>
                         @if ($scanlog->status == 0)
                         <span class="badge text-bg-danger">
                             Belum Diproses
                         </span>
                         @elseif($scanlog->status==1)
-                        <span class="badge text-bg-success">
-                            berhasil diproses
-                        </span>
-                        @else
                         <span class="badge text-bg-warning">
                             scan tidak lengkap
                         </span>
+                        @else
+                        <span class="badge text-bg-success">
+                            berhasil diproses
+                        </span>
                         @endif
+
+                        <!-- @elseif($scanlog->harian)
+                        @else
+                        <span class="badge text-bg-warning">
+                            PIN tidak ditemukan
+                        </span>
+                        @endif -->
                     </td>
                 </tr>
                 @endforeach
