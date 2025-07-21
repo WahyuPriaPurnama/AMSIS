@@ -3,8 +3,7 @@
     <style>
         table,
         th,
-        td,
-        {
+        td {
         border: 1px solid black;
         font-size: 50%;
         border-collapse: collapse;

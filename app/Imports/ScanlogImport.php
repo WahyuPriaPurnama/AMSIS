@@ -3,10 +3,12 @@
 namespace App\Imports;
 
 use App\Models\Scanlog;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class ScanlogImport implements ToModel, WithStartRow
+class ScanlogImport implements ToModel, WithStartRow, WithChunkReading, ShouldQueue
 {
     /**
      * @param array $row
@@ -36,5 +38,10 @@ class ScanlogImport implements ToModel, WithStartRow
     public function startRow(): int
     {
         return 3;
+    }
+
+    public function chunkSize(): int
+    {
+        return 1000; // Adjust the chunk size as needed
     }
 }

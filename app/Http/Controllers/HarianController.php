@@ -6,6 +6,7 @@ use App\Exports\HarianExport;
 use App\Imports\HarianImport;
 use App\Models\Harian;
 use App\Models\Scanlog;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -15,13 +16,24 @@ class HarianController extends Controller
 
     public function cetakSlip(Request $request)
     {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
         $start = $request->start_date;
         $end = $request->end_date;
         $slips = Scanlog::with('harian')
             ->whereBetween('tgl', [$start, $end])
             ->get();
+       $totalGaji= $slips->sum('tgaji');
+        if ($slips->isEmpty()) {
+            return response()->view('scanlog.slip_kosong', compact('start', 'end'));
+        }
+        $pdf = Pdf::loadView('scanlog.slip', compact('slips', 'start', 'end','totalGaji'))
+            ->setPaper('A4', 'portrait')
+            ->setOptions(['defaultFont' => 'sans-serif']);
 
-        return view('scanlog.slip', compact('slips'));
+        return $pdf->stream();
     }
     public function import(Request $request)
     {

@@ -150,9 +150,9 @@
                                     Scanlog
                                 </a>
                             </li>
-                            <!-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{route('karyawan-harian.index')}}" class="nav-link @yield('menuHarian')">Karyawan</a>
-                            </li> -->
+                            </li>
                         </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
