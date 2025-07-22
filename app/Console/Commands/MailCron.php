@@ -47,24 +47,7 @@ class MailCron extends Command
             }
         }
 
-        $barangs = MasterBarang::all();
-
-        foreach ($barangs as $barang) {
-            if ($barang->kategori == 'Periodik') {
-                $next_order = Carbon::parse($barang->tgl_pembelian)->addDay($barang->periode);
-                $periode = Carbon::now()->diffInDays($next_order);
-
-                if ($periode == 7) {
-
-                    $mailData = [
-                        'title' => 'Reminder Pembelian' . $barang->nama_barang,
-                        'body' => "Dengan Email ini kami menginformasikan bahwa waktu pembelian " . $barang->nama_barang . " dari plant " . $barang->subsidiary->name . " tinggal " . $periode . " hari lagi."
-                    ];
-
-                    Mail::to(['wahyupriapurnama@gmail.com', 'purchasing@amsgroup.co.id', 'hrd@eln.amsgroup.co.id'])->send(new MyTestMail($mailData));
-                }
-            }
-        }
+       
 
         $vehicles = Vehicle::all();
         foreach ($vehicles as $vehicle) {
@@ -80,7 +63,7 @@ class MailCron extends Command
                     'body' => "Dengan email ini kami menginformasikan bahwa masa berlaku STNK " . $vehicle->jenis_kendaraan . " dari plant " . $vehicle->subsidiary->name . " tinggal " . $stnk . " hari lagi."
                 ];
 
-                Mail::to(['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com', 'hrd@eln.amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
+                Mail::to(['wahyupriapurnama@gmail.com', 'samgowok@gmail.com', 'hrd@eln.amsgroup.co.id', 'hrd@amsgroup.co.id'])->send(new MyTestMail($mailData));
             } elseif ($pajak == 30 or $pajak == 15) {
                 $mailData = [
                     'title' => 'Reminder Perpanjangan Pajak Kendaraan ' . $vehicle->jenis_kendaraan,
