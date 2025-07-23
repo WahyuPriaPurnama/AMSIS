@@ -362,7 +362,7 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Simpan</button>
+                <x-buttons.submit></x-buttons.submit>
             </form>
         @endcomponent
     </div>

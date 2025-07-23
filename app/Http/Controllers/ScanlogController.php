@@ -6,10 +6,10 @@ use App\Exports\ScanlogExport;
 use App\Imports\ScanlogImport;
 use App\Models\Scanlog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ScanlogController extends Controller
 {
@@ -26,23 +26,25 @@ class ScanlogController extends Controller
     {
         $scanlogs = Scanlog::with('harian')->get();
 
+        if ($scanlogs->isEmpty()) {
+            return redirect()->route('scanlog.index')->with('alert2', 'Database kosong. Tidak ada data scanlog yang tersedia.');
+        }
+
+        $pinTidakDitemukan = [];
+
         foreach ($scanlogs as $scanlog) {
             $harian = $scanlog->harian;
-            $pinTidakDitemukan = [];
-            if ($harian) {
-                // Update gaji based on durasi kerja
-                $gaji = $harian->gaji * $scanlog->dk; 
+            if ($harian && $scanlog->dk) {
+                $gaji = ($harian->gaji ?? 0) * $scanlog->dk;
                 $scanlog->update(['tgaji' => $gaji]);
             } else {
-                // Simpan pin yang tidak cocok
                 $pinTidakDitemukan[] = $scanlog->pin;
             }
         }
-        if (count($pinTidakDitemukan) > 0) {
-            $pesan = 'Gaji berhasil diproses! Namun, beberapa PIN tidak ditemukan di database harian: ' . implode(', ', $pinTidakDitemukan);
-        } else {
-            $pesan = 'Gaji berhasil diproses!';
-        }
+
+        $pesan = count($pinTidakDitemukan) > 0
+            ? 'Gaji berhasil diproses! Namun, beberapa PIN tidak ditemukan: ' . implode(', ', $pinTidakDitemukan)
+            : 'Gaji berhasil diproses!';
 
         return redirect()->route('scanlog.index')->with('alert', $pesan);
     }
@@ -60,20 +62,16 @@ class ScanlogController extends Controller
 
         //temporary file
         $path = $file->storeAs('public/excel/', $nama_file);
-
-        // import data
-        $import = Excel::import(new ScanlogImport(), storage_path('app/public/excel/' . $nama_file));
-
+        try {
+            $import = Excel::import(new ScanlogImport(), storage_path('app/public/excel/' . $nama_file));
+            $pesan = ['alert' => 'data berhasil diimport!'];
+        } catch (\Exception $e) {
+            $pesan = ['alert2' => 'data gagal diimport!'];
+            Log::error('Gagal import: ' . $e->getMessage());
+        }
         //remove from server
         Storage::delete($path);
-
-        if ($import) {
-            //redirect
-            return redirect()->route('scanlog.index')->with(['alert' => 'Data Berhasil Diimport!']);
-        } else {
-            //redirect
-            return redirect()->route('scanlog.index')->with(['alert2' => 'Data Gagal Diimport!']);
-        }
+        return redirect()->route('scanlog.index')->with($pesan);
     }
 
     public function export()
@@ -139,8 +137,10 @@ class ScanlogController extends Controller
     public function convert()
     {
         $datas = Scanlog::where('status', 0)->get();
+        if ($datas->isEmpty()) {
+            return redirect()->route('scanlog.index')->with('alert2', 'tidak ada data yang perlu diproses');
+        }
         $berhasil = 0;
-
         foreach ($datas as $data) {
             $jamMasukJadwal = $data->jm ? Carbon::parse($data->jm) : null;
             $scanMasuk = $data->sm ? $this->scanMasuk(Carbon::parse($data->sm), $jamMasukJadwal) : null;
@@ -174,25 +174,19 @@ class ScanlogController extends Controller
                 $berhasil++;
             }
         }
-
-        if ($berhasil > 0) {
-            return redirect()->route('scanlog.index')->with('alert', "berhasil data berhasil dikonversi ke jam");
-        } else if ($datas->isEmpty()) {
-            return redirect()->route('scanlog.index')->with('alert2', 'Tidak ada data yang perlu diproses');
-        } else {
-            return redirect()->route('scanlog.index')->with('alert2', 'Gagal mengonversi data ke jam');
-        }
+        $pesan = $berhasil > 0
+            ? "Berhasil, {$berhasil} data berhasil dikonversi ke jam."
+            : "Gagal mengonversi data ke jam.";
+        $alert = $berhasil > 0 ? 'alert' : 'alert2';
+        return redirect()->route('scanlog.index')->with($alert, $pesan);
     }
-
 
     public function truncate()
     {
-        $truncate = Scanlog::query()->truncate();
-
-        if ($truncate) {
-            return redirect()->route('scanlog.index')->with('alert', 'data berhasil dikosongkan!');
-        } else {
-            return redirect()->route('scanlog.index')->with('alert2', 'data gagal dikosongkan!');
+        if (!Scanlog::exists()) {
+            return redirect()->route('scanlog.index')->with('alert2', 'tidak ada data yang perlu dihapus');
         }
+        Scanlog::truncate();
+        return redirect()->route('scanlog.index')->with('alert', 'data berhasil dikosongkan!');
     }
 }

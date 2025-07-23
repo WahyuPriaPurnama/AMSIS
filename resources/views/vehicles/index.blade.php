@@ -9,61 +9,63 @@
             @endslot
 
             <div class="button-action mb-3">
-                <a href="{{ route('vehicle.create') }}" class="btn btn-primary">Tambah</a>
+                <x-buttons.create href="{{ route('vehicle.create') }}"></x-buttons.create>
             </div>
-        
-        <div class="table-responsive">
-            <table class="table table-hover display" id="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>NAMA KENDARAAN</th>
-                        <th>KATEGORI</th>
-                        <th>PLANT</th>
-                        <th>NOPOL</th>
-                        <th>STNK</th>
-                        <th>PAJAK</th>
-                        <th>KIR</th>
-                        <th>ASURANSI</th>
-                        <th>KONDISI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($data as $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td><a href="{{ route('vehicle.show', ['vehicle' => $item->id]) }}" class="text-decoration-none">
-                                    {{ $item->jenis_kendaraan }}</a></td>
-                            <td>{{ $item->kategori }}</td>
-                            <td>{{ $item->subsidiary->name }}</td>
-                            <td>{{ $item->nopol }}</td>
-                            <td>{{ $item->stnk }}</td>
-                            <td>{{ $item->pajak }}</td>
-                            <td>{{ $item->kir }}</td>
-                            <td>{{ $item->jth_tempo }}</td>
-                            <td>{{ $item->kondisi }}</td>
 
+            <div class="table-responsive">
+                <table class="table table-hover display" id="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>NAMA KENDARAAN</th>
+                            <th>KATEGORI</th>
+                            <th>PLANT</th>
+                            <th>NOPOL</th>
+                            <th>STNK</th>
+                            <th>PAJAK</th>
+                            <th>KIR</th>
+                            <th>ASURANSI</th>
+                            <th>KONDISI</th>
                         </tr>
-                    @empty
-                        <td colspan="12" class="text-center">Tidak ada data...</td>
-                    @endforelse
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th>NAMA KENDARAAN</th>
-                        <th>KATEGORI</th>
-                        <th>PLANT</th>
-                        <th>NOPOL</th>
-                        <th>STNK</th>
-                        <th>PAJAK</th>
-                        <th>KIR</th>
-                        <th>ASURANSI</th>
-                        <th>KONDISI</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    @endcomponent
+                    </thead>
+                    <tbody>
+                        @forelse ($data as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td><a href="{{ route('vehicle.show', ['vehicle' => $item->id]) }}" class="text-decoration-none"
+                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="klik untuk melihat detail">
+                                        {{ $item->jenis_kendaraan }}</a></td>
+                                <td>{{ $item->kategori }}</td>
+                                <td>{{ $item->subsidiary->name }}</td>
+                                <td>{{ $item->nopol }}</td>
+                                <td>{{ $item->stnk }}</td>
+                                <td>{{ $item->pajak }}</td>
+                                <td>{{ $item->kir }}</td>
+                                <td>{{ $item->jth_tempo }}</td>
+                                <td>{{ $item->kondisi }}</td>
+
+                            </tr>
+                        @empty
+                            <td colspan="12" class="text-center">Tidak ada data...</td>
+                        @endforelse
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>NAMA KENDARAAN</th>
+                            <th>KATEGORI</th>
+                            <th>PLANT</th>
+                            <th>NOPOL</th>
+                            <th>STNK</th>
+                            <th>PAJAK</th>
+                            <th>KIR</th>
+                            <th>ASURANSI</th>
+                            <th>KONDISI</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        @endcomponent
     </div>
 @endsection

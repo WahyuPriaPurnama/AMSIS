@@ -54,7 +54,7 @@
                 <div class="row mb-3">
                     <div class="col-8">
                         <label class="form-label" for="address">Address</label>
-                        <textarea class="form-control" id="address" name="address" >{{ $subsidiary->address }}</textarea>
+                        <textarea class="form-control" id="address" name="address">{{ $subsidiary->address }}</textarea>
                     </div>
                     <div class="col-4">
                         <label for="logo" class="form-label">Logo</label>
@@ -63,7 +63,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mb-2">Update</button>
+                <button type="submit" class="btn btn-success mb-2"data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-title="Simpan"><i class="bi bi-floppy-fill"></i></button>
             </form>
         @endcomponent
     </div>

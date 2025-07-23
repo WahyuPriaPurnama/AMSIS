@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 
     <!-- Scripts -->
-   
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <!-- load font awesome for icons -->
@@ -101,11 +101,10 @@
                                     HRD
                                 </a>
                                 <ul class="dropdown-menu">
-                                    @can('view', App\Models\Employee::class)
-                                        <li><a class="dropdown-item @yield('menuEmployees')" href="{{ route('employees.index') }}">
-                                                Karyawan</a>
-                                        </li>
-                                    @endcan
+                                    <li><a class="dropdown-item @yield('menuEmployees')" href="{{ route('employees.index') }}">
+                                            Karyawan</a>
+                                    </li>
+
                                     <li>
                                         <a class="dropdown-item" href="#">
                                             E-Slip &raquo;
@@ -125,35 +124,40 @@
                                                     BOFI</a></li>
                                         </ul>
                                     </li>
-                                    @can('view', App\Models\Subsidiary::class)
-                                        <li><a class="dropdown-item @yield('menuSubsidiaries')"
-                                                href="{{ route('subsidiaries.index') }}">
-                                                Perusahaan</a></li>
-                                    @endcan
-                                    @can('view', App\Models\Vehicle::class)
-                                        <li>
-                                            <a class="dropdown-item @yield('menuVehicles')"
-                                                href="{{ route('vehicle.index') }}">Kendaraan</a>
-                                        </li>
-                                    @endcan
+                                    <li><a class="dropdown-item @yield('menuSubsidiaries')"
+                                            href="{{ route('subsidiaries.index') }}">
+                                            Perusahaan</a></li>
+
+                                    <li>
+                                        <a class="dropdown-item @yield('menuVehicles')"
+                                            href="{{ route('vehicle.index') }}">Kendaraan</a>
+                                    </li>
                                 </ul>
                             </li>
-
-                            <li class="nav-item">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Payroll
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item @yield('menuScanlog')"
+                                            href="{{ route('scanlog.index') }}">Scanlog</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item @yield('menuHarian')"
+                                            href="{{ route('karyawan-harian.index') }}">Karyawan</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {{-- <li class="nav-item">
                                 <a href="/cctv" class="nav-link @yield('menuCCTV')">
                                     CCTV
                                 </a>
-
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('scanlog.index') }}" class="nav-link @yield('menuScanlog')">
-                                    Scanlog
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('karyawan-harian.index')}}" class="nav-link @yield('menuHarian')">Karyawan</a>
-                            </li>
+                                
+                            </li> --}}
                         </ul>
+
                     @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -201,6 +205,7 @@
             AMS Information System | © {{ date('Y') }} All rights reserved.
         </div>
     </footer>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

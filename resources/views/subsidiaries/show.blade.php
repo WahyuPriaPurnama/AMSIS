@@ -7,17 +7,18 @@
             @slot('header')
                 Data Perusahaan
             @endslot
-            <div class="btn-group">
+            <div class="btn-group d-flex gap-2 flex-wrap">
                 @can('update', $subsidiary)
-                    <a href="{{ route('subsidiaries.edit', ['subsidiary' => $subsidiary->id]) }}" class="btn btn-primary">Edit</a>
+                    <x-buttons.edit href="{{ route('subsidiaries.edit', ['subsidiary' => $subsidiary->id]) }}"></x-buttons.edit>
                 @endcan
                 @can('delete', $subsidiary)
                     <form action="{{ route('subsidiaries.destroy', ['subsidiary' => $subsidiary->id]) }}" id="hapus"
                         method="post">
                         @method('DELETE')
                         @csrf
+                        <button type="submit" form="hapus" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Delete"><i class="bi bi-trash3-fill"></i></button>
                     </form>
-                    <button type="submit" form="hapus" class="btn btn-danger">Hapus</button>
                 @endcan
             </div>
             <div class="row mt-5 align-items-center text-center">
@@ -36,9 +37,9 @@
                     </div>
                     <div>
                         {{ $subsidiary->npwp }}
-                    |
+                        |
                         {{ $subsidiary->email }}
-                    |
+                        |
                         {{ $subsidiary->phone }}
                     </div>
                     <div>

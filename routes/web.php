@@ -55,7 +55,7 @@ route::middleware('auth')->group(function () {
     route::post('karyawan-harian-import', [HarianController::class, 'import'])->name('karyawan-harian.import');
     route::get('karyawan-harian-export', [HarianController::class, 'export'])->name('karyawan-harian.export');
     route::get('karyawan-harian-truncate', [HarianController::class, 'truncate'])->name('karyawan-harian.truncate');
-    route::post('karyawan-cetak-slip', [HarianController::class, 'cetakSlip'])->name('karyawan-cetak-slip');
+    route::post('karyawan-cetak-slip/{pin}', [HarianController::class, 'cetakSlip'])->name('karyawan-cetak-slip');
 });
 
 route::get('/cctv', function () {

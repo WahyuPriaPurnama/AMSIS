@@ -21,8 +21,10 @@
             </div>
             <div class="button-action mb-3">
                 @can('create', App\Models\Subsidiary::class)
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Tambah
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop" data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-title="Tambah Data">
+                        <i class="bi bi-file-earmark-plus-fill"></i>
                     </button>
                 @endcan
             </div>

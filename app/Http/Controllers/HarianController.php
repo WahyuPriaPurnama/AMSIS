@@ -14,7 +14,27 @@ use Maatwebsite\Excel\Facades\Excel;
 class HarianController extends Controller
 {
 
-    public function cetakSlip(Request $request)
+    public function cetakSlip(Request $request, $pin)
+
+    {
+                $request->validate([
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after_or_equal:start_date',]);
+
+                $start = $request->start_date;
+                $end = $request->end_date;
+                $slips = Scanlog::with('harian')->whereHas('harian', function ($query) use ($pin) {
+                $query->where('pin', $pin); })
+                ->whereBetween('tgl', [$start, $end])
+                ->get();
+                $totalGaji = $slips->sum('tgaji');
+                $pdf = Pdf::loadView('scanlog.slip', compact('slips', 'start', 'end', 'totalGaji'))
+                ->setPaper('A4', 'portrait');
+                return $pdf->stream();
+    }
+
+
+    public function cetakSlipMasal(Request $request)
     {
         $request->validate([
             'start_date' => 'required|date',
@@ -22,16 +42,13 @@ class HarianController extends Controller
         ]);
         $start = $request->start_date;
         $end = $request->end_date;
-        $slips = Scanlog::with('harian')
-            ->whereBetween('tgl', [$start, $end])
-            ->get();
-       $totalGaji= $slips->sum('tgaji');
+        $slips = Scanlog::with('harian')->whereBetween('tgl', [$start, $end])->get();
+        $totalGaji = $slips->sum('tgaji');
         if ($slips->isEmpty()) {
             return response()->view('scanlog.slip_kosong', compact('start', 'end'));
         }
-        $pdf = Pdf::loadView('scanlog.slip', compact('slips', 'start', 'end','totalGaji'))
-            ->setPaper('A4', 'portrait')
-            ->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = Pdf::loadView('scanlog.slip', compact('slips', 'start', 'end', 'totalGaji'))
+            ->setPaper('A4', 'portrait');
 
         return $pdf->stream();
     }

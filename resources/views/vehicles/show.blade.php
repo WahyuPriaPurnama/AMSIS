@@ -11,16 +11,15 @@
             <div class="d-flex justify-content-between">
                 <div class="d-flex">
                     @can('update', $vehicle)
-                        <div class="btn-group">
-                            <a href="{{ route('vehicle.edit', ['vehicle' => $vehicle->id]) }}" class="btn btn-primary">Edit</a>
+                        <div class="btn-group d-flex gap-2 flex-wrap">
+                            <x-buttons.edit href="{{ route('vehicle.edit', ['vehicle' => $vehicle->id]) }}"></x-buttons.edit>
                         @endcan
                         @can('delete', $vehicle)
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Hapus
-                            </button>
+                            <x-buttons.delete data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            </x-buttons.delete>
                         </div>
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -319,15 +318,8 @@
                                                         @if ($vehicle->foto == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.foto', $vehicle->foto) }}"
-                                                                target="_blank" class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
+                                                            <x-buttons.download
+                                                                href="{{ route('vehicle.foto', $vehicle->foto) }}"></x-buttons.download>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -340,15 +332,8 @@
                                                         @if ($vehicle->f_stnk == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.stnk', $vehicle->f_stnk) }}"
-                                                                target="_blank" class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
+                                                            <x-buttons.download
+                                                                href="{{ route('vehicle.stnk', $vehicle->f_stnk) }}"></x-buttons.download>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -361,15 +346,8 @@
                                                         @if ($vehicle->f_pajak == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.pajak', $vehicle->f_pajak) }}"
-                                                                target="_blank" class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
+                                                            <x-buttons.download
+                                                                href="{{ route('vehicle.pajak', $vehicle->f_pajak) }}"></x-buttons.download>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -382,15 +360,8 @@
                                                         @if ($vehicle->f_kir == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.kir', $vehicle->f_kir) }}"
-                                                                target="_blank" class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
+                                                            <x-buttons.download
+                                                                href="{{ route('vehicle.kir', $vehicle->f_kir) }}"></x-buttons.download>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -403,15 +374,8 @@
                                                         @if ($vehicle->qr == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.qr', $vehicle->qr) }}" target="_blank"
-                                                                class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
+                                                            <x-buttons.download
+                                                                href="{{ route('vehicle.qr', $vehicle->qr) }}"></x-buttons.download>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -424,15 +388,8 @@
                                                         @if ($vehicle->f_polis == null)
                                                             <p class="font-monospace">kosong</p>
                                                         @else
-                                                            <a href="{{ route('vehicle.polis', $vehicle->f_polis) }}" target="_blank"
-                                                                class="btn btn-primary"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-file-earmark-arrow-down-fill"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
-                                                                </svg></a>
+                                                            <x-buttons.download
+                                                                href="{{ route('vehicle.polis', $vehicle->f_polis) }}"></x-buttons.download>
                                                         @endif
                                                     </div>
                                                 </div>
