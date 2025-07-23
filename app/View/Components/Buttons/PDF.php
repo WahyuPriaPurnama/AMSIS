@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class PDF extends Component
+class Pdf extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class PDF extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.buttons.p-d-f');
+        return view('components.buttons.pdf');
     }
 }
