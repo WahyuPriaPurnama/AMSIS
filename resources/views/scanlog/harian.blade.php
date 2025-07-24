@@ -6,18 +6,36 @@
     <div class="container-fluid mt-3">
         @component('components.card')
             <div class="button-action mb-3 d-flex flex-wrap gap-1">
-                <button type="button" class="btn btn-success w-sm-auto h-100" data-bs-toggle="modal" data-bs-target="#import">
+                <button type="button" class="btn btn-success w-sm-auto h-100" data-bs-toggle="modal" data-bs-target="#import"
+                    data-bs-toggle="tooltip" data-placement="top" title="Import Data" id="importButton">
                     <i class="bi bi-file-earmark-arrow-down-fill">
                     </i>
-                    Import
                 </button>
-                <a href="{{ route('karyawan-harian.export') }}" class="btn btn-success w-sm-auto h-100">
-                    <i class="bi bi-file-earmark-arrow-up-fill"></i>
-                    Export</a>
-                <a href="{{ route('karyawan-harian.truncate') }}" class="btn btn-secondary w-sm-auto h-100"
-                    data-toggle="tooltip" data-placement="top" title="Kosongkan Database">
-                    <i class="bi bi-trash-fill"></i></a>
+                <x-buttons.excel href="{{ route('karyawan-harian.export') }}"></x-buttons.excel>
+                <x-buttons.delete data-bs-toggle="modal" data-bs-target="#delete"></x-buttons.delete>
             </div>
+            <div class="modal fade" aria-hidden="true" id="delete" tabindex="-1" role="dialog" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hapus Data Karyawan Harian</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('karyawan-harian.truncate') }}">
+                                <p>Apakah Anda yakin ingin menghapus semua data karyawan harian?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                                    class="bi bi-x-lg"></i></button>
+                            <button type="submit" class="btn btn-danger">Yakin</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
             @slot('header')
                 Karyawan Harian
             @endslot
@@ -49,8 +67,8 @@
                                 <td>{{ $karyawan->gaji }}</td>
                                 <td><button type="button" class="btn btn-success w-sm-auto h-100" data-bs-toggle="modal"
                                         data-bs-target="#cetakSlip{{ $karyawan->pin }}" data-bs-toggle="tooltip"
-                                        title="Import Data">
-                                        Cetak Slip
+                                        data-placement="top" title="Cetak Slip Gaji">
+                                        <i class="bi bi-printer-fill"></i>
                                     </button></td>
                             </tr>
                             <div class="modal fade" id="cetakSlip{{ $karyawan->pin }}" data-bs-backdrop="static" tabindex="-1"
@@ -85,15 +103,14 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">X</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                                                        class="bi bi-x-lg"></i></button>
                                                 <button type="submit" class="btn btn-success">Cetak</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            
                         @endforeach
                     </tbody>
                 </table>
@@ -114,8 +131,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>PILIH FILE</label>
-                            <input type="file" name="file" class="form-control @error('file') is-invalid @enderror"
-                               >
+                            <input type="file" name="file"
+                                class="form-control @error('file') is-invalid @enderror">
                             @error('file')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

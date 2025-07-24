@@ -13,26 +13,28 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class HarianController extends Controller
 {
-
     public function cetakSlip(Request $request, $pin)
-
     {
-                $request->validate([
-                'start_date' => 'required|date',
-                'end_date' => 'required|date|after_or_equal:start_date',]);
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
 
-                $start = $request->start_date;
-                $end = $request->end_date;
-                $slips = Scanlog::with('harian')->whereHas('harian', function ($query) use ($pin) {
-                $query->where('pin', $pin); })
-                ->whereBetween('tgl', [$start, $end])
-                ->get();
-                $totalGaji = $slips->sum('tgaji');
-                $pdf = Pdf::loadView('scanlog.slip', compact('slips', 'start', 'end', 'totalGaji'))
-                ->setPaper('A4', 'portrait');
-                return $pdf->stream();
+        $start = $request->start_date;
+        $end = $request->end_date;
+        if (!Scanlog::where('pin', $pin)->whereBetween('tgl', [$start, $end])->exists()) {
+            return redirect()->back()->with('alert2', 'Tidak ada data scanlog untuk PIN ' . $pin . ' pada rentang tanggal yang dipilih.');
+        }
+        $slips = Scanlog::with('harian')->whereHas('harian', function ($query) use ($pin) {
+            $query->where('pin', $pin);
+        })
+            ->whereBetween('tgl', [$start, $end])
+            ->get();
+        $totalGaji = $slips->sum('tgaji');
+        $pdf = Pdf::loadView('scanlog.slip', compact('slips', 'start', 'end', 'totalGaji'))
+            ->setPaper('A4', 'portrait');
+        return $pdf->stream();
     }
-
 
     public function cetakSlipMasal(Request $request)
     {
@@ -52,6 +54,7 @@ class HarianController extends Controller
 
         return $pdf->stream();
     }
+    
     public function import(Request $request)
     {
         $this->validate($request, [

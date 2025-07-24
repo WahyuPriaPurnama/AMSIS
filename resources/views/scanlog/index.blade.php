@@ -14,8 +14,7 @@
                 <button type="submit" data-bs-toggle="tooltip" title="Bulatkan Jam" class="btn btn-success w-sm-auto h-100"
                     form="myForm"><i class="bi bi-clock-fill"></i>
                 </button>
-                <a href="{{ route('scanlog.truncate') }}" class="btn btn-danger w-sm-auto h-100" data-bs-toggle="tooltip"
-                    data-bs-placement="top" data-bs-title="Delete Data"><i class="bi bi-trash3-fill"></i></a>
+                <x-buttons.delete data-bs-toggle="modal" data-bs-target="#delete"></x-buttons.delete>
 
                 <form action="{{ route('scanlog.convert') }}" id="myForm" method="post">
                     @csrf
@@ -23,11 +22,6 @@
                 </form>
                 @if (session('alert'))
                     <a href="{{ route('scanlog.proses.gaji') }}" class="btn btn-primary w-sm-auto h-100">Hitung Gaji</a>
-
-                    <script>
-                        const hapusToast = new bootstrap.Toast(document.getElementById('hapusToast'));
-                        hapusToast.show();
-                    </script>
                 @else
                     <span class="text-muted">silahkan convert terlebih dahulu</span>
                 @endif
@@ -35,6 +29,26 @@
                     <i class="bi bi-info-circle-fill"></i> Jam Efektif = dipotong istirahat 1 jam atau
                     1,5 jam
                     (jika >=10 jam)
+                </div>
+            </div>
+            <div class="modal fade" aria-hidden="true" id="delete" tabindex="-1" role="dialog" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hapus Data Scanlog</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('scanlog.truncate') }}">
+                                <p>Apakah Anda yakin ingin menghapus semua data scanlog?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                                    class="bi bi-x-lg"></i></button>
+                            <button type="submit" class="btn btn-danger">Yakin</button>
+                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             @slot('header')
