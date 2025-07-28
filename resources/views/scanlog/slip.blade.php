@@ -32,7 +32,7 @@
         <table>
             <tr>
                 <td style="text-align:left">{{ $slip->harian->nama }}</td>
-                <td style="text-align:right">{{ $slip->harian->bagian }}</td>
+                <td style="text-align:right">{{ $slip->harian->departemen }}</td>
             </tr>
             <tr>
                 <td style="text-align:left">Periode:</td>

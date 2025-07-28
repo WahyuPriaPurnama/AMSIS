@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="modal fade" aria-hidden="true" id="delete" tabindex="-1" role="dialog" data-bs-backdrop="static">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Hapus Data Scanlog</h5>

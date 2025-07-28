@@ -2,7 +2,6 @@
 @section('title', 'Karyawan Harian')
 @section('menuHarian', 'active')
 @section('content')
-
     <div class="container-fluid mt-3">
         @component('components.card')
             <div class="button-action mb-3 d-flex flex-wrap gap-1">
@@ -15,7 +14,7 @@
                 <x-buttons.delete data-bs-toggle="modal" data-bs-target="#delete"></x-buttons.delete>
             </div>
             <div class="modal fade" aria-hidden="true" id="delete" tabindex="-1" role="dialog" data-bs-backdrop="static">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Hapus Data Karyawan Harian</h5>
@@ -23,7 +22,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="{{ route('karyawan-harian.truncate') }}">
-                                <p>Apakah Anda yakin ingin menghapus semua data karyawan harian?</p>
+                                <p>Apakah Anda yakin ingin menghapus semua data karyawan?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i

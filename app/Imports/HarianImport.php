@@ -9,21 +9,21 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 class HarianImport implements ToModel, WithStartRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
         return new Harian([
-            'pin'=>$row[0],
-            'nip'=>$row[1] === '' ? null : $row[1],
-            'nama'=>$row[2],
-            'jadwal_kerja'=>$row[3] === '' ? null : $row[3],
-            'departemen'=>$row[7] === '' ? null : $row[7],
-            'bagian'=>$row[8] === '' ? null : $row[8],
-            'no_telp'=>$row[12] === '' ? null : $row[12],
-            'gaji'=>$row[14] === '' ? 0.00 : (float)$row[14],
+            'pin' => $row[0],
+            'nip' => $row[1] === '' ? null : $row[1],
+            'nama' => $row[2],
+            'jadwal_kerja' => $row[3] === '' ? null : $row[3],
+            'departemen' => $row[7] === '' ? null : $row[7],
+            'bagian' => $row[8] === '' ? null : $row[8],
+            'no_telp' => $row[12] === '' ? null : $row[12],
+            'gaji' => $row[14] === '' ? 0.00 : (float)$row[14],
         ]);
     }
 

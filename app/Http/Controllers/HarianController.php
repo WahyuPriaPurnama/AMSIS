@@ -54,7 +54,7 @@ class HarianController extends Controller
 
         return $pdf->stream();
     }
-    
+
     public function import(Request $request)
     {
         $this->validate($request, [
@@ -92,7 +92,7 @@ class HarianController extends Controller
     public function truncate()
     {
         Harian::truncate();
-        return redirect()->route('karyawan-harian.index')->with(['alert' => 'Data Berhasil Ditruncate!']);
+        return redirect()->route('karyawan-harian.index')->with(['alert' => 'Data Berhasil Dikosongkan!']);
     }
     /**
      * Display a listing of the resource.

@@ -26,28 +26,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
 
-    <!-- add your custom CSS -->
-    <style>
-        /* Add WA floating button CSS */
-        .floating {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #0fe45d;
-            color: #fff;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 100;
-        }
-
-        .fab-icon {
-            margin-top: 16px;
-        }
-    </style>
 
     <!-- render the button and direct it to wa.me -->
     <a href="https://wa.me/6285745334330?text=Halo, Saya butuh bantuan" class="floating" target="_blank">
