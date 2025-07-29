@@ -100,15 +100,15 @@
                                 <td>
                                     @if ($scanlog->status == 0)
                                         <span class="badge text-bg-danger">
-                                            unprocess
+                                            <i class="bi bi-radioactive" data-bs-toggle="tooltip" title="belum diproses"></i>
                                         </span>
                                     @elseif($scanlog->status == 1 && $scanlog->harian)
                                         <span class="badge text-bg-success">
-                                            processed
+                                            <i class="bi bi-check-circle-fill" data-bs-toggle="tooltip" title="sudah diproses"></i>
                                         </span>
                                     @else
                                         <span class="badge text-bg-warning">
-                                            invalid
+                                            <i class="bi bi-exclamation-diamond-fill" data-bs-toggle="tooltip" title="scanlog tidak lengkap"></i>
                                         </span>
                                     @endif
                                 </td>

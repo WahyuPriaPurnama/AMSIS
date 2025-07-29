@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\Subsidiary;
 use App\Traits\FileUpload;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
@@ -262,9 +263,10 @@ class EmployeeController extends Controller
     {
         $this->authorize('view', Employee::class);
         $employees = Employee::all();
+        $timestamp = now()->format('d/m/Y H:i:s');
         ini_set('max_execution_time', 500);
         ini_set('memory_limit', '512M');
-        $pdf = pdf::loadview('employees.PDF.index', ['employees' => $employees])
+        $pdf = pdf::loadview('employees.PDF.index', ['employees' => $employees,'timestamp' => $timestamp])
             ->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
@@ -272,15 +274,21 @@ class EmployeeController extends Controller
     public function index_excel()
     {
         return Excel::download(new EmployeeExport, 'data-karyawan.xlsx');
-        // Employee::query()->where('nama', 'Wahyu Pria Purnama')->downloadExcel('query.xlsx');
     }
 
     public function show_pdf($id)
     {
         $this->authorize('view', Employee::class);
-        $result = Employee::find($id);
-        $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.PDF.show', ['employee' => $result])->setPaper('letter', 'landscape');
+        $employee = Employee::findOrFail($id);
+        if ($employee->tgl_masuk) {
+            $employee->tgl_masuk_formatted = Carbon::parse($employee->tgl_masuk)->format('d/m/Y');
+        }
+        if ($employee->status_peg == 'PKWT') {
+            $employee->awal_kontrak_formatted = Carbon::parse($employee->awal_kontrak)->format('d/m/Y');
+            $employee->akhir_kontrak_formatted = Carbon::parse($employee->akhir_kontrak)->format('d/m/Y');
+        }
+        $timestamp = now()->format('d/m/Y H:i:s');
+        $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $employee, 'timestamp' => $timestamp])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
-   
 }

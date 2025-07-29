@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('bagian')->nullable();
             $table->string('no_telp',15)->nullable();
             $table->decimal('gaji', 10, 2)->default(0.00);
+            $table->decimal('uang_makan', 10, 2)->default(0.00);
             $table->timestamps();
         });
     }

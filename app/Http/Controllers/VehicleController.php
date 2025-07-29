@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Subsidiary;
 use App\Models\Vehicle;
 use App\Traits\FileUpload;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
@@ -190,5 +191,13 @@ class VehicleController extends Controller
     {
         $this->authorize('view', Vehicle::class);
         return Response::download('storage/vehicles/polis/' . $polis);
+    }
+
+    public function show_pdf($id)
+    {
+        $this->authorize('view', Vehicle::class);
+        $result = Vehicle::findOrFail($id);
+        $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('vehicles.pdf.show', ['vehicle' => $result])->setPaper('letter', 'landscape');
+        return $pdf->stream();
     }
 }

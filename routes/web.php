@@ -43,6 +43,7 @@ route::middleware('auth')->group(function () {
     route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
     route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
     route::get('vehicle/polis/{polis}', [VehicleController::class, 'polis'])->name('vehicle.polis');
+    route::get('vehicle/show-pdf/{id}', [VehicleController::class, 'show_pdf'])->name('vehicle.pdf');
 
     route::resource('scanlog', ScanlogController::class);
     route::post('scanlog-import', [ScanlogController::class, 'import'])->name('scanlog.import');

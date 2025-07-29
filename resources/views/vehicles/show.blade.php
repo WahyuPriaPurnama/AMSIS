@@ -17,29 +17,31 @@
                         @can('delete', $vehicle)
                             <x-buttons.delete data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             </x-buttons.delete>
-                        </div>
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Yakin mau hapus
-                                            {{ $vehicle->jenis_kendaraan }}?
-                                        </h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak Jadi</button>
-                                        <button type="submit" form="delete" class="btn btn-danger ms-3">Iya, Yakin</button>
-                                        <form id="delete" action="{{ route('vehicle.destroy', ['vehicle' => $vehicle->id]) }}"
-                                            method="post">
-                                            @method('DELETE')
-                                            @csrf
-                                        </form>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Yakin mau hapus
+                                                {{ $vehicle->jenis_kendaraan }}?
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak Jadi</button>
+                                            <button type="submit" form="delete" class="btn btn-danger ms-3">Iya, Yakin</button>
+                                            <form id="delete"
+                                                action="{{ route('vehicle.destroy', ['vehicle' => $vehicle->id]) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <x-buttons.pdf href="{{ route('vehicle.pdf', $vehicle->id) }}"></x-buttons.print>
                         </div>
                     @endcan
                 </div>

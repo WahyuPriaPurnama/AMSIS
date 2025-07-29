@@ -23,8 +23,8 @@
 
 <body>
     <div class="table-container">
-
-        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/logo/bofi.png'))) }}" style="width: 100%;max-width:100%; height: auto;">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/logo/bofi.png'))) }}"
+            style="width: 100%;max-width:100%; height: auto;">
         <br>
         @php
             $slip = $slips->first();
