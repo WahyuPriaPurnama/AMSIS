@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Biodata Karyawan {{ $employee->nama }}</title>
+    <title>Biodata {{ $employee->nama }}</title>
     <style>
         * {
 
