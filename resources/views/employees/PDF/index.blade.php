@@ -9,7 +9,6 @@
             border-collapse: collapse;
         }
 
-
         * {
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
@@ -22,9 +21,7 @@
             text-decoration: black;
         }
 
-        #warning {
-            background-color: yellow;
-        }
+        
     </style>
 </head>
 
@@ -35,7 +32,7 @@
                 <h1>DATA KARYAWAN</h1>
             </td>
             <td style="text-align: right; vertical-align: middle; border: none;">
-                <img src="data:image/png;base64,{{ base64_encode(Storage::get('public/subsidiary/logo/ams_holding.png')) }}"
+                <img src="data:image/png;base64,{{ base64_encode(Storage::get('public/subsidiary/logo/' . $subsidiary->logo)) }}"
                     style="width: 150px; height: auto;">
             </td>
         </tr>

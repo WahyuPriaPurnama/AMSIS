@@ -196,8 +196,10 @@ class VehicleController extends Controller
     public function show_pdf($id)
     {
         $this->authorize('view', Vehicle::class);
-        $result = Vehicle::findOrFail($id);
-        $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('vehicles.pdf.show', ['vehicle' => $result])->setPaper('letter', 'landscape');
+        $vehicle = Vehicle::findOrFail($id);
+        $subsidiary = Subsidiary::find($vehicle->subsidiary_id);
+        $timestamp = now()->format('d-m-Y H:i:s');
+        $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('vehicles.pdf.show', ['vehicle' => $vehicle, 'subsidiary' => $subsidiary, 'timestamp' => $timestamp])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
 }

@@ -32,7 +32,7 @@
                 <h2>{{ $employee->nama }}</h2>
             </td>
             <td style="text-align: right; vertical-align: middle;">
-                <img src="data:image/png;base64,{{ base64_encode(Storage::get('public/subsidiary/logo/' . $employee->subsidiary->logo)) }}"
+                <img src="data:image/png;base64,{{ base64_encode(Storage::get('public/subsidiary/logo/' . $subsidiary->logo)) }}"
                     style="width: 150px; height: auto;">
             </td>
         </tr>
@@ -133,17 +133,17 @@
         </tr>
         <tr>
             <td colspan="2">
+                @php
+                    $documents = [
+                        'pp' => 'Foto Profil',
+                        'ktp' => 'KTP',
+                        'npwp2' => 'NPWP',
+                        'kk' => 'KK',
+                        'bpjs_ket' => 'BPJS Ketenagakerjaan',
+                        'bpjs_kes' => 'BPJS Kesehatan',
+                    ];
+                @endphp
                 <table style="width: 100%; font-size: 14px; line-height: 1.2;">
-                    @php
-                        $documents = [
-                            'pp' => 'Foto Profil',
-                            'ktp' => 'KTP',
-                            'npwp2' => 'NPWP',
-                            'kk' => 'KK',
-                            'bpjs_ket' => 'BPJS Ketenagakerjaan',
-                            'bpjs_kes' => 'BPJS Kesehatan',
-                        ];
-                    @endphp
                     @foreach ($documents as $key => $label)
                         <tr>
                             <td style="padding: 2px 6px; white-space: nowrap;">{{ $label }}</td>

@@ -4,10 +4,12 @@
 @section('content')
     <div class="container-fluid mt-3">
         @component('components.card')
-            <div class="button-action mb-3 d-flex gap-2 flex-wrap">
+            <div class="button-action mb-3 d-flex gap-2 flex-wrap justify-content-between flex-wrap">
                 @can('create', App\Models\Employee::class)
+                <div class="d-flex gap-2 flex-wrap">
                     <x-buttons.create href="{{ route('employees.create') }}"></x-buttons.create>
                     <x-buttons.excel href="{{ route('employees.excel') }}"></x-buttons.excel>
+                </div>
                 @endcan
                 <x-buttons.pdf href="{{ route('employees.pdf') }}"></x-buttons.pdf>
             </div>
