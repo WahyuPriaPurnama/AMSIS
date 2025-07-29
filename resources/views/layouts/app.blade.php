@@ -25,13 +25,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
-
-
-    <!-- render the button and direct it to wa.me -->
-    <a href="https://wa.me/6285745334330?text=Halo, Saya butuh bantuan" class="floating" target="_blank">
-        <i class="fab fa-whatsapp fab-icon"></i>
-    </a>
-
 </head>
 
 <body class="d-flex flex-column min-vh-100">
