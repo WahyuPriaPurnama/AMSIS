@@ -175,6 +175,10 @@
         <div class="container text-center">
             AMS Information System | © {{ date('Y') }} All rights reserved.
         </div>
+        <a href="https://wa.me/6285745334330?text={{ urlencode('Halo, saya butuh bantuan.') }}"
+            class="whatsapp-float" target="_blank" data-bs-toggle="title" title="Hubungi kami via WhatsApp">
+            <i class="bi bi-whatsapp"></i>
+        </a>
     </footer>
 
 </body>
