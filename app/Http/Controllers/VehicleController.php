@@ -199,7 +199,7 @@ class VehicleController extends Controller
         $vehicle = Vehicle::findOrFail($id);
         $subsidiary = Subsidiary::find($vehicle->subsidiary_id);
         $timestamp = now()->format('d-m-Y H:i:s');
-        $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('vehicles.PDF.show', ['vehicle' => $vehicle, 'subsidiary' => $subsidiary, 'timestamp' => $timestamp])->setPaper('letter', 'landscape');
+        $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('vehicles.pdf.show', ['vehicle' => $vehicle, 'subsidiary' => $subsidiary, 'timestamp' => $timestamp])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
 }

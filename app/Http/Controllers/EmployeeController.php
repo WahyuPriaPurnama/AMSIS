@@ -267,7 +267,7 @@ class EmployeeController extends Controller
         $timestamp = now()->format('d/m/Y H:i:s');
         ini_set('max_execution_time', 500);
         ini_set('memory_limit', '512M');
-        $pdf = pdf::loadview('employees.PDF.index', ['employees' => $employees, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])
+        $pdf = pdf::loadview('employees.pdf.index', ['employees' => $employees, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])
             ->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
@@ -290,7 +290,7 @@ class EmployeeController extends Controller
             $employee->akhir_kontrak_formatted = Carbon::parse($employee->akhir_kontrak)->format('d/m/Y');
         }
         $timestamp = now()->format('d/m/Y H:i:s');
-        $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.PDF.show', ['employee' => $employee, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])->setPaper('letter', 'landscape');
+        $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $employee, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])->setPaper('letter', 'landscape');
         return $pdf->stream();
     }
 }
