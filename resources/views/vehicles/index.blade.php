@@ -8,8 +8,9 @@
                 DATA KENDARAAN
             @endslot
 
-            <div class="button-action mb-3">
-                <x-buttons.create href="{{ route('vehicle.create') }}"></x-buttons.create>
+           <div class="button-action mb-3 d-flex gap-2 flex-wrap justify-content-between flex-wrap">
+                <x-buttons.create href="{{ route('vehicles.create') }}"></x-buttons.create>
+                <x-buttons.pdf href="{{ route('vehicles.pdf') }}"></x-buttons.pdf>
             </div>
 
             <div class="table-responsive">
@@ -21,6 +22,8 @@
                             <th>KATEGORI</th>
                             <th>PLANT</th>
                             <th>NOPOL</th>
+                            <th>SERVICE</th>
+                            <th>KM</th>
                             <th>STNK</th>
                             <th>PAJAK</th>
                             <th>KIR</th>
@@ -32,13 +35,15 @@
                         @forelse ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('vehicle.show', ['vehicle' => $item->id]) }}" class="text-decoration-none"
+                                <td><a href="{{ route('vehicles.show', ['vehicle' => $item->id]) }}" class="text-decoration-none"
                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                         data-bs-title="klik untuk melihat detail">
                                         {{ $item->jenis_kendaraan }}</a></td>
                                 <td>{{ $item->kategori }}</td>
                                 <td>{{ $item->subsidiary->name }}</td>
                                 <td>{{ $item->nopol }}</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>{{ $item->stnk }}</td>
                                 <td>{{ $item->pajak }}</td>
                                 <td>{{ $item->kir }}</td>

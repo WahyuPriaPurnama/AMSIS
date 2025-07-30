@@ -33,6 +33,8 @@ class StoreVehicleRequest extends FormRequest
             'tahun' => 'required',
             'atas_nama' => 'required',
             'nopol' => 'required|unique:vehicles',
+            'tgl_service' => 'nullable|date',
+            'km_akhir' => 'nullable|numeric',
             'no_rangka' => 'unique:vehicles',
             'no_bpkb' => 'unique:vehicles',
             'no_mesin' => 'unique:vehicles',
@@ -50,6 +52,7 @@ class StoreVehicleRequest extends FormRequest
             'f_pajak' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_polis' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_service' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
 
         ];

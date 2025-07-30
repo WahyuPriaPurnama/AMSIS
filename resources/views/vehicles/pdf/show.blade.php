@@ -58,6 +58,8 @@
                         'tahun' => 'Tahun Produksi',
                         'atas_nama' => 'Atas Nama',
                         'kondisi' => 'Kondisi',
+                        'tgl_service' => 'Tgl Service',
+                        'km_akhir' => 'KM Akhir',
                     ];
                 @endphp
 

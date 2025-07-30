@@ -101,7 +101,7 @@
 
                                     <li>
                                         <a class="dropdown-item @yield('menuVehicles')"
-                                            href="{{ route('vehicle.index') }}">Kendaraan</a>
+                                            href="{{ route('vehicles.index') }}">Kendaraan</a>
                                     </li>
                                 </ul>
                             </li>

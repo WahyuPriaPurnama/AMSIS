@@ -75,9 +75,6 @@ class UpdateEmployeeRequest extends FormRequest
     {
         $this->merge([
             'nama' => ucwords(strtolower($this->nama)),
-            'divisi' => ucwords(strtolower($this->divisi)),
-            'departemen' => ucwords(strtolower($this->departemen)),
-            'seksi' => ucwords(strtolower($this->seksi)),
             'tmpt_lahir' => ucwords(strtolower($this->tmpt_lahir)),
             'jurusan' => ucwords(strtolower($this->jurusan)),
             'nama_ibu' => ucwords(strtolower($this->nama_ibu)),

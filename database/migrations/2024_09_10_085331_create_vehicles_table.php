@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('tahun');
             $table->string('atas_nama');
             $table->string('nopol')->unique();
+            $table->date('tgl_service')->nullable();
+            $table->integer('km_akhir')->nullable();
             $table->string('no_rangka')->unique()->nullable();
             $table->string('no_bpkb')->unique()->nullable();
             $table->string('no_mesin')->unique()->nullable();
@@ -42,6 +44,7 @@ return new class extends Migration
             $table->string('f_kir')->nullable();
             $table->string('qr')->nullable();
             $table->string('f_polis')->nullable();
+            $table->string('f_service')->nullable();
             $table->timestamps();
         });
     }

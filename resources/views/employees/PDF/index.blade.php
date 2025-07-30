@@ -20,8 +20,6 @@
         a {
             text-decoration: black;
         }
-
-        
     </style>
 </head>
 

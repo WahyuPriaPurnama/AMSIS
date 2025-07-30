@@ -33,6 +33,8 @@ class UpdateVehicleRequest extends FormRequest
             'tahun' => 'required',
             'atas_nama' => 'required',
             'nopol' => 'required|unique:vehicles,nopol,' . $vehicle->id,
+            'tgl_service' => 'nullable|date',
+            'km_akhir' => 'nullable|numeric',
             'no_rangka' => 'unique:vehicles,no_rangka,' . $vehicle->id,
             'no_bpkb' => 'unique:vehicles,no_bpkb,' . $vehicle->id,
             'no_mesin' => 'unique:vehicles,no_mesin,' . $vehicle->id,
@@ -51,6 +53,7 @@ class UpdateVehicleRequest extends FormRequest
             'f_kir' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'qr' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'f_polis' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+            'f_service' => 'mimes:png,jpg,jpeg,pdf|max:2048',
             'kondisi' => 'required'
         ];
     }

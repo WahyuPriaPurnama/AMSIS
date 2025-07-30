@@ -269,7 +269,7 @@ class EmployeeController extends Controller
         ini_set('memory_limit', '512M');
         $pdf = pdf::loadview('employees.pdf.index', ['employees' => $employees, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])
             ->setPaper('letter', 'landscape');
-        return $pdf->stream();
+        return $pdf->stream('data-karyawan-' . now()->format('d-m-Y') . '.pdf');
     }
 
     public function index_excel()
@@ -291,6 +291,6 @@ class EmployeeController extends Controller
         }
         $timestamp = now()->format('d/m/Y H:i:s');
         $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $employee, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])->setPaper('letter', 'landscape');
-        return $pdf->stream();
+        return $pdf->stream('data-karyawan-' . $employee->nama . '-' . now()->format('d-m-Y') . '.pdf');
     }
 }

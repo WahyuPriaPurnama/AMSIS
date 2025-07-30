@@ -8,7 +8,6 @@ use App\Models\Subsidiary;
 use App\Models\Vehicle;
 use App\Traits\FileUpload;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -66,7 +65,11 @@ class VehicleController extends Controller
             $polis = $this->fileUpload($request, 'public/vehicles/polis', 'f_polis');
             $data->update(['f_polis' => $polis->hashName()]);
         }
-        return redirect()->route('vehicle.index')->with('alert', 'data berhasil disimpan');
+        if ($request->file('f_service')) {
+            $service = $this->fileUpload($request, 'public/vehicles/service', 'f_service');
+            $data->update(['f_service' => $service->hashName()]);
+        }
+        return redirect()->route('vehicles.index')->with('alert', 'data berhasil disimpan');
     }
 
     /**
@@ -85,7 +88,6 @@ class VehicleController extends Controller
         $sub = Subsidiary::all();
         return view('vehicles.edit', compact('sub', 'vehicle'));
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -127,12 +129,14 @@ class VehicleController extends Controller
             $polis = $this->fileUpload($request, 'public/vehicles/polis', 'f_polis');
             $vehicle->update(['f_polis' => $polis->hashName()]);
         }
-
-        if ($vehicle) {
-            return redirect()->route('vehicle.show', ['vehicle' => $vehicle->id])->with('alert', "update data berhasil");
-        } else {
-            return redirect()->route('vehicle.show', ['vehicle' => $vehicle->id])->with('alert', "update data  gagal");
+        if ($request->file('f_service')) {
+            Storage::disk('local')->delete('public/vehicles/service/' . $vehicle->f_service);
+            $service = $this->fileUpload($request, 'public/vehicles/service', 'f_service');
+            $vehicle->update(['f_service' => $service->hashName()]);
         }
+
+        return redirect()->route('vehicles.show', ['vehicle' => $vehicle->id])
+            ->with($vehicle ? 'alert' : 'alert2', $vehicle ? 'update data berhasil' : 'update data gagal');
     }
 
     /**
@@ -148,13 +152,14 @@ class VehicleController extends Controller
         $data->delete('/public/vehicles/kir/' . $vehicle->kir);
         $data->delete('/public/vehicles/qr/' . $vehicle->qr);
         $data->delete('/public/vehicles/polis/' . $vehicle->polis);
+        $data->delete('/public/vehicles/service/' . $vehicle->f_service);
         $vehicle->delete();
 
-        if ($vehicle) {
-            return redirect()->route('vehicle.index')->with('alert', "hapus data $vehicle->jenis_kendaraan berhasil");
-        } else {
-            return redirect()->route('vehicle.index')->with('alert', "hapus data $vehicle->jenis_kendaraan gagal");
-        }
+        return redirect()->route('vehicles.index')
+            ->with(
+                $vehicle ? 'alert' : 'alert2',
+                "hapus data {$vehicle->jenis_kendaraan} " . ($vehicle ? 'berhasil' : 'gagal')
+            );
     }
 
     public function foto($foto)
@@ -192,6 +197,24 @@ class VehicleController extends Controller
         $this->authorize('view', Vehicle::class);
         return Response::download('storage/vehicles/polis/' . $polis);
     }
+    public function service($service)
+    {
+        $this->authorize('view', Vehicle::class);
+        return Response::download('storage/vehicles/service/' . $service);
+    }
+
+    public function index_pdf()
+    {
+        $this->authorize('view', Vehicle::class);
+        $vehicles = Vehicle::all();
+        $subsidiary = Subsidiary::find(1);
+        $timestamp = now()->format('d/m/Y H:i:s');
+        ini_set('max_execution_time', 500);
+        ini_set('memory_limit', '512M');
+        $pdf = pdf::loadview('vehicles.pdf.index', ['vehicles' => $vehicles, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])
+            ->setPaper('letter', 'landscape');
+        return $pdf->stream('data-kendaraan-' . now()->format('d-m-Y') . '.pdf');
+    }
 
     public function show_pdf($id)
     {
@@ -200,6 +223,6 @@ class VehicleController extends Controller
         $subsidiary = Subsidiary::find($vehicle->subsidiary_id);
         $timestamp = now()->format('d-m-Y H:i:s');
         $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('vehicles.pdf.show', ['vehicle' => $vehicle, 'subsidiary' => $subsidiary, 'timestamp' => $timestamp])->setPaper('letter', 'landscape');
-        return $pdf->stream();
+        return $pdf->stream('data-kendaraan-' . $vehicle->jenis_kendaraan . '-' . now()->format('d-m-Y') . '.pdf');
     }
 }

@@ -29,21 +29,26 @@ route::middleware('auth')->group(function () {
     route::get('employee/KK/{kk}', [EmployeeController::class, 'kk'])->name('employee.kk');
     route::get('employee/BPJS-ket/{bpjs_ket}', [EmployeeController::class, 'bpjs_ket'])->name('employee.bpjs_ket');
     route::get('employee/BPJS-kes/{bpjs_kes}', [EmployeeController::class, 'bpjs_kes'])->name('employee.bpjs_kes');
-    route::get('/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
-    route::get('/export-excel', [EmployeeController::class, 'index_excel'])->name('employees.excel');
-    route::get('/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
+    route::get('employee/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
+    route::get('employee/export-excel', [EmployeeController::class, 'index_excel'])->name('employees.excel');
+    route::get('employee/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
+   
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('users', UserController::class);
     route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('/home', [HomeController::class, 'index']);
-    route::resource('vehicle', VehicleController::class);
-    route::get('vehicle/foto/{foto}', [VehicleController::class, 'foto'])->name('vehicle.foto');
-    route::get('vehicle/stnk/{stnk}', [VehicleController::class, 'stnk'])->name('vehicle.stnk');
-    route::get('vehicle/pajak/{pajak}', [VehicleController::class, 'pajak'])->name('vehicle.pajak');
-    route::get('vehicle/kir/{kir}', [VehicleController::class, 'kir'])->name('vehicle.kir');
-    route::get('vehicle/qr/{qr}', [VehicleController::class, 'qr'])->name('vehicle.qr');
-    route::get('vehicle/polis/{polis}', [VehicleController::class, 'polis'])->name('vehicle.polis');
-    route::get('vehicle/show-pdf/{id}', [VehicleController::class, 'show_pdf'])->name('vehicle.pdf');
+
+    route::resource('vehicles', VehicleController::class);
+    Route::prefix('vehicle')->controller(VehicleController::class)->group(function () {
+        Route::get('foto/{foto}', 'foto')->name('vehicle.foto');
+        Route::get('stnk/{stnk}', 'stnk')->name('vehicle.stnk');
+        Route::get('pajak/{pajak}', 'pajak')->name('vehicle.pajak');
+        Route::get('kir/{kir}', 'kir')->name('vehicle.kir');
+        Route::get('qr/{qr}', 'qr')->name('vehicle.qr');
+        Route::get('polis/{polis}', 'polis')->name('vehicle.polis');
+        Route::get('export-pdf', 'index_pdf')->name('vehicles.pdf');
+        Route::get('show-pdf/{id}', 'show_pdf')->name('vehicle.pdf');
+    });
 
     route::resource('scanlog', ScanlogController::class);
     route::post('scanlog-import', [ScanlogController::class, 'import'])->name('scanlog.import');
