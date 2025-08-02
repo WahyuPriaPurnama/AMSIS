@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\HarianExport;
 use App\Imports\HarianImport;
+use App\Models\Employee;
 use App\Models\Harian;
 use App\Models\Scanlog;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -99,6 +100,7 @@ class HarianController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Employee::class);
         $harian = Harian::latest()->get();
         return view('scanlog.harian', compact('harian'));
     }

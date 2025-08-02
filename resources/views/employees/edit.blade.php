@@ -2,9 +2,7 @@
 @section('title', 'Edit Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
-    @php
-        $isEmployee = Auth::user()->role == 'employee';
-    @endphp
+   
     <div class="container mt-3">
         @component('components.card')
             @slot('header')

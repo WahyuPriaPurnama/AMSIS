@@ -19,6 +19,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
+         $this->authorize('create', Vehicle::class);
         $data = Vehicle::Index()->paginate(50);
         return view('vehicles.index', compact('data'));
     }

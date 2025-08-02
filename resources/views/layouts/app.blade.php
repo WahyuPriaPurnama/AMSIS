@@ -31,9 +31,25 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'AMSIS') }}
-                </a>
+                @auth
+                    @php
+                        $user = auth()->user();
+                        $isEmployee = $user && $user->role === 'employee';
+                        $employeeId = $user->employee_id ?? null;
+                    @endphp
+
+                    @if ($isEmployee && $employeeId)
+                        {{-- Jika user adalah employee, arahkan ke profil karyawan --}}
+                        <a class="navbar-brand" href="{{ route('employees.show', $employeeId) }}">
+                            {{ config('app.name', 'AMSIS') }}
+                        </a>
+                    @else
+                        {{-- Jika bukan employee, arahkan ke halaman utama --}}
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            {{ config('app.name', 'AMSIS') }}
+                        </a>
+                    @endif
+                @endauth
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -64,66 +80,73 @@
                                 </ul>
                             </li>
                         </ul>
-                    @else
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    HRD
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item @yield('menuEmployees')" href="{{ route('employees.index') }}">
-                                            Karyawan</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            E-Slip &raquo;
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-submenu">
-                                            <li><a class="dropdown-item @yield('menuAMS')" href="/ams-malang">
-                                                    AMS Holding</a></li>
-                                            <li><a class="dropdown-item @yield('menuRMM')" href="/rmm-malang">
-                                                    RMM</a></li>
-                                            <li><a class="dropdown-item @yield('menuELN')" href="/eln-malang">
-                                                    ELN Malang</a></li>
-                                            <li><a class="dropdown-item @yield('menuELN2')" href="/eln-bwi">
-                                                    ELN Banyuwangi</a></li>
-                                            <li><a class="dropdown-item @yield('menuHAKA')" href="/haka-bwi">
-                                                    HAKA</a></li>
-                                            <li><a class="dropdown-item @yield('menuBOFI')" href="/bofi-bwi">
-                                                    BOFI</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item @yield('menuSubsidiaries')"
-                                            href="{{ route('subsidiaries.index') }}">
-                                            Perusahaan</a></li>
-
-                                    <li>
-                                        <a class="dropdown-item @yield('menuVehicles')"
-                                            href="{{ route('vehicles.index') }}">Kendaraan</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Payroll
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item @yield('menuScanlog')"
-                                            href="{{ route('scanlog.index') }}">Scanlog</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item @yield('menuHarian')"
-                                            href="{{ route('karyawan-harian.index') }}">Karyawan</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
                     @endguest
+                    @auth
+                        @php
+                            $user = auth()->user();
+                            $isEmployee = $user && $user->role === 'employee';
+                            $employeeId = $user->employee_id ?? null;
+                        @endphp
+                        @if (!$isEmployee)
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        HRD
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item @yield('menuEmployees')"
+                                                href="{{ route('employees.index') }}">
+                                                Karyawan</a>
+                                        </li>
+                                        <li><a class="dropdown-item @yield('menuSubsidiaries')"
+                                                href="{{ route('subsidiaries.index') }}">
+                                                Perusahaan</a></li>
+                                        <li>
+                                            <a class="dropdown-item @yield('menuVehicles')"
+                                                href="{{ route('vehicles.index') }}">Kendaraan</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                E-Slip &raquo;
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-submenu">
+                                                <li><a class="dropdown-item @yield('menuAMS')" href="/ams-malang">
+                                                        AMS Holding</a></li>
+                                                <li><a class="dropdown-item @yield('menuRMM')" href="/rmm-malang">
+                                                        RMM</a></li>
+                                                <li><a class="dropdown-item @yield('menuELN')" href="/eln-malang">
+                                                        ELN Malang</a></li>
+                                                <li><a class="dropdown-item @yield('menuELN2')" href="/eln-bwi">
+                                                        ELN Banyuwangi</a></li>
+                                                <li><a class="dropdown-item @yield('menuHAKA')" href="/haka-bwi">
+                                                        HAKA</a></li>
+                                                <li><a class="dropdown-item @yield('menuBOFI')" href="/bofi-bwi">
+                                                        BOFI</a></li>
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Payroll
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item @yield('menuScanlog')"
+                                                href="{{ route('scanlog.index') }}">Scanlog</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item @yield('menuHarian')"
+                                                href="{{ route('karyawan-harian.index') }}">Karyawan</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        @endif
+                    @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->

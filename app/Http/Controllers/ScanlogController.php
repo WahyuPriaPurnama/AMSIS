@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ScanlogExport;
 use App\Imports\ScanlogImport;
+use App\Models\Employee;
 use App\Models\Scanlog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,6 +19,7 @@ class ScanlogController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Employee::class);
         $scanlogs = Scanlog::latest()->get();
         return view('scanlog.index', compact('scanlogs'));
     }
