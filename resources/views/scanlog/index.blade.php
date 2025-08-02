@@ -39,15 +39,15 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('scanlog.truncate') }}">
+                            <form action="{{ route('scanlog.truncate') }}" id="deleteForm">
                                 <p>Apakah Anda yakin ingin menghapus semua data scanlog?</p>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
                                     class="bi bi-x-lg"></i></button>
-                            <button type="submit" class="btn btn-danger">Yakin</button>
+                            <button type="submit" form="deleteForm" class="btn btn-danger">Yakin</button>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>

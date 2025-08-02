@@ -21,4 +21,9 @@ class Employee extends Model
     {
         return $query->with('subsidiary');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'employee_id');
+    }
 }

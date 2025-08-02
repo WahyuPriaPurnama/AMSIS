@@ -7,43 +7,40 @@
             @slot('header')
                 {{ $employee->nama }}
             @endslot
-            <div class="d-flex justify-content-between">
-                <div class="d-flex">
+            <div class="d-flex">
+                <div class="btn-group d-flex gap-2 flex-wrap">
                     @can('update', $employee)
-                        <div class="btn-group d-flex gap-2 flex-wrap">
-                            <x-buttons.edit href="{{ route('employees.edit', ['employee' => $employee->id]) }}"></x-buttons.edit>
-                        @endcan
-                        @can('delete', $employee)
-                            <x-buttons.delete data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            </x-buttons.delete>
-                        </div>
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Yakin mau hapus {{ $employee->nama }}?
-                                        </h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak Jadi</button>
-                                        <button type="submit" form="delete" class="btn btn-danger ms-3">Iya, Yakin</button>
-                                        <form id="delete"
-                                            action="{{ route('employees.destroy', ['employee' => $employee->id]) }}" method="post">
-                                            @method('DELETE')
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <x-buttons.edit href="{{ route('employees.edit', ['employee' => $employee->id]) }}"></x-buttons.edit>
+                        <x-buttons.pdf href="{{ route('employee.pdf', ['employee' => $employee->id]) }}"></x-buttons.pdf>
+                    @endcan
+                    @can('delete', $employee)
+                        <x-buttons.delete data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        </x-buttons.delete>
                     @endcan
                 </div>
-                <x-buttons.pdf href="{{ route('employee.pdf', ['employee' => $employee->id]) }}"></x-buttons.pdf>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Yakin mau hapus {{ $employee->nama }}?
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak Jadi</button>
+                                <button type="submit" form="delete" class="btn btn-danger ms-3">Iya, Yakin</button>
+                                <form id="delete" action="{{ route('employees.destroy', ['employee' => $employee->id]) }}"
+                                    method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <hr>
+            <br>
             <section class="bg-light py-3 py-md-5 py-xl-8">
                 <div class="container">
                     <div class="row gy-4 gy-lg-0">
@@ -122,7 +119,6 @@
                                                 data-bs-target="#lampiran-tab-pane" type="button" role="tab"
                                                 aria-controls="lampiran-tab-pane" aria-selected="false">Lampiran</button>
                                         </li>
-
                                     </ul>
                                     <div class="tab-content pt-4" id="organisasiTabContent">
                                         <div class="tab-pane fade show active" id="organisasi-tab-pane" role="tabpanel"
@@ -187,8 +183,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <div class="tab-pane fade show" id="biodata-tab-pane" role="tabpanel"
                                             aria-labelledby="biodata-tab" tabindex="0">
                                             <div class="row g-0">

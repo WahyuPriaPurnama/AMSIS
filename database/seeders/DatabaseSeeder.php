@@ -4,13 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Employee;
-use App\Models\Purchasing\MasterBarang;
-use App\Models\Purchasing\MasterSupplier;
-use App\Models\Sparepart;
 use App\Models\Subsidiary;
 use App\Models\User;
-use App\Models\Vehicle;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -83,34 +78,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
-
-        // $faker = \Faker\Factory::create('id_ID');
-        // MasterSupplier::create([
-        //     'nama_supplier' => 'Satelit',
-        //     'jenis_supplier' => $faker->words(3, true),
-        //     'kontak' => $faker->numerify('085100892492'),
-        //     'alamat' => $faker->address(),
-        //     'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-        //     'hari' => $faker->numerify('##'),
-        // ]);
-        // MasterSupplier::create([
-        //     'nama_supplier' => 'Jaya Sentosa',
-        //     'jenis_supplier' => $faker->words(3, true),
-        //     'kontak' => $faker->numerify('085330830199'),
-        //     'alamat' => $faker->address(),
-        //     'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-        //     'hari' => $faker->numerify('##'),
-        // ]);
-        // MasterSupplier::create([
-        //     'nama_supplier' => 'Depo Bangunan',
-        //     'jenis_supplier' => $faker->words(3, true),
-        //     'kontak' => $faker->numerify('081133308276'),
-        //     'alamat' => $faker->address(),
-        //     'pembayaran' => $faker->randomElement(['Cash', 'Tempo']),
-        //     'hari' => $faker->numerify('##'),
-        // ]);
-       
-
         // for ($i = 0; $i < 100; $i++) {
         //     Employee::create([
         //         'nip' => $faker->randomNumber(9),
@@ -165,71 +132,25 @@ class DatabaseSeeder extends Seeder
         //         'kondisi' => $faker->randomElement(['Baik', 'Kurang Baik'])
         //     ]);
 
-        //     Sparepart::create([
-        //         'kode_barang' => $faker->randomNumber(9),
-        //         'serial_number' => $faker->randomNumber(9),
-        //         'nama_barang' => $faker->randomElement(['Paku', 'Obeng', 'Tang', 'Baut Baja', 'Kabel', 'Mur', 'Paku Rivet']),
-        //         'jumlah' => $faker->randomNumber(3),
-        //         'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
-        //     ]);
 
-        //     MasterBarang::create([
-        //         'nama_barang' => $faker->words(3, true),
-        //         'subsidiary_id' => $faker->numberBetween(1, 6),
-        //         'nomor_rfo' => $faker->randomNumber(9),
-        //         'nomor_po' => $faker->randomNumber(9),
-        //         'harga' => $faker->randomNumber(7),
-        //         'jumlah' => $faker->randomNumber(2),
-        //         'satuan' => $faker->randomElement(['unit', 'dus', 'pcs']),
-        //         'master_supplier_id' => $faker->numberBetween(1, 5),
-        //         'tgl_pembelian' => $faker->date(),
-        //     ]);
-        // }
+        $admins = [
+            ['name' => 'Super Admin', 'email' => 'super.admin@amsgroup.co.id', 'password' => 'SuperAdmin_1996', 'role' => 'super-admin'],
+            ['name' => 'Holding Admin', 'email' => 'holding.admin@amsgroup.co.id', 'password' => 'HoldingAdmin_9H!7', 'role' => 'holding-admin'],
+            ['name' => 'ELN Admin', 'email' => 'eln.admin@amsgroup.co.id', 'password' => 'ELNAdmin_6c\9', 'role' => 'eln-admin'],
+            ['name' => 'ELN 2 Admin', 'email' => 'eln2.admin@amsgroup.co.id', 'password' => 'ELN2Admin_tT45', 'role' => 'eln2-admin'],
+            ['name' => 'Haka Admin', 'email' => 'haka.admin@amsgroup.co.id', 'password' => 'HakaAdmin_a6^0', 'role' => 'haka-admin'],
+            ['name' => 'BOFI Admin', 'email' => 'bofi.admin@amsgroup.co.id', 'password' => 'BOFIAdmin_50U(', 'role' => 'bofi-admin'],
+            ['name' => 'RMM Admin', 'email' => 'rmm.admin@amsgroup.co.id', 'password' => 'RMMAdmin_177v', 'role' => 'rmm-admin'],
+            ['name' => 'Employee', 'email' => 'employee@amsgroup.co.id', 'password' => 'Employee_1996', 'role' => 'employee'],
+        ];
 
-
-
-
-        User::create([
-            'name' => 'Super Admin',
-            'email' => 'super.admin@amsgroup.co.id',
-            'password' => Hash::make('SuperAdmin_1996'),
-            'role' => 'super-admin'
-        ]);
-        User::create([
-            'name' => 'Holding Admin',
-            'email' => 'holding.admin@amsgroup.co.id',
-            'password' => Hash::make('HoldingAdmin_9H!7'),
-            'role' => 'holding-admin'
-        ]);
-        User::create([
-            'name' => 'ELN Admin',
-            'email' => 'eln.admin@amsgroup.co.id',
-            'password' => Hash::make('ELNAdmin_6c\9'),
-            'role' => 'eln-admin'
-        ]);
-        User::create([
-            'name' => 'ELN 2 Admin',
-            'email' => 'eln2.admin@amsgroup.co.id',
-            'password' => Hash::make('ELN2Admin_tT45'),
-            'role' => 'eln2-admin'
-        ]);
-        User::create([
-            'name' => 'Haka Admin',
-            'email' => 'haka.admin@amsgroup.co.id',
-            'password' => Hash::make('HakaAdmin_a6^0'),
-            'role' => 'haka-admin'
-        ]);
-        User::create([
-            'name' => 'BOFI Admin',
-            'email' => 'bofi.admin@amsgroup.co.id',
-            'password' => Hash::make('BOFIAdmin_50U('),
-            'role' => 'bofi-admin'
-        ]);
-        User::create([
-            'name' => 'RMM Admin',
-            'email' => 'rmm.admin@amsgroup.co.id',
-            'password' => Hash::make('RMMAdmin_177v'),
-            'role' => 'rmm-admin'
-        ]);
+        foreach ($admins as $admin) {
+            User::create([
+                'name' => $admin['name'],
+                'email' => $admin['email'],
+                'password' => Hash::make($admin['password']),
+                'role' => $admin['role'],
+            ]);
+        }
     }
 }

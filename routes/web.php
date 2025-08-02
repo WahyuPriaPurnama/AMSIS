@@ -32,10 +32,11 @@ route::middleware('auth')->group(function () {
     route::get('employee/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
     route::get('employee/export-excel', [EmployeeController::class, 'index_excel'])->name('employees.excel');
     route::get('employee/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
-   
+
     route::resource('subsidiaries', SubsidiaryController::class);
     route::resource('users', UserController::class);
-    route::get('logActivity', [HomeController::class, 'logActivity'])->name('log.activity');
+    route::get('log-activity', [HomeController::class, 'logActivity'])->name('log.activity');
+    route::get('Log-activity/truncate', [HomeController::class, 'truncate'])->name('log.activity.truncate');
     route::get('/home', [HomeController::class, 'index']);
 
     route::resource('vehicles', VehicleController::class);

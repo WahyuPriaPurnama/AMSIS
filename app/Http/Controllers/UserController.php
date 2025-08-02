@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::Index()->get();
         return view('auth.userlist', ['users' => $users]);
     }
 
@@ -72,7 +72,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->authorize('update', User::class);
-       
+
         $validated = $request->validate([
             'name' => 'required|max:50|string',
             'role' => 'required|string|max:25',

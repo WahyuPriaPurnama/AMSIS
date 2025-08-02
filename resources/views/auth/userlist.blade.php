@@ -1,13 +1,13 @@
 @extends('layouts.app')
-
+@section('title', 'List User')
 @section('content')
     <div class="container mt-3">
         @component('components.card')
             @slot('header')
                 LIST USER
             @endslot
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser"
-                data-bs-toggle="tooltip" title="Tambah User">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser" data-bs-toggle="tooltip"
+                title="Tambah User">
                 <i class="bi bi-person-fill-add"></i>
             </button>
 
@@ -98,13 +98,14 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover" id="table">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>NAMA</th>
                             <th>EMAIL</th>
                             <th>LEVEL</th>
+                            <th>PLANT</th>
                             <th>MENU</th>
                         </tr>
                     </thead>
@@ -115,6 +116,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
+                                <td>{{ $user->subsidiary?->name ?? '-' }}</td>
                                 <td>
                                     <!-- Button trigger modal -->
                                     <div class="input-group">

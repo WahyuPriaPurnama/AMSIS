@@ -31,11 +31,8 @@ class LoginController extends Controller
     {
         $role = Auth::user()->role;
         switch ($role) {
-            case 'eln-sparepart':
-                return '/spareparts';
-                break;
-            case 'holding-purchasing':
-                return '/master-barang';
+            case 'employee':
+                return route('employees.show', Auth::user()->employee_id);
                 break;
             default:
                 return '/home';

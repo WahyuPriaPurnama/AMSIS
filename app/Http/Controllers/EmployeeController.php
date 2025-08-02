@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
 
 class EmployeeController extends Controller
 {
@@ -26,27 +27,27 @@ class EmployeeController extends Controller
         $this->authorize('view', Employee::class);
         $user = Auth::user()->role;
         if (($user == 'super-admin') or ($user == 'holding-admin')) {
-            $employees = Employee::Index()->latest()->paginate(1000);
+            $employees = Employee::Index()->latest()->paginate(100);
         } elseif ($user == 'eln-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '2');
-            })->sortable()->latest()->paginate(1000);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'eln2-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '3');
-            })->sortable()->latest()->paginate(1000);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'bofi-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '4');
-            })->sortable()->latest()->paginate(1000);
+            })->sortable()->latest()->paginate(100);
         } elseif ($user == 'rmm-admin') {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '6');
-            })->sortable()->latest()->paginate(1000);
+            })->sortable()->latest()->paginate(100);
         } else {
             $employees = Employee::whereHas('subsidiary', function ($query) {
                 return $query->where('id', '5');
-            })->sortable()->latest()->paginate(1000);
+            })->sortable()->latest()->paginate(100);
         }
 
         return view('employees.index', compact('employees'));
@@ -126,7 +127,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-
+        $this->authorize('update', $employee);
         return view('employees.show', compact('employee'));
     }
 
@@ -135,23 +136,30 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        $this->authorize('update', Employee::class);
+        $this->authorize('update', $employee);
         \App\Helpers\LogActivity::addToLog();
-        $user = Auth::user()->role;
-        if (($user == 'super-admin') or ($user == 'holding-admin')) {
+
+        $role = Auth::user()->role;
+
+        if (in_array($role, ['super-admin', 'holding-admin'])) {
             $subsidiaries = Subsidiary::all();
-        } elseif ($user == 'eln-admin') {
-            $subsidiaries = Subsidiary::where('id', '2')->get();
-        } elseif ($user == 'eln2-admin') {
-            $subsidiaries = Subsidiary::where('id', '3')->get();
-        } elseif ($user == 'bofi-admin') {
-            $subsidiaries = Subsidiary::where('id', '4')->get();
-        } elseif ($user == 'rmm-admin') {
-            $subsidiaries = Subsidiary::where('id', '6')->get();
+        } elseif ($role === 'eln-admin') {
+            $subsidiaries = Subsidiary::where('id', 2)->get();
+        } elseif ($role === 'eln2-admin') {
+            $subsidiaries = Subsidiary::where('id', 3)->get();
+        } elseif ($role === 'bofi-admin') {
+            $subsidiaries = Subsidiary::where('id', 4)->get();
+        } elseif ($role === 'rmm-admin') {
+            $subsidiaries = Subsidiary::where('id', 6)->get();
+        } elseif ($role === 'employee') {
+            // ✅ Karyawan hanya bisa lihat subsidiary miliknya sendiri
+            $subsidiaries = Subsidiary::where('id', $employee->subsidiary_id)->get();
         } else {
-            $subsidiaries = Subsidiary::where('id', '5')->get();
+            // fallback: hanya subsidiary default
+            $subsidiaries = Subsidiary::where('id', 5)->get();
         }
-        return view('employees.edit', compact(['employee', 'subsidiaries']));
+
+        return view('employees.edit', compact('employee', 'subsidiaries'));
     }
 
     /**
@@ -159,8 +167,7 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        $this->authorize('update', Employee::class);
-        \App\Helpers\LogActivity::addToLog();
+        $this->authorize('update', $employee);
         $employee->update($request->validated());
 
         if ($request->file('pp')) {
@@ -230,32 +237,31 @@ class EmployeeController extends Controller
 
     public function pp($pp)
     {
-        $this->authorize('view', Employee::class);
         return Response::download('storage/foto_profil/' . $pp);
     }
     public function ktp($ktp)
     {
-        $this->authorize('view', Employee::class);
+
         return Response::download('storage/KTP/' . $ktp);
     }
     public function npwp($npwp)
     {
-        $this->authorize('view', Employee::class);
+
         return Response::download('storage/NPWP/' . $npwp);
     }
     public function kk($kk)
     {
-        $this->authorize('view', Employee::class);
+
         return Response::download('storage/Kartu Keluarga/' . $kk);
     }
     public function bpjs_ket($bpjs_ket)
     {
-        $this->authorize('view', Employee::class);
+
         return Response::download('storage/BPJS Ketenagakerjaan/' . $bpjs_ket);
     }
     public function bpjs_kes($bpjs_kes)
     {
-        $this->authorize('view', Employee::class);
+
         return Response::download('storage/BPJS Kesehatan/' . $bpjs_kes);
     }
 
@@ -279,18 +285,28 @@ class EmployeeController extends Controller
 
     public function show_pdf($id)
     {
-        $this->authorize('view', Employee::class);
         $employee = Employee::findOrFail($id);
+        $this->authorize('update', $employee);
+
         $subsidiary = Subsidiary::find($employee->subsidiary_id);
-        if ($employee->tgl_masuk) {
-            $employee->tgl_masuk_formatted = Carbon::parse($employee->tgl_masuk)->format('d/m/Y');
+
+        $employee->tgl_masuk_formatted = Carbon::make($employee->tgl_masuk)?->format('d/m/Y');
+
+        if ($employee->status_peg === 'PKWT') {
+            $employee->awal_kontrak_formatted = Carbon::make($employee->awal_kontrak)?->format('d/m/Y');
+            $employee->akhir_kontrak_formatted = Carbon::make($employee->akhir_kontrak)?->format('d/m/Y');
         }
-        if ($employee->status_peg == 'PKWT') {
-            $employee->awal_kontrak_formatted = Carbon::parse($employee->awal_kontrak)->format('d/m/Y');
-            $employee->akhir_kontrak_formatted = Carbon::parse($employee->akhir_kontrak)->format('d/m/Y');
-        }
+
         $timestamp = now()->format('d/m/Y H:i:s');
-        $pdf = pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadview('employees.pdf.show', ['employee' => $employee, 'timestamp' => $timestamp, 'subsidiary' => $subsidiary])->setPaper('letter', 'landscape');
-        return $pdf->stream('data-karyawan-' . $employee->nama . '-' . now()->format('d-m-Y') . '.pdf');
+
+        $filename = 'data-karyawan-' . Str::slug($employee->nama) . '-' . now()->format('d-m-Y') . '.pdf';
+
+        $pdf = PDF::setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true
+        ])->loadView('employees.pdf.show', compact('employee', 'timestamp', 'subsidiary'))
+            ->setPaper('letter', 'landscape');
+
+        return $pdf->stream($filename);
     }
 }

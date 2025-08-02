@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'AMSIS') }} - @yield('title')</title>
+    <title>{{ config('app.name', 'AMSIS') }} | @yield('title')</title>
 
     <!-- Fonts -->
 
@@ -121,12 +121,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a href="/cctv" class="nav-link @yield('menuCCTV')">
-                                    CCTV
-                                </a>
-                                
-                            </li> --}}
                         </ul>
 
                     @endguest

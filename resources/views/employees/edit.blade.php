@@ -2,6 +2,9 @@
 @section('title', 'Edit Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
+    @php
+        $isEmployee = Auth::user()->role == 'employee';
+    @endphp
     <div class="container mt-3">
         @component('components.card')
             @slot('header')
@@ -12,139 +15,190 @@
                 @method('PUT')
                 @csrf
                 <div class="row mb-3">
-                    <h3>Organisasi</h3>
+                    <div class="row align-items-center mb-2">
+                        <div class="col-md-6">
+                            <h4 class="fw-semibold mb-0">Organisasi</h4>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <div class="alert alert-warning d-inline-block py-2 px-3 mb-0">
+                                <i class="bi bi-info-circle-fill"></i> Hanya admin yang dapat edit Organisasi
+                            </div>
+                        </div>
+                    </div>
                     <hr>
-                    <div class="col">
-                        <label class="form-label" for="nip">NIP</label>
-                        <input type="text" id="nip" name="nip" value="{{ $employee->nip }}"
-                            class="form-control @error('nip') is-invalid @enderror" aria-describedby="NIPHelpBlock">
-                        <div id="NIPHelpBlock" class="form-text">
-                            standarnya 9 digit </div>
+
+                    {{-- NIP --}}
+                    <div class="col-md-2 mb-3">
+                        <label for="nip" class="form-label">NIP</label>
+                        <input type="text" id="nip" name="nip" value="{{ old('nip', $employee->nip) }}"
+                            class="form-control @error('nip') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}
+                            aria-describedby="nipHelp">
+                        <div id="nipHelp" class="form-text">Standarnya 9 digit</div>
                         @error('nip')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="nama">Nama Lengkap</label>
-                        <input type="text" id="nama" name="nama" value="{{ $employee->nama }}"
-                            class="form-control @error('nama') is-invalid @enderror">
+
+                    {{-- Nama Lengkap --}}
+                    <div class="col-md-3 mb-3">
+                        <label for="nama" class="form-label">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama" value="{{ old('nama', $employee->nama) }}"
+                            class="form-control @error('nama') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('nama')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="nik">NIK</label>
-                        <input type="text" id="nik" name="nik" value="{{ $employee->nik }}"
-                            class="form-control @error('nik') is-invalid @enderror">
+
+                    {{-- NIK --}}
+                    <div class="col-md-3 mb-3">
+                        <label for="nik" class="form-label">NIK</label>
+                        <input type="text" id="nik" name="nik" value="{{ old('nik', $employee->nik) }}"
+                            class="form-control @error('nik') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('nik')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="plant">Plant</label>
-                        <select class="form-select" name="subsidiary_id" id="plant">
 
-                            @foreach ($subsidiaries as $subsidiary)
-                                <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == $employee->subsidiary_id)>
-                                    {{ $subsidiary->name }}
-                                </option>
-                            @endforeach
-
-                        </select>
+                    {{-- Subsidiary (Plant) --}}
+                    <div class="col-md-2 mb-3">
+                        <label for="subsidiary_id" class="form-label">Plant</label>
+                        @if ($isEmployee)
+                            <select class="form-select" disabled>
+                                @foreach ($subsidiaries as $subsidiary)
+                                    <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == $employee->subsidiary_id)>
+                                        {{ $subsidiary->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <input type="hidden" name="subsidiary_id" value="{{ $employee->subsidiary_id }}">
+                        @else
+                            <select name="subsidiary_id" id="subsidiary_id"
+                                class="form-select @error('subsidiary_id') is-invalid @enderror">
+                                <option value="">Pilih Plant</option>
+                                @foreach ($subsidiaries as $subsidiary)
+                                    <option value="{{ $subsidiary->id }}" @selected($subsidiary->id == old('subsidiary_id', $employee->subsidiary_id))>
+                                        {{ $subsidiary->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endif
                         @error('subsidiary_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="divisi">Divisi</label>
-                        <input type="text" id="divisi" name="divisi" value="{{ $employee->divisi }}"
-                            class="form-control @error('divisi') is-invalid @enderror">
+
+                    {{-- Divisi --}}
+                    <div class="col-md-2 mb-3">
+                        <label for="divisi" class="form-label">Divisi</label>
+                        <input type="text" id="divisi" name="divisi" value="{{ old('divisi', $employee->divisi) }}"
+                            class="form-control @error('divisi') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('divisi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col">
-                        <label class="form-label" for="departemen">Departemen</label>
-                        <input type="text" id="departemen" name="departemen" value="{{ $employee->departemen }}"
-                            class="form-control @error('departemen') is-invalid @enderror">
+                    {{-- Departemen --}}
+                    <div class="col-md-3 mb-3">
+                        <label for="departemen" class="form-label">Departemen</label>
+                        <input type="text" id="departemen" name="departemen"
+                            value="{{ old('departemen', $employee->departemen) }}"
+                            class="form-control @error('departemen') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('departemen')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="seksi">Seksi</label>
-                        <input type="text" id="seksi" name="seksi" value="{{ $employee->seksi }}"
-                            class="form-control @error('seksi') is-invalid @enderror">
+
+                    {{-- Seksi --}}
+                    <div class="col-md-3 mb-3">
+                        <label for="seksi" class="form-label">Seksi</label>
+                        <input type="text" id="seksi" name="seksi" value="{{ old('seksi', $employee->seksi) }}"
+                            class="form-control @error('seksi') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('seksi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="posisi">Jabatan</label>
-                        <select class="form-select" name="posisi" id="posisi" value="{{ $employee->posisi }}">
-                            <option value="Direktur" @selected($employee->posisi == 'Direktur')>
-                                Direktur
-                            </option>
-                            <option value="Manager" @selected($employee->posisi == 'Manager')>
-                                Manager
-                            </option>
-                            <option value="Staff" @selected($employee->posisi == 'Staff')>
-                                Staff
-                            </option>
-                            <option value="Supervisor" @selected($employee->posisi == 'Supervisor')>
-                                Supervisor
-                            </option>
-                            <option value="Operator" @selected($employee->posisi == 'Operator')>
-                                Operator
-                            </option>
-                            <option value="Admin" @selected($employee->posisi == 'Admin')>
-                                Admin
-                            </option>
-                        </select>
+
+                    {{-- Jabatan --}}
+                    <div class="col-md-3 mb-3">
+                        <label for="posisi" class="form-label">Jabatan</label>
+                        @if ($isEmployee)
+                            <select class="form-select" disabled>
+                                <option>{{ $employee->posisi }}</option>
+                            </select>
+                            <input type="hidden" name="posisi" value="{{ $employee->posisi }}">
+                        @else
+                            <select name="posisi" id="posisi" class="form-select @error('posisi') is-invalid @enderror">
+                                <option value="">Pilih Jabatan</option>
+                                @foreach (['Direktur', 'Manager', 'Staff', 'Supervisor', 'Operator', 'Admin'] as $pos)
+                                    <option value="{{ $pos }}" @selected(old('posisi', $employee->posisi) === $pos)>
+                                        {{ $pos }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endif
                         @error('posisi')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="status_peg">Status Pegawai</label>
-                        <select class="form-select" name="status_peg" id="status_peg" value="{{ $employee->status_peg }}">
-                            <option value="PKWT" @selected($employee->status_peg == 'PKWT')>PKWT</option>
-                            <option value="PKWTT" @selected($employee->status_peg == 'PKWTT')>PKWTT</option>
-                            <option value="-" @selected($employee->status_peg == '-')> - </option>
-                        </select>
+
+                    {{-- Status Pegawai --}}
+                    <div class="col-md-3 mb-3">
+                        <label for="status_peg" class="form-label">Status Pegawai</label>
+                        @if ($isEmployee)
+                            <select class="form-select" disabled>
+                                <option>{{ $employee->status_peg }}</option>
+                            </select>
+                            <input type="hidden" name="status_peg" value="{{ $employee->status_peg }}">
+                        @else
+                            <select name="status_peg" id="status_peg"
+                                class="form-select @error('status_peg') is-invalid @enderror">
+                                <option value="">Pilih Status</option>
+                                @foreach (['PKWT', 'PKWTT', '-'] as $status)
+                                    <option value="{{ $status }}" @selected(old('status_peg', $employee->status_peg) === $status)>
+                                        {{ $status }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endif
                         @error('status_peg')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
+
                 <div class="row mb-3">
-                    <div class="col">
-                        <label class="form-label" for="tgl_masuk">Tanggal Masuk Kerja</label>
-                        <input type="date" id="tgl_masuk" name="tgl_masuk" value="{{ $employee->tgl_masuk }}"
-                            class="form-control @error('tgl_masuk') is-invalid @enderror">
+                    {{-- Tanggal Masuk Kerja --}}
+                    <div class="col-md-4 mb-3">
+                        <label for="tgl_masuk" class="form-label">Tanggal Masuk Kerja</label>
+                        <input type="date" id="tgl_masuk" name="tgl_masuk"
+                            value="{{ old('tgl_masuk', $employee->tgl_masuk) }}"
+                            class="form-control @error('tgl_masuk') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('tgl_masuk')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="awal_kontrak">Awal Kontrak</label>
-                        <input type="date" id="awal_kontrak" name="awal_kontrak" value="{{ $employee->awal_kontrak }}"
-                            class="form-control @error('awal_kontrak') is-invalid @enderror"aria-describedby="statusHelpBlock">
-                        <div id="statusHelpBlock" class="form-text">
-                            kosongi jika PKWTT</div>
+
+                    {{-- Awal Kontrak --}}
+                    <div class="col-md-4 mb-3">
+                        <label for="awal_kontrak" class="form-label">Awal Kontrak</label>
+                        <input type="date" id="awal_kontrak" name="awal_kontrak"
+                            value="{{ old('awal_kontrak', $employee->awal_kontrak) }}"
+                            class="form-control @error('awal_kontrak') is-invalid @enderror"
+                            {{ $isEmployee ? 'readonly' : '' }} aria-describedby="kontrakHelp">
+                        <div id="kontrakHelp" class="form-text">Kosongi jika PKWTT</div>
                         @error('awal_kontrak')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="akhir_kontrak">Akhir Kontrak</label>
+
+                    {{-- Akhir Kontrak --}}
+                    <div class="col-md-4 mb-3">
+                        <label for="akhir_kontrak" class="form-label">Akhir Kontrak</label>
                         <input type="date" id="akhir_kontrak" name="akhir_kontrak"
-                            value="{{ $employee->akhir_kontrak }}"
-                            class="form-control @error('akhir_kontrak') is-invalid @enderror"aria-describedby="statusHelpBlock">
-                        <div id="statusHelpBlock" class="form-text">
-                            kosongi jika PKWTT</div>
+                            value="{{ old('akhir_kontrak', $employee->akhir_kontrak) }}"
+                            class="form-control @error('akhir_kontrak') is-invalid @enderror"
+                            {{ $isEmployee ? 'readonly' : '' }} aria-describedby="kontrakHelp">
                         @error('akhir_kontrak')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

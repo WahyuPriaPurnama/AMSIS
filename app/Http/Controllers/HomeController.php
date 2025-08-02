@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-
+use App\Models\LogActivity;
 
 class HomeController extends Controller
 {
@@ -46,6 +46,12 @@ class HomeController extends Controller
         $logs = \App\Helpers\LogActivity::logActivityLists();
         return view('logActivity', compact('logs'));
     }
-
-    
+    public function truncate()
+    {
+        if (!LogActivity::exists()) {
+            return redirect()->route('log.activity')->with('alert2', 'tidak ada data yang perlu dihapus');
+        }
+        LogActivity::truncate();
+        return redirect()->route('log.activity')->with('alert', 'data berhasil dikosongkan!');
+    }
 }
