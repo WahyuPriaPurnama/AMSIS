@@ -37,13 +37,13 @@
                         $isEmployee = $user->role === 'employee';
                         $employeeId = $user->employee_id ?? null;
                     @endphp
-                
+
                     {{-- Navbar Brand --}}
                     @if ($isEmployee && $employeeId)
                         <a class="navbar-brand" href="{{ route('employees.show', $employeeId) }}">
                             {{ config('app.name', 'AMSIS') }}
                         </a>
-                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button"
@@ -114,6 +114,9 @@
 
                 {{-- Menu untuk guest --}}
                 @guest
+                    <a class="navbar-brand" href="{{ url('/') }}" id="amsis-logo">
+                        {{ config('app.name', 'AMSIS') }}
+                    </a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item dropdown">
@@ -124,6 +127,18 @@
                             </li>
                         </ul>
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const logo = document.getElementById('amsis-logo');
+                            if (logo) {
+                                logo.addEventListener('click', function(e) {
+                                    e.preventDefault(); // Mencegah navigasi
+                                    alert('Silakan login terlebih dahulu untuk mengakses halaman ini.');
+                                });
+                            }
+                        });
+                    </script>
+
                 @endguest
 
                 <!-- Right Side Of Navbar -->
