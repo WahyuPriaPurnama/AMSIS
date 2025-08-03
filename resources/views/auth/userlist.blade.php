@@ -64,6 +64,7 @@
                                             haka-admin</option>
                                         <option value="bofi-admin">bofi-admin</option>
                                         <option value="rmm-admin">rmm-admin</option>
+                                        <option value="employee">employee</option>
                                     </select>
                                     <label for="floatingSelect">level</label>
                                     @error('role')

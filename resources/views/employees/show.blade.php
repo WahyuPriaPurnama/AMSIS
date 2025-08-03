@@ -7,7 +7,7 @@
             @slot('header')
                 {{ $employee->nama }}
             @endslot
-            <div class="d-flex">
+            <div class="d-flex align-items-center justify-content-between mb-3">
                 <div class="btn-group d-flex gap-2 flex-wrap">
                     @can('update', $employee)
                         <x-buttons.edit href="{{ route('employees.edit', ['employee' => $employee->id]) }}"></x-buttons.edit>
@@ -18,24 +18,28 @@
                         </x-buttons.delete>
                     @endcan
                 </div>
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Yakin mau hapus {{ $employee->nama }}?
-                                </h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak Jadi</button>
-                                <button type="submit" form="delete" class="btn btn-danger ms-3">Iya, Yakin</button>
-                                <form id="delete" action="{{ route('employees.destroy', ['employee' => $employee->id]) }}"
-                                    method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                </form>
-                            </div>
+                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}"
+                    class="img-fluid mx-auto d-block" alt="Logo {{ $employee->subsidiary->name }}"
+                    style="max-width: 200px; height: auto;">
+
+            </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Yakin mau hapus {{ $employee->nama }}?
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Gak Jadi</button>
+                            <button type="submit" form="delete" class="btn btn-danger ms-3">Iya, Yakin</button>
+                            <form id="delete" action="{{ route('employees.destroy', ['employee' => $employee->id]) }}"
+                                method="post">
+                                @method('DELETE')
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>

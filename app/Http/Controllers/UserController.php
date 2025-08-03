@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Stringable;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -43,7 +44,7 @@ class UserController extends Controller
             'name' => $request->name,
             'role' => $request->role,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => $request->filled('password') ? Hash::make($request->password) : null,
         ]);
 
         return redirect()->route('users.index')->with('alert', "input data {$validated['name']} berhasil");
@@ -76,18 +77,26 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:50|string',
             'role' => 'required|string|max:25',
-            'email' => 'required|email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+
             'password' => 'min:8|nullable|confirmed'
         ]);
+        $updateData = [
+            'name' => Str::lower($validated['name']),
+            'role' => $validated['role'],
+            'email' => $validated['email'],
+        ];
 
-        $user = User::findOrFail($user->id);
-        $user->update([
-            'name' => strtolower($request->name),
-            'role' => $request->role,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        return redirect()->route('users.index')->with('alert', "update data {$validated['name']} berhasil");
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($updateData);
+        return redirect()->route('users.index')->with('alert', 'update data' . e($validated['name']) . ' berhasil');
     }
 
     /**
@@ -95,8 +104,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('delete', User::class);
+        $this->authorize('delete', $user);
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')
+            ->with('alert', 'User ' . e($user->name) . ' berhasil dihapus');
     }
 }

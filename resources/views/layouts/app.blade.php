@@ -34,159 +34,137 @@
                 @auth
                     @php
                         $user = auth()->user();
-                        $isEmployee = $user && $user->role === 'employee';
+                        $isEmployee = $user->role === 'employee';
                         $employeeId = $user->employee_id ?? null;
                     @endphp
-
+                
+                    {{-- Navbar Brand --}}
                     @if ($isEmployee && $employeeId)
-                        {{-- Jika user adalah employee, arahkan ke profil karyawan --}}
                         <a class="navbar-brand" href="{{ route('employees.show', $employeeId) }}">
                             {{ config('app.name', 'AMSIS') }}
                         </a>
+                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown">
+                                        E-Slip
+                                    </a>
+                                    @include('partials.navbar-eslip')
+                                </li>
+                            </ul>
+                        </div>
                     @else
-                        {{-- Jika bukan employee, arahkan ke halaman utama --}}
                         <a class="navbar-brand" href="{{ url('/') }}">
                             {{ config('app.name', 'AMSIS') }}
                         </a>
                     @endif
-                @endauth
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    @guest
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    E-Slip
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item @yield('menuAMS')" href="/ams-malang">
-                                            AMS Holding</a></li>
-                                    <li><a class="dropdown-item @yield('menuRMM')" href="/rmm-malang">
-                                            RMM</a></li>
-                                    <li><a class="dropdown-item @yield('menuELN')" href="/eln-malang">
-                                            ELN Malang</a></li>
-                                    <li><a class="dropdown-item @yield('menuELN2')" href="/eln-bwi">
-                                            ELN Banyuwangi</a></li>
-                                    <li><a class="dropdown-item @yield('menuHAKA')" href="/haka-bwi">
-                                            HAKA</a></li>
-                                    <li><a class="dropdown-item @yield('menuBOFI')" href="/bofi-bwi">
-                                            BOFI</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    @endguest
-                    @auth
-                        @php
-                            $user = auth()->user();
-                            $isEmployee = $user && $user->role === 'employee';
-                            $employeeId = $user->employee_id ?? null;
-                        @endphp
-                        @if (!$isEmployee)
+                    {{-- Toggler --}}
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    {{-- Menu untuk non-employee --}}
+                    @if (!$isEmployee)
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto">
+                                {{-- HRD --}}
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        data-bs-toggle="dropdown">
                                         HRD
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item @yield('menuEmployees')"
-                                                href="{{ route('employees.index') }}">
-                                                Karyawan</a>
-                                        </li>
+                                                href="{{ route('employees.index') }}">Karyawan</a></li>
                                         <li><a class="dropdown-item @yield('menuSubsidiaries')"
-                                                href="{{ route('subsidiaries.index') }}">
-                                                Perusahaan</a></li>
-                                        <li>
-                                            <a class="dropdown-item @yield('menuVehicles')"
-                                                href="{{ route('vehicles.index') }}">Kendaraan</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                E-Slip &raquo;
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-submenu">
-                                                <li><a class="dropdown-item @yield('menuAMS')" href="/ams-malang">
-                                                        AMS Holding</a></li>
-                                                <li><a class="dropdown-item @yield('menuRMM')" href="/rmm-malang">
-                                                        RMM</a></li>
-                                                <li><a class="dropdown-item @yield('menuELN')" href="/eln-malang">
-                                                        ELN Malang</a></li>
-                                                <li><a class="dropdown-item @yield('menuELN2')" href="/eln-bwi">
-                                                        ELN Banyuwangi</a></li>
-                                                <li><a class="dropdown-item @yield('menuHAKA')" href="/haka-bwi">
-                                                        HAKA</a></li>
-                                                <li><a class="dropdown-item @yield('menuBOFI')" href="/bofi-bwi">
-                                                        BOFI</a></li>
-                                            </ul>
-                                        </li>
+                                                href="{{ route('subsidiaries.index') }}">Perusahaan</a></li>
+                                        <li><a class="dropdown-item @yield('menuVehicles')"
+                                                href="{{ route('vehicles.index') }}">Kendaraan</a></li>
+                                    </ul>
+                                </li>
 
+                                {{-- Payroll --}}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown">
+                                        Payroll
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item @yield('menuScanlog')"
+                                                href="{{ route('scanlog.index') }}">Scanlog</a></li>
+                                        <li><a class="dropdown-item @yield('menuHarian')"
+                                                href="{{ route('karyawan-harian.index') }}">Karyawan</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Payroll
+                                        data-bs-toggle="dropdown">
+                                        E-Slip
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item @yield('menuScanlog')"
-                                                href="{{ route('scanlog.index') }}">Scanlog</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item @yield('menuHarian')"
-                                                href="{{ route('karyawan-harian.index') }}">Karyawan</a>
-                                        </li>
-                                    </ul>
+                                    @include('partials.navbar-eslip')
                                 </li>
                             </ul>
-                        @endif
-                    @endauth
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-                        @else
+                        </div>
+                    @endif
+                @endauth
+
+                {{-- Menu untuk guest --}}
+                @guest
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto">
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    E-Slip
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                    <!-- <a class="dropdown-item" href="{ route('register') }}">Register</a>-->
-                                    @if (Auth::user()->role == 'super-admin')
-                                        <a class="dropdown-item" href="{{ route('users.index') }}">User Management</a>
-                                        <a class="dropdown-item" href="{{ route('log.activity') }}">Log Activity</a>
-                                    @endif
-                                    <a class="dropdown-item text-danger fw-bold" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-                                </div>
+                                @include('partials.navbar-eslip')
                             </li>
-                        @endguest
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+                @endguest
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                                <!-- <a class="dropdown-item" href="{ route('register') }}">Register</a>-->
+                                @if (Auth::user()->role == 'super-admin')
+                                    <a class="dropdown-item" href="{{ route('users.index') }}">User Management</a>
+                                    <a class="dropdown-item" href="{{ route('log.activity') }}">Log Activity</a>
+                                @endif
+                                <a class="dropdown-item text-danger fw-bold" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
         </nav>
-        <main class="py-4">
-            @yield('content')
-        </main>
+    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
     </div>
     <footer class="bg-dark py-4 text-white  mt-auto">
         <div class="container text-center">
