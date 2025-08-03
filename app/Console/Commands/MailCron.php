@@ -44,7 +44,7 @@ class MailCron extends Command
                 'body' => "Kami dari HRD AMS Group mengucapkan selamat ulang tahun kepada " . $employee->nama . " dari plant " . $subsidiaryName . ". Semoga sehat dan sukses selalu!"
             ];
 
-            Mail::to([$employee->mail, 'wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->queue(new MyTestMail($mailData));
+            Mail::to([$employee->mail, 'ithelpdesk@amsgroup.co.id'])->queue(new MyTestMail($mailData));
 
             Log::info('Email ulang tahun dikirim untuk ' . $employee->nama . ' pada ' . now());
         }
