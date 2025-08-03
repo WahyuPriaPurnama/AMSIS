@@ -37,7 +37,7 @@ route::middleware('auth')->group(function () {
     route::resource('users', UserController::class);
     route::get('log-activity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('Log-activity/truncate', [HomeController::class, 'truncate'])->name('log.activity.truncate');
-    route::get('/home', [HomeController::class, 'index']);
+    route::get('/home', [HomeController::class, 'index'])->name('dashboard');
 
     route::resource('vehicles', VehicleController::class);
     Route::prefix('vehicle')->controller(VehicleController::class)->group(function () {
