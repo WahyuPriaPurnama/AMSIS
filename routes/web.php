@@ -65,8 +65,23 @@ route::middleware('auth')->group(function () {
     route::post('karyawan-cetak-slip/{pin}', [HarianController::class, 'cetakSlip'])->name('karyawan-cetak-slip');
 });
 
-route::get('/cctv', function () {
-    return view('cctv');
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MyTestMail;
+
+Route::get('/test-email', function () {
+    $employee = \App\Models\Employee::first();
+
+    $mailData = [
+        'type' => 'birthday',
+        'title' => 'Selamat Ulang Tahun ' . $employee->nama,
+        'body' => 'Semoga sehat dan sukses selalu!',
+        'subsidiary' => $employee->subsidiary->slug,
+        'logo' => asset('images/logos/' . $employee->subsidiary->logo),
+    ];
+
+    Mail::to('wahyupriapurnama@gmail.com')->send(new MyTestMail($mailData, $employee));
+
+    return 'Email berhasil dikirim!';
 });
 
 Auth::routes([

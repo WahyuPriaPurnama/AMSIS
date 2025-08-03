@@ -15,11 +15,11 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\MailCron::class,
     ];
-    
+
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('mail:cron')->daily();
+        $schedule->command('mail:cron')->dailyAt('08:00');
     }
 
     /**
