@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Mail\MyTestMail;
 use App\Models\Employee;
-use App\Models\Purchasing\MasterBarang;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

@@ -72,14 +72,13 @@ Route::get('/test-email', function () {
     $employee = \App\Models\Employee::first();
 
     $mailData = [
-        'type' => 'birthday',
+        'type' => 'reminder',
         'title' => 'Selamat Ulang Tahun ' . $employee->nama,
         'body' => 'Semoga sehat dan sukses selalu!',
-        'subsidiary' => $employee->subsidiary->slug,
-        'logo' => asset('images/logos/' . $employee->subsidiary->logo),
+        'subsidiary' => $employee->subsidiary->logo,
     ];
 
-    Mail::to('wahyupriapurnama@gmail.com')->send(new MyTestMail($mailData, $employee));
+    Mail::to('wahyupriapurnama@gmail.com')->queue(new MyTestMail($mailData, $employee));
 
     return 'Email berhasil dikirim!';
 });

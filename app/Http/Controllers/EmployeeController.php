@@ -25,30 +25,39 @@ class EmployeeController extends Controller
     public function index()
     {
         $this->authorize('view', Employee::class);
-        $user = Auth::user()->role;
-        if (($user == 'super-admin') or ($user == 'holding-admin')) {
-            $employees = Employee::Index()->latest()->paginate(1000);
-        } elseif ($user == 'eln-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) {
-                return $query->where('id', '2');
-            })->sortable()->latest()->paginate(1000);
-        } elseif ($user == 'eln2-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) {
-                return $query->where('id', '3');
-            })->sortable()->latest()->paginate(1000);
-        } elseif ($user == 'bofi-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) {
-                return $query->where('id', '4');
-            })->sortable()->latest()->paginate(1000);
-        } elseif ($user == 'rmm-admin') {
-            $employees = Employee::whereHas('subsidiary', function ($query) {
-                return $query->where('id', '6');
-            })->sortable()->latest()->paginate(1000);
-        } else {
-            $employees = Employee::whereHas('subsidiary', function ($query) {
-                return $query->where('id', '5');
-            })->sortable()->latest()->paginate(1000);
+
+        $user = Auth::user();
+
+        // Role yang bisa melihat semua data
+        $fullAccessRoles = ['super-admin', 'holding-admin'];
+
+        // Mapping role ke subsidiary_id
+        $roleSubsidiaryMap = [
+            'eln-admin'   => 2,
+            'eln2-admin'  => 3,
+            'bofi-admin'  => 4,
+            'haka-admin'  => 5,
+            'rmm-admin'   => 6,
+        ];
+
+        // Base query
+        $query = Employee::Index()->latest();
+
+        // Filter berdasarkan role jika bukan full access
+        if (!in_array($user->role, $fullAccessRoles)) {
+            $subsidiaryId = $roleSubsidiaryMap[$user->role] ?? null;
+
+            if ($subsidiaryId) {
+                $query->whereHas('subsidiary', function ($q) use ($subsidiaryId) {
+                    $q->where('id', $subsidiaryId);
+                });
+            } else {
+                // Jika role tidak dikenali, bisa redirect atau tampilkan kosong
+                abort(403, 'Role tidak dikenali');
+            }
         }
+
+        $employees = $query->paginate(1000);
 
         return view('employees.index', compact('employees'));
     }
@@ -59,23 +68,35 @@ class EmployeeController extends Controller
     public function create()
     {
         $this->authorize('create', Employee::class);
-        $user = Auth::user()->role;
-        if (($user == 'super-admin') or ($user == 'holding-admin')) {
+
+        $user = Auth::user();
+
+        // Role yang bisa akses semua subsidiaries
+        $fullAccessRoles = ['super-admin', 'holding-admin'];
+
+        // Mapping role ke subsidiary_id
+        $roleSubsidiaryMap = [
+            'eln-admin'   => 2,
+            'eln2-admin'  => 3,
+            'bofi-admin'  => 4,
+            'haka-admin'  => 5,
+            'rmm-admin'   => 6,
+        ];
+
+        if (in_array($user->role, $fullAccessRoles)) {
             $subsidiaries = Subsidiary::all();
-        } elseif ($user == 'eln-admin') {
-            $subsidiaries = Subsidiary::where('id', '2')->get();
-        } elseif ($user == 'eln2-admin') {
-            $subsidiaries = Subsidiary::where('id', '3')->get();
-        } elseif ($user == 'bofi-admin') {
-            $subsidiaries = Subsidiary::where('id', '4')->get();
-        } elseif ($user == 'rmm-admin') {
-            $subsidiaries = Subsidiary::where('id', '6')->get();
         } else {
-            $subsidiaries = Subsidiary::where('id', '5')->get();
+            $subsidiaryId = $roleSubsidiaryMap[$user->role] ?? null;
+
+            if ($subsidiaryId) {
+                $subsidiaries = Subsidiary::where('id', $subsidiaryId)->get();
+            } else {
+                abort(403, 'Role tidak dikenali');
+            }
         }
+
         return view('employees.create', compact('subsidiaries'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -163,7 +184,7 @@ class EmployeeController extends Controller
         // Cek apakah user adalah karyawan dan sedang edit datanya sendiri
         $isEmployee = $user->role === 'employee' && $user->employee_id === $employee->id;
 
-        return view('employees.edit', compact('employee', 'subsidiaries','isEmployee'));
+        return view('employees.edit', compact('employee', 'subsidiaries', 'isEmployee'));
     }
 
     /**
