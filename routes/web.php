@@ -87,7 +87,7 @@ Route::get('/test-email', function () {
             'body' => "Kami dari HRD AMS Group mengucapkan selamat ulang tahun kepada " . $employee->nama . " dari plant " . $subsidiaryName . ". Semoga sehat dan sukses selalu!"
         ];
 
-        Mail::to([$employee->mail, 'ithelpdesk@amsgroup.co.id'])->queue(new MyTestMail($mailData, $employee));
+        Mail::to([$employee->email, 'ithelpdesk@amsgroup.co.id'])->queue(new MyTestMail($mailData, $employee));
     }
     return 'Email ulang tahun dikirim pada ' . now();
 });
