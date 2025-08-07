@@ -212,7 +212,7 @@
                     </div>
                     <div class="col-sm-4 col-md-3 mb-3">
                         <label class="form-label" for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}"
+                        <input type="text" id="email" name="email" value="{{ old('email') }}"
                             class="form-control @error('email') is-invalid @enderror">
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>

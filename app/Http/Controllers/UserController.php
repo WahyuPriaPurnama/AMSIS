@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -108,5 +110,11 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')
             ->with('alert', 'User ' . e($user->name) . ' berhasil dihapus');
+    }
+
+    public function export()
+    {
+
+        return Excel::download(new UsersExport, 'amsis-users '. now().'.xlsx');
     }
 }

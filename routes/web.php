@@ -34,6 +34,7 @@ route::middleware('auth')->group(function () {
     route::get('employee/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
 
     route::resource('subsidiaries', SubsidiaryController::class);
+    route::get('/users/export', [UserController::class, 'export'])->name('users.export');
     route::resource('users', UserController::class);
     route::get('log-activity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('Log-activity/truncate', [HomeController::class, 'truncate'])->name('log.activity.truncate');

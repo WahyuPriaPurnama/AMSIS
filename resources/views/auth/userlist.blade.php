@@ -6,11 +6,14 @@
             @slot('header')
                 LIST USER
             @endslot
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser" data-bs-toggle="tooltip"
+            <div class="d-flex gap-2 mb-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser" data-bs-toggle="tooltip"
                 title="Tambah User">
                 <i class="bi bi-person-fill-add"></i>
             </button>
-
+            <x-buttons.excel href="{{ route('users.export') }}" class="btn btn-success">
+            </x-buttons.excel>
+        </div>
             <!-- Modal -->
             <div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="addUserLabel" aria-hidden="true">

@@ -18,9 +18,8 @@
                         </x-buttons.delete>
                     @endcan
                 </div>
-                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}"
-                    class="img-fluid mx-auto d-block" alt="Logo {{ $employee->subsidiary->name }}"
-                    style="max-width: 200px; height: auto;">
+                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid mx-auto d-block"
+                    alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
 
             </div>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
