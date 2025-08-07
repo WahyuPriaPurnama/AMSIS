@@ -58,7 +58,7 @@
                 alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
         </div>
 
-        <div class="title">🎉 Selamat Ulang Tahun {{ $employee->nama }}!</div>
+        <div class="title">🎉{{ $mailData['title'] }}</div>
 
         <div class="body">
             <p>Halo {{ $employee->nama }},</p>
@@ -67,6 +67,10 @@
             <p>Terima kasih atas dedikasi dan kontribusimu selama ini. Kami bangga memiliki kamu sebagai bagian dari tim
                 kami di plant <strong>{{ $employee->subsidiary->name }}</strong>.</p>
             <p>Semoga tahun yang baru ini membawa banyak berkah dan pencapaian luar biasa!</p>
+            <p>🎵 Klik untuk mendengarkan lagu ulang tahun:</p>
+            <a href="https://music.youtube.com/watch?v=QJ80jTm4K8I&si=Wmn4HC38_vtEbf_A" target="_blank">
+                🎶 Selamat Ulang Tahun - Jamrud
+            </a>
         </div>
 
         <div class="footer">

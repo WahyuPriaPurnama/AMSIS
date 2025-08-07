@@ -40,7 +40,7 @@ class UpdateEmployeeRequest extends FormRequest
             'jenis_kelamin' => 'in:L,P',
             'alamat' => '',
             'no_telp' => '',
-            'email' => '',
+            'email' => 'nullable|email|unique:employees,email,' . $employee->id,
             'pend_trkhr' => '',
             'jurusan' => '',
             'thn_lulus' => '',
@@ -67,7 +67,8 @@ class UpdateEmployeeRequest extends FormRequest
             'unique' => 'tidak boleh sama',
             'pp.mimes' => 'format yang diizinkan png, jpg dan jpeg',
             'mimes' => 'format yang diizinkan png, jpg, jpeg dan pdf',
-            'max' => 'ukuran file maksimum 2 MB'
+            'max' => 'ukuran file maksimum 2 MB',
+            'email' => 'format email tidak valid',
         ];
     }
 
@@ -80,6 +81,7 @@ class UpdateEmployeeRequest extends FormRequest
             'nama_ibu' => ucwords(strtolower($this->nama_ibu)),
             'nama_kd' => ucwords(strtolower($this->nama_kd)),
             'hubungan' => ucwords(strtolower($this->hubungan)),
+            'email' => strtolower($this->email),
         ]);
     }
 }

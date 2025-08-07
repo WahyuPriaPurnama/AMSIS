@@ -67,20 +67,28 @@ route::middleware('auth')->group(function () {
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MyTestMail;
+use App\Models\Employee;
+use Carbon\Carbon;
 
 Route::get('/test-email', function () {
-    $employee = \App\Models\Employee::first();
+    $today = Carbon::today()->format('m-d');
+    $birthdayEmployees = Employee::whereRaw("DATE_FORMAT(tgl_lahir, '%m-%d') = ?", [$today])->get();
+    if ($birthdayEmployees->isEmpty()) {
+        return 'Tidak ada yang ulang tahun hari ini.';
+    }
 
-    $mailData = [
-        'type' => 'reminder',
-        'title' => 'Selamat Ulang Tahun ' . $employee->nama,
-        'body' => 'Semoga sehat dan sukses selalu!',
-        'subsidiary' => $employee->subsidiary->logo,
-    ];
+    foreach ($birthdayEmployees as $employee) {
+        $subsidiaryName = optional($employee->subsidiary)->name ?? 'Tidak diketahui';
 
-    Mail::to('wahyupriapurnama@gmail.com')->queue(new MyTestMail($mailData, $employee));
+        $mailData = [
+            'type' => 'birthday',
+            'title' => 'Selamat Ulang Tahun ' . $employee->nama,
+            'body' => "Kami dari HRD AMS Group mengucapkan selamat ulang tahun kepada " . $employee->nama . " dari plant " . $subsidiaryName . ". Semoga sehat dan sukses selalu!"
+        ];
 
-    return 'Email berhasil dikirim!';
+        Mail::to([$employee->mail, 'ithelpdesk@amsgroup.co.id'])->queue(new MyTestMail($mailData, $employee));
+    }
+    return 'Email ulang tahun dikirim pada ' . now();
 });
 
 Auth::routes([

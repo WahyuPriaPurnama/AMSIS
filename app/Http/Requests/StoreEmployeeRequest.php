@@ -39,7 +39,7 @@ class StoreEmployeeRequest extends FormRequest
             'jenis_kelamin' => 'required|in:L,P',
             'alamat' => 'string',
             'no_telp' => 'required',
-            'email' => 'email',
+            'email' => 'nullable|unique:employees,email',
             'pend_trkhr' => 'required|alpha',
             'jurusan' => 'alpha',
             'thn_lulus' => 'integer',
@@ -70,7 +70,7 @@ class StoreEmployeeRequest extends FormRequest
             'max' => 'ukuran file maksimum 2 MB',
             'integer' => 'hanya boleh berisi angka',
             'alpha_num' => 'hanya boleh berisi huruf dan angka',
-            'email' => 'harus berisi email valid',
+            'email' => 'format email tidak valid',
             'date' => 'harus berisi tanggal yang valid',
             'string' => 'hanya boleh berisi teks'
         ];
@@ -84,7 +84,8 @@ class StoreEmployeeRequest extends FormRequest
             'jurusan' => ucwords(strtolower($this->jurusan)),
             'nama_ibu' => ucwords(strtolower($this->nama_ibu)),
             'nama_kd' => ucwords(strtolower($this->nama_kd)),
-            'hubungan' => ucwords(strtolower($this->hubungan))
+            'hubungan' => ucwords(strtolower($this->hubungan)),
+            'email' => strtolower($this->email),
         ]);
     }
 }

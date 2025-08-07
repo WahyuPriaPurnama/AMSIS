@@ -58,7 +58,7 @@
                 alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
         </div>
 
-        <div class="title">{{ $mailData['title'] }}</div>
+        <div class="title">{{$mailData['title']}}</div>
 
         <div class="body">
             <p>{{ $mailData['body'] }}</p>

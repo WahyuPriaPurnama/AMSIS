@@ -21,6 +21,15 @@ class Employee extends Model
     {
         return $query->with('subsidiary');
     }
+    protected static function booted()
+    {
+        static::deleting(function ($employee) {
+            // Delete related user if exists
+            if ($employee->user) {
+                $employee->user->delete();
+            }
+        });
+    }
 
     public function user()
     {

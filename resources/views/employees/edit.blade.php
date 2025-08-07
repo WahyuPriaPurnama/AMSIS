@@ -2,7 +2,7 @@
 @section('title', 'Edit Data Karyawan')
 @section('menuEmployees', 'active')
 @section('content')
-   
+
     <div class="container mt-3">
         @component('components.card')
             @slot('header')
@@ -33,7 +33,9 @@
                             aria-describedby="nipHelp">
                         <div id="nipHelp" class="form-text">Standarnya 9 digit</div>
                         @error('nip')
-                            <div class="text-danger">{{ $message }}</div>
+                             <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
@@ -43,7 +45,9 @@
                         <input type="text" id="nama" name="nama" value="{{ old('nama', $employee->nama) }}"
                             class="form-control @error('nama') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('nama')
-                            <div class="text-danger">{{ $message }}</div>
+                             <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
@@ -253,13 +257,19 @@
                         @enderror
                     </div>
                     <div class="col">
-                        <label class="form-label" for="email">Email</label>
-                        <input type="text" id="email" name="email" value="{{ $employee->email }}"
-                            class="form-control @error('email') is-invalid @enderror">
+                        <label for="email" class="form-label">Email</label>
+
+                        <input type="email" id="email" name="email" value="{{ old('email', $employee->email) }}"
+                            class="form-control @error('email') is-invalid @enderror" placeholder="Enter employee email"
+                            autocomplete="email">
+
                         @error('email')
-                            <div class="text-danger">{{ $message }}</div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
+
                     <div class="col-2">
                         <label class="form-label" for="pend_trkhr">Pendidikan Terakhir</label>
                         <select name="pend_trkhr" id="pend_trkhr" class="form-select">
