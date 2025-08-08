@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class MyTestMail extends Mailable
 {
@@ -40,7 +41,19 @@ class MyTestMail extends Mailable
      */
     public function content(): Content
     {
-        $viewName = $this->mailData['type'] === 'birthday' ? 'emails.birthday' : 'emails.reminder';
+        $type = $this->mailData['type'] ?? null;
+
+        if ($type === 'birthday') {
+            $viewName = 'emails.birthday';
+        } elseif ($type === 'reminder') {
+            $viewName = 'emails.reminder';
+        } else {
+            Log::warning('Tipe email tidak dikenali atau tidak diset.', [
+                'mailData' => $this->mailData,
+            ]);
+            $viewName = 'emails.default'; // fallback view jika tersedia
+        }
+
         return new Content(
             view: $viewName,
             with: [
