@@ -8,10 +8,12 @@
             @slot('header')
                 EDIT DATA KARYAWAN
             @endslot
-            <form action="{{ route('employees.update', ['employee' => $employee->id]) }}" method="post"
+            <form action="{{ isset($employee) ? route('employees.update', $employee) : route('employees.store') }}" method="post"
                 enctype="multipart/form-data">
-                @method('PUT')
                 @csrf
+                @if (isset($employee))
+                    @method('PUT')
+                @endif
                 <div class="row mb-3">
                     <div class="row align-items-center mb-2">
                         <div class="col-md-6">
@@ -33,7 +35,7 @@
                             aria-describedby="nipHelp">
                         <div id="nipHelp" class="form-text">Standarnya 9 digit</div>
                         @error('nip')
-                             <div class="invalid-feedback">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -45,7 +47,7 @@
                         <input type="text" id="nama" name="nama" value="{{ old('nama', $employee->nama) }}"
                             class="form-control @error('nama') is-invalid @enderror" {{ $isEmployee ? 'readonly' : '' }}>
                         @error('nama')
-                             <div class="invalid-feedback">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror

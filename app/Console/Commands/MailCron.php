@@ -32,6 +32,7 @@ class MailCron extends Command
     public function handle()
     {
         $today = Carbon::today()->format('m-d');
+
         $birthdayEmployees = Employee::whereRaw("DATE_FORMAT(tgl_lahir, '%m-%d') = ?", [$today])->get();
 
         foreach ($birthdayEmployees as $employee) {
@@ -43,10 +44,28 @@ class MailCron extends Command
                 'body' => "Kami dari HRD AMS Group mengucapkan selamat ulang tahun kepada " . $employee->nama . " dari plant " . $subsidiaryName . ". Semoga sehat dan sukses selalu!"
             ];
 
-            Mail::to([$employee->mail, 'ithelpdesk@amsgroup.co.id'])->queue(new MyTestMail($mailData));
+            // ✅ Validasi email
+            $emailTujuan = [];
 
-            Log::info('Email ulang tahun dikirim untuk ' . $employee->nama . ' pada ' . now());
+            if (filter_var($employee->mail, FILTER_VALIDATE_EMAIL)) {
+                $emailTujuan[] = $employee->mail;
+            } else {
+                Log::warning('Email tidak valid atau kosong untuk ' . $employee->nama . ': ' . $employee->mail);
+            }
+
+            $emailTujuan[] = 'ithelpdesk@amsgroup.co.id'; // CC atau fallback
+
+            try {
+                Mail::to($emailTujuan)->queue(new MyTestMail($mailData));
+                Log::info('Email ulang tahun dikirim ke: ' . implode(', ', $emailTujuan) . ' untuk ' . $employee->nama . ' pada ' . now());
+            } catch (\Throwable $e) {
+                Log::error('Gagal kirim email ulang tahun untuk ' . $employee->nama . ': ' . $e->getMessage(), [
+                    'email' => $employee->mail,
+                    'trace' => $e->getTraceAsString(),
+                ]);
+            }
         }
+
 
         $targetDates = [
             Carbon::now()->addDays(30)->toDateString(),
