@@ -32,12 +32,9 @@ class MailCron extends Command
     public function handle()
     {
         $today = Carbon::today()->format('m-d');
-
-        $birthdayEmployees = Employee::whereRaw("DATE_FORMAT(tgl_lahir, '%m-%d') = ?", [$today])->get();
-
+        $birthdayEmployees = Employee::with('subsidiary')->whereRaw("DATE_FORMAT(tgl_lahir, '%m-%d') = ?", [$today])->get();
         foreach ($birthdayEmployees as $employee) {
             $subsidiaryName = optional($employee->subsidiary)->name ?? 'Tidak diketahui';
-
             $mailData = [
                 'type' => 'birthday',
                 'title' => 'Selamat Ulang Tahun ' . $employee->nama,
@@ -46,21 +43,27 @@ class MailCron extends Command
 
             // ✅ Validasi email
             $emailTujuan = [];
-
-            if (filter_var($employee->mail, FILTER_VALIDATE_EMAIL)) {
-                $emailTujuan[] = $employee->mail;
+            $email = trim($employee->email);
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailTujuan[] = $email;
             } else {
-                Log::warning('Email tidak valid atau kosong untuk ' . $employee->nama . ': ' . $employee->mail);
+                Log::warning("Email tidak valid: {$employee->nama} - '{$employee->email}'");
             }
 
             $emailTujuan[] = 'ithelpdesk@amsgroup.co.id'; // CC atau fallback
 
             try {
-                Mail::to($emailTujuan)->queue(new MyTestMail($mailData));
-                Log::info('Email ulang tahun dikirim ke: ' . implode(', ', $emailTujuan) . ' untuk ' . $employee->nama . ' pada ' . now());
+                Mail::to($emailTujuan)
+                    ->bcc('ithelpdesk@amsgroup.co.id')
+                    ->queue(new MyTestMail($mailData, $employee));
+                Log::info('Selamat Ulang Tahun dikirim ke:', [
+                    'email' => $employee->email,
+                    'nama' => $employee?->nama,
+                    'subsidiary' => $employee?->subsidiary?->name,
+                ]);
             } catch (\Throwable $e) {
                 Log::error('Gagal kirim email ulang tahun untuk ' . $employee->nama . ': ' . $e->getMessage(), [
-                    'email' => $employee->mail,
+                    'email' => $employee->email,
                     'trace' => $e->getTraceAsString(),
                 ]);
             }

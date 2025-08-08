@@ -23,6 +23,12 @@ class MyTestMail extends Mailable
     {
         $this->mailData = $mailData;
         $this->employee = $employee;
+
+        if (!$employee) {
+            Log::warning('Employee tidak tersedia saat membuat MyTestMail.', [
+                'mailData' => $mailData,
+            ]);
+        }
     }
 
 

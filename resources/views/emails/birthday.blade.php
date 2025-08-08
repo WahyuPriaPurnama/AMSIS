@@ -54,18 +54,24 @@
     <div class="container">
         <div class="header">
             {{-- Logo perusahaan (opsional) --}}
-            <img src="{{ asset('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid mx-auto d-block"
-                alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
+            @php
+                $logoPath = $employee?->subsidiary?->logo
+                    ? asset('subsidiary/logo/' . $employee->subsidiary->logo)
+                    : asset('default-logo.png'); // fallback logo
+                $subsidiaryName = $employee?->subsidiary?->name ?? 'tidak diketahui';
+            @endphp
+
+            <img src="{{ $logoPath }}" alt="Logo {{ $subsidiaryName }}" style="max-width: 200px; height: auto;">
         </div>
 
-        <div class="title">🎉{{ $mailData['title'] }}</div>
+        <div class="title">🎉{{ $mailData['title'] ?? 'Selamat Ulang Tahun' }}</div>
 
         <div class="body">
-            <p>Halo {{ $employee->nama }},</p>
+            <p>Halo {{ e($employee->nama ?? 'Rekan AMS') }},</p>
             <p>Seluruh tim dari <strong>AMS Group</strong> mengucapkan selamat ulang tahun! Semoga hari ini penuh
                 kebahagiaan, kesehatan, dan kesuksesan untukmu.</p>
             <p>Terima kasih atas dedikasi dan kontribusimu selama ini. Kami bangga memiliki kamu sebagai bagian dari tim
-                kami di plant <strong>{{ $employee->subsidiary->name }}</strong>.</p>
+                kami di plant <strong>{{ $employee->subsidiary->name ?? 'tidak diketahui' }}</strong>.</p>
             <p>Semoga tahun yang baru ini membawa banyak berkah dan pencapaian luar biasa!</p>
             <p>🎵 Klik untuk mendengarkan lagu ulang tahun:</p>
             <a href="https://music.youtube.com/watch?v=QJ80jTm4K8I&si=Wmn4HC38_vtEbf_A" target="_blank">
