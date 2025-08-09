@@ -80,8 +80,10 @@
         </div>
 
         <div class="footer">
-            &copy; {{ date('Y') }} AMSIS • Human Resources Department<br>
-            Email ini dikirim secara otomatis oleh sistem <strong>AMSIS</strong>. Mohon tidak membalas email ini.
+            &copy; {{ date('Y') }} AMSIS • Powered By IT Division<br>
+            Email ini dikirim secara otomatis oleh <strong>AMSIS</strong>. Mohon tidak membalas email ini.<br>
+            <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+            Untuk pertanyaan, silakan hubungi <a href="mailto:it@amsgroup.co.id">it@amsgroup.co.id</a>
         </div>
     </div>
 </body>

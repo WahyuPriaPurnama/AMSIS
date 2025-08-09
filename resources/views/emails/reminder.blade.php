@@ -57,15 +57,16 @@
             <img src="{{ asset('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid mx-auto d-block"
                 alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
         </div>
-        <div class="title">{{$mailData['title']}}</div>
+        <div class="title">{{ $mailData['title'] }}</div>
         <div class="body">
             <p>{{ $mailData['body'] }}</p>
             <p>Mohon untuk segera melakukan tindak lanjut sesuai prosedur HRD terkait perpanjangan atau evaluasi
                 kontrak.</p>
         </div>
         <div class="footer">
-            &copy; {{ date('Y') }} AMSIS • Human Resources Department<br>
-            Email ini dikirim secara otomatis oleh sistem <strong>AMSIS</strong>. Mohon tidak membalas email ini.
+            &copy; {{ date('Y') }} AMSIS • Powered By IT Division<br>
+            Email ini dikirim secara otomatis oleh <strong>AMSIS</strong>. Mohon tidak membalas email ini.<br>
+            Untuk pertanyaan, silakan hubungi <strong>it@amsgroup.co.id</strong>
         </div>
     </div>
 </body>
