@@ -5,7 +5,7 @@
     <div class="container mt-3">
         @component('components.card')
             @slot('header')
-                Edit {{ $subsidiary->name }}
+                {{ $isEdit ? 'Edit ' . $subsidiary->name : 'Tambah Data Perusahaan' }}
             @endslot
             <form action="{{ $isEdit ? route('subsidiaries.update', $subsidiary->id) : route('subsidiaries.store') }}"
                 method="post" enctype="multipart/form-data">
