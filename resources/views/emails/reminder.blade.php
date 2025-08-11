@@ -64,7 +64,7 @@
                 kontrak.</p>
         </div>
         <div class="footer">
-            &copy; {{ date('Y') }} AMSIS • Powered By IT Division<br>
+            &copy; {{ date('Y') }} AMSIS • Membangun Sistem, Mendukung Moment • Powered by IT<br>
             Email ini dikirim secara otomatis oleh <strong>AMSIS</strong>. Mohon tidak membalas email ini.<br>
             Untuk pertanyaan, silakan hubungi <strong>it@amsgroup.co.id</strong>
         </div>
