@@ -19,18 +19,26 @@ class SubsidiaryRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
-
-        return [
-            'name' => 'required|min:3|max:50',
-            'tagline' => 'required',
-            'npwp' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'logo' => 'mimes:png,jpeg,jpg | max:2048'
+        $rules = [
+            'name' => 'required|string|max:255',
+            'tagline' => 'nullable|string|max:255',
+            'npwp' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string',
+            'logo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
         ];
+
+        // Jika update, tambahkan pengecualian unik berdasarkan ID
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            $id = $this->route('subsidiary'); // pastikan nama route param sesuai
+            $rules['email'] .= ",email,{$id}";
+            $rules['npwp'] .= ",npwp,{$id}";
+        }
+
+        return $rules;
     }
     public function messages()
     {
@@ -51,5 +59,4 @@ class SubsidiaryRequest extends FormRequest
             'tagline' => ucwords(strtolower($this->tagline))
         ]);
     }
-
 }

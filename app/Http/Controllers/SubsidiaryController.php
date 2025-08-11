@@ -26,7 +26,8 @@ class SubsidiaryController extends Controller
      */
     public function create()
     {
-        return view('subsidiaries.create');
+
+        return view('subsidiaries.form', ['subsidiary' => new Subsidiary(), 'isEdit' => false]);
     }
 
     /**
@@ -57,7 +58,7 @@ class SubsidiaryController extends Controller
     public function edit(Subsidiary $subsidiary)
     {
         $this->authorize('update', Subsidiary::class);
-        return view('subsidiaries.edit', ['subsidiary' => $subsidiary]);
+        return view('subsidiaries.form', ['subsidiary' => $subsidiary, 'isEdit' => true]);
     }
 
     /**

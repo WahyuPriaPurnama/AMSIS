@@ -21,58 +21,54 @@
                     </form>
                 @endcan
             </div>
-            <div class="row mt-5 align-items-center text-center">
+            <div class="row my-3 align-items-center text-center">
                 <div class="col-md-3 mx-auto">
-                    <img class="img-thumbnail" oncontextmenu="return false"
-                        @if ($subsidiary->logo == null) src="
-                {{ Storage::url('public/subsidiary/logo/default.png') }}"
-               @else
-              src="  {{ Storage::url('public/subsidiary/logo/') . $subsidiary->logo }}" @endif
-                        alt="" srcset="">
+                    @php
+                        $logoPath = $subsidiary->logo
+                            ? Storage::url("public/subsidiary/logo/{$subsidiary->logo}")
+                            : Storage::url('public/subsidiary/logo/default.png');
+                    @endphp
+
+                    <img class="img-thumbnail" src="{{ $logoPath }}" alt="Logo {{ $subsidiary->name }}"
+                        oncontextmenu="return false">
                 </div>
-                <div class="col-md-7 mt-3 mx-auto">
+                <div class="col-md-7 mx-auto">
                     <h3>{{ $subsidiary->name }}</h3>
                     <div>
-                        {{ $subsidiary->tagline }}
-                    </div>
-                    <div>
-                        {{ $subsidiary->npwp }}
-                        |
-                        {{ $subsidiary->email }}
-                        |
-                        {{ $subsidiary->phone }}
-                    </div>
-                    <div>
-                        {{ $subsidiary->address }}
+                        {{ $subsidiary->tagline ?? '-' }}
+                        | {{ $subsidiary->npwp ?? '-' }}
+                        | {{ $subsidiary->email ?? '-' }}
+                        | {{ $subsidiary->phone ?? '-' }}
+                        | {{ $subsidiary->address ?? '-' }}
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>NAMA KARYAWAN</th>
-                            <th>POSISI</th>
-                            <th>STATUS PEGAWAI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($subsidiary->employees as $employee)
+                <hr>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table">
+                        <thead>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('employees.show', $employee->id) }}" class="text-decoration-none"
-                                        data-bs-toggle="tooltip" data-bs-title="klik untuk lihat detail">
-                                        {{ $employee->nama }}
-                                    </a></td>
-                                <td>{{ $employee->posisi }}</td>
-                                <td>{{ $employee->status_peg }}</td>
+                                <th>NO</th>
+                                <th>NAMA KARYAWAN</th>
+                                <th>POSISI</th>
+                                <th>STATUS PEGAWAI</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @foreach ($subsidiary->employees as $employee)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><a href="{{ route('employees.show', $employee->id) }}" class="text-decoration-none"
+                                            data-bs-toggle="tooltip" data-bs-title="klik untuk lihat detail">
+                                            {{ $employee->nama }}
+                                        </a></td>
+                                    <td>{{ $employee->posisi }}</td>
+                                    <td>{{ $employee->status_peg }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
         @endcomponent
     </div>
 
