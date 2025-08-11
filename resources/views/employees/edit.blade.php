@@ -219,7 +219,8 @@
                     </div>
                     <div class="col-12 col-md-4 mb-3">
                         <label class="form-label" for="tmpt_lahir">Tempat Lahir</label>
-                        <input type="text" id="tmpt_lahir" name="tmpt_lahir" value="{{ $employee->tmpt_lahir }}"
+                        <input type="text" id="tmpt_lahir" name="tmpt_lahir"
+                            value="{{ old('tmpt_lahir', $employee->tmpt_lahir) }}"
                             class="form-control @error('tmpt_lahir') is-invalid @enderror">
                         @error('tmpt_lahir')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -228,7 +229,7 @@
                     <div class="col-12 col-md-4 mb-3">
                         <label class="form-label" for="tgl_lahir">Tanggal Lahir</label>
                         <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control"
-                            value="{{ $employee->tgl_lahir }}">
+                            value="{{ old('tgl_lahir', $employee->tgl_lahir) }}">
                         @error('tgl_lahir')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -251,13 +252,14 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="alamat">Alamat</label>
-                        <textarea class="form-control" id="alamat" rows="3" name="alamat">{{ $employee->alamat }}</textarea>
+                        <textarea class="form-control" id="alamat" rows="3" name="alamat">{{ old('alamat', $employee->alamat) }}</textarea>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-4 col-md-2 mb-3">
                         <label class="form-label" for="no_telp">No. Telp / WhatsApp</label>
-                        <input type="text" id="no_telp" name="no_telp" value="{{ $employee->no_telp }}"
+                        <input type="text" id="no_telp" name="no_telp"
+                            value="{{ old('no_telp', $employee->no_telp) }}"
                             class="form-control @error('no_telp') is-invalid @enderror">
                         @error('no_telp')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -292,7 +294,8 @@
                     </div>
                     <div class="col-sm-4 col-md-3 mb-3">
                         <label class="form-label" for="jurusan">Jurusan</label>
-                        <input type="text" id="jurusan" name="jurusan" value="{{ $employee->jurusan }}"
+                        <input type="text" id="jurusan" name="jurusan"
+                            value="{{ old('jurusan', $employee->jurusan) }}"
                             class="form-control @error('jurusan') is-invalid @enderror">
                         @error('jurusan')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -300,7 +303,8 @@
                     </div>
                     <div class="col-sm-4 col-md-2 mb-3">
                         <label class="form-label" for="thn_lulus">Tahun Lulus</label>
-                        <input type="text" id="thn_lulus" name="thn_lulus" value="{{ $employee->thn_lulus }}"
+                        <input type="text" id="thn_lulus" name="thn_lulus"
+                            value="{{ old('thn_lulus', $employee->thn_lulus) }}"
                             class="form-control @error('thn_lulus') is-invalid @enderror">
                         @error('thn_lulus')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -310,7 +314,8 @@
                 <div class="row mb-3">
                     <div class="col-sm-4 mb-3">
                         <label class="form-label" for="nama_ibu">Nama Ibu</label>
-                        <input type="text" id="nama_ibu" name="nama_ibu" value="{{ $employee->nama_ibu }}"
+                        <input type="text" id="nama_ibu" name="nama_ibu"
+                            value="{{ old('nama_ibu', $employee->nama_ibu) }}"
                             class="form-control @error('nama_ibu') is-invalid @enderror">
                         @error('nama_ibu')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -318,7 +323,7 @@
                     </div>
                     <div class="col mb-3">
                         <label class="form-label" for="npwp">NPWP</label>
-                        <input type="text" id="npwp" name="npwp" value="{{ $employee->npwp }}"
+                        <input type="text" id="npwp" name="npwp" value="{{ old('npwp', $employee->npwp) }}"
                             class="form-control @error('npwp') is-invalid @enderror">
                         @error('npwp')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -337,7 +342,7 @@
                     </div>
                     <div class="col-sm-1 mb-3">
                         <label class="form-label" for="jml_ank">Anak</label>
-                        <input type="text" id="jml_ank" name="jml_ank" value="{{ $employee->jml_ank }}"
+                        <input type="text" id="jml_ank" name="jml_ank" value="{{ old('jml', $employee->jml_ank) }}"
                             class="form-control @error('jml_ank') is-invalid @enderror">
                         @error('jml_ank')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -349,7 +354,8 @@
                     <hr>
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="nama_kd">Nama Kontak Darurat</label>
-                        <input type="text" id="nama_ibu" name="nama_kd" value="{{ $employee->nama_kd }}"
+                        <input type="text" id="nama_ibu" name="nama_kd"
+                            value="{{ old('nama_kd', $employee->nama_kd) }}"
                             class="form-control @error('nama_kd') is-invalid @enderror">
                         @error('nama_kd')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -357,7 +363,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="no_kd">No. Kontak Darurat</label>
-                        <input type="text" id="no_kd" name="no_kd" value="{{ $employee->no_kd }}"
+                        <input type="text" id="no_kd" name="no_kd" value="{{ old('no_kd', $employee->no_kd) }}"
                             class="form-control @error('no_kd') is-invalid @enderror">
                         @error('no_kd')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -365,7 +371,8 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="hubungan">Hubungan</label>
-                        <input type="text" id="hubungan" name="hubungan" value="{{ $employee->hubungan }}"
+                        <input type="text" id="hubungan" name="hubungan"
+                            value="{{ old('hubungan', $employee->hubungan) }}"
                             class="form-control @error('hubungan') is-invalid @enderror">
                         @error('hubungan')
                             <div class="invalid-feedback">{{ $message }}</div>
