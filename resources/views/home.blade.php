@@ -4,7 +4,7 @@
     <div class="container">
         @if (session('feature_changes'))
             <div class="alert alert-info alert-dismissible fade show" role="alert">
-                <h5>🔔 Info Perubahan Fitur:</h5>
+                <h5>🔔 Info Peningkatan Fitur:</h5>
                 <ul>
                     @foreach (session('feature_changes') as $date => $note)
                         <li><strong>{{ $date }}:</strong> {{ $note }}</li>
