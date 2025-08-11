@@ -303,7 +303,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="no_kd">No. Kontak Darurat</label>
-                        <input type="number" id="no_kd" name="no_kd" value="{{ old('no_kd') }}"
+                        <input type="text" id="no_kd" name="no_kd" value="{{ old('no_kd') }}"
                             class="form-control @error('no_kd') is-invalid @enderror">
                         @error('no_kd')
                             <div class="invalid-feedback">{{ $message }}</div>
