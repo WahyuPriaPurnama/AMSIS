@@ -10,45 +10,51 @@
             <form action="{{ route('employees.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
-                    <div class="col-12">
-                        <h3 class="mb-2">Organisasi</h3>
-                        <hr>
+                    <div class="row align-items-center mb-2">
+                        <div class="col-md-6">
+                            <h4 class="fw-semibold mb-0">Organisasi</h4>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <div class="alert alert-warning d-inline-block py-2 px-3 mb-0">
+                                <i class="bi bi-info-circle-fill"></i> hanya admin yang dapat edit Organisasi
+                            </div>
+                        </div>
                     </div>
+                    <hr>
 
                     <div class="col-12 col-sm-6 col-md-2 mb-3">
                         <label for="nip" class="form-label">NIP</label>
                         <input type="text" id="nip" name="nip" value="{{ old('nip') }}"
                             class="form-control @error('nip') is-invalid @enderror" aria-describedby="nipHelp"
-                            placeholder="123456789" maxlength="9" inputmode="numeric" pattern="\d{9}" >
+                            placeholder="123456789" maxlength="9" inputmode="numeric" pattern="\d{9}">
                         <div id="nipHelp" class="form-text">Standarnya 9 digit angka</div>
                         @error('nip')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="col-12 col-sm-6 col-md-3 mb-3">
+                    <div class="col-12 col-sm-6 col-md-2 mb-3">
                         <label for="nama" class="form-label">Nama Lengkap</label>
                         <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
                             class="form-control @error('nama') is-invalid @enderror" aria-describedby="namaHelp"
                             placeholder="Contoh: Roberto Karlos">
-                        <div id="namaHelp" class="form-text">Masukkan nama lengkap sesuai KTP</div>
+                        <div id="namaHelp" class="form-text">sesuai KTP</div>
                         @error('nama')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="col-12 col-md-3 mb-3">
+                    <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <label for="nik" class="form-label">NIK</label>
                         <input type="text" id="nik" name="nik" value="{{ old('nik') }}"
-                            class="form-control @error('nik') is-invalid @enderror" 
-                            placeholder="Contoh: 1234567890123456" maxlength="16" inputmode="numeric" pattern="\d{16}"
-                            aria-describedby="nikHelp">
+                            class="form-control @error('nik') is-invalid @enderror" placeholder="Contoh: 1234567890123456"
+                            maxlength="16" inputmode="numeric" pattern="\d{16}" aria-describedby="nikHelp">
                         @error('nik')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="col-12 col-md-2 mb-3">
+                    <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <label for="subsidiary_id" class="form-label">Plant</label>
                         <select class="form-select @error('subsidiary_id') is-invalid @enderror" name="subsidiary_id"
                             id="subsidiary_id">
@@ -62,7 +68,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 col-md-2 mb-3">
+                    <div class="col-12 col-sm-6 col-md-2 mb-3">
                         <label for="divisi" class="form-label">Divisi</label>
                         <input type="text" id="divisi" name="divisi" value="{{ old('divisi') }}"
                             class="form-control @error('divisi') is-invalid @enderror">
@@ -105,7 +111,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <label for="status_peg" class="form-label">Status Pegawai</label>
                         <select class="form-select @error('status_peg') is-invalid @enderror" name="status_peg"
@@ -157,7 +162,6 @@
                         <h3 class="mb-2">Biodata</h3>
                         <hr>
                     </div>
-
                     <div class="col-12 col-md-4 mb-3">
                         <label for="tmpt_lahir" class="form-label">Tempat Lahir</label>
                         <input type="text" id="tmpt_lahir" name="tmpt_lahir" value="{{ old('tmpt_lahir') }}"
@@ -166,7 +170,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
                     <div class="col-12 col-md-4 mb-3">
                         <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
                         <input type="date" name="tgl_lahir" id="tgl_lahir" value="{{ old('tgl_lahir') }}"
@@ -213,7 +216,7 @@
                     <div class="col-sm-4 col-md-3 mb-3">
                         <label class="form-label" for="email">Email</label>
                         <input type="text" id="email" name="email" value="{{ old('email') }}"
-                            class="form-control @error('email') is-invalid @enderror">
+                            class="form-control @error('email') is-invalid @enderror" autocomplete="email">
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -281,9 +284,7 @@
                     <div class="col-sm-1 mb-3">
                         <label class="form-label" for="jml_ank">Anak</label>
                         <input type="number" id="jml_ank" name="jml_ank" value="{{ old('jml_ank') }}"
-                            class="form-control @error('jml_ank') is-invalid @enderror"aria-describedby="statusHelpBlock">
-                        <div id="statusHelpBlock" class="form-text">
-                            kosongi jika Lajang</div>
+                            class="form-control @error('jml_ank') is-invalid @enderror">
                         @error('jml_ank')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
