@@ -80,7 +80,7 @@
         </div>
 
         <div class="footer">
-            &copy; {{ date('Y') }} AMSIS • Powered By IT Division<br>
+            &copy; {{ date('Y') }} AMSIS • Membangun Sistem, Mendukung Moment • Powered By IT<br>
             Email ini dikirim secara otomatis oleh <strong>AMSIS</strong>. Mohon tidak membalas email ini.<br>
             <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
             Untuk pertanyaan, silakan hubungi <a href="mailto:it@amsgroup.co.id">it@amsgroup.co.id</a>
