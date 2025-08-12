@@ -94,33 +94,50 @@ class MailCron extends Command
                 'body' => "Dengan Email ini kami menginformasikan bahwa karyawan dengan nama " . $employee->nama . " dari plant " . $subsidiaryName . " memiliki sisa masa kontrak " . $time . " hari lagi."
             ];
 
-            Mail::to(['wahyupriapurnama@gmail.com', 'hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id'])->queue(new MyTestMail($mailData));
+            Mail::bcc(['hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id', 'it@amsgroup.co.id'])->queue(new MyTestMail($mailData));
+
             Log::info('Cron job reminder karyawan berhasil dijalankan ' . now());
         }
 
         $vehicles = Vehicle::with('subsidiary')->get();
         $now = Carbon::now();
 
+        $defaultEmails = [
+            'samgowok@gmail.com',
+            'it@amsgroup.co.id',
+            'hrd@eln.amsgroup.co.id',
+            'hrd@amsgroup.co.id',
+        ];
+
         foreach ($vehicles as $vehicle) {
             $reminders = [
-                'STNK' => ['date' => $vehicle->stnk, 'emails' => ['wahyupriapurnama@gmail.com', 'samgowok@gmail.com', 'hrd@eln.amsgroup.co.id', 'hrd@amsgroup.co.id']],
-                'Pajak' => ['date' => $vehicle->pajak, 'emails' => ['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com', 'hrd@eln.amsgroup.co.id', 'hrd@amsgroup.co.id']],
-                'KIR' => ['date' => $vehicle->kir, 'emails' => ['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com', 'hrd@eln.amsgroup.co.id', 'hrd@amsgroup.co.id']],
-                'Asuransi' => ['date' => $vehicle->jth_tempo, 'emails' => ['wahyupriapurnama@gmail.com', 'amsdriver29@gmail.com', 'hrd@eln.amsgroup.co.id', 'hrd@amsgroup.co.id']],
+                'STNK'     => $vehicle->stnk,
+                'Pajak'    => $vehicle->pajak,
+                'KIR'      => $vehicle->kir,
+                'Asuransi' => $vehicle->jth_tempo,
             ];
 
-            foreach ($reminders as $type => $data) {
-                $daysLeft = $now->diffInDays(Carbon::parse($data['date']), false);
+            foreach ($reminders as $type => $date) {
+                if (!$date) continue; // skip jika tanggal kosong/null
+
+                $daysLeft = $now->diffInDays(Carbon::parse($date), false);
 
                 if (in_array($daysLeft, [30, 15])) {
                     $mailData = [
+                        'type'  => 'reminder.vehicle',
                         'title' => "Reminder Perpanjangan {$type} - {$vehicle->jenis_kendaraan}",
                         'nopol' => $vehicle->nopol,
-                        'body' => "Dengan email ini kami menginformasikan bahwa masa berlaku {$type} untuk kendaraan {$vehicle->jenis_kendaraan} dengan nopol {$vehicle->nopol} dari plant " . optional($vehicle->subsidiary)->name . " tinggal {$daysLeft} hari lagi."
+                        'body'  => "Dengan email ini kami menginformasikan bahwa masa berlaku {$type} untuk kendaraan {$vehicle->jenis_kendaraan} dengan nopol {$vehicle->nopol} dari plant " . optional($vehicle->subsidiary)->name . " tinggal {$daysLeft} hari lagi."
                     ];
 
-                    Mail::to($data['emails'])->queue(new MyTestMail($mailData));
-                    Log::info('Cron job reminder berhasil dijalankan ' . now());
+                    $to  = $defaultEmails[0];
+                    $bcc = array_slice($defaultEmails, 1);
+
+                    Mail::to($to)
+                        ->bcc($bcc)
+                        ->queue(new MyTestMail($mailData));
+
+                    Log::info("Reminder {$type} untuk {$vehicle->nopol} berhasil dikirim ({$daysLeft} hari lagi) - " . now());
                 }
             }
         }
