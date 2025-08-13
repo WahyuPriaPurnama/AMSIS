@@ -56,7 +56,6 @@ class StoreEmployeeRequest extends FormRequest
             'npwp2' => 'nullable|mimes:png,jpg,jpeg,pdf|max:2048',
             'bpjs_kes' => 'nullable|mimes:png,jpg,jpeg,pdf|max:2048',
             'bpjs_ket' => 'nullable|mimes:png,jpg,jpeg,pdf|max:2048',
-
         ];
     }
 

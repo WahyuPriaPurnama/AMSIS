@@ -14,15 +14,20 @@ class EmployeeAccountsSeeder extends Seeder
     {
         User::where('role', 'employee')->delete();
 
-        $employees = Employee::all();
+        foreach (Employee::all() as $employee) {
+            // Buat email dari nama
+            $baseEmail = Str::slug($employee->nama, '.');
+            $email = "{$baseEmail}@amsgroup.co.id";
 
-        foreach ($employees as $employee) {
-            $email = Str::slug($employee->nama, '.') . '@amsgroup.co.id';
-
-            if (User::where('email', $email)->exists()) {
-                continue;
+            // Cek duplikat email
+            $counter = 1;
+            while (User::where('email', $email)->exists()) {
+                $email = "{$baseEmail}{$counter}@amsgroup.co.id";
+                $counter++;
             }
 
+
+            // Buat user
             User::create([
                 'name' => $employee->nama,
                 'email' => $email,

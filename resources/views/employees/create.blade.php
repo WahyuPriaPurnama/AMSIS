@@ -26,7 +26,7 @@
                         <label for="nip" class="form-label">NIP</label>
                         <input type="text" id="nip" name="nip" value="{{ old('nip') }}"
                             class="form-control @error('nip') is-invalid @enderror" aria-describedby="nipHelp"
-                            placeholder="123456789" maxlength="9" inputmode="numeric" pattern="\d{9}">
+                            placeholder="123456789">
                         <div id="nipHelp" class="form-text">Standarnya 9 digit angka</div>
                         @error('nip')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -48,7 +48,7 @@
                         <label for="nik" class="form-label">NIK</label>
                         <input type="text" id="nik" name="nik" value="{{ old('nik') }}"
                             class="form-control @error('nik') is-invalid @enderror" placeholder="Contoh: 1234567890123456"
-                            maxlength="16" inputmode="numeric" pattern="\d{16}" aria-describedby="nikHelp">
+                            aria-describedby="nikHelp">
                         @error('nik')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -58,9 +58,10 @@
                         <label for="subsidiary_id" class="form-label">Plant</label>
                         <select class="form-select @error('subsidiary_id') is-invalid @enderror" name="subsidiary_id"
                             id="subsidiary_id">
-                            <option selected value="">Pilih Plant</option>
+                            <option value="" {{ old('subsidiary_id') == '' ? 'selected' : '' }}>Pilih Plant</option>
                             @foreach ($subsidiaries as $subsidiary)
-                                <option value="{{ $subsidiary->id }}">{{ $subsidiary->name }}</option>
+                                <option value="{{ $subsidiary->id }}"{{ old('subsidiary_id') == $subsidiary->id ? 'selected' : '' }}>
+                                    {{ $subsidiary->name }}</option>
                             @endforeach
                         </select>
                         @error('subsidiary_id')

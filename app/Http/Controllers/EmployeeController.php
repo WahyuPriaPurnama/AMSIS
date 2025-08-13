@@ -7,10 +7,12 @@ use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use App\Models\Subsidiary;
+use App\Models\User;
 use App\Traits\FileUpload;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -104,43 +106,53 @@ class EmployeeController extends Controller
     {
         $this->authorize('create', Employee::class);
         \App\Helpers\LogActivity::addToLog();
-        $data = Employee::create($request->validated());
+        $employee = Employee::create($request->validated());
+        // Buat email dari nama
+        $baseEmail = Str::slug($employee->nama, '.');
+        $email = strtolower("{$baseEmail}@amsgroup.co.id");
 
-        if ($request->file('pp')) {
-            $pp = $this->fileUpload($request, 'public/foto_profil', 'pp');
-            $data->update(['pp' => $pp->hashName()]);
+        // Pastikan email unik
+        $counter = 1;
+        $originalEmail = $email;
+        while (User::where('email', $email)->exists()) {
+            $email = "{$baseEmail}{$counter}@amsgroup.co.id";
+            $counter++;
         }
 
-        if ($request->file('ktp')) {
-            $ktp = $this->fileUpload($request, 'public/KTP', 'ktp');
-            $data->update(['ktp' => $ktp->hashName()]);
-        }
+        // Buat user
+        User::updateOrCreate(
+            ['employee_id' => $employee->id],
+            [
+                'name' => $employee->nama,
+                'email' => $email,
+                'password' => Hash::make('Karyawan_2025'),
+                'role' => 'employee',
+                'employee_id' => $employee->id,
+                'subsidiary_id' => $employee->subsidiary_id,
+            ]
+        );
 
-        if ($request->file('npwp2')) {
-            $npwp = $this->fileUpload($request, 'public/NPWP', 'npwp2');
-            $data->update(['npwp2' => $npwp->hashName()]);
-        }
 
-        if ($request->file('kk')) {
-            $kk = $this->fileUpload($request, 'public/Kartu Keluarga', 'kk');
-            $data->update(['kk' => $kk->hashName()]);
-        }
+        $documents = [
+            'pp' => 'public/foto_profil',
+            'ktp' => 'public/KTP',
+            'npwp2' => 'public/NPWP',
+            'kk' => 'public/Kartu Keluarga',
+            'bpjs_kes' => 'public/BPJS Kesehatan',
+            'bpjs_ket' => 'public/BPJS Ketenagakerjaan',
+        ];
 
-        if ($request->file('bpjs_kes')) {
-            $bpjs_kes = $this->fileUpload($request, 'public/BPJS Kesehatan', 'bpjs_kes');
-            $data->update(['bpjs_kes' => $bpjs_kes->hashName()]);
+        foreach ($documents as $field => $path) {
+            if ($request->file($field)) {
+                $file = $this->fileUpload($request, $path, $field);
+                $employee->update([$field => $file->hashName()]);
+            }
         }
+        $nama = $employee->nama;
 
-        if ($request->file('bpjs_ket')) {
-            $bpjs_ket = $this->fileUpload($request, 'public/BPJS Ketenagakerjaan', 'bpjs_ket');
-            $data->update(['bpjs_ket' => $bpjs_ket->hashName()]);
-        }
-
-        if ($data) {
-            return redirect()->route('employees.index')->with('alert', "Input data $request->nama berhasil");
-        } else {
-            return redirect()->route('employees.index')->with('alert2', "Input data $request->nama gagal");
-        }
+        return redirect()
+            ->route('employees.index')
+            ->with($employee ? 'alert' : 'alert2', "Input data {$nama} " . ($employee ? 'berhasil' : 'gagal'));
     }
 
     /**
