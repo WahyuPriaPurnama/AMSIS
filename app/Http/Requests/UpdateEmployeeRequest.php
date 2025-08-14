@@ -25,7 +25,7 @@ class UpdateEmployeeRequest extends FormRequest
         return [
             'nip' => 'required|unique:employees,nip,' . $employee->id,
             'nama' => 'required',
-            'nik' => 'required|unique:employees,nik,' . $employee->id,
+            'nik' => 'required|string|unique:employees,nik,' . $employee->id,
             'subsidiary_id' => 'required|integer|exists:subsidiaries,id',
             'divisi' => 'required|string|max:100',
             'departemen' => 'required|string|max:100',

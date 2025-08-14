@@ -60,7 +60,8 @@
                             id="subsidiary_id">
                             <option value="" {{ old('subsidiary_id') == '' ? 'selected' : '' }}>Pilih Plant</option>
                             @foreach ($subsidiaries as $subsidiary)
-                                <option value="{{ $subsidiary->id }}"{{ old('subsidiary_id') == $subsidiary->id ? 'selected' : '' }}>
+                                <option
+                                    value="{{ $subsidiary->id }}"{{ old('subsidiary_id') == $subsidiary->id ? 'selected' : '' }}>
                                     {{ $subsidiary->name }}</option>
                             @endforeach
                         </select>

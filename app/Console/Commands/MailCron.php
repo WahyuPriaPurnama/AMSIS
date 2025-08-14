@@ -75,7 +75,6 @@ class MailCron extends Command
             }
         }
 
-
         $targetDates = [
             Carbon::now()->addDays(30)->toDateString(),
             Carbon::now()->addDays(15)->toDateString(),
@@ -117,9 +116,7 @@ class MailCron extends Command
 
             foreach ($reminders as $type => $date) {
                 if (!$date) continue; // skip jika tanggal kosong/null
-
                 $daysLeft = $now->diffInDays(Carbon::parse($date), false);
-
                 if (in_array($daysLeft, [30, 15])) {
                     $mailData = [
                         'type'  => 'vehicle',

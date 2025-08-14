@@ -24,7 +24,7 @@ class StoreEmployeeRequest extends FormRequest
         return [
             'nip' => 'required|unique:employees|string',
             'nama' => 'required|string',
-            'nik' => 'required|unique:employees|integer',
+            'nik' => 'required|unique:employees|string',
             'subsidiary_id' => 'required|integer|exists:subsidiaries,id',
             'divisi' => 'required|string|max:100',
             'departemen' => 'required|string|max:100',

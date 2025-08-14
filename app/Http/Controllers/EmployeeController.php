@@ -132,7 +132,6 @@ class EmployeeController extends Controller
             ]
         );
 
-
         $documents = [
             'pp' => 'public/foto_profil',
             'ktp' => 'public/KTP',
