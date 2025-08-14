@@ -35,8 +35,8 @@ route::middleware('auth')->group(function () {
 
     route::resource('subsidiaries', SubsidiaryController::class);
     route::get('/users/export', [UserController::class, 'export'])->name('users.export');
+    route::post('/users/password', [UserController::class, 'updatePassword'])->name('password.update2');
     route::get('/users/password', [UserController::class, 'editPassword'])->name('password.edit');
-    route::post('/users/password', [UserController::class, 'updatePassword'])->name('password.update');
     route::resource('users', UserController::class);
     route::get('log-activity', [HomeController::class, 'logActivity'])->name('log.activity');
     route::get('Log-activity/truncate', [HomeController::class, 'truncate'])->name('log.activity.truncate');

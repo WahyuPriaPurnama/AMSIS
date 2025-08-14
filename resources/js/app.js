@@ -9,3 +9,4 @@ document.addEventListener('DOMContentLoaded', function () {
     [...popoverTriggerList].map(el => new bootstrap.Popover(el));
 });
 const tooltip = new bootstrap.Tooltip(document.getElementById('importButton'));
+
