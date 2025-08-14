@@ -45,7 +45,7 @@
                         <label for="nama" class="form-label">Nama Lengkap</label>
                         <input type="text" id="nama" name="nama" value="{{ old('nama', $employee->nama) }}"
                             class="form-control @error('nama') is-invalid @enderror"
-                            {{ $isEmployee ? 'readonly' : '' }}aria-describedby="namaHelp" placeholder="Contoh: Roberto Karlos">
+                            {{ $isEmployee ? 'readonly' : '' }} aria-describedby="namaHelp" placeholder="Contoh: Roberto Karlos">
                         <div id="namaHelp" class="form-text">sesuai KTP</div>
                         @error('nama')
                             <div class="invalid-feedback">
