@@ -166,6 +166,7 @@
                                     <a class="dropdown-item" href="{{ route('users.index') }}">User Management</a>
                                     <a class="dropdown-item" href="{{ route('log.activity') }}">Log Activity</a>
                                 @elseif(Auth::user()->role == 'employee')
+                                    <a href="{{ route('employees.show', $employeeId) }}" class="dropdown-item">Profil</a>
                                     <a href="{{ route('password.edit') }}" class="dropdown-item">Ganti Password</a>
                                 @endif
                                 <a class="dropdown-item text-danger fw-bold" href="{{ route('logout') }}"
