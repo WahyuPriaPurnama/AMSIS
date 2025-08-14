@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UsersExport;
+use App\Helpers\LogActivity;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -115,6 +116,32 @@ class UserController extends Controller
     public function export()
     {
 
-        return Excel::download(new UsersExport, 'amsis-users '. now().'.xlsx');
+        return Excel::download(new UsersExport, 'amsis-users ' . now() . '.xlsx');
+    }
+
+    public function editPassword()
+    {
+        return view('employees.change-password');
+    }
+    
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = \App\Models\User::find(auth()->id()); // ✅ pastikan ini model Eloquent
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Password lama tidak cocok']);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('employees.show', $user->employee_id)
+            ->with('alert', 'Password berhasil diubah.');
     }
 }

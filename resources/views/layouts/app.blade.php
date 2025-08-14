@@ -117,7 +117,7 @@
                     <a class="navbar-brand" href="{{ url('/') }}" id="amsis-logo">
                         {{ config('app.name', 'AMSIS') }}
                     </a>
-                    
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item dropdown">
@@ -165,6 +165,8 @@
                                 @if (Auth::user()->role == 'super-admin')
                                     <a class="dropdown-item" href="{{ route('users.index') }}">User Management</a>
                                     <a class="dropdown-item" href="{{ route('log.activity') }}">Log Activity</a>
+                                @elseif(Auth::user()->role == 'employee')
+                                    <a href="{{ route('password.edit') }}" class="dropdown-item">Ganti Password</a>
                                 @endif
                                 <a class="dropdown-item text-danger fw-bold" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

@@ -67,7 +67,7 @@ class MailCron extends Command
                         'subsidiary' => $subsidiaryName,
                     ]);
                 } catch (\Throwable $e) {
-                    Log::error('Gagal kirim email ulang tahun untuk ' . $employee->nama . ': ' . $e->getMessage(), [
+                    Log::error("Gagal kirim email ulang tahun untuk {$employee->nama}: " . $e->getMessage(), [
                         'email' => $toEmail,
                         'trace' => $e->getTraceAsString(),
                     ]);
@@ -93,18 +93,16 @@ class MailCron extends Command
                 'title' => 'Reminder Sisa Kontrak ' . $employee->nama,
                 'body' => "Dengan Email ini kami menginformasikan bahwa karyawan dengan nama " . $employee->nama . " dari plant " . $subsidiaryName . " memiliki sisa masa kontrak " . $time . " hari lagi."
             ];
-
             Mail::bcc(['hrdmgr@amsgroup.co.id', 'hrd@amsgroup.co.id', 'it@amsgroup.co.id'])->queue(new MyTestMail($mailData));
-
-            Log::info('Cron job reminder karyawan berhasil dijalankan ' . now());
+            Log::info("Reminder sisa kontrak karyawan {$employee->nama} berhasil dikirim." . now());
         }
 
         $vehicles = Vehicle::with('subsidiary')->get();
         $now = Carbon::now();
 
         $defaultEmails = [
-            'samgowok@gmail.com',
             'it@amsgroup.co.id',
+            'samgowok@gmail.com',
             'hrd@eln.amsgroup.co.id',
             'hrd@amsgroup.co.id',
         ];
@@ -124,7 +122,7 @@ class MailCron extends Command
 
                 if (in_array($daysLeft, [30, 15])) {
                     $mailData = [
-                        'type'  => 'reminder.vehicle',
+                        'type'  => 'vehicle',
                         'title' => "Reminder Perpanjangan {$type} - {$vehicle->jenis_kendaraan}",
                         'nopol' => $vehicle->nopol,
                         'body'  => "Dengan email ini kami menginformasikan bahwa masa berlaku {$type} untuk kendaraan {$vehicle->jenis_kendaraan} dengan nopol {$vehicle->nopol} dari plant " . optional($vehicle->subsidiary)->name . " tinggal {$daysLeft} hari lagi."

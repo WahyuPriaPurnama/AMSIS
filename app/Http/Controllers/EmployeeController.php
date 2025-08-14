@@ -205,6 +205,7 @@ class EmployeeController extends Controller
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         $this->authorize('update', $employee);
+        \App\Helpers\LogActivity::addToLog();
         $employee->update($request->validated());
 
         if ($request->file('pp')) {

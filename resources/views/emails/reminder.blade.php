@@ -53,11 +53,8 @@
 <body>
     <div class="container">
         <div class="header">
-            {{-- Logo perusahaan (opsional) --}}
-            <img src="{{ asset('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid mx-auto d-block"
-                alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
+            <div class="title">{{ $mailData['title'] }}</div>
         </div>
-        <div class="title">{{ $mailData['title'] }}</div>
         <div class="body">
             <p>{{ $mailData['body'] }}</p>
             <p>Mohon untuk segera melakukan tindak lanjut sesuai prosedur HRD terkait perpanjangan atau evaluasi

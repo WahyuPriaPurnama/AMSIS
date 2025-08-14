@@ -69,7 +69,7 @@ class UpdateEmployeeRequest extends FormRequest
             'mimes' => 'format yang diizinkan png, jpg, jpeg dan pdf',
             'max' => 'ukuran file maksimum 2 MB',
             'email' => 'format email tidak valid',
-            'string'=>'harus berupa teks'
+            'string' => 'harus berupa teks'
         ];
     }
 

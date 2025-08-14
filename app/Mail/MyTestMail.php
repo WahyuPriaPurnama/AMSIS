@@ -53,6 +53,8 @@ class MyTestMail extends Mailable
             $viewName = 'emails.birthday';
         } elseif ($type === 'reminder') {
             $viewName = 'emails.reminder';
+        } elseif ($type === 'vehicle') {
+            $viewName = 'emails.vehicle';
         } else {
             Log::warning('Tipe email tidak dikenali atau tidak diset.', [
                 'mailData' => $this->mailData,
