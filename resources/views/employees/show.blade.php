@@ -3,6 +3,17 @@
 @section('menuEmployees', 'active')
 @section('content')
     <div class="container mt-3">
+        @if (Auth::check() && Auth::user()->role === 'employee' && session('feature_changes'))
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <h5>🔔 Info Peningkatan Fitur:</h5>
+                <ul>
+                    @foreach (session('feature_changes') as $date => $note)
+                        <li><strong>{{ $date }}:</strong> {{ $note }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @component('components.card')
             @slot('header')
                 {{ $employee->nama }}
@@ -18,8 +29,9 @@
                         </x-buttons.delete>
                     @endcan
                 </div>
-                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid mx-auto d-block"
-                    alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
+                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}"
+                    class="img-fluid mx-auto d-block" alt="Logo {{ $employee->subsidiary->name }}"
+                    style="max-width: 200px; height: auto;">
 
             </div>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
