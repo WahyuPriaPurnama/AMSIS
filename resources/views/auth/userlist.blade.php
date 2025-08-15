@@ -7,13 +7,13 @@
                 LIST USER
             @endslot
             <div class="d-flex gap-2 mb-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser" data-bs-toggle="tooltip"
-                title="Tambah User">
-                <i class="bi bi-person-fill-add"></i>
-            </button>
-            <x-buttons.excel href="{{ route('users.export') }}" class="btn btn-success">
-            </x-buttons.excel>
-        </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser"
+                    data-bs-toggle="tooltip" title="Tambah User">
+                    <i class="bi bi-person-fill-add"></i>
+                </button>
+                <x-buttons.excel href="{{ route('users.export') }}" class="btn btn-success">
+                </x-buttons.excel>
+            </div>
             <!-- Modal -->
             <div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="addUserLabel" aria-hidden="true">
@@ -31,7 +31,7 @@
                                         id="floatingInput" placeholder="username" name="name">
                                     <label for="floatingInput">username</label>
                                     @error('name')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <div class="form-text">
                                         hanya berupa huruf dan tanpa spasi
@@ -42,7 +42,7 @@
                                         name="email" id="floatingInput" placeholder="email">
                                     <label for="floatingInput">email</label>
                                     @error('email')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-floating mb-3">
@@ -71,7 +71,7 @@
                                     </select>
                                     <label for="floatingSelect">level</label>
                                     @error('role')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-floating mb-3">
@@ -79,7 +79,7 @@
                                         id="floatingInput" name="password" placeholder="password">
                                     <label for="floatingInput">password</label>
                                     @error('password')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-floating mb-3">
@@ -87,7 +87,7 @@
                                         placeholder="konfirmasi password">
                                     <label for="floatingInput">konfirmasi password</label>
                                     @error('password_confirmation')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-floating text-end">
@@ -162,7 +162,7 @@
                                                                 placeholder="username" name="name">
                                                             <label for="floatingInput">username</label>
                                                             @error('name')
-                                                                <div class="text-danger">{{ $message }}</div>
+                                                                <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror
                                                             <div class="form-text">
                                                                 hanya berupa huruf dan tanpa spasi
@@ -175,7 +175,7 @@
                                                                 value="{{ $user->email }}" placeholder="email">
                                                             <label for="floatingInput">email</label>
                                                             @error('email')
-                                                                <div class="text-danger">{{ $message }}</div>
+                                                                <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                         <div class="form-floating mb-3">
@@ -202,32 +202,57 @@
                                                                 <option value="rmm-admin" @selected($user->role == 'rmm-admin')>
                                                                     rmm-admin
                                                                 </option>
+                                                                <option value="employee" @selected($user->role == 'employee')>
+                                                                    employee
+                                                                </option>
                                                             </select>
                                                             <label for="floatingSelect">level</label>
                                                             @error('role')
-                                                                <div class="text-danger">{{ $message }}</div>
+                                                                <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror
                                                         </div>
-                                                        <div class="form-floating mb-3">
-                                                            <input type="password"
-                                                                class="form-control @error('password') is-invalid @enderror"
-                                                                id="floatingInput" name="password" placeholder="password">
-                                                            <label for="floatingInput">password</label>
-                                                            @error('password')
-                                                                <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
+                                                        <div class="mb-3">
+                                                            <div class="col">
+                                                                <label for="password" class="form-label">Kata Sandi
+                                                                    Baru</label>
+                                                                <div class="input-group">
+                                                                    <input type="password" name="password" id="password{{$user->id}}"
+                                                                        value="{{ old('password') }}"
+                                                                        class="form-control @error('password') is-invalid @enderror">
+                                                                    <button type="button"
+                                                                        class="input-group-text bg-white border-start-0"
+                                                                        onclick="togglePassword('password{{$user->id}}','iconNew{{ $user->id }}')"
+                                                                        tabindex="-1" data-bs-toggle="tooltip"
+                                                                        title="Lihat Password">
+                                                                        <i class="bi bi-eye"
+                                                                            id="iconNew{{ $user->id }}"></i>
+                                                                    </button>
+                                                                    @error('password')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-floating mb-3">
-                                                            <input type="password" class="form-control"
-                                                                name="password_confirmation" id="floatingInput"
-                                                                placeholder="konfirmasi password">
-                                                            <label for="floatingInput">konfirmasi
-                                                                password</label>
-                                                            @error('password_confirmation')
-                                                                <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
-                                                            <div class="form-text">
-                                                                kosongi password jika tidak ingin merubahnya
+                                                        <div class="mb-3">
+                                                            <div class="col">
+                                                                <label for="password_confirmation"
+                                                                    class="form-label">Konfirmasi Kata Sandi</label>
+                                                                <div class="input-group">
+                                                                    <input type="password" name="password_confirmation"
+                                                                        id="password_confirmation{{$user->id}}"
+                                                                        class="form-control @error('password') is-invalid @enderror">
+                                                                    <button type="button"
+                                                                        class="input-group-text bg-white border-start-0"
+                                                                        onclick="togglePassword('password_confirmation{{$user->id}}','iconConfirm{{ $user->id }}')"
+                                                                        tabindex="-1" data-bs-toggle="tooltip"
+                                                                        title="Lihat Password">
+                                                                        <i class="bi bi-eye"
+                                                                            id="iconConfirm{{ $user->id }}"></i>
+                                                                    </button>
+                                                                    @error('password_confirmation')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-floating mb-3">
@@ -246,4 +271,17 @@
                 </table>
             </div>
         @endcomponent
+        <script>
+            function togglePassword(inputId, iconId) {
+                const input = document.getElementById(inputId);
+                const icon = document.getElementById(iconId);
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('bi-eye', 'bi-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.replace('bi-eye-slash', 'bi-eye');
+                }
+            }
+        </script>
     @endsection

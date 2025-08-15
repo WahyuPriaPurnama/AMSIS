@@ -82,14 +82,13 @@ class UserController extends Controller
             'role' => 'required|string|max:25',
             'email' => [
                 'required',
-                'email',
                 Rule::unique('users')->ignore($user->id),
             ],
 
             'password' => 'min:8|nullable|confirmed'
         ]);
         $updateData = [
-            'name' => Str::lower($validated['name']),
+            'name' => ucwords(strtolower($validated['name'])),
             'role' => $validated['role'],
             'email' => $validated['email'],
         ];
@@ -99,7 +98,7 @@ class UserController extends Controller
         }
 
         $user->update($updateData);
-        return redirect()->route('users.index')->with('alert', 'update data' . e($validated['name']) . ' berhasil');
+        return redirect()->route('users.index')->with('alert', 'update data ' . e($validated['name']) . ' berhasil');
     }
 
     /**
