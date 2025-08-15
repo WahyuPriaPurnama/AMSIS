@@ -17,12 +17,12 @@ class EmployeeAccountsSeeder extends Seeder
         foreach (Employee::all() as $employee) {
             // Buat email dari nama
             $baseEmail = Str::slug($employee->nama, '.');
-            $email = "{$baseEmail}@amsgroup.co.id";
+            $email = "{$baseEmail}";
 
             // Cek duplikat email
             $counter = 1;
             while (User::where('email', $email)->exists()) {
-                $email = "{$baseEmail}{$counter}@amsgroup.co.id";
+                $email = "{$baseEmail}{$counter}";
                 $counter++;
             }
 

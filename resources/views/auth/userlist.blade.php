@@ -107,7 +107,7 @@
                         <tr>
                             <th>#</th>
                             <th>NAMA</th>
-                            <th>EMAIL</th>
+                            <th>USERNAME</th>
                             <th>LEVEL</th>
                             <th>PLANT</th>
                             <th>MENU</th>

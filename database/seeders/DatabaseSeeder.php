@@ -141,7 +141,6 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Haka Admin', 'email' => 'haka.admin@amsgroup.co.id', 'password' => 'HakaAdmin_a6^0', 'role' => 'haka-admin'],
             ['name' => 'BOFI Admin', 'email' => 'bofi.admin@amsgroup.co.id', 'password' => 'BOFIAdmin_50U(', 'role' => 'bofi-admin'],
             ['name' => 'RMM Admin', 'email' => 'rmm.admin@amsgroup.co.id', 'password' => 'RMMAdmin_177v', 'role' => 'rmm-admin'],
-            ['name' => 'Employee', 'email' => 'employee@amsgroup.co.id', 'password' => 'Employee_1996', 'role' => 'employee'],
         ];
 
         foreach ($admins as $admin) {

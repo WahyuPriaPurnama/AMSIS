@@ -109,13 +109,13 @@ class EmployeeController extends Controller
         $employee = Employee::create($request->validated());
         // Buat email dari nama
         $baseEmail = Str::slug($employee->nama, '.');
-        $email = strtolower("{$baseEmail}@amsgroup.co.id");
+        $email = strtolower("{$baseEmail}");
 
         // Pastikan email unik
         $counter = 1;
         $originalEmail = $email;
         while (User::where('email', $email)->exists()) {
-            $email = "{$baseEmail}{$counter}@amsgroup.co.id";
+            $email = "{$baseEmail}{$counter}";
             $counter++;
         }
 
