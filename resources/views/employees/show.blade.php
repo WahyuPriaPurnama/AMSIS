@@ -30,7 +30,7 @@
                     @endcan
                 </div>
                 <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}"
-                    class="img-fluid mx-auto d-block" alt="Logo {{ $employee->subsidiary->name }}"
+                    class="img-fluid ms-auto" alt="Logo {{ $employee->subsidiary->name }}"
                     style="max-width: 200px; height: auto;">
 
             </div>
