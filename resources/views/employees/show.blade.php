@@ -29,9 +29,8 @@
                         </x-buttons.delete>
                     @endcan
                 </div>
-                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}"
-                    class="img-fluid ms-auto" alt="Logo {{ $employee->subsidiary->name }}"
-                    style="max-width: 200px; height: auto;">
+                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid ms-auto"
+                    alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
 
             </div>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -134,6 +133,11 @@
                                             <button class="nav-link" id="lampiran-tab" data-bs-toggle="tab"
                                                 data-bs-target="#lampiran-tab-pane" type="button" role="tab"
                                                 aria-controls="lampiran-tab-pane" aria-selected="false">Lampiran</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="cuti-tab" data-bs-toggle="tab"
+                                                data-bs-target="#cuti-tab-pane" type="button" role="tab"
+                                                aria-controls="cuti-tab-pane" aria-selected="false">Masa Kerja</button>
                                         </li>
                                     </ul>
                                     <div class="tab-content pt-4" id="organisasiTabContent">
@@ -419,13 +423,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="tab-pane fade show" id="cuti-tab-pane" role="tabpanel"
+                                            aria-labelledby="cuti-tab" tabindex="0">
+                                            <div class="row g-0">
+                                                <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                    <div class="p-2">Masuk Kerja</div>
+                                                </div>
+                                                <div
+                                                    class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                    <div class="p-2">
+                                                        {{ $employee->tgl_masuk ? Carbon\Carbon::create($employee->tgl_masuk)->isoFormat('dddd, D MMMM YYYY') : 'Belum ada data' }}
+                                                        ({{ Carbon\Carbon::parse($employee->tgl_masuk)->diffInMonths(Carbon\Carbon::now()) }}
+                                                        Bulan)
+                                                    </div>
+                                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                        <div class="p-2">Jatah Cuti</div>
+                                                    </div
+                                                        class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                    <div class="p-2">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        @endcomponent
+        </div>
+        </section>
+    @endcomponent
     </div>
 @endsection

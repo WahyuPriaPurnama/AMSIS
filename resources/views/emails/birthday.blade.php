@@ -49,6 +49,10 @@
         }
     </style>
 </head>
+@php
+    use Carbon\Carbon;
+    $usia = $employee->tgl_lahir ? Carbon::parse($employee->tgl_lahir)->age : null;
+@endphp
 
 <body>
     <div class="container">
@@ -58,7 +62,9 @@
 
         <div class="body">
             <p>Halo {{ e($employee->nama ?? 'Rekan AMS') }},</p>
-            <p>Seluruh tim dari <strong>AMS Group</strong> mengucapkan selamat ulang tahun! Semoga hari ini penuh
+            <p>Seluruh tim dari <strong>AMS Group</strong> mengucapkan selamat ulang tahun yang
+                ke-<strong>{{ $usia ?? '...' }}</strong>!
+                Semoga hari ini penuh
                 kebahagiaan, kesehatan, dan kesuksesan untukmu.</p>
             <p>Terima kasih atas dedikasi dan kontribusimu selama ini. Kami bangga memiliki kamu sebagai bagian dari tim
                 kami di plant <strong>{{ $employee->subsidiary->name ?? 'tidak diketahui' }}</strong>.</p>

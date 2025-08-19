@@ -23,15 +23,17 @@ use Illuminate\Support\Facades\Route;
 
 route::middleware('auth')->group(function () {
     route::resource('employees', EmployeeController::class);
-    route::get('employee/foto_profil/{pp}', [EmployeeController::class, 'pp'])->name('employee.pp');
-    route::get('employee/KTP/{ktp}', [EmployeeController::class, 'ktp'])->name('employee.ktp');
-    route::get('employee/NPWP/{npwp}', [EmployeeController::class, 'npwp'])->name('employee.npwp');
-    route::get('employee/KK/{kk}', [EmployeeController::class, 'kk'])->name('employee.kk');
-    route::get('employee/BPJS-ket/{bpjs_ket}', [EmployeeController::class, 'bpjs_ket'])->name('employee.bpjs_ket');
-    route::get('employee/BPJS-kes/{bpjs_kes}', [EmployeeController::class, 'bpjs_kes'])->name('employee.bpjs_kes');
-    route::get('employee/export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
-    route::get('employee/export-excel', [EmployeeController::class, 'index_excel'])->name('employees.excel');
-    route::get('employee/show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
+    route::prefix('employee')->controller(EmployeeController::class)->group(function () {
+        Route::get('foto_profil/{pp}', 'pp')->name('employee.pp');
+        Route::get('KTP/{ktp}', 'ktp')->name('employee.ktp');
+        Route::get('NPWP/{npwp}', 'npwp')->name('employee.npwp');
+        Route::get('KK/{kk}', 'kk')->name('employee.kk');
+        Route::get('BPJS-ket/{bpjs_ket}', 'bpjs_ket')->name('employee.bpjs_ket');
+        Route::get('BPJS-kes/{bpjs_kes}', 'bpjs_kes')->name('employee.bpjs_kes');
+        route::get('export-pdf', [EmployeeController::class, 'index_pdf'])->name('employees.pdf');
+        route::get('export-excel', [EmployeeController::class, 'index_excel'])->name('employees.excel');
+        route::get('show-pdf/{employee}', [EmployeeController::class, 'show_pdf'])->name('employee.pdf');
+    });
 
     route::resource('subsidiaries', SubsidiaryController::class);
     route::get('/users/export', [UserController::class, 'export'])->name('users.export');
@@ -55,44 +57,24 @@ route::middleware('auth')->group(function () {
     });
 
     route::resource('scanlog', ScanlogController::class);
-    route::post('scanlog-import', [ScanlogController::class, 'import'])->name('scanlog.import');
-    route::get('scanlog-export', [ScanlogController::class, 'export'])->name('scanlog.export');
-    route::post('scanlog-convert', [ScanlogController::class, 'convert'])->name('scanlog.convert');
-    route::get('scanlog-truncate', [ScanlogController::class, 'truncate'])->name('scanlog.truncate');
-    route::get('scanlog-proses-gaji', [ScanlogController::class, 'prosesGaji'])->name('scanlog.proses.gaji');
+    route::prefix('scanlog')->controller(ScanlogController::class)->group(function () {
+        route::post('import', [ScanlogController::class, 'import'])->name('scanlog.import');
+        route::get('export', [ScanlogController::class, 'export'])->name('scanlog.export');
+        route::post('convert', [ScanlogController::class, 'convert'])->name('scanlog.convert');
+        route::get('truncate', [ScanlogController::class, 'truncate'])->name('scanlog.truncate');
+        route::get('proses-gaji', [ScanlogController::class, 'prosesGaji'])->name('scanlog.proses.gaji');
+    });
 
     route::resource('karyawan-harian', HarianController::class);
-    route::post('karyawan-harian-import', [HarianController::class, 'import'])->name('karyawan-harian.import');
-    route::get('karyawan-harian-export', [HarianController::class, 'export'])->name('karyawan-harian.export');
-    route::get('karyawan-harian-truncate', [HarianController::class, 'truncate'])->name('karyawan-harian.truncate');
-    route::post('karyawan-cetak-slip/{pin}', [HarianController::class, 'cetakSlip'])->name('karyawan-cetak-slip');
+    route::prefix('karyawan-harian')->controller(HarianController::class)->group(function () {
+        route::post('import', [HarianController::class, 'import'])->name('karyawan-harian.import');
+        route::get('export', [HarianController::class, 'export'])->name('karyawan-harian.export');
+        route::get('truncate', [HarianController::class, 'truncate'])->name('karyawan-harian.truncate');
+        route::post('slip/{pin}', [HarianController::class, 'cetakSlip'])->name('karyawan-cetak-slip');
+    });
 });
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\MyTestMail;
-use App\Models\Employee;
-use Carbon\Carbon;
 
-Route::get('/test-email', function () {
-    $today = Carbon::today()->format('m-d');
-    $birthdayEmployees = Employee::whereRaw("DATE_FORMAT(tgl_lahir, '%m-%d') = ?", [$today])->get();
-    if ($birthdayEmployees->isEmpty()) {
-        return 'Tidak ada yang ulang tahun hari ini.';
-    }
-
-    foreach ($birthdayEmployees as $employee) {
-        $subsidiaryName = optional($employee->subsidiary)->name ?? 'Tidak diketahui';
-
-        $mailData = [
-            'type' => 'birthday',
-            'title' => 'Selamat Ulang Tahun ' . $employee->nama,
-            'body' => "Kami dari HRD AMS Group mengucapkan selamat ulang tahun kepada " . $employee->nama . " dari plant " . $subsidiaryName . ". Semoga sehat dan sukses selalu!"
-        ];
-
-        Mail::to([$employee->email, 'ithelpdesk@amsgroup.co.id'])->queue(new MyTestMail($mailData, $employee));
-    }
-    return 'Email ulang tahun dikirim pada ' . now();
-});
 
 Auth::routes([
     'register' => false

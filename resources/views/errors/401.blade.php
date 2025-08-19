@@ -10,7 +10,7 @@
             @endslot
             <div class="text-center py-5">
                 <img src="{{ Storage::url('logo/default-logo.png') }}" class="img-thumbnail mb-3" alt="">
-                <h4 class="text-danger mb-3">{{ __('Anda tidak memiliki hak akses ke halaman ini.') }}</h4>
+                <h2 class="text-danger mb-3">{{ __('Anda tidak memiliki akses ke halaman ini.') }}</h2>
                 <a href="{{ url('/') }}" class="btn btn-primary">{{ __('Kembali') }}</a>
             </div>
         @endcomponent
