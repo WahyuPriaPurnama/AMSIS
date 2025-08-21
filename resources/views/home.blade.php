@@ -4,7 +4,7 @@
     <div class="container">
         @if (session('feature_changes'))
             <div class="alert alert-info alert-dismissible fade show" role="alert">
-                <h5>🔔 Info Peningkatan Fitur:</h5>
+                <h5>🔔 Update Terbaru:</h5>
                 <ul>
                     @foreach (session('feature_changes') as $date => $note)
                         <li><strong>{{ $date }}:</strong> {{ $note }}</li>
@@ -19,16 +19,18 @@
             @slot('header')
                 <div class="d-flex justify-content-between">
                     JUMLAH KARYAWAN
-                    @if ($jam = Carbon\Carbon::now()->format('H:m'))
-                        @if ($jam <= '11:00')
-                            <div>Selamat Pagi</div>
-                        @elseif($jam <= '15:00')
-                            <div>Selamat Siang</div>
-                        @elseif($jam <= '18:00')
-                            <div>Selamat Sore</div>
-                        @elseif($jam <= '23:59')
-                            <div>Selamat Malam</div>
-                        @endif
+                    @php
+                        $hour = \Carbon\Carbon::now()->hour;
+                    @endphp
+
+                    @if ($hour < 11)
+                        <div>Selamat Pagi</div>
+                    @elseif ($hour < 15)
+                        <div>Selamat Siang</div>
+                    @elseif ($hour < 18)
+                        <div>Selamat Sore</div>
+                    @else
+                        <div>Selamat Malam</div>
                     @endif
                 </div>
             @endslot

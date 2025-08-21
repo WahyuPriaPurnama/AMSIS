@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CutiRequestController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HarianController;
 use App\Http\Controllers\HomeController;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 route::middleware('auth')->group(function () {
     route::resource('employees', EmployeeController::class);
+    route::resource('cuti-requests', CutiRequestController::class);
     route::prefix('employee')->controller(EmployeeController::class)->group(function () {
         Route::get('foto_profil/{pp}', 'pp')->name('employee.pp');
         Route::get('KTP/{ktp}', 'ktp')->name('employee.ktp');
