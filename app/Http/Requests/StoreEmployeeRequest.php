@@ -46,7 +46,7 @@ class StoreEmployeeRequest extends FormRequest
             'nama_ibu' => 'required|string',
             'npwp' => 'nullable|string',
             'status' => 'required|string',
-            'jml_ank' => 'required|string',
+            'jml_ank' => 'nullable|string',
             'nama_kd' => 'required|string',
             'no_kd' => 'required|string',
             'hubungan' => 'required|string',

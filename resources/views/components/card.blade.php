@@ -13,7 +13,7 @@
 @endif
 <div class="card shadow">
     <div class="card-header">
-        <h3 class="card-title"> {{ $header }} </h3>
+        <b> {{ $header }} </b>
     </div>
     <div class="card-body">
         {{ $slot }}

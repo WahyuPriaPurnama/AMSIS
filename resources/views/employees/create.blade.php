@@ -114,45 +114,59 @@
                         @enderror
                     </div>
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
-                        <label for="status_peg" class="form-label">Status Pegawai</label>
-                        <select class="form-select @error('status_peg') is-invalid @enderror" name="status_peg"
-                            id="status_peg">
-                            <option value="" selected>Pilih Status Pegawai</option>
-                            <option value="PKWT" @selected(old('status_peg') == 'PKWT')>PKWT</option>
-                            <option value="PKWTT" @selected(old('status_peg') == 'PKWTT')>PKWTT</option>
-                            <option value="-" @selected(old('status_peg') == '-')>-</option>
-                        </select>
-                        @error('status_peg')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col mb-3">
-                        <label class="form-label" for="tgl_masuk">Tanggal Masuk Kerja</label>
+                        <label for="tgl_masuk" class="form-label">Tanggal Masuk Kerja</label>
                         <input type="date" id="tgl_masuk" name="tgl_masuk" value="{{ old('tgl_masuk') }}"
                             class="form-control @error('tgl_masuk') is-invalid @enderror">
                         @error('tgl_masuk')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col mb-3">
-                        <label class="form-label" for="awal_kontrak">Awal Kontrak</label>
-                        <input type="date" id="awal_kontrak" name="awal_kontrak" value="{{ old('awal_kontrak') }}"
-                            class="form-control @error('awal_kontrak') is-invalid @enderror"
-                            aria-describedby="statusHelpBlock">
-                        <div id="statusHelpBlock" class="form-text">
-                            kosongi jika PKWTT</div>
+                </div>
+                <div x-data="{
+                    statusPeg: '{{ old('status_peg') }}',
+                    awalKontrak: '{{ old('awal_kontrak') }}',
+                    akhirKontrak: '{{ old('akhir_kontrak') }}',
+                    resetKontrak() {
+                        if (this.statusPeg !== 'PKWT') {
+                            this.awalKontrak = '';
+                            this.akhirKontrak = '';
+                        }
+                    }
+                }" x-init="resetKontrak" x-watch="statusPeg" class="row mb-3">
+                    {{-- Status Pegawai --}}
+                    <div class="col-12 col-sm-6 col-md-3 mb-3">
+                        <label for="status_peg" class="form-label">Status Pegawai</label>
+                        <select name="status_peg" id="status_peg"
+                            class="form-select @error('status_peg') is-invalid @enderror" x-model="statusPeg">
+                            <option value="">Pilih Status</option>
+                            @foreach (['PKWT', 'PKWTT', '-'] as $status)
+                                <option value="{{ $status }}" @selected(old('status_peg') === $status)>
+                                    {{ $status }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('status_peg')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Awal Kontrak --}}
+                    <div class="col mb-3" x-show="statusPeg === 'PKWT'">
+                        <label for="awal_kontrak" class="form-label">Awal Kontrak</label>
+                        <input type="date" id="awal_kontrak" name="awal_kontrak" x-model="awalKontrak"
+                            :value="awalKontrak" class="form-control @error('awal_kontrak') is-invalid @enderror"
+                            aria-describedby="kontrakHelp">
                         @error('awal_kontrak')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="akhir_kontrak">Akhir Kontrak</label>
-                        <input type="date" id="akhir_kontrak" name="akhir_kontrak" value="{{ old('akhir_kontrak') }}"
-                            class="form-control @error('akhir_kontrak') is-invalid @enderror"aria-describedby="statusHelpBlock">
-                        <div id="statusHelpBlock" class="form-text">
-                            kosongi jika PKWTT</div>
+
+                    {{-- Akhir Kontrak --}}
+                    <div class="col mb-3" x-show="statusPeg === 'PKWT'">
+                        <label for="akhir_kontrak" class="form-label">Akhir Kontrak</label>
+                        <input type="date" id="akhir_kontrak" name="akhir_kontrak" x-model="akhirKontrak"
+                            :value="akhirKontrak" class="form-control @error('akhir_kontrak') is-invalid @enderror"
+                            aria-describedby="kontrakHelp">
                         @error('akhir_kontrak')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -255,7 +269,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div x-data="{ statusNikah: '{{ old('status') }}' }" class="row mb-3">
                     <div class="col-sm-4 mb-3">
                         <label class="form-label" for="nama_ibu">Nama Ibu</label>
                         <input type="text" id="nama_ibu" name="nama_ibu" value="{{ old('nama_ibu') }}"
@@ -272,9 +286,10 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    {{-- Status Pernikahan --}}
                     <div class="col-sm-3 mb-3">
-                        <label class="form-label" for="status">Pernikahan</label>
-                        <select name="status" id="status" class="form-select">
+                        <label class="form-label" for="status">Status Pernikahan</label>
+                        <select name="status" id="status" class="form-select" x-model="statusNikah">
                             <option value="Kawin" @selected(old('status') == 'Kawin')>Kawin</option>
                             <option value="Belum Kawin" @selected(old('status') == 'Belum Kawin')>Belum Kawin
                             </option>
@@ -283,14 +298,20 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-1 mb-3">
-                        <label class="form-label" for="jml_ank">Anak</label>
-                        <input type="number" id="jml_ank" name="jml_ank" value="{{ old('jml_ank') }}"
-                            class="form-control @error('jml_ank') is-invalid @enderror">
-                        @error('jml_ank')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    {{-- tampil input jumlah anak jika kawin --}}
+                    <template x-if="statusNikah === 'Kawin'">
+                        <div class="col-sm-1 mb-3">
+                            <label class="form-label" for="jml_ank">Anak</label>
+                            <input type="text" id="jml_ank" name="jml_ank" value="{{ old('jml_ank') }}"
+                                class="form-control @error('jml_ank') is-invalid @enderror">
+                            @error('jml_ank')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </template>
+                    <template x-if="statusNikah !== 'Kawin'">
+                        <input type="hidden" name="jml_ank" value="0">
+                    </template>
                 </div>
                 <div class="row mb-3 pt-3">
                     <h3>Kontak Darurat</h3>

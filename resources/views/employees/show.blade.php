@@ -29,16 +29,15 @@
                         </x-buttons.delete>
                     @endcan
                     @php
-                        $employeeId = auth()->user()->employee_id;
+                        $user = auth()->user();
                     @endphp
-                    @if ($employeeId && auth()->user()->role !== 'employee')
-                        <x-buttons.create href="{{ route('cuti-requests.create') }}">Pengajuan
+                    @if ($user->employee_id && $user->role == 'employee')
+                        <x-buttons.create href="#">Pengajuan
                             Cuti</x-buttons.create>
                     @endif
                 </div>
-                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid ms-auto"
+                <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid ms-auto me-md-3"
                     alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">
-
             </div>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -221,8 +220,8 @@
                                                             @endphp
 
                                                             {{ $start->isoFormat('dddd, D MMMM YYYY') }}
-                                                            ({{ $years }} Tahun {{ $months }} Bulan
-                                                            {{ $days }} Hari)
+                                                            / {{ $years }} Tahun {{ $months }} Bulan
+                                                            {{ $days }} Hari
                                                         @else
                                                             Belum ada data
                                                         @endif
