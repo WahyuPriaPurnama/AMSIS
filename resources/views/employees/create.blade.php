@@ -10,14 +10,9 @@
             <form action="{{ route('employees.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
-                    <div class="row align-items-center mb-2">
-                        <div class="col-md-6">
+                    <div class="row align-items-center mb-2 text-center text-md-start">
+                        <div class="col-12 col-md-6 mb-2 mb-md-0">
                             <h4 class="fw-semibold mb-0">Organisasi</h4>
-                        </div>
-                        <div class="col-md-6 text-end">
-                            <div class="alert alert-warning d-inline-block py-2 px-3 mb-0">
-                                <i class="bi bi-info-circle-fill"></i> hanya admin yang dapat edit Organisasi
-                            </div>
                         </div>
                     </div>
                     <hr>
@@ -239,14 +234,14 @@
                     </div>
                     <div class="col-sm-4 col-md-2 mb-3">
                         <label class="form-label" for="pend_trkhr">Pendidikan Terakhir</label>
-                        <select name="pend_trkhr" id="pend_trkhr" class="form-select">
-                            <option value="SD" @selected(old('pend_trkhr') == 'SD')>SD</option>
-                            <option value="SMP" @selected(old('pend_trkhr') == 'SMP')>SMP</option>
-                            <option value="SMA" @selected(old('pend_trkhr') == 'SMA')>SMA</option>
-                            <option value="Diploma" @selected(old('pend_trkhr') == 'Diploma')>Diploma</option>
-                            <option value="Sarjana" @selected(old('pend_trkhr') == 'Sarjana')>Sarjana</option>
-                            <option value="Magister" @selected(old('pend_trkhr') == 'Magister')>Magister</option>
-                            <option value="Doktor" @selected(old('pend_trkhr') == 'Doktor')>Doktor</option>
+                        <select name="pend_trkhr" id="pend_trkhr"
+                            class="form-select @error('pend_trkhr') is-invalid @enderror">
+                            <option value="">Pilih Pendidikan</option>
+                            @foreach (['SD', 'SMP', 'SMA', 'Diploma', 'Sarjana', 'Magister', 'Doktor'] as $pendidikan)
+                                <option value="{{ $pendidikan }}" @selected(old('pend_trkhr') === $pendidikan)>
+                                    {{ $pendidikan }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('pend_trkhr')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -290,16 +285,17 @@
                     <div class="col-sm-3 mb-3">
                         <label class="form-label" for="status">Status Pernikahan</label>
                         <select name="status" id="status" class="form-select" x-model="statusNikah">
-                            <option value="Kawin" @selected(old('status') == 'Kawin')>Kawin</option>
-                            <option value="Belum Kawin" @selected(old('status') == 'Belum Kawin')>Belum Kawin
-                            </option>
+                            <option value="">Pilih</option>
+                            @foreach (['Kawin', 'Belum Kawin', 'Cerai'] as $status)
+                                <option value="{{ $status }}">{{ $status }}</option>
+                            @endforeach
                         </select>
-                        @error('pend_trkhr')
+                        @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     {{-- tampil input jumlah anak jika kawin --}}
-                    <template x-if="statusNikah === 'Kawin'">
+                    <template x-if="statusNikah ==='Kawin' || statusNikah==='Cerai'">
                         <div class="col-sm-1 mb-3">
                             <label class="form-label" for="jml_ank">Anak</label>
                             <input type="text" id="jml_ank" name="jml_ank" value="{{ old('jml_ank') }}"
@@ -309,7 +305,7 @@
                             @enderror
                         </div>
                     </template>
-                    <template x-if="statusNikah !== 'Kawin'">
+                    <template x-if="statusNikah !== 'Kawin' && statusNikah !== 'Cerai'">
                         <input type="hidden" name="jml_ank" value="0">
                     </template>
                 </div>

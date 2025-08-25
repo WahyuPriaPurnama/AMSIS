@@ -7,12 +7,9 @@
             @slot('header')
                 EDIT DATA KARYAWAN
             @endslot
-            <form action="{{ isset($employee) ? route('employees.update', $employee) : route('employees.store') }}" method="post"
-                enctype="multipart/form-data">
+            <form action="{{ route('employees.update', $employee) }}" method="post" enctype="multipart/form-data">
                 @csrf
-                @if (isset($employee))
-                    @method('PUT')
-                @endif
+                @method('PUT')
                 <div class="row mb-3">
                     <div class="row align-items-center mb-2">
                         <div class="col-md-6">
@@ -284,15 +281,12 @@
                     </div>
 
                     <div class="col-sm-4 col-md-2 mb-3">
-                        <label class="form-label" for="pend_trkhr">Pendidikan Terakhir</label>
-                        <select name="pend_trkhr" id="pend_trkhr" class="form-select">
-                            <option value="SD" @selected($employee->pend_trkhr == 'SD')>SD</option>
-                            <option value="SMP" @selected($employee->pend_trkhr == 'SMP')>SMP</option>
-                            <option value="SMA" @selected($employee->pend_trkhr == 'SMA')>SMA</option>
-                            <option value="Diploma" @selected($employee->pend_trkhr == 'Diploma')>Diploma</option>
-                            <option value="Sarjana" @selected($employee->pend_trkhr == 'Sarjana')>Sarjana</option>
-                            <option value="Magister" @selected($employee->pend_trkhr == 'Magister')>Magister</option>
-                            <option value="Doktor" @selected($employee->pend_trkhr == 'Doktor')>Doktor</option>
+                        <label for="pend_trkhr" class="form-label">Pendidikan Terakhir</label>
+                        <select name="pend_trkhr" id="pend_trkhr"
+                            class="form-select @error('pend_trkhr') is-invalid @enderror">
+                            @foreach (['SD', 'SMP', 'SMA', 'Diploma', 'Sarjana', 'Magister', 'Doktor'] as $level)
+                                <option value="{{ $level }}" @selected($employee->pend_trkhr == $level)>{{ $level }}</option>
+                            @endforeach
                         </select>
                         @error('pend_trkhr')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -317,6 +311,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <div x-data="{ statusNikah: '{{ old('status', $employee->status) }}' }" class="row mb-3">
                     <div class="col-sm-4 mb-3">
                         <label class="form-label" for="nama_ibu">Nama Ibu</label>
@@ -338,17 +333,18 @@
                     {{-- Status Pernikahan --}}
                     <div class="col-sm-3 mb-3">
                         <label class="form-label" for="status">Status Pernikahan</label>
-                        <select name="status" id="status" class="form-select" x-model="statusNikah">
-                            <option value="Kawin"@selected($employee->status == 'Kawin')>Kawin</option>
-                            <option value="Belum Kawin"@selected($employee->status == 'Belum Kawin')>Belum Kawin
-                            </option>
+                        <select name="status" id="status" class="form-select @error('status') is-invalid @enderror"
+                            x-model="statusNikah">
+                            @foreach (['Kawin', 'Belum Kawin', 'Cerai'] as $status)
+                                <option value="{{ $status }}" @selected($employee->status == $status)>{{ $status }}</option>
+                            @endforeach
                         </select>
-                        @error('pend_trkhr')
+                        @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     {{-- tampil input jumlah anak jika kawin --}}
-                    <template x-if="statusNikah ==='Kawin'">
+                    <template x-if="statusNikah ==='Kawin' || statusNikah ==='Cerai'">
                         <div class="col-sm-1 mb-3">
                             <label class="form-label" for="jml_ank">Anak</label>
                             <input type="text" id="jml_ank" name="jml_ank"
@@ -359,7 +355,7 @@
                             @enderror
                         </div>
                     </template>
-                    <template x-if="statusNikah !== 'Kawin'">
+                    <template x-if="statusNikah !== 'Kawin' && statusNikah !== 'Cerai'">
                         <input type="hidden" name="jml_ank" value="0">
                     </template>
                 </div>
