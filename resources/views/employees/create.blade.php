@@ -22,7 +22,6 @@
                         <input type="text" id="nip" name="nip" value="{{ old('nip') }}"
                             class="form-control @error('nip') is-invalid @enderror" aria-describedby="nipHelp"
                             placeholder="123456789">
-                        <div id="nipHelp" class="form-text">Standarnya 9 digit angka</div>
                         @error('nip')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -32,8 +31,7 @@
                         <label for="nama" class="form-label">Nama Lengkap</label>
                         <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
                             class="form-control @error('nama') is-invalid @enderror" aria-describedby="namaHelp"
-                            placeholder="Contoh: Roberto Karlos">
-                        <div id="namaHelp" class="form-text">sesuai KTP</div>
+                            placeholder="sesuai KTP">
                         @error('nama')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -42,7 +40,7 @@
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <label for="nik" class="form-label">NIK</label>
                         <input type="text" id="nik" name="nik" value="{{ old('nik') }}"
-                            class="form-control @error('nik') is-invalid @enderror" placeholder="Contoh: 1234567890123456"
+                            class="form-control @error('nik') is-invalid @enderror" placeholder="NIK KTP"
                             aria-describedby="nikHelp">
                         @error('nik')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -64,46 +62,28 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
                     <div class="col-12 col-sm-6 col-md-2 mb-3">
-                        <label for="divisi" class="form-label">Divisi</label>
-                        <input type="text" id="divisi" name="divisi" value="{{ old('divisi') }}"
-                            class="form-control @error('divisi') is-invalid @enderror">
-                        @error('divisi')
+                        <x-autocomplete-field label="Divisi" name="division" :items="$divisions" />
+                        @error('division')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
-                        <label for="departemen" class="form-label">Departemen</label>
-                        <input type="text" id="departemen" name="departemen" value="{{ old('departemen') }}"
-                            class="form-control @error('departemen') is-invalid @enderror">
+                        <x-autocomplete-field label="Departemen" name="department" :items="$departments" />
                         @error('departemen')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
-                        <label for="seksi" class="form-label">Seksi</label>
-                        <input type="text" id="seksi" name="seksi" value="{{ old('seksi') }}"
-                            class="form-control @error('seksi') is-invalid @enderror">
+                        <x-autocomplete-field label="Seksi" name="section" :items="$sections" />
                         @error('seksi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div class="col-12 col-sm-6 col-md-3 mb-3">
-                        <label for="posisi" class="form-label">Jabatan</label>
-                        <select class="form-select @error('posisi') is-invalid @enderror" name="posisi" id="posisi">
-                            <option selected value="">Pilih Jabatan</option>
-                            <option value="Direktur" @selected(old('posisi') == 'Direktur')>Direktur</option>
-                            <option value="Manager" @selected(old('posisi') == 'Manager')>Manager</option>
-                            <option value="Staff" @selected(old('posisi') == 'Staff')>Staff</option>
-                            <option value="Supervisor" @selected(old('posisi') == 'Supervisor')>Supervisor</option>
-                            <option value="Operator" @selected(old('posisi') == 'Operator')>Operator</option>
-                            <option value="Admin" @selected(old('posisi') == 'Admin')>Admin</option>
-                        </select>
+                    <div class="col-md-3 mb-3">
+                        <x-autocomplete-field label="Jabatan" name="position" :items="$positions" />
                         @error('posisi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -131,8 +111,8 @@
                     {{-- Status Pegawai --}}
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <label for="status_peg" class="form-label">Status Pegawai</label>
-                        <select name="status_peg" id="status_peg"
-                            class="form-select @error('status_peg') is-invalid @enderror" x-model="statusPeg">
+                        <select name="status_peg" id="status_peg" class="form-select @error('status_peg') is-invalid @enderror"
+                            x-model="statusPeg">
                             <option value="">Pilih Status</option>
                             @foreach (['PKWT', 'PKWTT', '-'] as $status)
                                 <option value="{{ $status }}" @selected(old('status_peg') === $status)>
@@ -148,9 +128,8 @@
                     {{-- Awal Kontrak --}}
                     <div class="col mb-3" x-show="statusPeg === 'PKWT'">
                         <label for="awal_kontrak" class="form-label">Awal Kontrak</label>
-                        <input type="date" id="awal_kontrak" name="awal_kontrak" x-model="awalKontrak"
-                            :value="awalKontrak" class="form-control @error('awal_kontrak') is-invalid @enderror"
-                            aria-describedby="kontrakHelp">
+                        <input type="date" id="awal_kontrak" name="awal_kontrak" x-model="awalKontrak" :value="awalKontrak"
+                            class="form-control @error('awal_kontrak') is-invalid @enderror" aria-describedby="kontrakHelp">
                         @error('awal_kontrak')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

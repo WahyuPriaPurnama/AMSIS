@@ -36,13 +36,4 @@ class Employee extends Model
         return $this->hasOne(User::class, 'employee_id');
     }
 
-    public function cutiBalance()
-    {
-        return $this->hasOne(CutiBalance::class, 'employee_id');
-    }
-
-    public function cutiRequests()
-    {
-        return $this->hasMany(CutiRequest::class, 'employee_id');
-    }
 }

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Exports\EmployeeExport;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\Department;
+use App\Models\Division;
 use App\Models\Employee;
+use App\Models\Position;
+use App\Models\Section;
 use App\Models\Subsidiary;
 use App\Models\User;
 use App\Traits\FileUpload;
@@ -97,7 +101,24 @@ class EmployeeController extends Controller
             }
         }
 
-        return view('employees.create', compact('subsidiaries'));
+        $divisions = Division::select('name')
+            ->groupBy('name')
+            ->orderBy('name', 'asc')
+            ->get();
+        $departments = Department::select('name')
+            ->groupBy('name')
+            ->orderBy('name', 'asc')
+            ->get();
+        $sections = Section::select('name')
+            ->groupBy('name')
+            ->orderBy('name', 'asc')
+            ->get();
+        $positions = Position::select('name')
+            ->groupBy('name')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return view('employees.create', compact('subsidiaries', 'divisions', 'departments', 'sections', 'positions'));
     }
     /**
      * Store a newly created resource in storage.
