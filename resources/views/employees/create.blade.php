@@ -64,29 +64,17 @@
                     </div>
                     <div class="col-12 col-sm-6 col-md-2 mb-3">
                         <x-autocomplete-field label="Divisi" name="division" :items="$divisions" />
-                        @error('division')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <x-autocomplete-field label="Departemen" name="department" :items="$departments" />
-                        @error('departemen')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <x-autocomplete-field label="Seksi" name="section" :items="$sections" />
-                        @error('seksi')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="col-md-3 mb-3">
                         <x-autocomplete-field label="Jabatan" name="position" :items="$positions" />
-                        @error('posisi')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="col-12 col-sm-6 col-md-3 mb-3">
                         <label for="tgl_masuk" class="form-label">Tanggal Masuk Kerja</label>
@@ -263,7 +251,8 @@
                     {{-- Status Pernikahan --}}
                     <div class="col-sm-3 mb-3">
                         <label class="form-label" for="status">Status Pernikahan</label>
-                        <select name="status" id="status" class="form-select" x-model="statusNikah">
+                        <select name="status" id="status" class="form-select @error('status') is-invalid @enderror"
+                            x-model="statusNikah">
                             <option value="">Pilih</option>
                             @foreach (['Kawin', 'Belum Kawin', 'Cerai'] as $status)
                                 <option value="{{ $status }}">{{ $status }}</option>

@@ -27,5 +27,6 @@ export function autocompleteField(items, allowAdd = true, minLength = 1) {
             this.filtered = []
             this.showAdd = false
         }
+
     }
 }

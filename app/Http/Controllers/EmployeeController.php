@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\EmployeeExport;
+use App\Helpers\EntityResolver;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Department;
@@ -128,6 +129,19 @@ class EmployeeController extends Controller
         $this->authorize('create', Employee::class);
         \App\Helpers\LogActivity::addToLog();
         $employee = Employee::create($request->validated());
+        // Handle dynamic relations
+        $divisionId = EntityResolver::resolve(Division::class, $request->division_id, $request->division_name);
+        $departmentId = EntityResolver::resolve(Department::class, $request->department_id, $request->department_name);
+        $sectionId = EntityResolver::resolve(Section::class, $request->section_id, $request->section_name);
+        $positionId = EntityResolver::resolve(Position::class, $request->position_id, $request->position_name);
+
+        $data = $request->validated();
+        $data['division_id'] = $divisionId;
+        $data['department_id'] = $departmentId;
+        $data['section_id'] = $sectionId;
+        $data['position_id'] = $positionId;
+
+        $employee = Employee::create($data);
         // Buat email dari nama
         $baseEmail = Str::slug($employee->nama, '.');
         $email = strtolower("{$baseEmail}");

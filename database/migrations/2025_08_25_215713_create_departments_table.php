@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
             $table->string('name');
+            $table->unique(['division_id', 'name']);
             $table->timestamps();
         });
     }
