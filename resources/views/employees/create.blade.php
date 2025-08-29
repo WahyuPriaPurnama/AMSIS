@@ -160,13 +160,13 @@
                     <div class="col-12 col-md-4 mb-3">
                         <label class="form-label d-block">Jenis Kelamin</label>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki_laki"
-                                value="L" @checked(old('jenis_kelamin') == 'L')>
+                            <input class="form-check-input @error('jenis_kelamin') is-invalid @enderror" type="radio"
+                                name="jenis_kelamin" id="laki_laki" value="L" @checked(old('jenis_kelamin') == 'L')>
                             <label class="form-check-label" for="laki_laki">Laki-laki</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan"
-                                value="P" @checked(old('jenis_kelamin') == 'P')>
+                            <input class="form-check-input @error('jenis_kelamin') is-invalid @enderror" type="radio"
+                                name="jenis_kelamin" id="perempuan" value="P" @checked(old('jenis_kelamin') == 'P')>
                             <label class="form-check-label" for="perempuan">Perempuan</label>
                         </div>
                         @error('jenis_kelamin')

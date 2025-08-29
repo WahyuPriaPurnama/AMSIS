@@ -1,16 +1,23 @@
 @props(['label', 'name', 'items' => []])
 
-<label class="form-label">{{ $label }}</label>
-<div x-data="autocompleteField({{ Js::from($items) }}, '{{ old($name . '_name') }}')" x-init="selected = items.find(i => i.id == '{{ old($name . '_id') }}') || null;
-query = selected?.name || query;" @click.outside="filtered = []" class="position-relative w-100"
-    style="min-height: 3rem;">
+@php
+    $initialSelected = collect($items)->firstWhere('id', old($name . '_id'));
+@endphp
+
+<div x-data="autocompleteField(
+    {{ Js::from($items) }},
+    '{{ old($name . '_name') }}',
+    {{ Js::from($initialSelected) }}
+)" @click.outside="filtered = []" class="position-relative w-100" style="min-height: 3rem;">
+    <label class="form-label">{{ $label }}</label>
+
     <input type="text" class="form-control @error($name . '_name') is-invalid @enderror" x-model="query" @input="filter"
         placeholder="Ketik {{ strtolower($label) }}..." />
+
     @error($name . '_name')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
+        <div class="invalid-feedback">{{ $message }}</div>
     @enderror
+
     <ul x-show="filtered.length > 0" x-transition class="list-group position-absolute w-100 shadow"
         style="top: 100%; z-index: 1000; max-height: 200px; overflow-y: auto;">
         <template x-for="item in filtered" :key="item.id">

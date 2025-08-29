@@ -128,6 +128,7 @@ class EmployeeController extends Controller
     {
         $this->authorize('create', Employee::class);
         \App\Helpers\LogActivity::addToLog();
+        dd($request->all());
         $employee = Employee::create($request->validated());
         // Handle dynamic relations
         $divisionId = EntityResolver::resolve(Division::class, $request->division_id, $request->division_name);
