@@ -79,12 +79,12 @@
                                         HRD
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item @yield('menuEmployees')"
-                                                href="{{ route('employees.index') }}">Karyawan</a></li>
+                                        <li><a class="dropdown-item @yield('menuEmployees')" href="{{ route('employees.index') }}"
+                                                wire:navigate>Karyawan</a></li>
                                         <li><a class="dropdown-item @yield('menuSubsidiaries')"
-                                                href="{{ route('subsidiaries.index') }}">Perusahaan</a></li>
-                                        <li><a class="dropdown-item @yield('menuVehicles')"
-                                                href="{{ route('vehicles.index') }}">Kendaraan</a></li>
+                                                href="{{ route('subsidiaries.index') }}" wire:navigate>Perusahaan</a></li>
+                                        <li><a class="dropdown-item @yield('menuVehicles')" href="{{ route('vehicles.index') }}"
+                                                wire:navigate>Kendaraan</a></li>
                                     </ul>
                                 </li>
 
@@ -95,10 +95,10 @@
                                         Payroll
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item @yield('menuScanlog')"
-                                                href="{{ route('scanlog.index') }}">Scanlog</a></li>
+                                        <li><a class="dropdown-item @yield('menuScanlog')" href="{{ route('scanlog.index') }}"
+                                                wire:navigate>Scanlog</a></li>
                                         <li><a class="dropdown-item @yield('menuHarian')"
-                                                href="{{ route('karyawan-harian.index') }}">Karyawan</a></li>
+                                                href="{{ route('karyawan-harian.index') }}" wire:navigate>Karyawan</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -191,7 +191,7 @@
             AMS Information System | © {{ date('Y') }} All rights reserved.
         </div>
     </footer>
-@livewireScripts
+    @livewireScripts
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
