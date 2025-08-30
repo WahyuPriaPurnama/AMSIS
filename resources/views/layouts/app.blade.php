@@ -24,6 +24,8 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    @livewireStyles
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -189,6 +191,7 @@
             AMS Information System | © {{ date('Y') }} All rights reserved.
         </div>
     </footer>
+@livewireScripts
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

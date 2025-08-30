@@ -1,256 +1,67 @@
 @extends('layouts.app')
+
 @section('title', 'E-Slip AMS Holding')
 @section('menuAMS', 'active')
+
 @section('content')
     <div class="container">
         @component('components.card')
             @slot('header')
                 E-Slip AMS Holding
             @endslot
+
             <div class="table-responsive">
                 <table class="table table-hover display" id="table">
                     <thead>
                         <tr>
+                            <th>NO.</th>
                             <th>NAMA</th>
                             <th>E-SLIP</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>A Lofie Vila Sarie</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/mjxpp0J94"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Abbiyu Laily Putri</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/X9G1ia030"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Ade Ayu Santi</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/MkNcD9EgW"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Alifyya Faiza</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/InnFtW30J"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Denny Setyawan</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/Nl8gUH80R"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Desinta Anakusuma</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/5L1tzk9TF"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Fajar Agro Wibowo</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/vcFilCuWN"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Firsandy</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/36JOdvbO4"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Hana Jelita Insani Pramo</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/BIHjvlIXn"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Harianto</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/gp6lBJaJw"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Hilda Astri Damayanti</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/9VWYL3xOU"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Hisyam Al Farisi</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/nW0xb0pGA"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Linda</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/Fxk0rukSP"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
+                        @php
+                            $eslips = [
+                                ['nama' => 'A Lofie Vila Sarie', 'link' => 'https://gofile.me/7hje9/mjxpp0J94'],
+                                ['nama' => 'Abbiyu Laily Putri', 'link' => 'https://gofile.me/7hje9/X9G1ia030'],
+                                ['nama' => 'Ade Ayu Santi', 'link' => 'https://gofile.me/7hje9/MkNcD9EgW'],
+                                ['nama' => 'Alifyya Faiza', 'link' => 'https://gofile.me/7hje9/InnFtW30J'],
+                                ['nama' => 'Denny Setyawan', 'link' => 'https://gofile.me/7hje9/Nl8gUH80R'],
+                                ['nama' => 'Desinta Anakusuma', 'link' => 'https://gofile.me/7hje9/5L1tzk9TF'],
+                                ['nama' => 'Fajar Agro Wibowo', 'link' => 'https://gofile.me/7hje9/vcFilCuWN'],
+                                ['nama' => 'Firsandy', 'link' => 'https://gofile.me/7hje9/36JOdvbO4'],
+                                ['nama' => 'Hana Jelita Insani Pramo', 'link' => 'https://gofile.me/7hje9/BIHjvlIXn'],
+                                ['nama' => 'Harianto', 'link' => 'https://gofile.me/7hje9/gp6lBJaJw'],
+                                ['nama' => 'Hilda Astri Damayanti', 'link' => 'https://gofile.me/7hje9/9VWYL3xOU'],
+                                ['nama' => 'Hisyam Al Farisi', 'link' => 'https://gofile.me/7hje9/nW0xb0pGA'],
+                                ['nama' => 'Linda', 'link' => 'https://gofile.me/7hje9/Fxk0rukSP'],
+                                ['nama' => 'Linggam Wardani Putri', 'link' => 'https://gofile.me/7hje9/xeUVQ13HM'],
+                                ['nama' => 'M. Zidan', 'link' => 'https://gofile.me/7hje9/yuGE9YMIp'],
+                                ['nama' => 'Michelline', 'link' => 'https://gofile.me/7hje9/EjAeVlEzh'],
+                                ['nama' => 'Muhammad Bobsaid', 'link' => 'https://gofile.me/7hje9/TsLDeHAcr'],
+                                ['nama' => 'Nabilah', 'link' => 'https://gofile.me/7hje9/9vVuqFoBY'],
+                                ['nama' => 'Nadia Sofia Permatasari', 'link' => 'https://gofile.me/7hje9/1KZwUAoaS'],
+                                ['nama' => 'Didik', 'link' => 'https://gofile.me/7hje9/bAJ5utbbk'],
+                                ['nama' => 'Samsul Hidayat', 'link' => 'https://gofile.me/7hje9/lk9rq5mnx'],
+                                ['nama' => 'Suwandi', 'link' => 'https://gofile.me/7hje9/9AmrWc20u'],
+                                ['nama' => 'Toha', 'link' => 'https://gofile.me/7hje9/3Q7PRXnXS'],
+                                ['nama' => 'Trisna Amrina', 'link' => 'https://gofile.me/7hje9/IuxZIusrR'],
+                                ['nama' => 'Wahyu Pria Purnama', 'link' => 'https://gofile.me/7hje9/yKmYAhERF'],
+                                ['nama' => 'Wahyu Vinika Sari', 'link' => 'https://gofile.me/7hje9/I7VRtTCBe'],
+                            ];
+                        @endphp
 
-                            <td>Linggam Wardani Putri</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/xeUVQ13HM"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>M. Zidan</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/yuGE9YMIp"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Michelline</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/EjAeVlEzh"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Bobsaid</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/TsLDeHAcr"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Nabilah</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/9vVuqFoBY"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                          <tr>
-                            <td>Nadia Sofia Permatasari</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/1KZwUAoaS"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Didik</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/bAJ5utbbk"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Samsul Hidayat</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/lk9rq5mnx"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Suwandi</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/9AmrWc20u"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Toha</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/3Q7PRXnXS"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Trisna Amrina</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/IuxZIusrR"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Wahyu Pria Purnama</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/yKmYAhERF"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
-                        <tr>
-                            <td>Wahyu Vinika Sari</td>
-                            <td><a class="btn btn-primary" href="https://gofile.me/7hje9/I7VRtTCBe"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                    </svg></a></td>
-                        </tr>
+                        @foreach ($eslips as $eslip)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $eslip['nama'] }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ $eslip['link'] }}" target="_blank">
+                                        <i class="bi bi-file-earmark"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

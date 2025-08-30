@@ -21,7 +21,7 @@
             <div class="d-flex align-items-center justify-content-between mb-3">
                 <div class="btn-group d-flex gap-2 flex-wrap">
                     @can('update', $employee)
-                        <x-buttons.edit href="{{ route('employees.edit', ['employee' => $employee->id]) }}"></x-buttons.edit>
+                        <x-buttons.edit href="{{ route('employees.edit', ['employee' => $employee->id]) }}" wire:navigate></x-buttons.edit>
                         <x-buttons.pdf href="{{ route('employee.pdf', ['employee' => $employee->id]) }}"></x-buttons.pdf>
                     @endcan
                     @can('delete', $employee)
