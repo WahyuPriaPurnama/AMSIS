@@ -31,10 +31,10 @@
                     @php
                         $user = auth()->user();
                     @endphp
-                    @if ($user->employee_id && $user->role == 'employee')
+                    {{-- @if ($user->employee_id && $user->role == 'employee')
                         <x-buttons.create href="#">Pengajuan
                             Cuti</x-buttons.create>
-                    @endif
+                    @endif --}}
                 </div>
                 <img src="{{ Storage::url('subsidiary/logo/' . $employee->subsidiary->logo) }}" class="img-fluid ms-auto me-md-3"
                     alt="Logo {{ $employee->subsidiary->name }}" style="max-width: 200px; height: auto;">

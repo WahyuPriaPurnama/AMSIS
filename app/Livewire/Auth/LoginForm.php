@@ -13,16 +13,25 @@ class LoginForm extends Component
     public $passwordVisible = false;
 
     protected $rules = [
-        'email' => 'required|email',
+        'email' => 'required',
         'password' => 'required|min:6',
+    ];
+    protected $messages = [
+        'email.required' => 'Email wajib diisi.',
+        'password.required' => 'Password wajib diisi.',
     ];
 
     public function login()
     {
         $this->validate();
-
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             session()->regenerate();
+            $user = Auth::user(); // Ambil setelah login berhasil
+
+            if ($user->role === 'employee') {
+                return redirect()->route('employees.show', $user->employee);
+            }
+
             return redirect()->intended('/dashboard');
         }
 
